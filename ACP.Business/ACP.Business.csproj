@@ -43,7 +43,9 @@
     <Compile Include="Exceptions\ItemNotFoundException.cs" />
     <Compile Include="Exceptions\ValidationErrorsException.cs" />
     <Compile Include="Managers\IBaseManager.cs" />
+    <Compile Include="Managers\IServiceManager.cs" />
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\ServiceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IGenericRepository.cs" />
   </ItemGroup>
