@@ -49,11 +49,21 @@
   <ItemGroup>
     <Compile Include="ACPContext.cs" />
     <Compile Include="ACPInitialiser.cs" />
-    <Compile Include="Config\ServiceConfig.cs" />
+    <Compile Include="Config\BookingServiceConfig.cs" />
+    <Compile Include="Managers\BaseACPManager.cs" />
     <Compile Include="Managers\BaseManager.cs" />
     <Compile Include="Managers\ServiceManager.cs" />
+    <Compile Include="Migrations\201505231859576_firstone.cs" />
+    <Compile Include="Migrations\201505231859576_firstone.Designer.cs">
+      <DependentUpon>201505231859576_firstone.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505232254067_news service table.cs" />
+    <Compile Include="Migrations\201505232254067_news service table.Designer.cs">
+      <DependentUpon>201505232254067_news service table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ACPRepository.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +82,14 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201505231859576_firstone.resx">
+      <DependentUpon>201505231859576_firstone.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505232254067_news service table.resx">
+      <DependentUpon>201505232254067_news service table.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

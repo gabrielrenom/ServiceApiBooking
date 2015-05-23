@@ -8,13 +8,17 @@ using System.Threading.Tasks;
 
 namespace ACP.DataAccess.Config
 {
-    public class ServiceConfig : EntityTypeConfiguration<Service>
+    public class BookingServiceConfig : EntityTypeConfiguration<BookingService>
     {
-        public ServiceConfig()
+        public BookingServiceConfig()
         {
             //## Primary Key
             HasKey(t => t.Id);
 
+            // Properties            
+            Property(x => x.Name)
+                .IsRequired()
+                .HasMaxLength(250);
         }        
     }
 }

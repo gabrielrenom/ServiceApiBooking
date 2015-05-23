@@ -12,8 +12,9 @@ namespace ACP.DataAccess
     public class ACPContext: DbContext
     {
         public ACPContext()
-            : base("ACP")
+            : base(@"ACP")
         { 
+
         }
 
         static ACPContext()
@@ -25,10 +26,10 @@ namespace ACP.DataAccess
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Configurations.Add(new ServiceConfig());            
+            modelBuilder.Configurations.Add(new BookingServiceConfig());            
 
         }
 
-        public DbSet<Service> Instances { get; set; }        
+        public DbSet<BookingService> BookingServices { get; set; }        
     }
 }

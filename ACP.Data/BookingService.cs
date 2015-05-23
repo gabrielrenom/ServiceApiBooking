@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ACP.Business.Models
+namespace ACP.Data
 {
-    public class ServiceModel : BaseModel
+    public class BookingService : BaseEntity
     {
-        [Required]
         public string Name { get; set; }
     }
 }

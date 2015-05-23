@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace ACP.Business.Managers
 {
-    public interface IServiceManager : IBaseManager<ServiceModel, Service>
-    {
-      
+    public interface IBookingServiceManager : IBaseManager<BookingServiceModel, BookingService>
+    {       
+
     }
 }
