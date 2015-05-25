@@ -9,5 +9,7 @@ namespace ACP.Data
     public class BookingService : BaseEntity
     {
         public string Name { get; set; }
+
+        public virtual ICollection<BookingEntity> Entity { get; set; }
     }
 }

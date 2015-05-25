@@ -27,5 +27,49 @@ namespace ACP.Business.Services
         {
             return _serviceManager.AddAsync(service);
         }
+
+
+        public BookingServiceModel GetServiceByName(string servicename)
+        {
+            return _serviceManager.GetSingle(x => x.Name == servicename);
+        }
+
+        public Task<BookingServiceModel> GetServiceByNameAsync(string servicename)
+        {
+            return _serviceManager.GetSingleAsync(x => x.Name == servicename);
+        }
+
+
+        public bool UpdateService(BookingServiceModel model)
+        {
+            return _serviceManager.Update(model);
+        }
+
+        public Task<bool> UpdateServiceAsync(BookingServiceModel model)
+        {
+            return _serviceManager.UpdateAsync(model);
+        }
+          
+
+        public bool RemoveService( int id)
+        {
+            return _serviceManager.DeleteById(id);
+        }
+
+        public Task<bool> RemoveServiceAsync(int id)
+        {
+            return _serviceManager.DeleteByIdAsync(id);
+        }
+
+
+        public IList<BookingServiceModel> GetAll()
+        {
+            return _serviceManager.GetAll().ToList<BookingServiceModel>();
+        }
+
+        public Task<IEnumerable<BookingServiceModel>> GetAllAsync()
+        {
+            return _serviceManager.GetAllAsync();
+        }
     }
 }

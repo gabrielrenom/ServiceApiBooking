@@ -12,5 +12,21 @@ namespace ACP.Business.Services.Interfaces
         BookingServiceModel Add(BookingServiceModel service);
 
         Task<BookingServiceModel> AddAsync(BookingServiceModel service);
+
+        BookingServiceModel GetServiceByName(string servicename);
+
+        Task<BookingServiceModel> GetServiceByNameAsync(string servicename);
+
+        bool UpdateService(BookingServiceModel model);
+
+        Task<bool> UpdateServiceAsync(BookingServiceModel model);
+
+        bool RemoveService(int id);
+
+        Task<bool> RemoveServiceAsync(int id);
+
+        IList<BookingServiceModel> GetAll();
+
+        Task<IEnumerable<BookingServiceModel>> GetAllAsync();
     }
 }

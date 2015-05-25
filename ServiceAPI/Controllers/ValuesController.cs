@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACP.Business.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,9 +8,9 @@ using System.Web.Http;
 
 namespace ServiceAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ValuesController : ApiController
-    {
+    {        
         // GET api/values
         public IEnumerable<string> Get()
         {
