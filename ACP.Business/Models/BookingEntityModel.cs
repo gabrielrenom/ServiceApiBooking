@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ACP.Data
+namespace ACP.Business.Models
 {
-    public class BookingEntity: BaseEntity
+    public class BookingEntityModel: BaseModel
     {
         public string Name { get; set; }
         public byte[] Image { get; set; }
@@ -15,9 +15,9 @@ namespace ACP.Data
         public decimal Comission { get; set; }
         public bool Sameday { get; set; }
 
-        public virtual RootBookingEntity RootBookingEntity { get; set; }
-        public virtual ICollection<BookingPricing> Prices {get;set;}
-        public virtual Address Address { get; set; }
-        public virtual ICollection<BookingService> Service { get; set; }
+        //public virtual RootBookingEntity RootBookingEntity { get; set; }
+        //public virtual ICollection<BookingPricing> Prices { get; set; }
+        //public virtual Address Address { get; set; }
+        //public virtual ICollection<BookingService> Service { get; set; }
     }
 }

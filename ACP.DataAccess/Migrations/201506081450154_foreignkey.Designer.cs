@@ -7,13 +7,13 @@ namespace ACP.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class firstone : IMigrationMetadata
+    public sealed partial class foreignkey : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(firstone));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(foreignkey));
         
         string IMigrationMetadata.Id
         {
-            get { return "201505231859576_firstone"; }
+            get { return "201506081450154_foreignkey"; }
         }
         
         string IMigrationMetadata.Source

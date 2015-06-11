@@ -11,8 +11,7 @@ namespace ACP.DataAccess
 {
     public class ACPContext: DbContext
     {
-        public ACPContext()
-            : base(@"ACP")
+        public ACPContext(): base("ACP")
         { 
 
         }
@@ -26,10 +25,20 @@ namespace ACP.DataAccess
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Configurations.Add(new BookingServiceConfig());            
+            modelBuilder.Configurations.Add(new BookingServiceConfig());
+            modelBuilder.Configurations.Add(new RootBookingEntityConfig());            
 
         }
 
-        public DbSet<BookingService> BookingServices { get; set; }        
+        public DbSet<RootBookingEntity> Entities { get; set; }
+        public DbSet<BookingService> BookingServices { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
+        public DbSet<BookingEntity> BookingEntities { get; set; }
+        public DbSet<BookingPricing> BookingPricings { get; set; }
+        public DbSet<HourPrice> HourPrices { get; set; }
+        public DbSet<DayPrice> DayPrices { get; set; }
+        public DbSet<Status> Statuses { get; set; }
+        public DbSet<User> Users { get; set; }   
     }
 }

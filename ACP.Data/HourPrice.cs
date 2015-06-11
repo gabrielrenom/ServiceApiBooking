@@ -5,9 +5,11 @@ using System.Text;
 
 namespace ACP.Data
 {
-    public class HourPrice
+    public class HourPrice: BaseEntity
     {
         public DateTime HourMinute;
         public decimal Hourprice;
+
+        public DayPrice DayPrice { get; set; }
     }
 }

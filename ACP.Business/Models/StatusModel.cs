@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ACP.DataAccess
+namespace ACP.Business.Models
 {
-    public class ACPInitialiser : DropCreateDatabaseIfModelChanges<ACPContext>
+    public class StatusModel
     {
-
     }
 }

@@ -7,13 +7,13 @@ namespace ACP.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class newsservicetable : IMigrationMetadata
+    public sealed partial class firstmigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(newsservicetable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(firstmigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "201505232254067_news service table"; }
+            get { return "201506052125212_first-migration"; }
         }
         
         string IMigrationMetadata.Source

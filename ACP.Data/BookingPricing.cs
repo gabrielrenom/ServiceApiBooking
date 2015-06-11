@@ -10,7 +10,9 @@ namespace ACP.Data
         public string Name {get;set;}
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
-
-        public virtual ICollection<DayPrice> Price { get; set; }
+        public int BookingEntityId { get; set; }
+        
+        public virtual BookingEntity BookingEntity { get; set; }
+        public virtual ICollection<DayPrice> DayPrices { get; set; }
     }
 }

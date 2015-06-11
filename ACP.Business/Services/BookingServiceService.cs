@@ -27,7 +27,7 @@ namespace ACP.Business.Services
         {
             return _serviceManager.AddAsync(service);
         }
-
+        
 
         public BookingServiceModel GetServiceByName(string servicename)
         {
@@ -63,7 +63,7 @@ namespace ACP.Business.Services
 
 
         public IList<BookingServiceModel> GetAll()
-        {
+        {            
             return _serviceManager.GetAll().ToList<BookingServiceModel>();
         }
 
