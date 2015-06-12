@@ -61,9 +61,10 @@
     <Compile Include="Config\UserConfig.cs" />
     <Compile Include="Managers\BaseACPManager.cs" />
     <Compile Include="Managers\BaseManager.cs" />
-    <Compile Include="Managers\BookingEntityMananger.cs" />
+    <Compile Include="Managers\BookingEntityManager.cs" />
     <Compile Include="Managers\BookingManager.cs" />
     <Compile Include="Managers\BookingPricingManager.cs" />
+    <Compile Include="Managers\RootBookingEntityManager.cs" />
     <Compile Include="Managers\ServiceManager.cs" />
     <Compile Include="Migrations\201506052125212_first-migration.cs" />
     <Compile Include="Migrations\201506052125212_first-migration.Designer.cs">
@@ -76,6 +77,14 @@
     <Compile Include="Migrations\201506081450154_foreignkey.cs" />
     <Compile Include="Migrations\201506081450154_foreignkey.Designer.cs">
       <DependentUpon>201506081450154_foreignkey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506112015558_addressadded.cs" />
+    <Compile Include="Migrations\201506112015558_addressadded.Designer.cs">
+      <DependentUpon>201506112015558_addressadded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506112047383_key.cs" />
+    <Compile Include="Migrations\201506112047383_key.Designer.cs">
+      <DependentUpon>201506112047383_key.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -108,6 +117,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506081450154_foreignkey.resx">
       <DependentUpon>201506081450154_foreignkey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506112015558_addressadded.resx">
+      <DependentUpon>201506112015558_addressadded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506112047383_key.resx">
+      <DependentUpon>201506112047383_key.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -17,7 +17,7 @@ namespace ACP.Business.Models
 
         //public virtual RootBookingEntity RootBookingEntity { get; set; }
         //public virtual ICollection<BookingPricing> Prices { get; set; }
-        //public virtual Address Address { get; set; }
+        public virtual AddressModel Address { get; set; }
         //public virtual ICollection<BookingService> Service { get; set; }
     }
 }

@@ -26,7 +26,9 @@ namespace ACP.DataAccess
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Configurations.Add(new BookingServiceConfig());
-            modelBuilder.Configurations.Add(new RootBookingEntityConfig());            
+            modelBuilder.Configurations.Add(new BookingEntityConfig());
+            modelBuilder.Configurations.Add(new RootBookingEntityConfig());
+            modelBuilder.Configurations.Add(new AddressConfig());
 
         }
 

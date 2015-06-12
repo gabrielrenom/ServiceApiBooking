@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace ACP.Business.Managers
 {
-    public interface IBookingEntityManager:IBaseManager<BookingEntityModel, BookingEntity>
+    public interface IRootBookingEntityManager : IBaseManager<RootBookingEntityModel, RootBookingEntity>
     {
-        IList<BookingEntityModel> GetAllBookingEntities();
+
     }
 }

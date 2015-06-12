@@ -13,7 +13,9 @@ namespace ACP.DataAccess.Config
         public AddressConfig()
         {
             //## Primary Key
-           HasKey(t => t.Id);           
+           HasKey(t => t.Id);   
+        
+
         }
     }
 }

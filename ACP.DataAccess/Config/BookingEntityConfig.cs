@@ -13,7 +13,16 @@ namespace ACP.DataAccess.Config
         public BookingEntityConfig()
         {
             //## Primary Key
-            HasKey(t => t.Id);           
+            HasKey(t => t.Id);
+            
+            HasRequired(a => a.Address)
+            .WithMany()
+            .HasForeignKey(u => u.AddressId);
+
+            HasRequired(p => p.RootBookingEntity)
+             .WithMany()
+             .HasForeignKey(p => p.RootBookingEntityId);
+        
         }
     }
 }

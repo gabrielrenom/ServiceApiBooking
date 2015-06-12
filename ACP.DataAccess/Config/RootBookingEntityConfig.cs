@@ -13,6 +13,16 @@ namespace ACP.DataAccess.Config
         public RootBookingEntityConfig()
         {
             HasKey(t => t.Id);
+
+            HasRequired(p => p.Address)
+                .WithMany()
+                .HasForeignKey(p => p.AddressId)
+                .WillCascadeOnDelete(false);
+
+            HasRequired(p => p.Status)
+                .WithMany()
+                .HasForeignKey(p => p.StatusId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

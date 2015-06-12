@@ -14,6 +14,8 @@ namespace ACP.Data
         public decimal Price { get; set; }
         public decimal Comission { get; set; }
         public bool Sameday { get; set; }
+        public int AddressId { get; set; }
+        public int RootBookingEntityId { get; set; }
 
         public virtual RootBookingEntity RootBookingEntity { get; set; }
         public virtual ICollection<BookingPricing> Prices {get;set;}
