@@ -14,8 +14,8 @@ namespace ACP.Business.Models
         public int AddressId { get; set; }
         public int StatusId { get; set; }
 
-        public virtual Address Address { get; set; }
-        public virtual Status Status { get; set; }
-        public virtual ICollection<BookingEntity> BookingEntities { get; set; }
+        public virtual AddressModel Address { get; set; }
+        public virtual StatusModel Status { get; set; }
+        public virtual ICollection<BookingEntityModel> BookingEntities { get; set; }
     }
 }

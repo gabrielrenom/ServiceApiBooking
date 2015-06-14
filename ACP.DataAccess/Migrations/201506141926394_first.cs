@@ -3,7 +3,7 @@ namespace ACP.DataAccess.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class firstmigration : DbMigration
+    public partial class first : DbMigration
     {
         public override void Up()
         {
@@ -36,51 +36,18 @@ namespace ACP.DataAccess.Migrations
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Comission = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Sameday = c.Boolean(nullable: false),
+                        AddressId = c.Int(nullable: false),
+                        RootBookingEntityId = c.Int(nullable: false),
                         CreatedBy = c.String(),
                         ModifiedBy = c.String(),
                         Created = c.DateTime(),
                         Modified = c.DateTime(),
-                        Address_Id = c.Int(),
-                        Entity_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Addresses", t => t.Address_Id)
-                .ForeignKey("dbo.RootBookingEntities", t => t.Entity_Id)
-                .Index(t => t.Address_Id)
-                .Index(t => t.Entity_Id);
-            
-            CreateTable(
-                "dbo.RootBookingEntities",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Telephone = c.String(),
-                        CreatedBy = c.String(),
-                        ModifiedBy = c.String(),
-                        Created = c.DateTime(),
-                        Modified = c.DateTime(),
-                        Address_Id = c.Int(),
-                        Status_Id = c.Int(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Addresses", t => t.Address_Id)
-                .ForeignKey("dbo.Status", t => t.Status_Id)
-                .Index(t => t.Address_Id)
-                .Index(t => t.Status_Id);
-            
-            CreateTable(
-                "dbo.Status",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        CreatedBy = c.String(),
-                        ModifiedBy = c.String(),
-                        Created = c.DateTime(),
-                        Modified = c.DateTime(),
-                    })
-                .PrimaryKey(t => t.Id);
+                .ForeignKey("dbo.Addresses", t => t.AddressId, cascadeDelete: true)
+                .ForeignKey("dbo.RootBookingEntities", t => t.RootBookingEntityId)
+                .Index(t => t.AddressId)
+                .Index(t => t.RootBookingEntityId);
             
             CreateTable(
                 "dbo.BookingPricings",
@@ -90,15 +57,15 @@ namespace ACP.DataAccess.Migrations
                         Name = c.String(),
                         Start = c.DateTime(nullable: false),
                         End = c.DateTime(nullable: false),
+                        BookingEntityId = c.Int(nullable: false),
                         CreatedBy = c.String(),
                         ModifiedBy = c.String(),
                         Created = c.DateTime(),
                         Modified = c.DateTime(),
-                        BookingEntity_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.BookingEntities", t => t.BookingEntity_Id)
-                .Index(t => t.BookingEntity_Id);
+                .ForeignKey("dbo.BookingEntities", t => t.BookingEntityId, cascadeDelete: true)
+                .Index(t => t.BookingEntityId);
             
             CreateTable(
                 "dbo.DayPrices",
@@ -107,15 +74,15 @@ namespace ACP.DataAccess.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Day = c.Int(nullable: false),
                         Dayprice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        BookingPricingId = c.Int(nullable: false),
                         CreatedBy = c.String(),
                         ModifiedBy = c.String(),
                         Created = c.DateTime(),
                         Modified = c.DateTime(),
-                        BookingPricing_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.BookingPricings", t => t.BookingPricing_Id)
-                .Index(t => t.BookingPricing_Id);
+                .ForeignKey("dbo.BookingPricings", t => t.BookingPricingId, cascadeDelete: true)
+                .Index(t => t.BookingPricingId);
             
             CreateTable(
                 "dbo.HourPrices",
@@ -131,6 +98,39 @@ namespace ACP.DataAccess.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.DayPrices", t => t.DayPrice_Id)
                 .Index(t => t.DayPrice_Id);
+            
+            CreateTable(
+                "dbo.RootBookingEntities",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Telephone = c.String(),
+                        AddressId = c.Int(nullable: false),
+                        StatusId = c.Int(nullable: false),
+                        CreatedBy = c.String(),
+                        ModifiedBy = c.String(),
+                        Created = c.DateTime(),
+                        Modified = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Addresses", t => t.AddressId)
+                .ForeignKey("dbo.Status", t => t.StatusId)
+                .Index(t => t.AddressId)
+                .Index(t => t.StatusId);
+            
+            CreateTable(
+                "dbo.Status",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        CreatedBy = c.String(),
+                        ModifiedBy = c.String(),
+                        Created = c.DateTime(),
+                        Modified = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.BookingServices",
@@ -199,33 +199,33 @@ namespace ACP.DataAccess.Migrations
             DropForeignKey("dbo.Bookings", "Status_Id", "dbo.Status");
             DropForeignKey("dbo.Bookings", "Entity_Id", "dbo.BookingEntities");
             DropForeignKey("dbo.BookingServices", "BookingEntity_Id", "dbo.BookingEntities");
+            DropForeignKey("dbo.BookingEntities", "RootBookingEntityId", "dbo.RootBookingEntities");
+            DropForeignKey("dbo.RootBookingEntities", "StatusId", "dbo.Status");
+            DropForeignKey("dbo.RootBookingEntities", "AddressId", "dbo.Addresses");
             DropForeignKey("dbo.HourPrices", "DayPrice_Id", "dbo.DayPrices");
-            DropForeignKey("dbo.DayPrices", "BookingPricing_Id", "dbo.BookingPricings");
-            DropForeignKey("dbo.BookingPricings", "BookingEntity_Id", "dbo.BookingEntities");
-            DropForeignKey("dbo.RootBookingEntities", "Status_Id", "dbo.Status");
-            DropForeignKey("dbo.BookingEntities", "Entity_Id", "dbo.RootBookingEntities");
-            DropForeignKey("dbo.RootBookingEntities", "Address_Id", "dbo.Addresses");
-            DropForeignKey("dbo.BookingEntities", "Address_Id", "dbo.Addresses");
+            DropForeignKey("dbo.DayPrices", "BookingPricingId", "dbo.BookingPricings");
+            DropForeignKey("dbo.BookingPricings", "BookingEntityId", "dbo.BookingEntities");
+            DropForeignKey("dbo.BookingEntities", "AddressId", "dbo.Addresses");
             DropIndex("dbo.Users", new[] { "Address_Id" });
             DropIndex("dbo.Bookings", new[] { "User_Id" });
             DropIndex("dbo.Bookings", new[] { "Status_Id" });
             DropIndex("dbo.Bookings", new[] { "Entity_Id" });
             DropIndex("dbo.BookingServices", new[] { "BookingEntity_Id" });
+            DropIndex("dbo.RootBookingEntities", new[] { "StatusId" });
+            DropIndex("dbo.RootBookingEntities", new[] { "AddressId" });
             DropIndex("dbo.HourPrices", new[] { "DayPrice_Id" });
-            DropIndex("dbo.DayPrices", new[] { "BookingPricing_Id" });
-            DropIndex("dbo.BookingPricings", new[] { "BookingEntity_Id" });
-            DropIndex("dbo.RootBookingEntities", new[] { "Status_Id" });
-            DropIndex("dbo.RootBookingEntities", new[] { "Address_Id" });
-            DropIndex("dbo.BookingEntities", new[] { "Entity_Id" });
-            DropIndex("dbo.BookingEntities", new[] { "Address_Id" });
+            DropIndex("dbo.DayPrices", new[] { "BookingPricingId" });
+            DropIndex("dbo.BookingPricings", new[] { "BookingEntityId" });
+            DropIndex("dbo.BookingEntities", new[] { "RootBookingEntityId" });
+            DropIndex("dbo.BookingEntities", new[] { "AddressId" });
             DropTable("dbo.Users");
             DropTable("dbo.Bookings");
             DropTable("dbo.BookingServices");
+            DropTable("dbo.Status");
+            DropTable("dbo.RootBookingEntities");
             DropTable("dbo.HourPrices");
             DropTable("dbo.DayPrices");
             DropTable("dbo.BookingPricings");
-            DropTable("dbo.Status");
-            DropTable("dbo.RootBookingEntities");
             DropTable("dbo.BookingEntities");
             DropTable("dbo.Addresses");
         }

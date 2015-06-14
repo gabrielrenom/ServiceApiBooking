@@ -9,6 +9,7 @@ namespace ACP.Data
     {
         public int Day { get; set; }
         public decimal Dayprice { get; set; }
+        public int BookingPricingId { get; set; }
 
         public virtual BookingPricing BookingPricing { get; set; }
         public ICollection<HourPrice> HourPrices { get; set; }

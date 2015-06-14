@@ -1,4 +1,5 @@
 ﻿using ACP.Business.Models;
+using ACP.Business.Services;
 using ACP.Data;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace ACP.Business.Managers
 {
-    public interface IRootBookingEntityManager : IBaseManager<RootBookingEntityModel, RootBookingEntity>
+    public interface IBookingPricingManager : IBaseManager<BookingPricingModel, BookingPricing>
     {
-        IList<RootBookingEntityModel> GetAll();
+        IList<BookingPricingModel> GetAllPrices(DateTime pickup, DateTime dropoff);
     }
 }

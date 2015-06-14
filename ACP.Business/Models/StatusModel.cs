@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ACP.Business.Models
 {
-    public class StatusModel
+    public class StatusModel:BaseModel
     {
+        public string Name { get; set; }
     }
 }
