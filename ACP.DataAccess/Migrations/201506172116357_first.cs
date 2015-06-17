@@ -89,15 +89,17 @@ namespace ACP.DataAccess.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        HourMinute = c.DateTime(nullable: false),
+                        Hourprice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        DayPriceId = c.Int(nullable: false),
                         CreatedBy = c.String(),
                         ModifiedBy = c.String(),
                         Created = c.DateTime(),
                         Modified = c.DateTime(),
-                        DayPrice_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.DayPrices", t => t.DayPrice_Id)
-                .Index(t => t.DayPrice_Id);
+                .ForeignKey("dbo.DayPrices", t => t.DayPriceId, cascadeDelete: true)
+                .Index(t => t.DayPriceId);
             
             CreateTable(
                 "dbo.RootBookingEntities",
@@ -202,7 +204,7 @@ namespace ACP.DataAccess.Migrations
             DropForeignKey("dbo.BookingEntities", "RootBookingEntityId", "dbo.RootBookingEntities");
             DropForeignKey("dbo.RootBookingEntities", "StatusId", "dbo.Status");
             DropForeignKey("dbo.RootBookingEntities", "AddressId", "dbo.Addresses");
-            DropForeignKey("dbo.HourPrices", "DayPrice_Id", "dbo.DayPrices");
+            DropForeignKey("dbo.HourPrices", "DayPriceId", "dbo.DayPrices");
             DropForeignKey("dbo.DayPrices", "BookingPricingId", "dbo.BookingPricings");
             DropForeignKey("dbo.BookingPricings", "BookingEntityId", "dbo.BookingEntities");
             DropForeignKey("dbo.BookingEntities", "AddressId", "dbo.Addresses");
@@ -213,7 +215,7 @@ namespace ACP.DataAccess.Migrations
             DropIndex("dbo.BookingServices", new[] { "BookingEntity_Id" });
             DropIndex("dbo.RootBookingEntities", new[] { "StatusId" });
             DropIndex("dbo.RootBookingEntities", new[] { "AddressId" });
-            DropIndex("dbo.HourPrices", new[] { "DayPrice_Id" });
+            DropIndex("dbo.HourPrices", new[] { "DayPriceId" });
             DropIndex("dbo.DayPrices", new[] { "BookingPricingId" });
             DropIndex("dbo.BookingPricings", new[] { "BookingEntityId" });
             DropIndex("dbo.BookingEntities", new[] { "RootBookingEntityId" });

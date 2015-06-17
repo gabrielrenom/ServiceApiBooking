@@ -30,6 +30,8 @@ namespace ACP.DataAccess
             modelBuilder.Configurations.Add(new BookingEntityConfig());
             modelBuilder.Configurations.Add(new RootBookingEntityConfig());
             modelBuilder.Configurations.Add(new AddressConfig());
+            modelBuilder.Configurations.Add(new DayPriceConfig());
+            modelBuilder.Configurations.Add(new HourPriceConfig());
 
         }
 

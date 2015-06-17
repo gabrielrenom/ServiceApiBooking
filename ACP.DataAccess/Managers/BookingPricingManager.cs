@@ -85,6 +85,61 @@ namespace ACP.DataAccess.Managers
             return domainModel;
             
         }
-        
+
+
+
+        public bool AddPricesWithDays(int bookingEntityId, IList<BookingPricingModel> prices)
+        {
+            bool result = false;
+            var bookingentity = Repository.GetSingle<BookingEntity>(x => x.Id == bookingEntityId);
+
+            foreach (var item in prices)
+            {
+                item.BookingEntityId = bookingEntityId;
+                BookingPricing model = ToDataModelWithChildNodes(item);
+                Repository.Add<BookingPricing>(model);
+                Repository.Commit();
+                result = true;
+            }
+
+            return result;
+        }
+
+        public override BookingPricing ToDataModelWithChildNodes(BookingPricingModel domainModel, BookingPricing dataModel = null)
+        {
+            BookingPricing model = new BookingPricing();
+
+
+            model.Created = domainModel.Created;
+            model.Id = domainModel.Id;
+            model.CreatedBy = domainModel.CreatedBy;
+            model.Modified = domainModel.Modified;
+            model.ModifiedBy = domainModel.ModifiedBy;
+            model.Name = domainModel.Name;
+            model.DayPrices = domainModel.DayPrices != null ? domainModel.DayPrices.Select(r => new DayPrice
+            {
+                Created = r.Created,
+                CreatedBy = r.CreatedBy,
+                Id = r.Id,
+                Modified = r.Modified,
+                ModifiedBy = r.ModifiedBy,
+                Day= r.Day,
+                Dayprice = r.Dayprice,
+                HourPrices = r.HourPrices!=null?r.HourPrices.Select(m=>new HourPrice
+                {
+                    Created = m.Created,
+                    CreatedBy = m.CreatedBy,                    
+                    Modified = m.Modified,
+                    ModifiedBy = m.ModifiedBy,
+                    HourMinute = m.HourMinute,
+                    Hourprice = m.Hourprice
+                }).ToList():null
+
+            }).ToList() : null;
+
+            
+            return model;
+
+        }
     }
 }

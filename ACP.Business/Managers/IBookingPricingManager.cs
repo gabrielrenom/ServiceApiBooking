@@ -12,5 +12,7 @@ namespace ACP.Business.Managers
     public interface IBookingPricingManager : IBaseManager<BookingPricingModel, BookingPricing>
     {
         IList<BookingPricingModel> GetAllPrices(DateTime pickup, DateTime dropoff);
+
+        bool AddPricesWithDays(int bookingEntityId, IList<BookingPricingModel> prices);
     }
 }

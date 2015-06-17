@@ -66,9 +66,9 @@
     <Compile Include="Managers\BookingPricingManager.cs" />
     <Compile Include="Managers\RootBookingEntityManager.cs" />
     <Compile Include="Managers\ServiceManager.cs" />
-    <Compile Include="Migrations\201506141926394_first.cs" />
-    <Compile Include="Migrations\201506141926394_first.Designer.cs">
-      <DependentUpon>201506141926394_first.cs</DependentUpon>
+    <Compile Include="Migrations\201506172116357_first.cs" />
+    <Compile Include="Migrations\201506172116357_first.Designer.cs">
+      <DependentUpon>201506172116357_first.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,8 +93,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201506141926394_first.resx">
-      <DependentUpon>201506141926394_first.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201506172116357_first.resx">
+      <DependentUpon>201506172116357_first.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

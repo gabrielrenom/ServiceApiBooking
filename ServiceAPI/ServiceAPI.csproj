@@ -230,6 +230,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506172048212_firstmigration.cs" />
+    <Compile Include="Migrations\201506172048212_firstmigration.Designer.cs">
+      <DependentUpon>201506172048212_firstmigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506172105023_s.cs" />
+    <Compile Include="Migrations\201506172105023_s.Designer.cs">
+      <DependentUpon>201506172105023_s.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506172108029_h.cs" />
+    <Compile Include="Migrations\201506172108029_h.Designer.cs">
+      <DependentUpon>201506172108029_h.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -314,6 +327,17 @@
       <Project>{3071fee3-8683-48f5-a510-ca347dbd97dc}</Project>
       <Name>ACP.DataAccess</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201506172048212_firstmigration.resx">
+      <DependentUpon>201506172048212_firstmigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506172105023_s.resx">
+      <DependentUpon>201506172105023_s.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506172108029_h.resx">
+      <DependentUpon>201506172108029_h.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

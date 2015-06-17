@@ -13,7 +13,11 @@ namespace ACP.DataAccess.Config
         public DayPriceConfig()
         {
             //## Primary Key
-            HasKey(t => t.Id);           
+            HasKey(t => t.Id);
+
+            HasRequired(t => t.BookingPricing)
+             .WithMany(t=>t.DayPrices)
+             .HasForeignKey(t => t.BookingPricingId);
         }
     }
 }

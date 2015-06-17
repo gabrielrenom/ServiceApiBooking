@@ -13,7 +13,11 @@ namespace ACP.DataAccess.Config
         public HourPriceConfig()
         {
             //## Primary Key
-            HasKey(t => t.Id);           
+            HasKey(t => t.Id);
+
+            HasRequired(t => t.DayPrice)
+             .WithMany(t => t.HourPrices)
+             .HasForeignKey(t => t.DayPriceId);
         }
     }
 }

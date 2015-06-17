@@ -10,5 +10,10 @@ namespace ACP.Business.Services.Interfaces
     public interface IBookingPricingService
     {
         IEnumerable<BookingPricingModel> GetAll();
+        bool AddPricesWithDays(int bookingEntityId, IList<BookingPricingModel> prices);
+        bool AddPricesWithDaysAndTimes(int bookingEntityId, IList<BookingPricingModel> prices);
+        BookingEntityModel GetAllPricesWithDays(int bookingEntityId);
+        BookingEntityModel GetAllPricesWithDaysAndTimes(int bookingEntityId);
+
     }
 }
