@@ -41,8 +41,11 @@ namespace ACP.Business.Test
             BookingPricingModel model = new BookingPricingModel();
             model.Created = DateTime.Now;
             model.CreatedBy = localuser;
+            model.Modified = DateTime.Now;
             model.Name = "Winter";
             model.DayPrices = new Collection<DayPriceModel>();
+            model.Start = DateTime.Now;
+            model.End = DateTime.Now;
             model.DayPrices.Add(new DayPriceModel
             {
                 Created = DateTime.Now,
@@ -56,17 +59,18 @@ namespace ACP.Business.Test
                     {
                          Created = DateTime.Now,                         
                          HourMinute = DateTime.Now,
-                         Hourprice = 0                       
+                         Hourprice = 0,
+                          Modified= DateTime.Now
                     }
                 }
             });
             list.Add(model);
 
             //Act
-            var results = service.AddPricesWithDays(1, list);
+            var results = service.AddPricesWithDays(2, list);
 
             //Assert
-            Assert.IsTrue(results != null);
+            Assert.IsTrue(results);
         }
 
         [TestMethod]

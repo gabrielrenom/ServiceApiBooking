@@ -93,15 +93,17 @@ namespace ACP.DataAccess.Managers
             bool result = false;
             var bookingentity = Repository.GetSingle<BookingEntity>(x => x.Id == bookingEntityId);
 
-            foreach (var item in prices)
+            if (bookingentity != null)
             {
-                item.BookingEntityId = bookingEntityId;
-                BookingPricing model = ToDataModelWithChildNodes(item);
-                Repository.Add<BookingPricing>(model);
-                Repository.Commit();
-                result = true;
+                foreach (var item in prices)
+                {                    
+                    item.BookingEntityId = bookingEntityId;
+                    BookingPricing model = ToDataModelWithChildNodes(item);                   
+                    Repository.Add<BookingPricing>(model);
+                    Repository.Commit();
+                    result = true;
+                }
             }
-
             return result;
         }
 
@@ -116,6 +118,10 @@ namespace ACP.DataAccess.Managers
             model.Modified = domainModel.Modified;
             model.ModifiedBy = domainModel.ModifiedBy;
             model.Name = domainModel.Name;
+            model.Start = domainModel.Start;
+            model.End = domainModel.End;
+            model.BookingEntityId = domainModel.BookingEntityId;
+           
             model.DayPrices = domainModel.DayPrices != null ? domainModel.DayPrices.Select(r => new DayPrice
             {
                 Created = r.Created,

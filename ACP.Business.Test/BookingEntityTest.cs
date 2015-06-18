@@ -37,7 +37,7 @@ namespace ACP.Business.Test
             model.CreatedBy = localuser;
             model.Modified = DateTime.Now;
             model.ModifiedBy = localuser;
-            model.Name = "Local Airport" + DateTime.Now.ToString();
+            model.Name = "Local Airport" + DateTime.Now.ToString();            
             model.Address = new AddressModel
             {
                 Address1 = "MyAdress",
