@@ -54,6 +54,7 @@
     <Compile Include="Config\BookingEntityConfig.cs" />
     <Compile Include="Config\BookingPricingConfig.cs" />
     <Compile Include="Config\BookingServiceConfig.cs" />
+    <Compile Include="Config\CarConfig.cs" />
     <Compile Include="Config\DayPriceConfig.cs" />
     <Compile Include="Config\RootBookingEntityConfig.cs" />
     <Compile Include="Config\HourPriceConfig.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Managers\BookingPricingManager.cs" />
     <Compile Include="Managers\RootBookingEntityManager.cs" />
     <Compile Include="Managers\ServiceManager.cs" />
+    <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Migrations\201506172116357_first.cs" />
     <Compile Include="Migrations\201506172116357_first.Designer.cs">
       <DependentUpon>201506172116357_first.cs</DependentUpon>

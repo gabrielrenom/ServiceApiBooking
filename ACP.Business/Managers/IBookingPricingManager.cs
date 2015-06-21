@@ -14,5 +14,11 @@ namespace ACP.Business.Managers
         IList<BookingPricingModel> GetAllPrices(DateTime pickup, DateTime dropoff);
 
         bool AddPricesWithDays(int bookingEntityId, IList<BookingPricingModel> prices);
+
+        IList<BookingPricingModel> GetAllPricesWithDaysAndTimes(int bookingEntityId);
+
+        IList<BookingPricingModel> GetAllPricesWithDays(int bookingEntityId);
+
+        bool UpdatePricesWithDays(int bookingEntityId, IList<BookingPricingModel> list);
     }
 }

@@ -35,15 +35,28 @@ namespace ACP.Business.Services
         {
             throw new NotImplementedException();
         }
+        
 
-        public BookingEntityModel GetAllPricesWithDays(int bookingEntityId)
+        public bool UpdatePricesWithDays(int bookingEntityId, IList<BookingPricingModel> list)
         {
-            throw new NotImplementedException();
+            return _bookingPricingManager.UpdatePricesWithDays( bookingEntityId,  list);
         }
 
-        public BookingEntityModel GetAllPricesWithDaysAndTimes(int bookingEntityId)
+
+        public IList<BookingPricingModel> GetAllPricesWithDays(int bookingEntityId)
         {
-            throw new NotImplementedException();
+            return _bookingPricingManager.GetAllPricesWithDays(bookingEntityId);
+        }
+
+        public IList<BookingPricingModel> GetAllPricesWithDaysAndTimes(int bookingEntityId)
+        {
+            return _bookingPricingManager.GetAllPricesWithDaysAndTimes(bookingEntityId);
+        }
+
+
+        public bool DeleteById(int Id)
+        {
+            return _bookingPricingManager.DeleteById(Id);
         }
     }
 }

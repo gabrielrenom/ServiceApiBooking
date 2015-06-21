@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ACP.Business.Repository;
 using ACP.Business.Managers;
@@ -53,6 +54,47 @@ namespace ACP.Business.Test
                 Modified = DateTime.Now,
                 Dayprice = 0,
                 CreatedBy = localuser,
+                //HourPrices = new Collection<HourPriceModel>() 
+                //{ 
+                //    new HourPriceModel
+                //    {
+                //         Created = DateTime.Now,                         
+                //         HourMinute = DateTime.Now,
+                //         Hourprice = 0,
+                //          Modified= DateTime.Now
+                //    }
+                //}
+            });
+            list.Add(model);
+
+            //Act
+            var results = service.AddPricesWithDays(2, list);
+
+            //Assert
+            Assert.IsTrue(results);
+        }
+
+        [TestMethod]
+        public void WhenAnEntityIsGiven_WhenOnlyDaysAndHoursAreSelected_BeSureTheyAreAdded()
+        {
+            //Arrange
+            IList<BookingPricingModel> list = new List<BookingPricingModel>();
+
+            BookingPricingModel model = new BookingPricingModel();
+            model.Created = DateTime.Now;
+            model.CreatedBy = localuser;
+            model.Modified = DateTime.Now;
+            model.Name = "Winter";
+            model.DayPrices = new Collection<DayPriceModel>();
+            model.Start = DateTime.Now;
+            model.End = DateTime.Now;
+            model.DayPrices.Add(new DayPriceModel
+            {
+                Created = DateTime.Now,
+                Day = 1,
+                Modified = DateTime.Now,
+                Dayprice = 0,
+                CreatedBy = localuser,
                 HourPrices = new Collection<HourPriceModel>() 
                 { 
                     new HourPriceModel
@@ -74,6 +116,22 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
+        public void WhenAnEntityIsGiven_WhenOnlyDaysAreSelected_BeSureTheyAreUpdated()
+        {
+            //Arrange
+            var allprices = service.GetAllPricesWithDays(2);
+             allprices.FirstOrDefault().Name = "A new One";
+
+            //Act
+             var results = service.UpdatePricesWithDays(2, allprices.ToList());
+
+            //Assert
+            Assert.IsTrue(results);
+            Assert.AreEqual(service.GetAllPricesWithDays(2).FirstOrDefault().Name, "A new One");
+        }
+
+
+        [TestMethod]
         public void OnPrices_WhenGetAllIsCalled_BeSureAllThePricesAreReturned()
         {
             //Arrange
@@ -85,6 +143,29 @@ namespace ACP.Business.Test
             Assert.IsNotNull(results);
         }
 
-     
+        [TestMethod]
+        public void OnPrices_WhenGetAllPricesWithDaysIsCalled_BeSureAllThePricesAreReturned()
+        {
+            //Arrange
+            var bookentityid = 2;
+            //Act
+            var results = service.GetAllPricesWithDays(bookentityid);
+
+            //Assert
+            Assert.IsNotNull(results);
+        }
+
+        [TestMethod]
+        public void OnAnEntityId_WhenDeleteByIdIsCalled_BeSureThePriceIsRemoved()
+        {
+            //Arrange
+            var bookentityid = 6;
+            //Act
+            var results = service.DeleteById(bookentityid);
+
+            //Assert
+            Assert.IsNotNull(results);
+        }
+
     }
 }

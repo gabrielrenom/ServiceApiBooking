@@ -49,6 +49,7 @@
     <Compile Include="Managers\IBookingPricingManager.cs" />
     <Compile Include="Managers\IRootBookingEntityManager.cs" />
     <Compile Include="Managers\IServiceManager.cs" />
+    <Compile Include="Managers\IUserManager.cs" />
     <Compile Include="Models\AddressModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\BookingEntityModel.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Models\BookingPricingModel.cs" />
     <Compile Include="Models\BookingServiceModel.cs" />
     <Compile Include="Models\BookingModel.cs" />
+    <Compile Include="Models\CarModel.cs" />
     <Compile Include="Models\DayPriceModel.cs" />
     <Compile Include="Models\HourPriceModel.cs" />
     <Compile Include="Models\InsuranceTypeModel.cs" />
@@ -65,6 +67,7 @@
     <Compile Include="Models\QuoteModel.cs" />
     <Compile Include="Models\RootBookingEntityModel.cs" />
     <Compile Include="Models\StatusModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IACPRepository.cs" />
     <Compile Include="Repository\IGenericRepository.cs" />
@@ -78,8 +81,10 @@
     <Compile Include="Services\Interfaces\IRootBookingEntityService.cs" />
     <Compile Include="Services\Interfaces\IServiceService.cs" />
     <Compile Include="Services\BookingServiceService.cs" />
+    <Compile Include="Services\Interfaces\IUserService.cs" />
     <Compile Include="Services\PricingService.cs" />
     <Compile Include="Services\RootBookingEntityService.cs" />
+    <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enums\" />

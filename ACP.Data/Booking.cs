@@ -11,9 +11,12 @@ namespace ACP.Data
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public decimal Price { get; set; }
+        public int StatusId { get; set; }
+        public int UserId { get; set; }
+        public int BookingEntityId { get; set; }
+        
         public virtual Status Status { get; set; }
         public virtual User User { get; set; }
         public virtual BookingEntity Entity { get; set; }
-
     }
 }

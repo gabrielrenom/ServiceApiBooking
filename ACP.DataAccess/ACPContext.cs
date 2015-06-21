@@ -32,6 +32,8 @@ namespace ACP.DataAccess
             modelBuilder.Configurations.Add(new AddressConfig());
             modelBuilder.Configurations.Add(new DayPriceConfig());
             modelBuilder.Configurations.Add(new HourPriceConfig());
+            modelBuilder.Configurations.Add(new UserConfig());
+            modelBuilder.Configurations.Add(new CarConfig());
 
         }
 
@@ -44,6 +46,7 @@ namespace ACP.DataAccess
         public DbSet<HourPrice> HourPrices { get; set; }
         public DbSet<DayPrice> DayPrices { get; set; }
         public DbSet<Status> Statuses { get; set; }
-        public DbSet<User> Users { get; set; }   
+        public DbSet<User> Users { get; set; }
+        public DbSet<Car> Cars { get; set; }   
     }
 }

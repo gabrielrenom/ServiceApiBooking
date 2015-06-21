@@ -11,6 +11,6 @@ namespace ACP.Business.Models
         public decimal Hourprice;
         public int DayPriceId { get; set; }
 
-        public DayPriceModel DayPrice { get; set; }
+        public virtual DayPriceModel DayPrice { get; set; }        
     }
 }

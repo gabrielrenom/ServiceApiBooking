@@ -13,6 +13,6 @@ namespace ACP.Business.Models
         public int BookingPricingId { get; set; }
 
         public virtual BookingPricingModel BookingPricing { get; set; }
-        public ICollection<HourPriceModel> HourPrices { get; set; }
+        public virtual ICollection<HourPriceModel> HourPrices { get; set; }
     }
 }

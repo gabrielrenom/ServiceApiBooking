@@ -13,7 +13,9 @@ namespace ACP.DataAccess.Config
         public UserConfig()
         {
             //## Primary Key
-            HasKey(t => t.Id);           
+            HasKey(t => t.Id);          
+ 
+
         }
     }
 }

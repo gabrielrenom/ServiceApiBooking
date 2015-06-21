@@ -5,6 +5,7 @@ using ACP.Business.Services;
 using ACP.Data;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,11 +14,13 @@ namespace ACP.DataAccess.Managers
 {
     public class BookingPricingManager : BaseACPManager<BookingPricingModel, BookingPricing>, IBookingPricingManager
     {
+        private IBookingEntityManager bookingEntityManager;
 
         public BookingPricingManager(IACPRepository repository)
             : base(repository)
         {
             Repository = repository;
+            bookingEntityManager = new BookingEntityManager(repository);
         }
 
 
@@ -47,17 +50,41 @@ namespace ACP.DataAccess.Managers
             domainModel.Created = dataModel.Created ?? dataModel.Created;
             domainModel.ModifiedBy = dataModel.ModifiedBy;
             domainModel.Modified = dataModel.Modified;
-            domainModel.BookingEntity = new BookingEntityModel
+            domainModel.BookingEntity = dataModel.BookingEntity != null ? new BookingEntityModel
             {
                 Id = dataModel.BookingEntity.Id,
                 Comission = dataModel.BookingEntity.Comission,
                 Name = dataModel.BookingEntity.Name,
                 Price = dataModel.BookingEntity.Price,
                 Sameday = dataModel.BookingEntity.Sameday
-            };
+            } : null;
+
+            domainModel.DayPrices = dataModel.DayPrices != null ? dataModel.DayPrices.Select(r => new DayPriceModel
+            {
+                Created = r.Created,
+                CreatedBy = r.CreatedBy,
+                Id = r.Id,
+                Modified = r.Modified,
+                ModifiedBy = r.ModifiedBy,
+                Day = r.Day,
+                Dayprice = r.Dayprice,
+                BookingPricingId = r.BookingPricingId,
+                HourPrices = r.HourPrices != null ? r.HourPrices.Select(m => new HourPriceModel
+                {
+                    Created = m.Created,
+                    CreatedBy = m.CreatedBy,
+                    Modified = m.Modified,
+                    ModifiedBy = m.ModifiedBy,
+                    HourMinute = m.HourMinute,
+                    Hourprice = m.Hourprice,
+                    Id = m.Id,
+                    DayPriceId = m.DayPriceId
+                }).ToList() : null
+
+            }).ToList() : null;
 
             return domainModel;
-
+          
         }
 
         public override BookingPricingModel ToDomainModel(BookingPricing dataModel)
@@ -73,14 +100,38 @@ namespace ACP.DataAccess.Managers
             domainModel.Created = dataModel.Created ?? dataModel.Created;
             domainModel.ModifiedBy = dataModel.ModifiedBy;
             domainModel.Modified = dataModel.Modified;
-            domainModel.BookingEntity = new BookingEntityModel
+            domainModel.BookingEntity = dataModel.BookingEntity!=null?new BookingEntityModel
             {
                 Id = dataModel.BookingEntity.Id,
                 Comission = dataModel.BookingEntity.Comission,
                 Name = dataModel.BookingEntity.Name,
                 Price = dataModel.BookingEntity.Price,
                 Sameday = dataModel.BookingEntity.Sameday
-            };
+            }:null;
+
+            domainModel.DayPrices = dataModel.DayPrices != null ? dataModel.DayPrices.Select(r => new DayPriceModel
+            {
+                Created = r.Created,
+                CreatedBy = r.CreatedBy,
+                Id = r.Id,
+                Modified = r.Modified,
+                ModifiedBy = r.ModifiedBy,
+                Day = r.Day,
+                Dayprice = r.Dayprice,
+                 BookingPricingId = r.BookingPricingId,
+                HourPrices = r.HourPrices != null ? r.HourPrices.Select(m => new HourPriceModel
+                {
+                    Created = m.Created,
+                    CreatedBy = m.CreatedBy,
+                    Modified = m.Modified,
+                    ModifiedBy = m.ModifiedBy,
+                    HourMinute = m.HourMinute,
+                    Hourprice = m.Hourprice,
+                     Id = m.Id,
+                      DayPriceId = m.DayPriceId
+                }).ToList() : null
+
+            }).ToList() : null;
 
             return domainModel;
             
@@ -120,7 +171,7 @@ namespace ACP.DataAccess.Managers
             model.Name = domainModel.Name;
             model.Start = domainModel.Start;
             model.End = domainModel.End;
-            model.BookingEntityId = domainModel.BookingEntityId;
+            model.BookingEntityId = domainModel.BookingEntityId;          
            
             model.DayPrices = domainModel.DayPrices != null ? domainModel.DayPrices.Select(r => new DayPrice
             {
@@ -130,7 +181,7 @@ namespace ACP.DataAccess.Managers
                 Modified = r.Modified,
                 ModifiedBy = r.ModifiedBy,
                 Day= r.Day,
-                Dayprice = r.Dayprice,
+                Dayprice = r.Dayprice,                
                 HourPrices = r.HourPrices!=null?r.HourPrices.Select(m=>new HourPrice
                 {
                     Created = m.Created,
@@ -138,8 +189,12 @@ namespace ACP.DataAccess.Managers
                     Modified = m.Modified,
                     ModifiedBy = m.ModifiedBy,
                     HourMinute = m.HourMinute,
-                    Hourprice = m.Hourprice
-                }).ToList():null
+                    Hourprice = m.Hourprice,
+                    DayPriceId =m.DayPriceId,                 
+                    Id = m.Id
+
+                }).ToList():null,
+                 BookingPricingId = r.BookingPricingId
 
             }).ToList() : null;
 
@@ -147,5 +202,91 @@ namespace ACP.DataAccess.Managers
             return model;
 
         }
+
+
+        public IList<BookingPricingModel> GetAllPricesWithDays(int bookingEntityId)
+        {                     
+            return GetListIncluding(x => x.BookingEntityId == bookingEntityId, x => x.DayPrices.Select(y => y.HourPrices)).ToList();
+        }
+
+        public IList<BookingPricingModel> GetAllPricesWithDaysAndTimes(int bookingEntityId)
+        {            
+            return GetListIncluding(x => x.BookingEntityId == bookingEntityId, x => x.DayPrices, x=>x.DayPrices.Select(y=>y.HourPrices)).ToList();
+        }
+
+        public bool UpdatePricesWithDays(int bookingEntityId, IList<BookingPricingModel> prices)
+        {
+            bool result = false;
+            var bookingentity = Repository.GetSingle<BookingEntity>(x => x.Id == bookingEntityId );
+
+            if (bookingentity != null)
+            {
+                foreach (var domainModel in prices)
+                {                    
+                    var model = Repository.GetSingle<BookingPricing>(x => x.Id == domainModel.Id,
+                        y => y.BookingEntity, y => y.DayPrices, x => x.DayPrices.Select(y => y.HourPrices));
+
+                    model.Created = domainModel.Created;                    
+                    model.CreatedBy = domainModel.CreatedBy;
+                    model.Modified = domainModel.Modified;
+                    model.ModifiedBy = domainModel.ModifiedBy;
+                    model.Name = domainModel.Name;
+                    model.Start = domainModel.Start;
+                    model.End = domainModel.End;                    
+
+                    if (model.DayPrices.Count > 0)
+                    {
+                        Repository.DeleteMany<DayPrice>(model.DayPrices.ToArray());
+
+                        model.DayPrices = domainModel.DayPrices != null ? domainModel.DayPrices.Select(r => new DayPrice
+                        {
+                            Created = r.Created,
+                            CreatedBy = r.CreatedBy,                            
+                            Modified = r.Modified,
+                            ModifiedBy = r.ModifiedBy,
+                            Day = r.Day,
+                            Dayprice = r.Dayprice,
+                            HourPrices = r.HourPrices != null ? r.HourPrices.Select(m => new HourPrice
+                            {
+                                Created = m.Created,
+                                CreatedBy = m.CreatedBy,
+                                Modified = m.Modified,
+                                ModifiedBy = m.ModifiedBy,
+                                HourMinute = m.HourMinute,
+                                Hourprice = m.Hourprice,
+                                DayPriceId = m.DayPriceId,                                
+
+                            }).ToList() : null,
+                            
+                        }).ToList() : null;
+
+                    }                   
+
+                    Repository.Update<BookingPricing>(model);
+                    Repository.Commit();
+                    result = true;
+                }
+            }
+            return result;
+
+        }
+
+        public override bool DeleteById(int id)
+        {
+            var model = Repository.GetSingle<BookingPricing>(a => a.Id == id, x => x.BookingEntity, x => x.DayPrices, x => x.DayPrices.Select(y => y.HourPrices));
+
+
+            if (model.DayPrices!=null)
+            {
+                Repository.DeleteMany<DayPrice>(model.DayPrices.ToArray());
+            }
+
+            Repository.Delete<BookingPricing>(model);
+            Repository.Commit();
+
+            return true;
+
+        }
+
     }
 }
