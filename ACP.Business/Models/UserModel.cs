@@ -13,7 +13,7 @@ namespace ACP.Business.Models
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string AddressId { get; set; }
+        public int AddressId { get; set; }
 
         public virtual AddressModel Address { get; set; }
         public virtual ICollection<BookingModel> Bookings { get; set; }

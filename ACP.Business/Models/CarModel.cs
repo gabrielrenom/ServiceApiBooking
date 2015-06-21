@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ACP.Business.Models
 {
-    public class CarModel
+    public class CarModel:BaseModel
     {
         public string Registration { get; set; }
         public string Make { get; set; }

@@ -14,7 +14,7 @@ namespace ACP.Data
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string AddressId{get;set;}        
+        public int  AddressId{get;set;}        
 
         public virtual Address Address { get; set; }
         public virtual ICollection<Booking> Bookings { get; set; }

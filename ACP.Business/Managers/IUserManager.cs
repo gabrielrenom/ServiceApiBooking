@@ -10,5 +10,7 @@ namespace ACP.Business.Managers
 {
     public interface IUserManager: IBaseACPManager<UserModel,User>
     {
+        IList<UserModel> GetAllUsersWithCarsAndBookings();
+        IList<UserModel> GetAllUsersWithCars();
     }
 }

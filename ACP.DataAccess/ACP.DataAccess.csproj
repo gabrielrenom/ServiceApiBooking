@@ -72,6 +72,14 @@
     <Compile Include="Migrations\201506172116357_first.Designer.cs">
       <DependentUpon>201506172116357_first.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506211635222_users.cs" />
+    <Compile Include="Migrations\201506211635222_users.Designer.cs">
+      <DependentUpon>201506211635222_users.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506211642299_addressaddedinUser.cs" />
+    <Compile Include="Migrations\201506211642299_addressaddedinUser.Designer.cs">
+      <DependentUpon>201506211642299_addressaddedinUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ACPRepository.cs" />
@@ -97,6 +105,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201506172116357_first.resx">
       <DependentUpon>201506172116357_first.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506211635222_users.resx">
+      <DependentUpon>201506211635222_users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506211642299_addressaddedinUser.resx">
+      <DependentUpon>201506211642299_addressaddedinUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
