@@ -56,6 +56,7 @@
     <Compile Include="Config\BookingServiceConfig.cs" />
     <Compile Include="Config\CarConfig.cs" />
     <Compile Include="Config\DayPriceConfig.cs" />
+    <Compile Include="Config\ExtraConfig.cs" />
     <Compile Include="Config\RootBookingEntityConfig.cs" />
     <Compile Include="Config\HourPriceConfig.cs" />
     <Compile Include="Config\StatusConfig.cs" />
@@ -79,6 +80,14 @@
     <Compile Include="Migrations\201506211642299_addressaddedinUser.cs" />
     <Compile Include="Migrations\201506211642299_addressaddedinUser.Designer.cs">
       <DependentUpon>201506211642299_addressaddedinUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506242051213_extras.cs" />
+    <Compile Include="Migrations\201506242051213_extras.Designer.cs">
+      <DependentUpon>201506242051213_extras.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506242120160_extrasandpriceupdated.cs" />
+    <Compile Include="Migrations\201506242120160_extrasandpriceupdated.Designer.cs">
+      <DependentUpon>201506242120160_extrasandpriceupdated.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -111,6 +120,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506211642299_addressaddedinUser.resx">
       <DependentUpon>201506211642299_addressaddedinUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506242051213_extras.resx">
+      <DependentUpon>201506242051213_extras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506242120160_extrasandpriceupdated.resx">
+      <DependentUpon>201506242120160_extrasandpriceupdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

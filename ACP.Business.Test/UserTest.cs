@@ -94,19 +94,43 @@ namespace ACP.Business.Test
         [TestMethod]
         public void AnUserIdIsGiven_WhenIsCalled_GetTheUserWithAllCarsAndBookings()
         { 
-        
+            //Arrange
+            int Id = 6;
+
+            //Act
+            var results = service.GetById(Id);
+
+            //Assert
+            Assert.IsNotNull(results);
         }
 
         [TestMethod]
         public void IfAnIdIsGiven_WhenUpdateIsCalled_BeSureAllIsUpdated()
         {
+            //Arrange
+            int Id = 6;
+            var model = service.GetById(Id);
+            model.Email = "Anemail@gmail.com";           
+
+            //Act
+            var result = service.Update(model);
+
+            //Assert
+            Assert.IsTrue(result);
 
         }
 
         [TestMethod]
         public void IfAnIdIsGiven_WhenDeleteIsCalled_BeSureTheUserWithAllCarsIsDeleted()
         {
+            //Arrange
+            int Id = 6;
 
+            //Act
+            var result = service.DeleteById(Id);
+
+            //Assert
+            Assert.IsTrue(result);
         }
     }
 }

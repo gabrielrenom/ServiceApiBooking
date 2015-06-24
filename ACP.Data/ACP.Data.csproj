@@ -45,6 +45,7 @@
     <Compile Include="BookingEntity.cs" />
     <Compile Include="BookingPricing.cs" />
     <Compile Include="Car.cs" />
+    <Compile Include="Extra.cs" />
     <Compile Include="RootBookingEntity.cs" />
     <Compile Include="HourPrice.cs" />
     <Compile Include="DayPrice.cs" />

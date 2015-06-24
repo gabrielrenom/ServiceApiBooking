@@ -28,5 +28,22 @@ namespace ACP.Business.Services
         {
             return _usermanager.GetAllUsersWithCarsAndBookings().ToList();
         }
+
+
+        public UserModel GetById(int Id)
+        {
+            return _usermanager.GetById(Id);
+        }
+
+        
+        public bool Update(UserModel model)
+        {
+            return _usermanager.Update(model);
+        }
+
+        public bool DeleteById(int Id)
+        {
+            return _usermanager.DeleteById(Id);
+        }
 }
 }

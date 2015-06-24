@@ -12,6 +12,12 @@ namespace ACP.Business.Services.Interfaces
         UserModel Add(UserModel user);
         
         IList<UserModel> GetAll();
+
+        UserModel GetById(int Id);
+
+        bool Update(UserModel model);
+
+        bool DeleteById(int Id);
     }
 
      

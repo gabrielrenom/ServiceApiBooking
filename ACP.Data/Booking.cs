@@ -14,6 +14,7 @@ namespace ACP.Data
         public int StatusId { get; set; }
         public int UserId { get; set; }
         public int BookingEntityId { get; set; }
+
         
         public virtual Status Status { get; set; }
         public virtual User User { get; set; }

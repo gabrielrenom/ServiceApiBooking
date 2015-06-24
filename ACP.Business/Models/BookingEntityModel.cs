@@ -14,10 +14,12 @@ namespace ACP.Business.Models
         public decimal Price { get; set; }
         public decimal Comission { get; set; }
         public bool Sameday { get; set; }
+        public int RootBookEntityId { get; set; }
 
-        //public virtual RootBookingEntity RootBookingEntity { get; set; }
+        public virtual RootBookingEntityModel RootBookingEntity { get; set; }
+        public virtual ICollection<ExtraModel> Extras { get; set; }
         public virtual ICollection<BookingPricingModel> Prices { get; set; }
         public virtual AddressModel Address { get; set; }
-        //public virtual ICollection<BookingService> Service { get; set; }
+        public virtual ICollection<BookingServiceModel> Service { get; set; }        
     }
 }

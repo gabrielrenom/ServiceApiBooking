@@ -7,6 +7,8 @@ using ACP.DataAccess.Repository;
 using ACP.Business.Services;
 using ACP.DataAccess.Managers;
 using ACP.Business.Models;
+using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace ACP.Business.Test
 {
@@ -37,7 +39,8 @@ namespace ACP.Business.Test
             model.CreatedBy = localuser;
             model.Modified = DateTime.Now;
             model.ModifiedBy = localuser;
-            model.Name = "Local Airport" + DateTime.Now.ToString();            
+            model.Name = "Local Airport" + DateTime.Now.ToString();
+            model.RootBookEntityId = 1;
             model.Address = new AddressModel
             {
                 Address1 = "MyAdress",
@@ -54,6 +57,47 @@ namespace ACP.Business.Test
             
 
         }
+
+        [TestMethod]
+        public void GivenAEntityWithExtras_WhenIsAdded_BeSureItRestunsTrueAndRemoves()
+        {
+            //Arrange
+            BookingEntityModel model = new BookingEntityModel();
+            model.Comission = 2;
+            model.Created = DateTime.Now;
+            model.CreatedBy = localuser;
+            model.Modified = DateTime.Now;
+            model.ModifiedBy = localuser;
+            model.Name = "Local Airport" + DateTime.Now.ToString();
+            model.RootBookEntityId = 1;
+            model.Address = new AddressModel
+            {
+                Address1 = "MyAdress",
+                Postcode = "SK74QW",
+                Country = "UK"
+            };
+            model.Extras = new Collection<ExtraModel>();
+            model.Extras.Add(new ExtraModel { 
+                Created = DateTime.Now,
+                CreatedBy = localuser,
+                Modified = DateTime.Now,
+                ModifiedBy = localuser,
+                 Name = "Car Wash", 
+                 Price=10,
+                  Description="Car Wash"
+ 
+            });
+
+            //Act
+            var results = service.Add(model);
+
+            //Assert
+            Assert.IsNotNull(results);           
+            Assert.IsTrue(results);
+
+
+        }
+
 
         [TestMethod]
         public void GivenAEntity_WhenIsUpadted_BeSureItReturnsUpdatedData()
