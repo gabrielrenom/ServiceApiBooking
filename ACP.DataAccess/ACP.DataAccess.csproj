@@ -50,6 +50,7 @@
     <Compile Include="ACPContext.cs" />
     <Compile Include="ACPInitialiser.cs" />
     <Compile Include="Config\AddressConfig.cs" />
+    <Compile Include="Config\AvailabilityConfig.cs" />
     <Compile Include="Config\BookingConfig.cs" />
     <Compile Include="Config\BookingEntityConfig.cs" />
     <Compile Include="Config\BookingPricingConfig.cs" />
@@ -57,10 +58,12 @@
     <Compile Include="Config\CarConfig.cs" />
     <Compile Include="Config\DayPriceConfig.cs" />
     <Compile Include="Config\ExtraConfig.cs" />
+    <Compile Include="Config\PropertiesConfig.cs" />
     <Compile Include="Config\RootBookingEntityConfig.cs" />
     <Compile Include="Config\HourPriceConfig.cs" />
     <Compile Include="Config\StatusConfig.cs" />
     <Compile Include="Config\UserConfig.cs" />
+    <Compile Include="Managers\AvailabilityManager.cs" />
     <Compile Include="Managers\BaseACPManager.cs" />
     <Compile Include="Managers\BaseManager.cs" />
     <Compile Include="Managers\BookingEntityManager.cs" />
@@ -88,6 +91,14 @@
     <Compile Include="Migrations\201506242120160_extrasandpriceupdated.cs" />
     <Compile Include="Migrations\201506242120160_extrasandpriceupdated.Designer.cs">
       <DependentUpon>201506242120160_extrasandpriceupdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506282043133_addingavailability.cs" />
+    <Compile Include="Migrations\201506282043133_addingavailability.Designer.cs">
+      <DependentUpon>201506282043133_addingavailability.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506301602532_properties.cs" />
+    <Compile Include="Migrations\201506301602532_properties.Designer.cs">
+      <DependentUpon>201506301602532_properties.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -126,6 +137,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506242120160_extrasandpriceupdated.resx">
       <DependentUpon>201506242120160_extrasandpriceupdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506282043133_addingavailability.resx">
+      <DependentUpon>201506282043133_addingavailability.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506301602532_properties.resx">
+      <DependentUpon>201506301602532_properties.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

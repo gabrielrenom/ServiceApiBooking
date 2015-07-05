@@ -44,5 +44,14 @@ namespace ACP.Business.Services
         {
             return _bookingEntityManager.DeleteById(Id);
         }
+
+        public IList<AvailabilityModel> GetAvailableSpacesById(int Id, DateTime StartDate, DateTime EndDate,string Status=null)
+        {
+            if (Status!=null)
+                return _bookingEntityManager.GetById(Id).Availability.Where(x => StartDate > x.StartDate && EndDate < x.EndDate && x.Status.Name == Status).ToList();
+            else
+                return _bookingEntityManager.GetById(Id).Availability.Where(x => StartDate > x.StartDate && EndDate < x.EndDate).ToList();
+             
+        }
     }
 }

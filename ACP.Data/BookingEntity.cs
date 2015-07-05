@@ -16,11 +16,15 @@ namespace ACP.Data
         public bool Sameday { get; set; }
         public int AddressId { get; set; }
         public int RootBookingEntityId { get; set; }
+        public EntityType EntityType { get; set; }
 
+        public virtual ICollection<Properties> Properties { get; set; }
         public virtual ICollection<Extra> Extras { get; set; }
         public virtual RootBookingEntity RootBookingEntity { get; set; }
         public virtual ICollection<BookingPricing> Prices {get;set;}
         public virtual Address Address { get; set; }
         public virtual ICollection<BookingService> Service { get; set; }
+        public virtual ICollection<Availability> Availability { get; set; }
+        
     }
 }

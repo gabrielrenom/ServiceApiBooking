@@ -40,8 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIs\APH.cs" />
+    <Compile Include="APIs\IAPH.cs" />
+    <Compile Include="APIs\Models\Agent.cs" />
+    <Compile Include="APIs\Models\APHRequest.cs" />
+    <Compile Include="APIs\Models\APHResponse.cs" />
+    <Compile Include="APIs\Models\Itinerary.cs" />
     <Compile Include="Exceptions\ItemNotFoundException.cs" />
     <Compile Include="Exceptions\ValidationErrorsException.cs" />
+    <Compile Include="Managers\IAvailabilityManager.cs" />
     <Compile Include="Managers\IBaseACPManager.cs" />
     <Compile Include="Managers\IBaseManager.cs" />
     <Compile Include="Managers\IBookingEntityManager.cs" />
@@ -51,6 +58,7 @@
     <Compile Include="Managers\IServiceManager.cs" />
     <Compile Include="Managers\IUserManager.cs" />
     <Compile Include="Models\AddressModel.cs" />
+    <Compile Include="Models\AvailabilityModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\BookingEntityModel.cs" />
     <Compile Include="Models\BookingItem.cs" />
@@ -59,12 +67,14 @@
     <Compile Include="Models\BookingModel.cs" />
     <Compile Include="Models\CarModel.cs" />
     <Compile Include="Models\DayPriceModel.cs" />
+    <Compile Include="Models\EntityType.cs" />
     <Compile Include="Models\ExtraModel.cs" />
     <Compile Include="Models\HourPriceModel.cs" />
     <Compile Include="Models\InsuranceTypeModel.cs" />
     <Compile Include="Models\LocationModel.cs" />
     <Compile Include="Models\PriceModel.cs" />
     <Compile Include="Models\PriceQuoteModel.cs" />
+    <Compile Include="Models\Properties.cs" />
     <Compile Include="Models\QuoteModel.cs" />
     <Compile Include="Models\RootBookingEntityModel.cs" />
     <Compile Include="Models\StatusModel.cs" />
@@ -72,9 +82,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IACPRepository.cs" />
     <Compile Include="Repository\IGenericRepository.cs" />
+    <Compile Include="Services\AvailabilityService.cs" />
     <Compile Include="Services\BookingEntityService.cs" />
     <Compile Include="Services\BookingPricingService.cs" />
     <Compile Include="Services\BookingService.cs" />
+    <Compile Include="Services\Interfaces\IAvailabilityService.cs" />
     <Compile Include="Services\Interfaces\IBookingEntityService.cs" />
     <Compile Include="Services\Interfaces\IBookingPricingService.cs" />
     <Compile Include="Services\Interfaces\IBookingService.cs" />

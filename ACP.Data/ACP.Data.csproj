@@ -40,12 +40,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="Availability.cs" />
     <Compile Include="BaseEntity.cs" />
     <Compile Include="Booking.cs" />
     <Compile Include="BookingEntity.cs" />
     <Compile Include="BookingPricing.cs" />
     <Compile Include="Car.cs" />
+    <Compile Include="EntityType.cs" />
     <Compile Include="Extra.cs" />
+    <Compile Include="Properties.cs" />
     <Compile Include="RootBookingEntity.cs" />
     <Compile Include="HourPrice.cs" />
     <Compile Include="DayPrice.cs" />
