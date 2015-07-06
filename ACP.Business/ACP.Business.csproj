@@ -40,12 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="APIs\APH.cs" />
-    <Compile Include="APIs\IAPH.cs" />
-    <Compile Include="APIs\Models\Agent.cs" />
-    <Compile Include="APIs\Models\APHRequest.cs" />
-    <Compile Include="APIs\Models\APHResponse.cs" />
-    <Compile Include="APIs\Models\Itinerary.cs" />
+    <Compile Include="APIs\APH\APH.cs" />
+    <Compile Include="APIs\APH\IAPH.cs" />
+    <Compile Include="APIs\APH\Models\Agent.cs" />
+    <Compile Include="APIs\APH\Models\API_Reply.cs" />
+    <Compile Include="APIs\APH\Models\API_Request.cs" />
+    <Compile Include="APIs\APH\Models\CarPark.cs" />
+    <Compile Include="APIs\APH\Models\Details.cs" />
+    <Compile Include="APIs\APH\Models\Info.cs" />
+    <Compile Include="APIs\APH\Models\Itinerary.cs" />
+    <Compile Include="APIs\APH\Models\Pricing.cs" />
+    <Compile Include="APIs\APH\Models\Request.cs" />
+    <Compile Include="APIs\APH\Models\Terminal.cs" />
     <Compile Include="Exceptions\ItemNotFoundException.cs" />
     <Compile Include="Exceptions\ValidationErrorsException.cs" />
     <Compile Include="Managers\IAvailabilityManager.cs" />

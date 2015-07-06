@@ -57,6 +57,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="APHTest.cs" />
     <Compile Include="BookingTest.cs" />
     <Compile Include="BookingEntityTest.cs" />
     <Compile Include="ServiceTests.cs" />

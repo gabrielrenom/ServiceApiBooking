@@ -1,21 +1,39 @@
-﻿using System;
+﻿using ACP.Business.APIs.APH.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
-namespace ACP.Business.APIs.Models
+namespace ACP.Business.APIs.APH.Models
 {
     public class API_Request
     {
         public Agent Agent { get; set; }
         public Itinerary Itinerary { get; set; }
+
+        [XmlAttribute("System")]     
         public string System { get; set; }
+
+        [XmlAttribute("Version")]     
         public string Version { get; set; }
+
+        [XmlAttribute("Product")]     
         public string Product { get; set; }
+
+        [XmlAttribute("Customer")]     
         public string Customer { get; set; }
+
+        [XmlAttribute("Session")]     
         public string Session { get; set; }
-        public string RequestCode { get; set; }       
+
+        [XmlAttribute("RequestCode")]     
+        public string RequestCode { get; set; }
+
+        [XmlElement("Request")]
+        public Request Request { get; set; }
+
     }
 }
 
