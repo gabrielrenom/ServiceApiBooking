@@ -5,11 +5,14 @@ using System.Text;
 
 namespace ACP.Business.Models
 {
-    public class Properties: BaseModel
-    {    
+    public class PropertyModel: BaseModel
+    {
         public string Key;
-        public object Value;
+        public string Value;
         public PropertyType Type;
+        public int BookingEntityId { get; set; }
+
+        public virtual BookingEntityModel BookingEntity { get; set; }
     }
 
     public enum PropertyType { 

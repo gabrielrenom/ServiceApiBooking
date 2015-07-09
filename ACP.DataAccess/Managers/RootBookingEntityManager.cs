@@ -25,7 +25,7 @@ namespace ACP.DataAccess.Managers
 
         public override RootBookingEntityModel GetById(int id)
         {
-            return GetByIdIncluding(id, x => x.Status, x => x.Address, x => x.BookingEntities, x => x.BookingEntities.Select(y=>y.Address));
+            return GetByIdIncluding(id, x => x.Status, x => x.Address, x => x.BookingEntities, x => x.BookingEntities.Select(y => y.Address), x => x.BookingEntities.Select(y => y.Properties));
         }
 
         public override bool Update(RootBookingEntityModel domainModel)
@@ -128,7 +128,7 @@ namespace ACP.DataAccess.Managers
 
         public IList<RootBookingEntityModel> GetAll()
         {
-            return GetListIncluding(x => x.Id > 0, x => x.Status, x => x.Address, x => x.BookingEntities, x => x.BookingEntities.Select(y => y.Address)).ToList();            
+            return GetListIncluding(x => x.Id > 0, x => x.Status, x => x.Address, x => x.BookingEntities, x => x.BookingEntities.Select(y => y.Address), x => x.BookingEntities.Select(y => y.Properties)).ToList();            
         }
 
         public override RootBookingEntity ToDataModel(RootBookingEntityModel domainModel, RootBookingEntity dataModel = null)
@@ -187,7 +187,6 @@ namespace ACP.DataAccess.Managers
                 AddressId = r.Address.Id,
                 Address = new Address
                 {
-
                     Address1 = r.Address.Address1,
                     Address2 = r.Address.Address2,
                     Country = r.Address.Country,
@@ -210,12 +209,12 @@ namespace ACP.DataAccess.Managers
         {
             RootBookingEntityModel model = new RootBookingEntityModel
             {
-                Created = dataModel.Created,
+                Created = dataModel.Created, 
                 Id = dataModel.Id,
                 CreatedBy = dataModel.CreatedBy,
                 Modified = dataModel.Modified,
                 ModifiedBy = dataModel.ModifiedBy,
-                Name = dataModel.Name,
+                Name = dataModel.Name,                
                 Address = new AddressModel
                 {
 
@@ -257,6 +256,12 @@ namespace ACP.DataAccess.Managers
                     Name = r.Name,
                     Price = r.Price,
                     Sameday = r.Sameday,
+                    Properties = r.Properties!=null?r.Properties.Select(y=>new PropertyModel
+                    {
+                        Key = y.Key,
+                        Value = y.Value,
+                        Type = (ACP.Business.Models.PropertyType) y.Type
+                    }).ToList():null,
                     Address = new AddressModel
                     {
                         Address1 = r.Address.Address1,

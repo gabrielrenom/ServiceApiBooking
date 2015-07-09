@@ -100,6 +100,18 @@
     <Compile Include="Migrations\201506301602532_properties.Designer.cs">
       <DependentUpon>201506301602532_properties.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507072026573_properties1.cs" />
+    <Compile Include="Migrations\201507072026573_properties1.Designer.cs">
+      <DependentUpon>201507072026573_properties1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507081918380_propertychange.cs" />
+    <Compile Include="Migrations\201507081918380_propertychange.Designer.cs">
+      <DependentUpon>201507081918380_propertychange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507081927266_properties_key_value.cs" />
+    <Compile Include="Migrations\201507081927266_properties_key_value.Designer.cs">
+      <DependentUpon>201507081927266_properties_key_value.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ACPRepository.cs" />
@@ -143,6 +155,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506301602532_properties.resx">
       <DependentUpon>201506301602532_properties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507072026573_properties1.resx">
+      <DependentUpon>201507072026573_properties1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507081918380_propertychange.resx">
+      <DependentUpon>201507081918380_propertychange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507081927266_properties_key_value.resx">
+      <DependentUpon>201507081927266_properties_key_value.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

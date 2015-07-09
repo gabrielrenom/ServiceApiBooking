@@ -18,7 +18,7 @@ namespace ACP.Data
         public int RootBookingEntityId { get; set; }
         public EntityType EntityType { get; set; }
 
-        public virtual ICollection<Properties> Properties { get; set; }
+        public virtual ICollection<Property> Properties { get; set; }
         public virtual ICollection<Extra> Extras { get; set; }
         public virtual RootBookingEntity RootBookingEntity { get; set; }
         public virtual ICollection<BookingPricing> Prices {get;set;}

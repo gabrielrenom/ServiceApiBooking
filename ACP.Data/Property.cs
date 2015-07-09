@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ACP.Data
 {
-    public class Properties :  BaseEntity
-    {    
-        public string Key;
-        public object Value;
-        public PropertyType Type;
+    public class Property :  BaseEntity
+    {
+        public string Key { get; set; }
+        public string Value { get; set; }
+        public PropertyType Type { get; set; }
         public int BookingEntityId { get; set; }
 
         public virtual BookingEntity BookingEntity { get; set; }

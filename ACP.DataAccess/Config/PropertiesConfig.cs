@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace ACP.DataAccess.Config
 {
-    public class PropertiesConfig : EntityTypeConfiguration<Properties>
+    public class PropertiesConfig : EntityTypeConfiguration<Property>
     {
         public PropertiesConfig()
         {
             HasKey(t=>t.Id);
-
+       
             HasRequired(t => t.BookingEntity)
                 .WithMany(t => t.Properties)
                 .HasForeignKey(t => t.BookingEntityId);                 

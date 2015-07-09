@@ -48,7 +48,7 @@
     <Compile Include="Car.cs" />
     <Compile Include="EntityType.cs" />
     <Compile Include="Extra.cs" />
-    <Compile Include="Properties.cs" />
+    <Compile Include="Property.cs" />
     <Compile Include="RootBookingEntity.cs" />
     <Compile Include="HourPrice.cs" />
     <Compile Include="DayPrice.cs" />

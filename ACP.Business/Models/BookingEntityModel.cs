@@ -16,7 +16,8 @@ namespace ACP.Business.Models
         public bool Sameday { get; set; }
         public int RootBookEntityId { get; set; }
         public EntityType EntityType { get; set; }
-        public Properties Properties { get; set; }
+
+        public virtual ICollection<PropertyModel> Properties { get; set; }        
 
         public virtual RootBookingEntityModel RootBookingEntity { get; set; }
         public virtual ICollection<ExtraModel> Extras { get; set; }
