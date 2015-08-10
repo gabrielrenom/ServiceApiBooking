@@ -11,6 +11,10 @@ using System.Collections.Generic;
 
 namespace ACP.Business.Test
 {
+    /// <summary>
+    /// RootBookingEntityTest tests an airport with bookingentities.
+    /// Every booking entity is a carpark.
+    /// </summary>
     [TestClass]
     public class RootBookingEntityTest
     {

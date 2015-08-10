@@ -9,9 +9,12 @@ using System.Web.Http;
 namespace ServiceAPI.Controllers
 {
     //[Authorize]
+    
     public class ValuesController : ApiController
-    {        
+    {
         // GET api/values
+        [Action1DebugActionWebApiFilter]
+        [OverrideActionFiltersAttribute]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };

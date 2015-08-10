@@ -40,7 +40,6 @@ namespace ACP.DataAccess.Managers
             dataModel.AddressId = domainModel.AddressId;
             dataModel.Address = new Address
             {
-
                 Address1 = domainModel.Address.Address1,
                 Address2 = domainModel.Address.Address2,
                 Country = domainModel.Address.Country,
@@ -83,9 +82,19 @@ namespace ACP.DataAccess.Managers
                     ModifiedBy = r.ModifiedBy,
                     Name = r.Name,
                     Price = r.Price,
-                    Sameday = r.Sameday,
-                    AddressId = r.Address.Id,
-                    Address = new Address
+                    Sameday = r.Sameday,                    
+                    Properties = r.Properties!=null?r.Properties.Select(y=> new Property{
+                         Created= y.Created,
+                          Id = y.Id,
+                           Key = y.Key,
+                            Value = y.Value,
+                             CreatedBy = y.CreatedBy,
+                              ModifiedBy = y.ModifiedBy,
+                               Modified = y.Modified,
+                                Type = (ACP.Data.PropertyType)y.Type
+                    }).ToList():null,
+                    //AddressId = r.Address==null?0:r.Address.Id,
+                    Address =r.Address==null?null:new Address
                     {
 
                         Address1 = r.Address.Address1,
