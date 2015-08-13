@@ -25,9 +25,17 @@ namespace ServiceAPI.Controllers
         }
 
         // GET: api/Service
-        public IEnumerable<string> Get()
+        public HttpResponseMessage Get()
         {
-            return new string[] { "value1", "value2" };
+
+            bool date2 = Request.Headers.Contains("Date");
+            string va = Request.Headers.GetValues("Date").FirstOrDefault();
+            bool xu = Request.Headers.Contains("X-ApiAuth-Username");
+            bool xus = Request.Headers.Contains("wayne");
+            Request.Headers.Date = Convert.ToDateTime(va);// DateTimeOffset.Now;         
+            //return new string[] { "value1", "value2" };
+            return Request.CreateResponse(HttpStatusCode.OK, "hh");
+
         }
 
         // GET: api/Service/5

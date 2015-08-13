@@ -10,6 +10,11 @@ namespace ServiceAPI.Controllers
 {
     //[Authorize]
     
+        public class test
+        {
+          public  string mytest { get; set; }
+        }
+
     public class ValuesController : ApiController
     {
         // GET api/values
@@ -27,8 +32,9 @@ namespace ServiceAPI.Controllers
         }
 
         // POST api/values
-        public void Post([FromBody]string value)
+        public void Post([FromBody]test value)
         {
+            String s = value.mytest;
         }
 
         // PUT api/values/5

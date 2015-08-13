@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceAPI", "ServiceAPI\ServiceAPI.csproj", "{F5FE9E2E-9BA2-4625-9FA7-E52BD44E244F}"
 EndProject
@@ -26,6 +26,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACP.Business", "ACP.Business\ACP.Business.csproj", "{BCF52CDD-2E05-4EB6-B7E7-A5975F326675}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACP.Business.Test", "ACP.Business.Test\ACP.Business.Test.csproj", "{F04CA59E-58D7-4816-8A2B-4D676456228B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Security", "4. Security", "{59B75FB4-04B2-4B17-A9DD-B0A7AFD73612}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACP.HMAC", "ACP.HMAC\ACP.HMAC.csproj", "{F465CE7C-361C-4F7E-B52B-CDBF5A99BCD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,10 @@ Global
 		{F04CA59E-58D7-4816-8A2B-4D676456228B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F04CA59E-58D7-4816-8A2B-4D676456228B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F04CA59E-58D7-4816-8A2B-4D676456228B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F465CE7C-361C-4F7E-B52B-CDBF5A99BCD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F465CE7C-361C-4F7E-B52B-CDBF5A99BCD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F465CE7C-361C-4F7E-B52B-CDBF5A99BCD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F465CE7C-361C-4F7E-B52B-CDBF5A99BCD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,5 +78,6 @@ Global
 		{3071FEE3-8683-48F5-A510-CA347DBD97DC} = {96E29A17-C3AD-4CF0-93D2-5F898806EFCC}
 		{BCF52CDD-2E05-4EB6-B7E7-A5975F326675} = {3667D674-3770-4555-825C-7FDBA0D9EBB1}
 		{F04CA59E-58D7-4816-8A2B-4D676456228B} = {ED6408C0-671C-4D5D-888E-ACDEAD6B8CA3}
+		{F465CE7C-361C-4F7E-B52B-CDBF5A99BCD6} = {59B75FB4-04B2-4B17-A9DD-B0A7AFD73612}
 	EndGlobalSection
 EndGlobal
