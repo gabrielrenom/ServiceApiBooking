@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Classes\HMACMessage.cs" />
     <Compile Include="Classes\SignatureManager.cs" />
+    <Compile Include="Header\Header.cs" />
     <Compile Include="Interfaces\IHMACMessage.cs" />
     <Compile Include="Interfaces\ISignatureManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

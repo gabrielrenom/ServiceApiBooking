@@ -5,6 +5,9 @@ using System.Net.Http;
 using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
+using ServiceAPI.Handlers;
+using ACP.Business.Services;
+using ACP.HMAC.Services;
 
 namespace ServiceAPI
 {
@@ -14,8 +17,18 @@ namespace ServiceAPI
         {
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
-            config.SuppressDefaultHostAuthentication();
-            config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+            //config.SuppressDefaultHostAuthentication();
+            //config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+
+            config.MessageHandlers.Add(new HMACinHandler(
+               new HMACService(
+                               new HMACMessage(),
+                               new SignatureManager())));
+
+            config.MessageHandlers.Add(new HMACoutHandler(
+                new HMACService(
+                                new HMACMessage(),
+                                new SignatureManager())));
 
             // Web API routes
             config.MapHttpAttributeRoutes();

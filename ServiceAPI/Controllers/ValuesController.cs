@@ -12,7 +12,7 @@ namespace ServiceAPI.Controllers
     
         public class test
         {
-          public  string mytest { get; set; }
+          public  string testdata { get; set; }
         }
 
     public class ValuesController : ApiController
@@ -32,9 +32,9 @@ namespace ServiceAPI.Controllers
         }
 
         // POST api/values
-        public void Post([FromBody]test value)
+        public test Post([FromBody]test value)
         {
-            String s = value.mytest;
+            return value;
         }
 
         // PUT api/values/5

@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ACP.Business</RootNamespace>
     <AssemblyName>ACP.Business</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,6 +34,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -92,10 +94,13 @@
     <Compile Include="Services\BookingEntityService.cs" />
     <Compile Include="Services\BookingPricingService.cs" />
     <Compile Include="Services\BookingService.cs" />
+    <Compile Include="Services\HMACService.cs" />
+    <Compile Include="Services\Interfaces\BaseAuth.cs" />
     <Compile Include="Services\Interfaces\IAvailabilityService.cs" />
     <Compile Include="Services\Interfaces\IBookingEntityService.cs" />
     <Compile Include="Services\Interfaces\IBookingPricingService.cs" />
     <Compile Include="Services\Interfaces\IBookingService.cs" />
+    <Compile Include="Services\Interfaces\IHMACService.cs" />
     <Compile Include="Services\Interfaces\IPricingService.cs" />
     <Compile Include="Services\Interfaces\IRootBookingEntityService.cs" />
     <Compile Include="Services\Interfaces\IServiceService.cs" />
@@ -112,6 +117,10 @@
     <ProjectReference Include="..\ACP.Data\ACP.Data.csproj">
       <Project>{02888825-5b5a-45d9-b2ae-631feb4f8fa6}</Project>
       <Name>ACP.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ACP.HMAC\ACP.HMAC.csproj">
+      <Project>{f465ce7c-361c-4f7e-b52b-cdbf5a99bcd6}</Project>
+      <Name>ACP.HMAC</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
