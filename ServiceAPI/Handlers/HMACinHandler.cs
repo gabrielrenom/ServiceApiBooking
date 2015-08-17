@@ -22,7 +22,7 @@ namespace ServiceAPI.Handlers
             _HMACService = HMACService;
         }
 
-        protected async Task<bool> IsAuthenticated(HttpRequestMessage requestMessage)
+        protected async Task<bool> IsAuthenticated(HttpRequestMessage requestMessage, Header.SecurityLevel securitylevel)
         {
             if (requestMessage.Headers.Authorization.Scheme != Header.AUTH_HEADER)
             {
@@ -72,12 +72,13 @@ namespace ServiceAPI.Handlers
             //    MemoryCache.Default.Add(signature, username,
             //                            DateTimeOffset.UtcNow.AddMinutes(Configuration.ValidityPeriodInMinutes));
             //}
+
             return result;
         }
 
         protected async override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, System.Threading.CancellationToken cancellationToken)
         {
-            var isAuthenticated = await IsAuthenticated(request);
+            var isAuthenticated = await IsAuthenticated(request, Header.SecurityLevel.Medium);
 
             if (!isAuthenticated)
             {

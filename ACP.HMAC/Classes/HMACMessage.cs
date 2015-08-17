@@ -29,13 +29,12 @@ namespace ACP.HMAC.Services
 
                     string httpMethod = requestMessage.Method.Method;
 
-                    string contentType = requestMessage.Content.Headers.ContentType.MediaType;
+                    //string contentType = requestMessage.Content.Headers.ContentType.MediaType;
                     string username = requestMessage.Headers.GetValues(Header.USERNAME_HEADER).First();
                     string uri = requestMessage.RequestUri.AbsolutePath.ToLower();
 
                     //## More headers could be added
                     result = String.Join("\n", httpMethod, md5, date.ToString(CultureInfo.InvariantCulture), username, uri);
-
                 }
             }
             catch (Exception ex)

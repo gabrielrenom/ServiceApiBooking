@@ -8,6 +8,7 @@ using Newtonsoft.Json.Serialization;
 using ServiceAPI.Handlers;
 using ACP.Business.Services;
 using ACP.HMAC.Services;
+using System.Configuration;
 
 namespace ServiceAPI
 {
@@ -20,15 +21,18 @@ namespace ServiceAPI
             //config.SuppressDefaultHostAuthentication();
             //config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
-            config.MessageHandlers.Add(new HMACinHandler(
-               new HMACService(
-                               new HMACMessage(),
-                               new SignatureManager())));
+            if (Convert.ToInt16(ConfigurationManager.AppSettings["SecurityEnable"]) != 0)
+            {
+                config.MessageHandlers.Add(new HMACinHandler(
+                   new HMACService(
+                                   new HMACMessage(),
+                                   new SignatureManager())));
 
-            config.MessageHandlers.Add(new HMACoutHandler(
-                new HMACService(
-                                new HMACMessage(),
-                                new SignatureManager())));
+                config.MessageHandlers.Add(new HMACoutHandler(
+                    new HMACService(
+                                    new HMACMessage(),
+                                    new SignatureManager())));
+            }
 
             // Web API routes
             config.MapHttpAttributeRoutes();

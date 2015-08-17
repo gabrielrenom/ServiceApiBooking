@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,8 @@ namespace ServiceAPI.Handlers
         protected async override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
          System.Threading.CancellationToken cancellationToken)
         {
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
             HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
 
             if (response.IsSuccessStatusCode && response.Content != null)

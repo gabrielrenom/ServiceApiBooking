@@ -48,3 +48,14 @@ namespace ServiceAPI.Controllers
         }
     }
 }
+
+//Content-MD5: jFPE4pFPAkgFnRekSViwSQ==
+//Content-Type: application/json;
+//X-ApiAuth-Username: username
+//X-ApiAuth-Date: Thu, 13 Aug 2015 10:45:25 GMT
+//Authorization: ApiAuth iYAIzzftPcaVKBxNLHYqpk+DR163KuR8hFdGHe70CfI=
+//Host: localhost:52034
+//Content-Length: 27
+
+
+//{"testdata":"some content"}
