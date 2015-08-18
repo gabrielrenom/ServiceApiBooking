@@ -18,7 +18,7 @@ namespace ACP.Business.Services
             _rootBookingEntityManager = rootBookingEntityManager;
         }
 
-        public RootBookingEntityModel Add(Models.RootBookingEntityModel model)
+        public async Task<RootBookingEntityModel> Add(Models.RootBookingEntityModel model)
         {         
             return _rootBookingEntityManager.Add(model);
         }
@@ -33,7 +33,7 @@ namespace ACP.Business.Services
             return _rootBookingEntityManager.GetAll().ToList();
         }
 
-        public Models.RootBookingEntityModel GetById(int Id)
+        public async Task<Models.RootBookingEntityModel> GetById(int Id)
         {
             return _rootBookingEntityManager.GetById(Id);
         }

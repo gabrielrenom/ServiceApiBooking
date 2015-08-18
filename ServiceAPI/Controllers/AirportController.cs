@@ -30,7 +30,7 @@ namespace ServiceAPI.Controllers
             AirportViewModel airport    =   null;
             try
             {                                
-                airport = ToViewModel(_airportservice.GetById(id));
+                airport = ToViewModel(await _airportservice.GetById(id));
             }
             catch (HttpRequestException ex)
             {
@@ -71,7 +71,7 @@ namespace ServiceAPI.Controllers
             AirportViewModel airport = null;
             try
             {
-                airport = _airportservice.Add(ToDataModel(model));
+                airport = ToViewModel(await _airportservice.Add(ToDataModel(model)));
             }
             catch (HttpRequestException ex)
             {
@@ -106,10 +106,94 @@ namespace ServiceAPI.Controllers
             return Request.CreateResponse(HttpStatusCode.Created, airport);
         }
 
+        [HttpPut]
+        public async Task<HttpResponseMessage> Update(AirportViewModel model)
+        {
+            bool airport = false;
+            try
+            {
+                airport = _airportservice.Update(ToDataModel(model));
+            }
+            catch (HttpRequestException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, exceptionMessage);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.Created, airport);
+        }
+
+        [HttpDelete]
+        public async Task<HttpResponseMessage> Delete(int id)
+        {
+            bool airport = false;
+            try
+            {
+                airport =  _airportservice.Remove(id);
+            }
+            catch (HttpRequestException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, exceptionMessage);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.Created, airport);
+        }
+
+
         private AirportViewModel ToViewModel(RootBookingEntityModel dataModel)
         {
             AirportViewModel viewmodel = new AirportViewModel
             {
+                Id = dataModel.Id,
                 Name = dataModel.Name,               
                 Address = new AddressViewModel
                 {
@@ -136,7 +220,7 @@ namespace ServiceAPI.Controllers
         private RootBookingEntityModel ToDataModel(AirportViewModel dataModel)
         {
             RootBookingEntityModel model = new RootBookingEntityModel();
-            
+            model.Id = dataModel.Id;
             model.Name = dataModel.Name;
             model.Address = new AddressModel
             {
