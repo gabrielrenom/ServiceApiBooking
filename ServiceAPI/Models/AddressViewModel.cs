@@ -8,6 +8,7 @@ namespace ServiceAPI.Models
 {
     public class AddressViewModel
     {
+        public int Id { get; set; }
         public int Number { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }

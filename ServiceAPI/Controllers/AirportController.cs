@@ -112,7 +112,7 @@ namespace ServiceAPI.Controllers
             bool airport = false;
             try
             {
-                airport = _airportservice.Update(ToDataModel(model));
+                airport = await _airportservice.Update(ToDataModel(model));
             }
             catch (HttpRequestException ex)
             {
@@ -197,7 +197,7 @@ namespace ServiceAPI.Controllers
                 Name = dataModel.Name,               
                 Address = new AddressViewModel
                 {
-
+                    Id=dataModel.Address.Id,
                     Address1 = dataModel.Address.Address1,
                     Address2 = dataModel.Address.Address2,
                     Country = dataModel.Address.Country,
@@ -210,6 +210,7 @@ namespace ServiceAPI.Controllers
                 Telephone = dataModel.Telephone,
                 Status = new StatusViewModel
                 {                    
+                    Id=dataModel.Status.Id,
                     Name = dataModel.Status.Name
                 }
             };            
@@ -224,6 +225,7 @@ namespace ServiceAPI.Controllers
             model.Name = dataModel.Name;
             model.Address = new AddressModel
             {
+                Id = dataModel.Address.Id,
                 Address1 = dataModel.Address.Address1,
                 Address2 = dataModel.Address.Address2,
                 Country = dataModel.Address.Country,
@@ -237,6 +239,7 @@ namespace ServiceAPI.Controllers
             model.Telephone = dataModel.Telephone;
             model.Status = new StatusModel
             {
+                Id= dataModel.Status.Id,
                 Name = dataModel.Status.Name
             };          
 

@@ -23,7 +23,7 @@ namespace ACP.Business.Services
             return _rootBookingEntityManager.Add(model);
         }
 
-        public bool Update(Models.RootBookingEntityModel model)
+        public async Task<bool> Update(Models.RootBookingEntityModel model)
         {
             return _rootBookingEntityManager.Update(model);
         }

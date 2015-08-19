@@ -10,7 +10,7 @@ namespace ACP.Business.Services.Interfaces
     public interface IRootBookingEntityService
     {
         Task<RootBookingEntityModel> Add(RootBookingEntityModel model);
-        bool Update(RootBookingEntityModel model);
+        Task<bool> Update(RootBookingEntityModel model);
         IList<RootBookingEntityModel> GetAll();
         Task<Models.RootBookingEntityModel> GetById(int Id);
         bool Remove(int Id);

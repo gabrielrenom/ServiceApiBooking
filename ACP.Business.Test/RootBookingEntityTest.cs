@@ -77,12 +77,12 @@ namespace ACP.Business.Test
         }
     
         [TestMethod]
-        public void GetEntity_WhenIdIsPassed_BeSureItRestunsTheEntity()
+        public async void GetEntity_WhenIdIsPassed_BeSureItRestunsTheEntity()
         {
             //Arrange
             
             //Act
-            var result = service.GetById(7);
+            var result = await service.GetById(7);
 
             //Assert
             Assert.IsTrue(result.Id > 0);
@@ -104,7 +104,7 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public void WhenEntityIsPassed_WhenUpdateIsCalled_BeSureEntityIsUpdated()
+        public async void WhenEntityIsPassed_WhenUpdateIsCalled_BeSureEntityIsUpdated()
         { 
             //Arrange
             var model = service.GetAll()[0];
@@ -118,7 +118,7 @@ namespace ACP.Business.Test
             }
 
             //Act
-            var result = service.Update(model);
+            var result = await service.Update(model);
 
             //Assert
             Assert.IsTrue(result);
