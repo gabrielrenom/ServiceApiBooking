@@ -125,13 +125,13 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public void WhenIdIsPassed_WhenDeleteIsCalled_BeSureEntityIsDelete()
+        public async void WhenIdIsPassed_WhenDeleteIsCalled_BeSureEntityIsDelete()
         {
             //Arrange
             var Id = service.GetAll()[0].Id;
                         
             //Act
-            var result = service.Remove(Id);
+            var result = await service.Remove(Id);
 
             //Assert
             Assert.IsTrue(result);

@@ -13,6 +13,6 @@ namespace ACP.Business.Services.Interfaces
         Task<bool> Update(RootBookingEntityModel model);
         IList<RootBookingEntityModel> GetAll();
         Task<Models.RootBookingEntityModel> GetById(int Id);
-        bool Remove(int Id);
+        Task<bool> Remove(int Id);
     }
 }

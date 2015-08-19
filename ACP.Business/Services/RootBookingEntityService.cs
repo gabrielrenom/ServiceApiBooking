@@ -38,9 +38,9 @@ namespace ACP.Business.Services
             return _rootBookingEntityManager.GetById(Id);
         }
 
-        public bool Remove(int Id)
+        public async Task<bool> Remove(int Id)
         {
-            return _rootBookingEntityManager.DeleteById(Id);
+            return  _rootBookingEntityManager.DeleteById(Id);
         }
     }
 }

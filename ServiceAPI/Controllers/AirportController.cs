@@ -153,7 +153,7 @@ namespace ServiceAPI.Controllers
             bool airport = false;
             try
             {
-                airport =  _airportservice.Remove(id);
+                airport =  await _airportservice.Remove(id);
             }
             catch (HttpRequestException ex)
             {
@@ -241,7 +241,15 @@ namespace ServiceAPI.Controllers
             {
                 Id= dataModel.Status.Id,
                 Name = dataModel.Status.Name
-            };          
+            };
+            if (dataModel.Id == 0)
+            {
+                model.Created = DateTime.Now;
+                model.CreatedBy = "local";
+            }
+
+            model.Modified = DateTime.Now;
+            model.ModifiedBy = "local";
 
             return model;
         }
