@@ -8,12 +8,18 @@ namespace ACP.Business.Test
     [TestClass]
     public class PurpleParkingAPITest
     {
+        IPurpleParking purpleparkingapi;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            purpleparkingapi = new PurpleParking();
+        }
+
         [TestMethod]
         public async Task _WhenGetAirportsIsCalled_BeSureItReturnsAllAirports()
-        {
-            PurpleParking pp = new PurpleParking();
-
-            var result = await pp.GetAirports();
+        { 
+            var result = await purpleparkingapi.GetAirports();
 
             Assert.IsNotNull(result);
         }
@@ -21,9 +27,7 @@ namespace ACP.Business.Test
         [TestMethod]
         public async Task _WhenGetAirportCarparksIsCalled_BeSureItReturnsAllCarparks()
         {
-            PurpleParking pp = new PurpleParking();
-
-            var result = await pp.GetCarParks();
+            var result = await purpleparkingapi.GetCarParks();
 
             Assert.IsNotNull(result);
         }
