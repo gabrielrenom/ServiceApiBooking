@@ -69,7 +69,7 @@
     <Compile Include="RootBookingEntityTest.cs" />
     <Compile Include="BookingPricingTest.cs" />
     <Compile Include="AvailabilityTest.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="PurpleParkingAPITest.cs" />
     <Compile Include="UserTest.cs" />
   </ItemGroup>
   <ItemGroup>
