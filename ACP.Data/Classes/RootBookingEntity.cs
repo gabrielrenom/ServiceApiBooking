@@ -16,5 +16,6 @@ namespace ACP.Data
         public virtual Address Address { get; set; }
         public virtual Status Status { get; set; }
         public virtual ICollection<BookingEntity> BookingEntities { get; set; }
+        public virtual ICollection<RootBookingProperty> Properties { get; set; }
     }
 }

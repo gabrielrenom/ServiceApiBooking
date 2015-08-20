@@ -65,6 +65,7 @@
     <Compile Include="APIs\PP\IPurpleParking.cs" />
     <Compile Include="APIs\PP\Models\Airports.cs" />
     <Compile Include="APIs\PP\PurpleParging.cs" />
+    <Compile Include="Enums\RootBookingPropertyType.cs" />
     <Compile Include="Exceptions\ItemNotFoundException.cs" />
     <Compile Include="Exceptions\ValidationErrorsException.cs" />
     <Compile Include="Managers\IAvailabilityManager.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Models\PropertyModel.cs" />
     <Compile Include="Models\QuoteModel.cs" />
     <Compile Include="Models\RootBookingEntityModel.cs" />
+    <Compile Include="Models\RootBookingPropertyModel.cs" />
     <Compile Include="Models\StatusModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -121,9 +123,7 @@
     <Compile Include="Services\RootBookingEntityService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Enums\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\ACP.Data\ACP.Data.csproj">
       <Project>{02888825-5b5a-45d9-b2ae-631feb4f8fa6}</Project>

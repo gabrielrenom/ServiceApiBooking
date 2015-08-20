@@ -25,6 +25,7 @@ namespace ACP.DataAccess
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Configurations.Add(new RootBookingPropertiesConfig());
             modelBuilder.Configurations.Add(new PropertiesConfig());
             modelBuilder.Configurations.Add(new StatusConfig());
             modelBuilder.Configurations.Add(new BookingServiceConfig());
@@ -38,6 +39,7 @@ namespace ACP.DataAccess
 
         }
 
+        public DbSet<RootBookingProperty> RootBookingProperties { get; set; }
         public DbSet<Property> Properties { get; set; }
         public DbSet<RootBookingEntity> RootBookingEntity { get; set; }
         public DbSet<BookingService> BookingServices { get; set; }

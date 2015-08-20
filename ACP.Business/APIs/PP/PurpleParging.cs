@@ -1,5 +1,6 @@
 ﻿
 using ACP.Business.APIs.PP.Models.Airports;
+using ACP.Business.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,11 +16,42 @@ namespace ACP.Business.APIs.PP
     public class PurpleParking : IPurpleParking
     {   
         private static string _purple_parking_url = @"http://ws.purple-parking.com/";
+        private IRootBookingEntityService _airportService;
+
+        public PurpleParking(IRootBookingEntityService airportService)
+        {
+            _airportService = airportService;
+        }
 
         public string Url
         {
             get { return _purple_parking_url; }
             set { _purple_parking_url = value; }
+        }
+
+        public async Task<bool> FillAirports()
+        {
+            bool result = false;
+
+            try
+            {
+                var airports = await GetAirports();
+
+                foreach (var item in airports)
+                {
+                    _airportService.Add(new Business.Models.RootBookingEntityModel
+                    {
+                          Name = item.name,
+                          ShortName = item.shortname,
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
         }
 
         public async Task<List<ACP.Business.APIs.PP.Models.Airports.responseAirport>> GetAirports()
@@ -46,7 +78,9 @@ namespace ACP.Business.APIs.PP
             return carparks;
         }
 
-        public async Task<T> GetREST<T>(string parameters)
+
+
+        protected async Task<T> GetREST<T>(string parameters)
         {
             object product = new object();
 

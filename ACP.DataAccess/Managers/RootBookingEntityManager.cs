@@ -153,6 +153,19 @@ namespace ACP.DataAccess.Managers
             dataModel.ModifiedBy = domainModel.ModifiedBy;
             dataModel.Id = domainModel.Id;
             dataModel.AddressId = domainModel.AddressId;
+            dataModel.Properties = domainModel.Properties!=null?domainModel.Properties.Select(x=>new RootBookingProperty
+            {
+                 Id = x.Id,
+                 Created = x.Created,
+                 CreatedBy = x.CreatedBy,
+                 Modified = x.Modified,
+                 ModifiedBy = x.ModifiedBy,
+                 RootBookingEntityId = x.RootBookingEntityId,
+                 Type = (Data.Enums.RootBookingPropertyType) x.Type,
+                 Key = x.Key,
+                 Value= x.Value                  
+            }).ToList():null;
+
             dataModel.Address = new Address
             {
 

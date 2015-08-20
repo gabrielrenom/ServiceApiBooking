@@ -62,6 +62,7 @@
     <Compile Include="Config\PropertiesConfig.cs" />
     <Compile Include="Config\RootBookingEntityConfig.cs" />
     <Compile Include="Config\HourPriceConfig.cs" />
+    <Compile Include="Config\RootBookingPropertiesConfig.cs" />
     <Compile Include="Config\StatusConfig.cs" />
     <Compile Include="Config\UserConfig.cs" />
     <Compile Include="Managers\AvailabilityManager.cs" />

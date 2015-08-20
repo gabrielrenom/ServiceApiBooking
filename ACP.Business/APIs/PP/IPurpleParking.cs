@@ -12,5 +12,6 @@ namespace ACP.Business.APIs.PP
     {
         Task<List<ACP.Business.APIs.PP.Models.Airports.responseAirport>> GetAirports();
         Task<List<ACP.Business.APIs.PP.Models.Airports.responseAirportCarPark>> GetCarParks();
+        Task<bool> FillAirports();
     }
 }

@@ -4,18 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ACP.Data
+namespace ACP.Data.Enums
 {
-    public class Property :  BaseEntity
-    {
-        public string Key { get; set; }
-        public string Value { get; set; }
-        public PropertyType Type { get; set; }
-        public int BookingEntityId { get; set; }
-
-        public virtual BookingEntity BookingEntity { get; set; }
-    }
-
     public enum PropertyType
     {
         String = 100,
