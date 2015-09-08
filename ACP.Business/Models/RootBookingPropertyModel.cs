@@ -11,7 +11,7 @@ namespace ACP.Business.Models
     {
         public string Key { get; set; }
         public string Value { get; set; }
-        public RootBookingPropertyType Type { get; set; }
+        public RootBookingPropertyType PropertyType { get; set; }
         public int RootBookingEntityId { get; set; }
 
         public virtual RootBookingEntityModel RootBookingEntity { get; set; }

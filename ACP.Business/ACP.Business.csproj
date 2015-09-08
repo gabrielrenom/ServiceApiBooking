@@ -64,7 +64,7 @@
     <Compile Include="APIs\APH\Models\Terminal.cs" />
     <Compile Include="APIs\PP\IPurpleParking.cs" />
     <Compile Include="APIs\PP\Models\Airports.cs" />
-    <Compile Include="APIs\PP\PurpleParging.cs" />
+    <Compile Include="APIs\PP\PurpleParking.cs" />
     <Compile Include="Enums\RootBookingPropertyType.cs" />
     <Compile Include="Exceptions\ItemNotFoundException.cs" />
     <Compile Include="Exceptions\ValidationErrorsException.cs" />
@@ -76,6 +76,7 @@
     <Compile Include="Managers\IBookingPricingManager.cs" />
     <Compile Include="Managers\IRootBookingEntityManager.cs" />
     <Compile Include="Managers\IServiceManager.cs" />
+    <Compile Include="Managers\IStatusManager.cs" />
     <Compile Include="Managers\IUserManager.cs" />
     <Compile Include="Models\AddressModel.cs" />
     <Compile Include="Models\AvailabilityModel.cs" />
@@ -118,9 +119,11 @@
     <Compile Include="Services\Interfaces\IRootBookingEntityService.cs" />
     <Compile Include="Services\Interfaces\IServiceService.cs" />
     <Compile Include="Services\BookingServiceService.cs" />
+    <Compile Include="Services\Interfaces\IStatusService.cs" />
     <Compile Include="Services\Interfaces\IUserService.cs" />
     <Compile Include="Services\PricingService.cs" />
     <Compile Include="Services\RootBookingEntityService.cs" />
+    <Compile Include="Services\StatusService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup />

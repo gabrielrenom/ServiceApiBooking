@@ -27,7 +27,7 @@ namespace ServiceAPI.Controllers
         [HttpGet]
         public async Task<HttpResponseMessage> GettById(int id)
         {
-            AirportViewModel airport    =   null;
+            RootBookingPropertyViewModel airport    =   null;
             try
             {                                
                 airport = ToViewModel(await _airportservice.GetById(id));
@@ -66,9 +66,9 @@ namespace ServiceAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<HttpResponseMessage> Add(AirportViewModel model)
+        public async Task<HttpResponseMessage> Add(RootBookingPropertyViewModel model)
         {
-            AirportViewModel airport = null;
+            RootBookingPropertyViewModel airport = null;
             try
             {
                 airport = ToViewModel(await _airportservice.Add(ToDataModel(model)));
@@ -107,7 +107,7 @@ namespace ServiceAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<HttpResponseMessage> Update(AirportViewModel model)
+        public async Task<HttpResponseMessage> Update(RootBookingPropertyViewModel model)
         {
             bool airport = false;
             try
@@ -189,9 +189,9 @@ namespace ServiceAPI.Controllers
         }
 
 
-        private AirportViewModel ToViewModel(RootBookingEntityModel dataModel)
+        private RootBookingPropertyViewModel ToViewModel(RootBookingEntityModel dataModel)
         {
-            AirportViewModel viewmodel = new AirportViewModel
+            RootBookingPropertyViewModel viewmodel = new RootBookingPropertyViewModel
             {
                 Id = dataModel.Id,
                 Name = dataModel.Name,               
@@ -218,7 +218,7 @@ namespace ServiceAPI.Controllers
             return viewmodel;
         }
 
-        private RootBookingEntityModel ToDataModel(AirportViewModel dataModel)
+        private RootBookingEntityModel ToDataModel(RootBookingPropertyViewModel dataModel)
         {
             RootBookingEntityModel model = new RootBookingEntityModel();
             model.Id = dataModel.Id;

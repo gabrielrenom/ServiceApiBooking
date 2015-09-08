@@ -91,7 +91,7 @@ namespace ACP.DataAccess.Managers
                              CreatedBy = y.CreatedBy,
                               ModifiedBy = y.ModifiedBy,
                                Modified = y.Modified,
-                                Type = (ACP.Data.PropertyType)y.Type
+                                Type = (ACP.Data.Enums.PropertyType)y.Type
                     }).ToList():null,
                     //AddressId = r.Address==null?0:r.Address.Id,
                     Address =r.Address==null?null:new Address
@@ -107,7 +107,9 @@ namespace ACP.DataAccess.Managers
                         Modified = r.Address.Modified,
                         ModifiedBy = r.Address.ModifiedBy,
                         Number = r.Address.Number,
-                        Postcode = r.Address.Postcode
+                        Postcode = r.Address.Postcode,
+                        City = r.Address.City
+
                     }
                 }).ToList() : null;
             }
@@ -161,12 +163,12 @@ namespace ACP.DataAccess.Managers
                  Modified = x.Modified,
                  ModifiedBy = x.ModifiedBy,
                  RootBookingEntityId = x.RootBookingEntityId,
-                 Type = (Data.Enums.RootBookingPropertyType) x.Type,
+                 Type = (Data.Enums.RootBookingPropertyType) x.PropertyType,
                  Key = x.Key,
                  Value= x.Value                  
             }).ToList():null;
 
-            dataModel.Address = new Address
+            dataModel.Address = domainModel.Address!=null?new Address
             {
 
                 Address1 = domainModel.Address.Address1,
@@ -180,9 +182,9 @@ namespace ACP.DataAccess.Managers
                 ModifiedBy = domainModel.Address.ModifiedBy,
                 Number = domainModel.Address.Number,
                 Postcode = domainModel.Address.Postcode
-            };            
+            }:null;            
             dataModel.StatusId = domainModel.StatusId;
-            dataModel.Status = new Status 
+            dataModel.Status = domainModel.Address != null?new Status 
             {
                 Created = domainModel.Status.Created,
                 CreatedBy = domainModel.Status.CreatedBy,
@@ -190,7 +192,7 @@ namespace ACP.DataAccess.Managers
                 Modified = domainModel.Status.Modified,
                 ModifiedBy = domainModel.Status.ModifiedBy,
                 Name = domainModel.Status.Name 
-            };
+            }:null;
             dataModel.Name = domainModel.Name;
             dataModel.Telephone = domainModel.Telephone;
             dataModel.BookingEntities = domainModel.BookingEntities != null ? domainModel.BookingEntities.Select(r => new BookingEntity

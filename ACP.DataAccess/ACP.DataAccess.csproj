@@ -73,6 +73,7 @@
     <Compile Include="Managers\BookingPricingManager.cs" />
     <Compile Include="Managers\RootBookingEntityManager.cs" />
     <Compile Include="Managers\ServiceManager.cs" />
+    <Compile Include="Managers\StatusManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Migrations\201506172116357_first.cs" />
     <Compile Include="Migrations\201506172116357_first.Designer.cs">
@@ -113,6 +114,10 @@
     <Compile Include="Migrations\201507081927266_properties_key_value.cs" />
     <Compile Include="Migrations\201507081927266_properties_key_value.Designer.cs">
       <DependentUpon>201507081927266_properties_key_value.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509071944591_newone.cs" />
+    <Compile Include="Migrations\201509071944591_newone.Designer.cs">
+      <DependentUpon>201509071944591_newone.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -166,6 +171,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507081927266_properties_key_value.resx">
       <DependentUpon>201507081927266_properties_key_value.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509071944591_newone.resx">
+      <DependentUpon>201509071944591_newone.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

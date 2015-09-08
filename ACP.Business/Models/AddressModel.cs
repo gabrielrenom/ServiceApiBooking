@@ -12,6 +12,7 @@ namespace ACP.Business.Models
         public string Address2 { get; set; }
         public string Postcode { get; set; }
         public string County { get; set; }
-        public string Country { get; set; }        
+        public string Country { get; set; }
+        public string City { get; set; }
     }
 }

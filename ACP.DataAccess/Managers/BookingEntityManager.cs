@@ -46,7 +46,8 @@ namespace ACP.DataAccess.Managers
                     Modified = dataModel.Address.Modified,
                     ModifiedBy = dataModel.Address.ModifiedBy,
                     Number = dataModel.Address.Number,
-                    Postcode = dataModel.Address.Postcode
+                    Postcode = dataModel.Address.Postcode,
+                    City = dataModel.Address.City
                 }:null,
                 Extras = dataModel.Extras != null ? dataModel.Extras.Select(x => new ExtraModel
                 {

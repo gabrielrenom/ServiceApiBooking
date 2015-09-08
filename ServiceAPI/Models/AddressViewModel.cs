@@ -15,5 +15,6 @@ namespace ServiceAPI.Models
         public string Postcode { get; set; }
         public string County { get; set; }
         public string Country { get; set; }
+        public string City { get; set; }
     }
 }

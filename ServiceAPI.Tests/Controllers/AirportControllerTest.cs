@@ -1,0 +1,81 @@
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading.Tasks;
+using ServiceAPI.Controllers;
+using ACP.Business.Services.Interfaces;
+using ACP.Business.Managers;
+using ACP.DataAccess.Managers;
+using ACP.Business.Repository;
+using ACP.DataAccess.Repository;
+using ACP.Business.Services;
+using ServiceAPI.Models;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Web.Http;
+using NSubstitute;
+
+namespace ServiceAPI.Tests.Controllers
+{
+    [TestClass]
+    public class AirportControllerTest
+    {
+        private AirportController airportcontroller;
+        private IRootBookingEntityService service;
+        private IRootBookingEntityManager manager;
+        private IACPRepository repository;
+
+
+        [TestInitialize]
+        public void Setup()
+        {
+
+            repository = new ACPRepository();
+            manager = new RootBookingEntityManager(repository);
+            service = new RootBookingEntityService(manager);
+            airportcontroller = new AirportController(service);
+            
+        }
+
+        [TestMethod]
+        public async Task GivenAnAirport_WhenIsAdded_BeSurereturnsTrue()
+        {
+            //Arrange
+            string value;
+            
+            airportcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+            airportcontroller.Configuration = Substitute.For<HttpConfiguration>();
+
+            RootBookingPropertyViewModel model = new RootBookingPropertyViewModel();
+            model.Address = new AddressViewModel
+            {
+                Address1 = "MyRootAddress",
+                Postcode = "SK74QW",
+                Country = "UK"
+            };            
+            model.Telephone = "07777212321";
+            model.Name = "Hazel Grove Airport";
+            model.BookingEntities= new List<BookingEntityViewModel>
+            {
+                new BookingEntityViewModel
+                {
+                   Comission = 2,
+                   Name = "Local Hazel Grove Parking" + DateTime.Now.ToString(),
+                   Address = new AddressViewModel
+                   {
+                        Address1 = "MyAdress",
+                        Postcode = "SK74QW",
+                        Country = "UK"
+                   }
+                }
+            };
+            model.Status = new StatusViewModel
+            {
+                Name = "Active"
+            };
+
+            //Act
+
+            //Assert
+        }
+    }
+}

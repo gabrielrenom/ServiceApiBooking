@@ -75,7 +75,8 @@ namespace ACP.DataAccess.Managers
                 Modified = domainModel.Address.Modified,
                 ModifiedBy = domainModel.Address.ModifiedBy,
                 Number = domainModel.Address.Number,
-                Postcode = domainModel.Address.Postcode
+                Postcode = domainModel.Address.Postcode,
+                City = domainModel.Address.City
             };
             dataModel.Email = domainModel.Email;
             dataModel.FirstName = domainModel.FirstName;
@@ -153,7 +154,8 @@ namespace ACP.DataAccess.Managers
                 Modified = domainModel.Address.Modified,
                 ModifiedBy = domainModel.Address.ModifiedBy,
                 Number = domainModel.Address.Number,
-                Postcode = domainModel.Address.Postcode
+                Postcode = domainModel.Address.Postcode,
+                City = domainModel.Address.City
             };
             dataModel.Email = domainModel.Email;
             dataModel.FirstName = domainModel.FirstName;
@@ -198,7 +200,8 @@ namespace ACP.DataAccess.Managers
                     Modified = dataModel.Address.Modified,
                     ModifiedBy = dataModel.Address.ModifiedBy,
                     Number = dataModel.Address.Number,
-                    Postcode = dataModel.Address.Postcode
+                    Postcode = dataModel.Address.Postcode,
+                    City = dataModel.Address.City
                 } : null,
                  PhoneNumber = dataModel.PhoneNumber,
                   FirstName = dataModel.FirstName,
