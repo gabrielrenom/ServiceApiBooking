@@ -9,10 +9,10 @@ namespace ACP.Business.Services.Interfaces
 {
     public interface IBookingEntityService
     {
-        bool Add(BookingEntityModel model);
-        bool Update(BookingEntityModel model);
-        IList<BookingEntityModel> GetAllBookingEntities();
-        BookingEntityModel GetBookingEntityById(int Id);
-        bool Remove(int Id);
+        Task<bool> Add(BookingEntityModel model);
+        Task<bool> Update(BookingEntityModel model);
+        Task<IList<BookingEntityModel>> GetAllBookingEntities();
+        Task<BookingEntityModel> GetBookingEntityById(int Id);
+        Task<bool> Remove(int Id);
     }
 }

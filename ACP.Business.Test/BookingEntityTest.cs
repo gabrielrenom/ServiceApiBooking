@@ -10,6 +10,7 @@ using ACP.Business.Models;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ACP.Business.Test
 {
@@ -31,7 +32,7 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public void GivenAEntity_WhenIsAdded_BeSureItRestunsTrueAndRemoves()
+        public async Task GivenAEntity_WhenIsAdded_BeSureItRestunsTrueAndRemoves()
         {
             //Arrange
             BookingEntityModel model = new BookingEntityModel();
@@ -50,7 +51,7 @@ namespace ACP.Business.Test
             };
 
             //Act
-            var results = service.Add(model);
+            var results = await service.Add(model);
 
             //Assert
             Assert.IsNotNull(results);
@@ -60,7 +61,7 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public void GivenAEntityWithExtras_WhenIsAdded_BeSureItRestunsTrueAndRemoves()
+        public async Task GivenAEntityWithExtras_WhenIsAdded_BeSureItRestunsTrueAndRemoves()
         {
             //Arrange
             BookingEntityModel model = new BookingEntityModel();
@@ -90,7 +91,7 @@ namespace ACP.Business.Test
             });
 
             //Act
-            var results = service.Add(model);
+            var results = await service.Add(model);
 
             //Assert
             Assert.IsNotNull(results);           
@@ -100,7 +101,7 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public void GivenAEntityWithExtrasAndPrices_WhenIsAdded_BeSureItRestunsTrueAndRemoves()
+        public async Task GivenAEntityWithExtrasAndPrices_WhenIsAdded_BeSureItRestunsTrueAndRemoves()
         {
             //Arrange
             BookingEntityModel model = new BookingEntityModel();
@@ -162,7 +163,7 @@ namespace ACP.Business.Test
         
 
             //Act
-            var results = service.Add(model);
+            var results = await service.Add(model);
 
             //Assert
             Assert.IsNotNull(results);
@@ -172,38 +173,39 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public void GivenAEntity_WhenIsUpadted_BeSureItReturnsUpdatedData()
+        public async Task GivenAEntity_WhenIsUpadted_BeSureItReturnsUpdatedData()
         {
-            var bookingentities = service.GetAllBookingEntities()[7];
-            bookingentities.Price = 999;
-            bookingentities.Address.Postcode = "SK74QW";
-            bookingentities.Prices.FirstOrDefault().DayPrices.FirstOrDefault().HourPrices.FirstOrDefault().Hourprice = 8888;
+            var bookingentities = await service.GetAllBookingEntities();
+            var bookingentity = bookingentities.LastOrDefault();
+            bookingentity.Price = 999;
+            bookingentity.Address.Postcode = "SK74QW";
+            bookingentity.Prices.FirstOrDefault().DayPrices.FirstOrDefault().HourPrices.FirstOrDefault().Hourprice = 8888;
             //Act
-            var results = service.Update(bookingentities);
+            var results = await service.Update(bookingentity);
 
             //Assert
             Assert.IsTrue(results);          
         }
 
         [TestMethod]
-        public void GivenAEntity_WhenIsDeleted_BeSureItIsNotThere()
+        public async Task GivenAEntity_WhenIsDeleted_BeSureItIsNotThere()
         {
-            var bookingentities = service.GetAllBookingEntities()[7];          
+            var bookingentities = await service.GetAllBookingEntities();          
 
             //Act
-            var results = service.Remove(bookingentities.Id);
+            var results = await service.Remove(bookingentities.LastOrDefault().Id);
 
             //Assert
             Assert.IsTrue(results);
         }
 
         [TestMethod]
-        public void GivenAEntity_WhenIsCalled_BeSureAllEntitiesAreReturned()
+        public async Task GivenAEntity_WhenIsCalled_BeSureAllEntitiesAreReturned()
         { 
             //Arrange
 
             //Act
-            var results = service.GetAllBookingEntities();
+            var results = await service.GetAllBookingEntities();
 
             //Assert
             Assert.IsNotNull(results);
@@ -214,14 +216,14 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public void GivenABookingEntityId_WhenIsCalled_BeSureEntityIsReturned()
+        public async Task GivenABookingEntityId_WhenIsCalled_BeSureEntityIsReturned()
         {
             //Arrange
-            var bookingentities = service.GetAllBookingEntities();
+            var bookingentities = await service.GetAllBookingEntities();
             int first = bookingentities[0].Id;
 
             //Act
-            var results = service.GetBookingEntityById(first);
+            var results = await service.GetBookingEntityById(first);
 
             //Assert
             Assert.IsNotNull(results);

@@ -9,10 +9,10 @@ namespace ACP.Business.Services.Interfaces
 {
     public interface IAvailabilityService
     {
-        AvailabilityModel Add(AvailabilityModel model);
-        bool Remove(int Id);
-        bool Update(AvailabilityModel model);
-        AvailabilityModel GetById(int Id);
-        IList<AvailabilityModel> GetAll();
+        Task<AvailabilityModel> Add(AvailabilityModel model);
+        Task<bool> Remove(int Id);
+        Task<bool> Update(AvailabilityModel model);
+        Task<AvailabilityModel> GetById(int Id);
+        Task<IList<AvailabilityModel>> GetAll();
     }
 }

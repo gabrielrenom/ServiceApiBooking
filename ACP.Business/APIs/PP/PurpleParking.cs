@@ -50,6 +50,10 @@ namespace ACP.Business.APIs.PP
                 {
                     RootBookingEntityModel airport = new RootBookingEntityModel();
                     airport.Name = item.name;
+                    airport.Created = DateTime.Now;
+                    airport.Modified = DateTime.Now;
+                    airport.ModifiedBy = "System";
+                    airport.CreatedBy = "System";
                     airport.Properties = new Collection<RootBookingPropertyModel>();
                     airport.Properties.Add(new RootBookingPropertyModel { Key = "Code", Value = item.code, PropertyType = ACP.Business.Enums.RootBookingPropertyType.String });
                     
@@ -87,7 +91,7 @@ namespace ACP.Business.APIs.PP
                         airportcarpark.Properties.Add(new PropertyModel { Key = "Provider", Value = "PP", Type = PropertyType.String });
 
                         airport.Status = status;
-
+                        airport.StatusId = status.Id;
 
                         airport.BookingEntities.Add(airportcarpark);
 

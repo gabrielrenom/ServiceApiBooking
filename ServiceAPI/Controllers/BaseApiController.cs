@@ -7,7 +7,8 @@ using System.Web.Http;
 
 namespace ServiceAPI.Controllers
 {
-    public class RootController : ApiController
+    public class BaseApiController : ApiController
     {
+
     }
 }

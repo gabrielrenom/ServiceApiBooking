@@ -20,6 +20,7 @@ namespace ACP.Business.Test
         private IRootBookingEntityService airportService;
         private IStatusService statusService;
         private IRootBookingEntityManager rootbookingentitymanager;
+        private IStatusManager statusmanager;
 
         [TestInitialize]
         public void Setup()
@@ -28,7 +29,8 @@ namespace ACP.Business.Test
 
             rootbookingentitymanager = new RootBookingEntityManager(repository);
             airportService = new RootBookingEntityService(rootbookingentitymanager);
-            statusService = new StatusService(statusService);
+            statusmanager = new StatusManager(repository);
+            statusService = new StatusService(statusmanager);
 
             purpleparkingapi = new PurpleParking(airportService, statusService);
         }

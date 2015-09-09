@@ -5,26 +5,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ACP.Business.Models;
+using ACP.Business.Managers;
 
 namespace ACP.Business.Services
 {
     public class StatusService : IStatusService
     {
-        private IStatusService _statuservice;
+        private IStatusManager _statusmanager;
 
-        public StatusService(IStatusService statuservice)
+        public StatusService(IStatusManager statusmanager)
         {
-            _statuservice = statuservice;
+            _statusmanager = statusmanager;
         }
 
         public StatusModel Add(StatusModel domainModel)
         {
-            return _statuservice.Add(domainModel);
+            return _statusmanager.Add(domainModel);
         }
 
         public StatusModel GetByName(string StatusName)
         {
-            return _statuservice.GetByName(StatusName);
+            return _statusmanager.GetByName(StatusName);
         }
     }
 }

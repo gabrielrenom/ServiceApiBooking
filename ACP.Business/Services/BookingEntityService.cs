@@ -18,34 +18,34 @@ namespace ACP.Business.Services
             _bookingEntityManager = bookingEntityManager;
         }
 
-        public bool Add(BookingEntityModel model)
+        public async Task<bool> Add(BookingEntityModel model)
         {
             BookingEntityModel added= _bookingEntityManager.Add(model);
 
             return (added.Id!=null?true:false);
         }
 
-        public bool Update(BookingEntityModel model)
+        public async Task<bool> Update(BookingEntityModel model)
         {
             return _bookingEntityManager.Update(model);
         }
 
-        public IList<Models.BookingEntityModel> GetAllBookingEntities()
+        public async Task<IList<Models.BookingEntityModel>> GetAllBookingEntities()
         {
             return _bookingEntityManager.GetAllBookingEntities().ToList();            
         }
 
-        public Models.BookingEntityModel GetBookingEntityById(int Id)
+        public async Task<Models.BookingEntityModel> GetBookingEntityById(int Id)
         {
             return _bookingEntityManager.GetById(Id);
         }
 
-        public bool Remove(int Id)
+        public async Task<bool> Remove(int Id)
         {
             return _bookingEntityManager.DeleteById(Id);
         }
 
-        public IList<AvailabilityModel> GetAvailableSpacesById(int Id, DateTime StartDate, DateTime EndDate,string Status=null)
+        public async Task<IList<AvailabilityModel>> GetAvailableSpacesById(int Id, DateTime StartDate, DateTime EndDate,string Status=null)
         {
             if (Status!=null)
                 return _bookingEntityManager.GetById(Id).Availability.Where(x => StartDate > x.StartDate && EndDate < x.EndDate && x.Status.Name == Status).ToList();

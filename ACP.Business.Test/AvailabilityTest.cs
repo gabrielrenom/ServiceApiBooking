@@ -8,6 +8,7 @@ using ACP.DataAccess.Managers;
 using ACP.Business.Services;
 using System.Linq;
 using ACP.Business.Models;
+using System.Threading.Tasks;
 
 namespace ACP.Business.Test
 {
@@ -59,13 +60,13 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public void GivenAnId_WhenIsGetById_BeSureTheSlotIsReturned()
+        public async Task GivenAnId_WhenIsGetById_BeSureTheSlotIsReturned()
         {
             //Arrange
             int id = 3;
 
             //Act
-            var result = service.GetById(id);
+            var result = await service.GetById(id);
 
             //Assert
             Assert.IsNotNull(result);
@@ -74,10 +75,10 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public void _WhenGetAllIsCalled_BeSureAllTheSlotsAreReturned()
+        public async Task _WhenGetAllIsCalled_BeSureAllTheSlotsAreReturned()
         {
             //Act
-            var result = service.GetAll();
+            var result = await  service.GetAll();
 
             //Assert
             Assert.IsNotNull(result);
@@ -86,16 +87,16 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public void GivenASlot_WhenIsUpdates_BeSureTheSlotIsUpdated()
+        public async Task GivenASlot_WhenIsUpdates_BeSureTheSlotIsUpdated()
         {
             //Arrange
-            AvailabilityModel model = service.GetById(2);
+            AvailabilityModel model = await service.GetById(2);
             model.StartDate = DateTime.Now;
             model.EndDate = DateTime.Now;
             model.StatusId = 7;
             
             //Act
-            var result = service.Update(model);
+            var result =await service.Update(model);
 
             //Assert
             Assert.IsTrue(result);

@@ -2,7 +2,6 @@
 using ACP.Business.Exceptions;
 using ACP.Business.Models;
 using ACP.Business.Services.Interfaces;
-using ServiceAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,24 +14,28 @@ using System.Web.Http;
 
 namespace ServiceAPI.Controllers
 {
-    [RoutePrefix("api/v1/airport")]
-    public class AirportController : BaseApiController
+    /// <summary>
+    /// CarPark Controller handles the CarPark
+    /// NOTE 1: BE AWARE THIS CONTROLLER DON'T USE VIEW MODEL
+    /// </summary>
+    [RoutePrefix("api/v1/carpark")]
+    public class CarParkController : BaseApiController
     {
-        private IRootBookingEntityService _airportservice;
+        private IBookingEntityService _carparkservice;
 
-        public AirportController(IRootBookingEntityService airportservice)
+        public CarParkController(IBookingEntityService carparkservice)
         {
-            _airportservice = airportservice;
+            _carparkservice = carparkservice;
         }
 
         [HttpGet]
         [Route("getbyid")]
         public async Task<HttpResponseMessage> GettById(int id)
         {
-            RootBookingPropertyViewModel airport    =   null;
+            BookingEntityModel carpark = null;
             try
-            {                                
-                airport = ToViewModel(await _airportservice.GetById(id));
+            {
+                carpark = await _carparkservice.GetBookingEntityById(id);
             }
             catch (HttpRequestException ex)
             {
@@ -64,17 +67,17 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, airport);
+            return Request.CreateResponse(HttpStatusCode.Created, carpark);
         }
 
         [HttpPost]
         [Route("add")]
-        public async Task<HttpResponseMessage> Add(RootBookingPropertyViewModel model)
+        public async Task<HttpResponseMessage> Add(BookingEntityModel model)
         {
-            RootBookingPropertyViewModel airport = null;
+            bool carpark = false;
             try
             {
-                airport = ToViewModel(await _airportservice.Add(ToDataModel(model)));
+                carpark = await _carparkservice.Add(model);
             }
             catch (HttpRequestException ex)
             {
@@ -106,17 +109,17 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, airport);
+            return Request.CreateResponse(HttpStatusCode.Created, carpark);
         }
 
         [HttpPut]
         [Route("update")]
-        public async Task<HttpResponseMessage> Update(RootBookingPropertyViewModel model)
+        public async Task<HttpResponseMessage> Update(BookingEntityModel model)
         {
-            bool airport = false;
+            bool carpark = false;
             try
             {
-                airport = await _airportservice.Update(ToDataModel(model));
+                carpark = await _carparkservice.Update(model);
             }
             catch (HttpRequestException ex)
             {
@@ -148,17 +151,17 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, airport);
+            return Request.CreateResponse(HttpStatusCode.Created, carpark);
         }
 
         [HttpDelete]
         [Route("delete")]
         public async Task<HttpResponseMessage> Delete(int id)
         {
-            bool airport = false;
+            bool carpark = false;
             try
             {
-                airport =  await _airportservice.Remove(id);
+                carpark = await _carparkservice.Remove(id);
             }
             catch (HttpRequestException ex)
             {
@@ -190,73 +193,8 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, airport);
+            return Request.CreateResponse(HttpStatusCode.Created, carpark);
         }
 
-
-        private RootBookingPropertyViewModel ToViewModel(RootBookingEntityModel dataModel)
-        {
-            RootBookingPropertyViewModel viewmodel = new RootBookingPropertyViewModel
-            {
-                Id = dataModel.Id,
-                Name = dataModel.Name,               
-                Address = new AddressViewModel
-                {
-                    Id=dataModel.Address.Id,
-                    Address1 = dataModel.Address.Address1,
-                    Address2 = dataModel.Address.Address2,
-                    Country = dataModel.Address.Country,
-                    County = dataModel.Address.County,                 
-                    Number = dataModel.Address.Number,
-                    Postcode = dataModel.Address.Postcode
-                },
-                AddressId = dataModel.AddressId,
-                StatusId = dataModel.StatusId,
-                Telephone = dataModel.Telephone,
-                Status = new StatusViewModel
-                {                    
-                    Id=dataModel.Status.Id,
-                    Name = dataModel.Status.Name
-                }
-            };            
-
-            return viewmodel;
-        }
-
-        private RootBookingEntityModel ToDataModel(RootBookingPropertyViewModel dataModel)
-        {
-            RootBookingEntityModel model = new RootBookingEntityModel();
-            model.Id = dataModel.Id;
-            model.Name = dataModel.Name;
-            model.Address = new AddressModel
-            {
-                Id = dataModel.Address.Id,
-                Address1 = dataModel.Address.Address1,
-                Address2 = dataModel.Address.Address2,
-                Country = dataModel.Address.Country,
-                County = dataModel.Address.County,
-                Number = dataModel.Address.Number,
-                Postcode = dataModel.Address.Postcode
-            };
-
-            model.AddressId = dataModel.AddressId;
-            model.StatusId = dataModel.StatusId;
-            model.Telephone = dataModel.Telephone;
-            model.Status = new StatusModel
-            {
-                Id= dataModel.Status.Id,
-                Name = dataModel.Status.Name
-            };
-            if (dataModel.Id == 0)
-            {
-                model.Created = DateTime.Now;
-                model.CreatedBy = "local";
-            }
-
-            model.Modified = DateTime.Now;
-            model.ModifiedBy = "local";
-
-            return model;
-        }
     }
 }
