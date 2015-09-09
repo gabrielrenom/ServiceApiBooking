@@ -113,7 +113,7 @@
     <Compile Include="Services\Interfaces\IAvailabilityService.cs" />
     <Compile Include="Services\Interfaces\IBookingEntityService.cs" />
     <Compile Include="Services\Interfaces\IBookingPricingService.cs" />
-    <Compile Include="Services\Interfaces\IBookingService.cs" />
+    <Compile Include="Services\Interfaces\IQuoteService.cs" />
     <Compile Include="Services\Interfaces\IHMACService.cs" />
     <Compile Include="Services\Interfaces\IPricingService.cs" />
     <Compile Include="Services\Interfaces\IRootBookingEntityService.cs" />

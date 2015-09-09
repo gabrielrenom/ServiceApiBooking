@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace ACP.Business.Services.Interfaces
 {
-    public interface IBookingService
+    public interface IQuoteService
     {
-        BookingModel Add(BookingModel service);
+        Task<BookingModel> Add(BookingModel service);
 
-        QuoteModel GetQuote(QuoteModel quote);
+        Task<QuoteModel> GetQuote(QuoteModel quote);
     }
 }
