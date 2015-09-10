@@ -184,7 +184,7 @@ namespace ACP.DataAccess.Managers
                 Postcode = domainModel.Address.Postcode
             }:null;            
             dataModel.StatusId = domainModel.StatusId;
-            dataModel.Status = domainModel.Address != null?new Status 
+            dataModel.Status = domainModel.Status != null?new Status 
             {
                 Created = domainModel.Status.Created,
                 CreatedBy = domainModel.Status.CreatedBy,
