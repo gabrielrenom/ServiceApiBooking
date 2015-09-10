@@ -9,8 +9,8 @@ namespace ACP.Business.Services.Interfaces
 {
     public interface IStatusService
     {
-        StatusModel GetByName(string StatusName);
+        Task<StatusModel> GetByName(string StatusName);
 
-        StatusModel Add(StatusModel domainModel);
+        Task<StatusModel> Add(StatusModel domainModel);
     }
 }

@@ -43,8 +43,8 @@ namespace ACP.Business.APIs.PP
             {
                 var airports = await GetAirports();
                 
-                StatusModel status = _statusService.GetByName("Active");
-                if (status == null) status = _statusService.Add(new StatusModel {  Name="Active", CreatedBy="System", ModifiedBy="System", Modified =DateTime.Now, Created=DateTime.Now });
+                StatusModel status = await _statusService.GetByName("Active");
+                if (status == null) status = await _statusService.Add(new StatusModel {  Name="Active", CreatedBy="System", ModifiedBy="System", Modified =DateTime.Now, Created=DateTime.Now });
 
                 foreach (var item in airports)
                 {

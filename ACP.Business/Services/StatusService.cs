@@ -18,14 +18,14 @@ namespace ACP.Business.Services
             _statusmanager = statusmanager;
         }
 
-        public StatusModel Add(StatusModel domainModel)
+        public async Task<StatusModel> Add(StatusModel domainModel)
         {
-            return _statusmanager.Add(domainModel);
+            return  _statusmanager.Add(domainModel);
         }
 
-        public StatusModel GetByName(string StatusName)
+        public async Task<StatusModel> GetByName(string StatusName)
         {
-            return _statusmanager.GetByName(StatusName);
+            return  _statusmanager.GetByName(StatusName);
         }
     }
 }
