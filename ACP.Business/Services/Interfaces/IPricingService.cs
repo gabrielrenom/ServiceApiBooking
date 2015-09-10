@@ -9,7 +9,7 @@ namespace ACP.Business.Services.Interfaces
 {
     public interface IPricingService
     {
-        PriceQuoteModel GetPrice(QuoteModel model);
+        Task<PriceQuoteModel> GetPrice(QuoteModel model);
 
     }
 }

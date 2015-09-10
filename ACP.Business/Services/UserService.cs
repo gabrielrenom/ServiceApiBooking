@@ -18,30 +18,30 @@ namespace ACP.Business.Services
             _usermanager = usermanager;
         }
 
-        public UserModel Add(UserModel user)
+        public async Task<UserModel> Add(UserModel user)
         {
             return _usermanager.Add(user);
         }
     
 
-        public IList<UserModel>GetAll()
+        public async Task<IList<UserModel>>GetAll()
         {
             return _usermanager.GetAllUsersWithCarsAndBookings().ToList();
         }
 
 
-        public UserModel GetById(int Id)
+        public async Task<UserModel> GetById(int Id)
         {
             return _usermanager.GetById(Id);
         }
 
         
-        public bool Update(UserModel model)
+        public async Task<bool> Update(UserModel model)
         {
             return _usermanager.Update(model);
         }
 
-        public bool DeleteById(int Id)
+        public async Task<bool> DeleteById(int Id)
         {
             return _usermanager.DeleteById(Id);
         }

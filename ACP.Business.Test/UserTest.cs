@@ -7,6 +7,7 @@ using ACP.DataAccess.Repository;
 using ACP.Business.Services;
 using ACP.Business.Models;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace ACP.Business.Test
 {
@@ -29,7 +30,7 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public void GivenAUser_WhenTheUserIsAdded_BeSureIsConfirmed()
+        public async Task GivenAUser_WhenTheUserIsAdded_BeSureIsConfirmed()
         { 
             //Arrange
             UserModel user = new UserModel();
@@ -45,7 +46,7 @@ namespace ACP.Business.Test
             
 
             //Act
-            var results = service.Add(user);
+            var results = await service.Add(user);
 
             //Assert
             Assert.IsNotNull(results);
@@ -53,7 +54,7 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public void GivenAUserWithCar_WhenTheUserAndCarAreAdded_BeSureBothAreConfirmed()
+        public async Task GivenAUserWithCar_WhenTheUserAndCarAreAdded_BeSureBothAreConfirmed()
         {
             //Arrange
             UserModel user = new UserModel();
@@ -76,44 +77,44 @@ namespace ACP.Business.Test
             };
 
             //Act
-            var results = service.Add(user);
+            var results =await service.Add(user);
 
             //Assert
             Assert.IsNotNull(results);
         }
 
         [TestMethod]
-        public void _WhenGetAllIsCalled_GetAllUsersWithAllCarsAndBookings()
+        public async Task _WhenGetAllIsCalled_GetAllUsersWithAllCarsAndBookings()
         {
            //Act
-            var results = service.GetAll(); 
+            var results = await service.GetAll(); 
            //Assert
             Assert.IsNotNull(results);
         }
 
         [TestMethod]
-        public void AnUserIdIsGiven_WhenIsCalled_GetTheUserWithAllCarsAndBookings()
+        public async Task AnUserIdIsGiven_WhenIsCalled_GetTheUserWithAllCarsAndBookings()
         { 
             //Arrange
             int Id = 6;
 
             //Act
-            var results = service.GetById(Id);
+            var results = await service.GetById(Id);
 
             //Assert
             Assert.IsNotNull(results);
         }
 
         [TestMethod]
-        public void IfAnIdIsGiven_WhenUpdateIsCalled_BeSureAllIsUpdated()
+        public async Task IfAnIdIsGiven_WhenUpdateIsCalled_BeSureAllIsUpdated()
         {
             //Arrange
             int Id = 6;
-            var model = service.GetById(Id);
+            var model = await service.GetById(Id);
             model.Email = "Anemail@gmail.com";           
 
             //Act
-            var result = service.Update(model);
+            var result = await service.Update(model);
 
             //Assert
             Assert.IsTrue(result);
@@ -121,13 +122,13 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public void IfAnIdIsGiven_WhenDeleteIsCalled_BeSureTheUserWithAllCarsIsDeleted()
+        public async Task IfAnIdIsGiven_WhenDeleteIsCalled_BeSureTheUserWithAllCarsIsDeleted()
         {
             //Arrange
             int Id = 6;
 
             //Act
-            var result = service.DeleteById(Id);
+            var result = await service.DeleteById(Id);
 
             //Assert
             Assert.IsTrue(result);

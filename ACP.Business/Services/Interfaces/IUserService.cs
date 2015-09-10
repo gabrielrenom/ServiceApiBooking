@@ -9,15 +9,15 @@ namespace ACP.Business.Services.Interfaces
 {
     public interface IUserService
     {
-        UserModel Add(UserModel user);
+        Task<UserModel> Add(UserModel user);
         
-        IList<UserModel> GetAll();
+        Task<IList<UserModel>> GetAll();
 
-        UserModel GetById(int Id);
+        Task<UserModel> GetById(int Id);
 
-        bool Update(UserModel model);
+        Task<bool> Update(UserModel model);
 
-        bool DeleteById(int Id);
+        Task<bool> DeleteById(int Id);
     }
 
      
