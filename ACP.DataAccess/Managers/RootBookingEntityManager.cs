@@ -222,8 +222,20 @@ namespace ACP.DataAccess.Managers
                     ModifiedBy = r.Address.ModifiedBy,
                     Number = r.Address.Number,
                     Postcode = r.Address.Postcode
-                }
-            } ).ToList():null;            
+                },
+                Properties = r.Properties!=null? r.Properties.Select(x => new Property
+                {
+                    Id = x.Id,
+                    Created = x.Created,
+                    CreatedBy = x.CreatedBy,
+                    Modified = x.Modified,
+                    ModifiedBy = x.ModifiedBy,
+                     BookingEntityId = x.BookingEntityId,
+                    Type = (Data.Enums.PropertyType)x.Type,
+                    Key = x.Key,
+                    Value = x.Value
+                }).ToList() : null,
+        } ).ToList():null;            
 
             return dataModel;
         }
