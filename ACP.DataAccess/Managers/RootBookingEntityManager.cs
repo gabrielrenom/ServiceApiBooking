@@ -139,7 +139,7 @@ namespace ACP.DataAccess.Managers
 
         public IList<RootBookingEntityModel> GetAll()
         {
-            return GetListIncluding(x => x.Id > 0, x => x.Status, x => x.Address, x => x.BookingEntities, x => x.BookingEntities.Select(y => y.Address), x => x.BookingEntities.Select(y => y.Properties)).ToList();            
+            return GetListIncluding(x => x.Id > 0, x => x.Status, x => x.Address, x => x.BookingEntities,x=>x.Properties, x => x.BookingEntities.Select(y => y.Address), x => x.BookingEntities.Select(y => y.Properties)).ToList();            
         }
 
         public override RootBookingEntity ToDataModel(RootBookingEntityModel domainModel, RootBookingEntity dataModel = null)
@@ -278,8 +278,19 @@ namespace ACP.DataAccess.Managers
                     ModifiedBy = dataModel.Status.ModifiedBy,
                     Name = dataModel.Status.Name
                 },
-
-                BookingEntities = dataModel.BookingEntities != null ? dataModel.BookingEntities.Select(r => new BookingEntityModel
+                Properties = dataModel.Properties != null ? dataModel.Properties.Select(x => new RootBookingPropertyModel
+                {
+                    Id = x.Id,
+                    Created = x.Created,
+                    CreatedBy = x.CreatedBy,
+                    Modified = x.Modified,
+                    ModifiedBy = x.ModifiedBy,
+                    PropertyType = (Business.Enums.RootBookingPropertyType)x.Type,
+                    RootBookingEntityId = x.RootBookingEntityId,                    
+                    Key = x.Key,
+                    Value = x.Value
+                }).ToList() : null,
+            BookingEntities = dataModel.BookingEntities != null ? dataModel.BookingEntities.Select(r => new BookingEntityModel
                 {
                     Comission = r.Comission,
                     Created = r.Created,
@@ -296,7 +307,12 @@ namespace ACP.DataAccess.Managers
                     {
                         Key = y.Key,
                         Value = y.Value,
-                        Type = (ACP.Business.Models.PropertyType) y.Type
+                        Type = (ACP.Business.Models.PropertyType) y.Type,
+                        Id = y.Id,
+                        Created = y.Created,
+                        CreatedBy = y.CreatedBy,
+                        Modified = y.Modified,
+                        ModifiedBy = y.ModifiedBy,
                     }).ToList():null,
                     Address = new AddressModel
                     {
