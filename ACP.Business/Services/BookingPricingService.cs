@@ -20,41 +20,41 @@ namespace ACP.Business.Services
             _bookingEntityManager = bookingEntityManager;
         }
 
-        public IEnumerable<BookingPricingModel> GetAll()
+        public async Task<IList<BookingPricingModel>> GetAll()
         {
-            return _bookingPricingManager.GetAll();
+            return _bookingPricingManager.GetAll().ToList();
         }
 
 
-        public bool AddPricesWithDays(int bookingEntityId, IList<BookingPricingModel> prices)
+        public async Task<bool> AddPricesWithDays(int bookingEntityId, IList<BookingPricingModel> prices)
         {
             return _bookingPricingManager.AddPricesWithDays(bookingEntityId, prices);
         }
 
-        public bool AddPricesWithDaysAndTimes(int bookingEntityId, IList<BookingPricingModel> prices)
+        public async Task<bool> AddPricesWithDaysAndTimes(int bookingEntityId, IList<BookingPricingModel> prices)
         {
             throw new NotImplementedException();
         }
         
 
-        public bool UpdatePricesWithDays(int bookingEntityId, IList<BookingPricingModel> list)
+        public async Task<bool> UpdatePricesWithDays(int bookingEntityId, IList<BookingPricingModel> list)
         {
             return _bookingPricingManager.UpdatePricesWithDays( bookingEntityId,  list);
         }
 
 
-        public IList<BookingPricingModel> GetAllPricesWithDays(int bookingEntityId)
+        public async Task<IList<BookingPricingModel>> GetAllPricesWithDays(int bookingEntityId)
         {
             return _bookingPricingManager.GetAllPricesWithDays(bookingEntityId);
         }
 
-        public IList<BookingPricingModel> GetAllPricesWithDaysAndTimes(int bookingEntityId)
+        public async Task<IList<BookingPricingModel>> GetAllPricesWithDaysAndTimes(int bookingEntityId)
         {
             return _bookingPricingManager.GetAllPricesWithDaysAndTimes(bookingEntityId);
         }
 
 
-        public bool DeleteById(int Id)
+        public async Task<bool> DeleteById(int Id)
         {
             return _bookingPricingManager.DeleteById(Id);
         }

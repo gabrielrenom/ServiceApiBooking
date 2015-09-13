@@ -11,6 +11,7 @@ using ACP.Business.Models;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace ACP.Business.Test
 {
@@ -34,7 +35,7 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public void WhenAnEntityIsGiven_WhenOnlyDaysAreSelected_BeSureTheyAreAdded()
+        public async Task WhenAnEntityIsGiven_WhenOnlyDaysAreSelected_BeSureTheyAreAdded()
         {
             //Arrange
             IList<BookingPricingModel> list = new List<BookingPricingModel>();
@@ -68,14 +69,14 @@ namespace ACP.Business.Test
             list.Add(model);
 
             //Act
-            var results = service.AddPricesWithDays(2, list);
+            var results = await service.AddPricesWithDays(2, list);
 
             //Assert
             Assert.IsTrue(results);
         }
 
         [TestMethod]
-        public void WhenAnEntityIsGiven_WhenOnlyDaysAndHoursAreSelected_BeSureTheyAreAdded()
+        public async Task WhenAnEntityIsGiven_WhenOnlyDaysAndHoursAreSelected_BeSureTheyAreAdded()
         {
             //Arrange
             IList<BookingPricingModel> list = new List<BookingPricingModel>();
@@ -109,25 +110,26 @@ namespace ACP.Business.Test
             list.Add(model);
 
             //Act
-            var results = service.AddPricesWithDays(2, list);
+            var results = await service.AddPricesWithDays(2, list);
 
             //Assert
             Assert.IsTrue(results);
         }
 
         [TestMethod]
-        public void WhenAnEntityIsGiven_WhenOnlyDaysAreSelected_BeSureTheyAreUpdated()
+        public async Task WhenAnEntityIsGiven_WhenOnlyDaysAreSelected_BeSureTheyAreUpdated()
         {
             //Arrange
-            var allprices = service.GetAllPricesWithDays(2);
+            var allprices = await service.GetAllPricesWithDays(2);
              allprices.FirstOrDefault().Name = "A new One";
 
             //Act
-             var results = service.UpdatePricesWithDays(2, allprices.ToList());
+             var results = await service.UpdatePricesWithDays(2, allprices.ToList());
 
             //Assert
             Assert.IsTrue(results);
-            Assert.AreEqual(service.GetAllPricesWithDays(2).FirstOrDefault().Name, "A new One");
+            var name = await service.GetAllPricesWithDays(2); ;
+            Assert.AreEqual(name.FirstOrDefault().Name, "A new One");
         }
 
 
