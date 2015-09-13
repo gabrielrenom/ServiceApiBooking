@@ -58,14 +58,13 @@ namespace ACP.Business.APIs.PP
                 }
 
                 //var result = allairports.Where(x => x.Properties.FirstOrDefault().Key.ToLower() == "provider" && x.Properties.FirstOrDefault().Value.ToLower() == "purple parking").FirstOrDefault().Modified;
+                StatusModel status = await _statusService.GetByName("Active");
+                if (status == null) status = await _statusService.Add(new StatusModel { Name = "Active", CreatedBy = "System", ModifiedBy = "System", Modified = DateTime.Now, Created = DateTime.Now });
 
-                if (date.Value < DateTime.Now.AddHours(1))
+                if (date.Value.AddHours(1) < DateTime.Now)
                 {
                     var airports = await GetAirports();
-
-                    StatusModel status = await _statusService.GetByName("Active");
-                    if (status == null) status = await _statusService.Add(new StatusModel { Name = "Active", CreatedBy = "System", ModifiedBy = "System", Modified = DateTime.Now, Created = DateTime.Now });
-
+                   
                     foreach (var item in airports)
                     {
                         RootBookingEntityModel airport = new RootBookingEntityModel();
@@ -75,14 +74,14 @@ namespace ACP.Business.APIs.PP
                         airport.ModifiedBy = "System";
                         airport.CreatedBy = "System";
                         airport.Properties = new Collection<RootBookingPropertyModel>();
-                        airport.Properties.Add(new RootBookingPropertyModel { Key = "Code", Value = item.code, PropertyType = ACP.Business.Enums.RootBookingPropertyType.String });
-                        airport.Properties.Add(new RootBookingPropertyModel { Key = "Provider", Value = "Purple Parking", PropertyType = ACP.Business.Enums.RootBookingPropertyType.String });
+                        airport.Properties.Add(new RootBookingPropertyModel { Key = "Code", Value = item.code, PropertyType = ACP.Business.Enums.RootBookingPropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System", });
+                        airport.Properties.Add(new RootBookingPropertyModel { Key = "Provider", Value = "Purple Parking", PropertyType = ACP.Business.Enums.RootBookingPropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System", });
                         airport.Address = new AddressModel();
                         airport.Status = status;
                         airport.StatusId = status.Id;
                         foreach (var terminal in item.terminals)
                         {
-                            new RootBookingPropertyModel { Key = "Terminal", Value = terminal, PropertyType = ACP.Business.Enums.RootBookingPropertyType.String };
+                            new RootBookingPropertyModel { Key = "Terminal", Value = terminal, PropertyType = ACP.Business.Enums.RootBookingPropertyType.String, Created=DateTime.Now, Modified=DateTime.Now, CreatedBy="System", ModifiedBy="System", };
                         }
                         //airport.BookingEntities = item.carParks != null ? new Collection<BookingEntityModel>() : null;
                         airport.BookingEntities = new Collection<BookingEntityModel>();
@@ -90,6 +89,13 @@ namespace ACP.Business.APIs.PP
                         foreach (var carpark in item.carParks)
                         {
                             BookingEntityModel airportcarpark = new BookingEntityModel();
+
+                            airportcarpark.Name = carpark.name;
+                            airportcarpark.ModifiedBy = "System";
+                            airportcarpark.CreatedBy = "System";
+                            airportcarpark.Modified = DateTime.Now;
+                            airportcarpark.Created = DateTime.Now;
+
                             if (carpark.address != null)
                             {
                                 string[] fields = carpark.address.Split(',');
@@ -102,16 +108,16 @@ namespace ACP.Business.APIs.PP
                             }
 
                             airportcarpark.Properties = new Collection<PropertyModel>();
-                            airportcarpark.Properties.Add(new PropertyModel { Key = "Arrival Procedure", Value = carpark.arrivalProcedure, Type = PropertyType.String });
-                            airportcarpark.Properties.Add(new PropertyModel { Key = "Departure Procedure", Value = carpark.departureProcedure, Type = PropertyType.String });
-                            airportcarpark.Properties.Add(new PropertyModel { Key = "Description", Value = carpark.description, Type = PropertyType.String });
-                            airportcarpark.Properties.Add(new PropertyModel { Key = "Code", Value = carpark.code, Type = PropertyType.String });
-                            airportcarpark.Properties.Add(new PropertyModel { Key = "Cancellations", Value = carpark.cancellations, Type = PropertyType.String });
-                            airportcarpark.Properties.Add(new PropertyModel { Key = "Direcctions", Value = carpark.directions, Type = PropertyType.String });
-                            airportcarpark.Properties.Add(new PropertyModel { Key = "Distance To Airport", Value = carpark.distanceToAirport, Type = PropertyType.String });
-                            airportcarpark.Properties.Add(new PropertyModel { Key = "Helpline", Value = carpark.helpline, Type = PropertyType.String });
-                            airportcarpark.Properties.Add(new PropertyModel { Key = "Lead Time Hours", Value = carpark.leadTimeHours.ToString(), Type = PropertyType.Int });
-                            airportcarpark.Properties.Add(new PropertyModel { Key = "Transfer Frequency", Value = carpark.transferFrequency.ToString(), Type = PropertyType.String });
+                            airportcarpark.Properties.Add(new PropertyModel { Key = "Arrival Procedure", Value = carpark.arrivalProcedure, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System" });
+                            airportcarpark.Properties.Add(new PropertyModel { Key = "Departure Procedure", Value = carpark.departureProcedure, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System" });
+                            airportcarpark.Properties.Add(new PropertyModel { Key = "Description", Value = carpark.description, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System", });
+                            airportcarpark.Properties.Add(new PropertyModel { Key = "Code", Value = carpark.code, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System", });
+                            airportcarpark.Properties.Add(new PropertyModel { Key = "Cancellations", Value = carpark.cancellations, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System", });
+                            airportcarpark.Properties.Add(new PropertyModel { Key = "Direcctions", Value = carpark.directions, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System", });
+                            airportcarpark.Properties.Add(new PropertyModel { Key = "Distance To Airport", Value = carpark.distanceToAirport, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System", });
+                            airportcarpark.Properties.Add(new PropertyModel { Key = "Helpline", Value = carpark.helpline, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System", });
+                            airportcarpark.Properties.Add(new PropertyModel { Key = "Lead Time Hours", Value = carpark.leadTimeHours.ToString(), Type = PropertyType.Int, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System", });
+                            airportcarpark.Properties.Add(new PropertyModel { Key = "Transfer Frequency", Value = Convert.ToString(carpark.transferFrequency), Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System", });
                             airportcarpark.Properties.Add(new PropertyModel { Key = "Provider", Value = "Purple Parking", Type = PropertyType.String });
 
                             airport.Status = status;
@@ -127,8 +133,75 @@ namespace ACP.Business.APIs.PP
                 else
                 {
                     //RUN UPDATE
+                    var airports = await GetAirports();
+                                       
+                    var dbairports = _airportService.GetAll();
+
+                    foreach (var item in airports)
+                    {
+
+                        var airportswiththesamename = dbairports.Where(x => x.Name == item.name).FirstOrDefault();
+                        if (airportswiththesamename.Properties.Where(x => x.Key == "Provider" && x.Value == "Purple Parking") != null)
+                        {                            
+                            RootBookingEntityModel airport = airportswiththesamename;
+                            airport.Name = item.name;
+                            airport.Created = DateTime.Now;
+                            airport.Modified = DateTime.Now;
+                            airport.ModifiedBy = "System";
+                            airport.CreatedBy = "System";                                                                                  
+                            airport.Properties.Add(new RootBookingPropertyModel { Key = "Provider", Value = "Purple Parking", PropertyType = ACP.Business.Enums.RootBookingPropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System", });
+                            airport.Address = new AddressModel();
+                            airport.Status = status;
+                            airport.StatusId = status.Id;
+                                                        
+                            foreach (var carpark in item.carParks)
+                            {
+                                BookingEntityModel airportcarpark = airport.BookingEntities.Where(x => x.Name == carpark.name).FirstOrDefault();
+                                airportcarpark.Name = carpark.name;
+                                airportcarpark.ModifiedBy = "System";
+                                airportcarpark.CreatedBy = "System";
+                                airportcarpark.Modified = DateTime.Now;
+
+                                if (carpark.address != null)
+                                {
+                                    string[] fields = carpark.address.Split(',');
+                                    airportcarpark.Address = new AddressModel();
+                                    airportcarpark.Address.Postcode = fields[fields.Length - 1] ?? fields[fields.Length - 1];
+                                    airportcarpark.Address.City = fields.Length > 1 ? fields[fields.Length - 2] : string.Empty;
+                                    airportcarpark.Address.Address2 = fields.Length > 2 ? fields[fields.Length - 3] : string.Empty;
+                                    airportcarpark.Address.Address2 = fields.Length > 2 ? airportcarpark.Address.Address2 + ", " + fields[fields.Length - 3] : string.Empty;
+                                    airportcarpark.Address.Address1 = fields.Length > 3 ? fields[fields.Length - 4] : string.Empty;
+                                }
+                                foreach (var property in airportcarpark.Properties)
+                                {
+                                    if (property.Key == "Arrival Procedure") property.Value = carpark.arrivalProcedure;
+                                    if (property.Key == "Departure Procedure") property.Value = carpark.departureProcedure;
+                                    if (property.Key == "Description") property.Value = carpark.description;
+                                    if (property.Key == "Code") property.Value = carpark.code;
+                                    if (property.Key == "Cancellations") property.Value = carpark.cancellations;
+                                    if (property.Key == "Direcctions") property.Value = carpark.directions;
+                                    if (property.Key == "Distance To Airport") property.Value = carpark.distanceToAirport;
+                                    if (property.Key == "Helpline") property.Value = carpark.helpline;
+                                    if (property.Key == "Lead Time Hours") property.Value = carpark.leadTimeHours.ToString();
+                                    if (property.Key == "Transfer Frequency") property.Value = Convert.ToString(carpark.transferFrequency);
+                                    if (property.Key == "Provider") property.Value = "Purple Parking";
+                                    property.Modified = DateTime.Now;                                    
+                                }
+                                
+                                for (int i = 0; i < airport.BookingEntities.Count; i++)
+                                {
+                                    if (airport.BookingEntities[i].Id == airportcarpark.Id)
+                                    {
+                                        airport.BookingEntities[i] = airportcarpark;
+                                    }
+                                }                               
+                            }
+                            await _airportService.Update(airport);
+                        }
+                    }
+
                 }
-                result = true;
+                    result = true;
             }
             catch (ItemNotFoundException ex)
             {

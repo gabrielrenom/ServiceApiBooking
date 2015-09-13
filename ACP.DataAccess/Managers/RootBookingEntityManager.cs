@@ -69,12 +69,12 @@ namespace ACP.DataAccess.Managers
             {
                 Repository.DeleteMany<BookingEntity>(dataModel.BookingEntities.ToArray());
 
-
                 dataModel.BookingEntities = domainModel.BookingEntities != null ? domainModel.BookingEntities.Select(r => new BookingEntity
                 {
                     Comission = r.Comission,
                     Created = r.Created,
                     Id = r.Id,
+                    RootBookingEntityId=r.RootBookEntityId,
                     CreatedBy = r.CreatedBy,
                     Image = r.Image,
                     Logo = r.Logo,
@@ -96,7 +96,7 @@ namespace ACP.DataAccess.Managers
                     //AddressId = r.Address==null?0:r.Address.Id,
                     Address =r.Address==null?null:new Address
                     {
-
+                        
                         Address1 = r.Address.Address1,
                         Address2 = r.Address.Address2,
                         Country = r.Address.Country,
@@ -107,7 +107,7 @@ namespace ACP.DataAccess.Managers
                         Modified = r.Address.Modified,
                         ModifiedBy = r.Address.ModifiedBy,
                         Number = r.Address.Number,
-                        Postcode = r.Address.Postcode,
+                        Postcode = r.Address.Postcode,                        
                         City = r.Address.City
 
                     }
@@ -188,7 +188,7 @@ namespace ACP.DataAccess.Managers
             {
                 Created = domainModel.Status.Created,
                 CreatedBy = domainModel.Status.CreatedBy,
-                Id = domainModel.Status.Id,
+                Id = domainModel.Status.Id,                
                 Modified = domainModel.Status.Modified,
                 ModifiedBy = domainModel.Status.ModifiedBy,
                 Name = domainModel.Status.Name 
@@ -200,6 +200,7 @@ namespace ACP.DataAccess.Managers
                 Comission = r.Comission,
                 Created = r.Created,
                 Id = r.Id,
+                RootBookingEntityId = r.RootBookEntityId,
                 CreatedBy = r.CreatedBy,
                 Image = r.Image,
                 Logo = r.Logo,
@@ -295,6 +296,7 @@ namespace ACP.DataAccess.Managers
                     Comission = r.Comission,
                     Created = r.Created,
                     Id = r.Id,
+                    RootBookEntityId=r.RootBookingEntityId,
                     CreatedBy = r.CreatedBy,
                     Image = r.Image,
                     Logo = r.Logo,
@@ -380,6 +382,7 @@ namespace ACP.DataAccess.Managers
                     Comission = r.Comission,
                     Created = r.Created,
                     Id = r.Id,
+                    RootBookEntityId= r.RootBookingEntityId,
                     CreatedBy = r.CreatedBy,
                     Image = r.Image,
                     Logo = r.Logo,

@@ -16,7 +16,7 @@ namespace ACP.Business.Models
 
         public virtual AddressModel Address { get; set; }
         public virtual StatusModel Status { get; set; }
-        public virtual ICollection<BookingEntityModel> BookingEntities { get; set; }
-        public virtual ICollection<RootBookingPropertyModel> Properties { get; set; }
+        public virtual IList<BookingEntityModel> BookingEntities { get; set; }
+        public virtual IList<RootBookingPropertyModel> Properties { get; set; }
     }
 }
