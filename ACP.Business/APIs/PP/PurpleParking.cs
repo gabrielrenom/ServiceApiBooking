@@ -41,7 +41,7 @@ namespace ACP.Business.APIs.PP
 
             try
             {
-                var allairports = _airportService.GetAll();
+                var allairports = await _airportService.GetAll();
 
                 DateTime? date = DateTime.Now;
 
@@ -120,6 +120,20 @@ namespace ACP.Business.APIs.PP
                             airportcarpark.Properties.Add(new PropertyModel { Key = "Transfer Frequency", Value = Convert.ToString(carpark.transferFrequency), Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System", });
                             airportcarpark.Properties.Add(new PropertyModel { Key = "Provider", Value = "Purple Parking", Type = PropertyType.String });
 
+                            airportcarpark.Properties.Add(new PropertyModel { Key = "Transfer From Airport", Value = carpark.arrivalProcedure, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System" });
+                            airportcarpark.Properties.Add(new PropertyModel { Key = "Transfer Time", Value = carpark.arrivalProcedure, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System" });
+                            airportcarpark.Properties.Add(new PropertyModel { Key = "Facilities For Disabled", Value = carpark.arrivalProcedure, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System" });
+                            airportcarpark.Properties.Add(new PropertyModel { Key = "Further Information", Value = carpark.arrivalProcedure, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System" });
+                            airportcarpark.Properties.Add(new PropertyModel { Key = "Lead Time Hours", Value = carpark.arrivalProcedure, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System" });
+                            airportcarpark.Properties.Add(new PropertyModel { Key = "Logo URL", Value = carpark.arrivalProcedure, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System" });
+                            airportcarpark.Properties.Add(new PropertyModel { Key = "Map URL", Value = carpark.arrivalProcedure, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System" });
+                            airportcarpark.Properties.Add(new PropertyModel { Key = "Maximum Car Size", Value = carpark.arrivalProcedure, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System" });
+                            airportcarpark.Properties.Add(new PropertyModel { Key = "Name", Value = carpark.arrivalProcedure, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System" });
+                            airportcarpark.Properties.Add(new PropertyModel { Key = "Opening Periods", Value = carpark.arrivalProcedure, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System" });
+                            airportcarpark.Properties.Add(new PropertyModel { Key = "Security Measures", Value = carpark.arrivalProcedure, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System" });
+                            airportcarpark.Properties.Add(new PropertyModel { Key = "Service Type", Value = carpark.arrivalProcedure, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System" });
+
+                            
                             airport.Status = status;
                             airport.StatusId = status.Id;
 
@@ -135,7 +149,7 @@ namespace ACP.Business.APIs.PP
                     //RUN UPDATE
                     var airports = await GetAirports();
                                        
-                    var dbairports = _airportService.GetAll();
+                    var dbairports = await _airportService.GetAll();
 
                     foreach (var item in airports)
                     {
@@ -184,6 +198,20 @@ namespace ACP.Business.APIs.PP
                                     if (property.Key == "Helpline") property.Value = carpark.helpline;
                                     if (property.Key == "Lead Time Hours") property.Value = carpark.leadTimeHours.ToString();
                                     if (property.Key == "Transfer Frequency") property.Value = Convert.ToString(carpark.transferFrequency);
+
+                                    if (property.Key == "Transfer From Airport") property.Value = carpark.transferFromAirport;
+                                    if (property.Key == "Transfer Time") property.Value = carpark.transferTime;
+                                    if (property.Key == "Facilities For Disabled") property.Value = carpark.facilitiesForDisabled;
+                                    if (property.Key == "Further Information") property.Value = carpark.furtherInformation;
+                                    if (property.Key == "Lead Time Hours") property.Value = Convert.ToString(carpark.leadTimeHours);
+                                    if (property.Key == "Logo URL") property.Value = Convert.ToString(carpark.logoURL);
+                                    if (property.Key == "Map URL") property.Value = Convert.ToString(carpark.mapURL);
+                                    if (property.Key == "Maximum Car Size") property.Value = Convert.ToString(carpark.maximumCarSize);
+                                    if (property.Key == "Name") property.Value = Convert.ToString(carpark.name);
+                                    if (property.Key == "Opening Periods") property.Value = Convert.ToString(carpark.openingPeriods);
+                                    if (property.Key == "Security Measures") property.Value = Convert.ToString(carpark.securityMeasures);
+                                    if (property.Key == "Service Type") property.Value = Convert.ToString(carpark.serviceType);                                
+
                                     if (property.Key == "Provider") property.Value = "Purple Parking";
                                     property.Modified = DateTime.Now;                                    
                                 }

@@ -33,6 +33,18 @@ namespace ACP.DataAccess.Managers
                 Name = dataModel.Name,
                 Price = dataModel.Price,
                 Sameday = dataModel.Sameday,
+                Properties = dataModel.Properties != null ? dataModel.Properties.Select(x => new PropertyModel
+                 {
+                     Id = x.Id,
+                     Created = x.Created,
+                     CreatedBy = x.CreatedBy,
+                     Modified = x.Modified,
+                     ModifiedBy = x.ModifiedBy,                     
+                     Type = (PropertyType) x.Type,
+                     BookingEntityId = x.BookingEntityId,
+                     Key = x.Key,
+                     Value = x.Value
+                 }).ToList() : null,
                 Address =dataModel.Address!=null?new AddressModel
                 {
 
@@ -97,8 +109,68 @@ namespace ACP.DataAccess.Managers
                 }).ToList() : null
             };
 
+            if (dataModel.RootBookingEntity != null)
+            {
+                model.RootBookingEntity = ToDomainModelRootBookingModel(dataModel.RootBookingEntity);
+            }
+
             return model;
         }
+
+        public RootBookingEntityModel ToDomainModelRootBookingModel(RootBookingEntity dataModel)
+        {
+            RootBookingEntityModel model = new RootBookingEntityModel
+            {
+                Created = dataModel.Created,
+                Id = dataModel.Id,
+                CreatedBy = dataModel.CreatedBy,
+                Modified = dataModel.Modified,
+                ModifiedBy = dataModel.ModifiedBy,
+                Name = dataModel.Name,
+                Address = dataModel.Address!=null?new AddressModel
+                {
+
+                    Address1 = dataModel.Address.Address1,
+                    Address2 = dataModel.Address.Address2,
+                    Country = dataModel.Address.Country,
+                    County = dataModel.Address.County,
+                    Created = dataModel.Address.Created,
+                    CreatedBy = dataModel.Address.CreatedBy,
+                    Id = dataModel.Address.Id,
+                    Modified = dataModel.Address.Modified,
+                    ModifiedBy = dataModel.Address.ModifiedBy,
+                    Number = dataModel.Address.Number,
+                    Postcode = dataModel.Address.Postcode
+                }:null,
+                AddressId = dataModel.AddressId,
+                StatusId = dataModel.StatusId,
+                Telephone = dataModel.Telephone,
+                Status = dataModel.Status!=null?new StatusModel
+                {
+                    Created = dataModel.Status.Created,
+                    CreatedBy = dataModel.Status.CreatedBy,
+                    Id = dataModel.Status.Id,
+                    Modified = dataModel.Status.Modified,
+                    ModifiedBy = dataModel.Status.ModifiedBy,
+                    Name = dataModel.Status.Name
+                }:null,
+                Properties = dataModel.Properties != null ? dataModel.Properties.Select(x => new RootBookingPropertyModel
+                {
+                    Id = x.Id,
+                    Created = x.Created,
+                    CreatedBy = x.CreatedBy,
+                    Modified = x.Modified,
+                    ModifiedBy = x.ModifiedBy,
+                    PropertyType = (Business.Enums.RootBookingPropertyType)x.Type,
+                    RootBookingEntityId = x.RootBookingEntityId,
+                    Key = x.Key,
+                    Value = x.Value
+                }).ToList() : null               
+            };
+
+            return model;
+        }
+
 
         public override BookingEntityModel ToDomainModelWithChildNodes(BookingEntity dataModel)
         {
@@ -115,6 +187,18 @@ namespace ACP.DataAccess.Managers
                 Name = dataModel.Name,
                 Price = dataModel.Price,
                 Sameday = dataModel.Sameday,
+                Properties = dataModel.Properties != null ? dataModel.Properties.Select(x => new PropertyModel
+                {
+                    Id = x.Id,
+                    Created = x.Created,
+                    CreatedBy = x.CreatedBy,
+                    Modified = x.Modified,
+                    ModifiedBy = x.ModifiedBy,
+                    Type = (PropertyType)x.Type,
+                    BookingEntityId = x.BookingEntityId,
+                    Key = x.Key,
+                    Value = x.Value
+                }).ToList() : null,
                 Address = new AddressModel
                 {
 
@@ -196,6 +280,18 @@ namespace ACP.DataAccess.Managers
                 dataModel.Price = domainModel.Price;
                 dataModel.Sameday = domainModel.Sameday;
                 dataModel.RootBookingEntityId = domainModel.RootBookEntityId;
+                dataModel.Properties = dataModel.Properties != null ? dataModel.Properties.Select(x => new Property
+                {
+                    Id = x.Id,
+                    Created = x.Created,
+                    CreatedBy = x.CreatedBy,
+                    Modified = x.Modified,
+                    ModifiedBy = x.ModifiedBy,
+                    Type = (Data.Enums.PropertyType)x.Type,
+                    BookingEntityId = x.BookingEntityId,
+                    Key = x.Key,
+                    Value = x.Value
+                }).ToList() : null;
                 dataModel.Address = new Address
                 {
                     Address1 = domainModel.Address.Address1,
@@ -259,12 +355,12 @@ namespace ACP.DataAccess.Managers
 
         public IList<BookingEntityModel> GetAllBookingEntities()
         {
-            return GetListIncluding(x => x.Id > 0, x => x.Address, x => x.Extras, x => x.Prices.Select(e => e.DayPrices), x => x.Prices.Select(w => w.DayPrices.Select(y => y.HourPrices))).ToList();            
+            return GetListIncluding(x => x.Id > 0, x => x.Address, x => x.Extras, x => x.Properties, x => x.Prices.Select(e => e.DayPrices), x => x.Prices.Select(w => w.DayPrices.Select(y => y.HourPrices))).ToList();                        
         }
 
         public override BookingEntityModel GetById(int id)
         {
-            return GetByIdIncluding(id, x => x.Address, x=>x.Extras, x => x.Prices.Select(e=>e.DayPrices), x=>x.Prices.Select(w=>w.DayPrices.Select(y=>y.HourPrices)));
+            return GetByIdIncluding(id, x => x.Address, x=>x.Extras, x => x.Properties, x => x.Prices.Select(e=>e.DayPrices), x=>x.Prices.Select(w=>w.DayPrices.Select(y=>y.HourPrices)));
         }
 
         public override BookingEntityModel Add(BookingEntityModel domainModel)
@@ -274,7 +370,7 @@ namespace ACP.DataAccess.Managers
 
         public override bool Update(BookingEntityModel domainModel)
         {
-            var record = Repository.GetSingle<BookingEntity>(x=>x.Id==domainModel.Id,x => x.Address, x=>x.Extras, x => x.Prices.Select(e=>e.DayPrices), x=>x.Prices.Select(w=>w.DayPrices.Select(y=>y.HourPrices) ));
+            var record = Repository.GetSingle<BookingEntity>(x=>x.Id==domainModel.Id,x => x.Address, x=>x.Extras, x => x.Properties,x => x.Prices.Select(e=>e.DayPrices), x=>x.Prices.Select(w=>w.DayPrices.Select(y=>y.HourPrices) ));
             
                 record.Comission = domainModel.Comission;
                 record.Created = domainModel.Created;
@@ -287,8 +383,19 @@ namespace ACP.DataAccess.Managers
                 record.Name = domainModel.Name;
                 record.Price = domainModel.Price;
                 record.Sameday = domainModel.Sameday;
-                               
-                    record.Address = domainModel.Address != null ? new Address
+                record.Properties = record.Properties != null ? record.Properties.Select(x => new Property
+                {
+                    Id = x.Id,
+                    Created = x.Created,
+                    CreatedBy = x.CreatedBy,
+                    Modified = x.Modified,
+                    ModifiedBy = x.ModifiedBy,
+                    Type = (Data.Enums.PropertyType)x.Type,
+                    BookingEntityId = x.BookingEntityId,
+                    Key = x.Key,
+                    Value = x.Value
+                }).ToList() : null;
+                 record.Address = domainModel.Address != null ? new Address
                     {
                         Address1 = domainModel.Address.Address1,
                         Address2 = domainModel.Address.Address2,
@@ -365,7 +472,7 @@ namespace ACP.DataAccess.Managers
 
         public override bool DeleteById(int id)
         {
-            var record = Repository.GetSingle<BookingEntity>(x => x.Id == id, x => x.Address, x => x.Extras, x => x.Prices.Select(e => e.DayPrices), x => x.Prices.Select(w => w.DayPrices.Select(y => y.HourPrices)));
+            var record = Repository.GetSingle<BookingEntity>(x => x.Id == id, x => x.Address, x => x.Extras, x => x.Properties, x => x.Prices.Select(e => e.DayPrices), x => x.Prices.Select(w => w.DayPrices.Select(y => y.HourPrices)));
 
             if (record.Extras.Count > 0)
             {
@@ -389,7 +496,7 @@ namespace ACP.DataAccess.Managers
 
         public async Task<BookingEntityModel> GetByName(string name)
         {
-            var record = Repository.GetSingle<BookingEntity>(x => x.Name.Contains(name), x => x.Address, x => x.Extras, x => x.Prices.Select(e => e.DayPrices), x => x.Prices.Select(w => w.DayPrices.Select(y => y.HourPrices)));
+            var record = Repository.GetSingle<BookingEntity>(x => x.Name.Contains(name),x=>x.RootBookingEntity, x => x.Address, x => x.Extras,x=>x.Properties, x => x.Prices.Select(e => e.DayPrices), x => x.Prices.Select(w => w.DayPrices.Select(y => y.HourPrices)));
 
             return ToDomainModel(record);
         }

@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CarParkControllerTest.cs" />
     <Compile Include="Controllers\ServiceControllerTest.cs" />
     <Compile Include="Controllers\AirportControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

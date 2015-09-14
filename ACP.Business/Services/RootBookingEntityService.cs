@@ -28,7 +28,7 @@ namespace ACP.Business.Services
             return _rootBookingEntityManager.Update(model);
         }
 
-        public IList<Models.RootBookingEntityModel> GetAll()
+        public async Task<IList<Models.RootBookingEntityModel>> GetAll()
         {
             return _rootBookingEntityManager.GetAll().ToList();
         }

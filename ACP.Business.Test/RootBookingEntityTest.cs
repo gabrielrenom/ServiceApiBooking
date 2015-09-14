@@ -8,6 +8,7 @@ using ACP.DataAccess.Managers;
 using ACP.Business.Services;
 using ACP.Business.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ACP.Business.Test
 {
@@ -92,12 +93,12 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public void GetEntities_WhenGetAllIsCalled_BeSureReturnAllTheEntities()
+        public async Task GetEntities_WhenGetAllIsCalled_BeSureReturnAllTheEntities()
         { 
             //Arrange
 
             //Act
-            var result = service.GetAll();
+            var result = await service.GetAll();
 
             //Assert
             Assert.IsTrue(result.Count > 0);
@@ -107,18 +108,18 @@ namespace ACP.Business.Test
         public async void WhenEntityIsPassed_WhenUpdateIsCalled_BeSureEntityIsUpdated()
         { 
             //Arrange
-            var model = service.GetAll()[0];
-            model.Name = "National";
-            model.Address.Country = "Biolorrusia";
-            model.Status.Name = "Worried";
-            foreach (var item in model.BookingEntities)
+            var model = await service.GetAll();
+            model[0].Name = "National";
+            model[0].Address.Country = "Biolorrusia";
+            model[0].Status.Name = "Worried";
+            foreach (var item in model[0].BookingEntities)
             {
                 item.Name = "Barca";
                 item.Address.Address1 = "Spain";
             }
 
             //Act
-            var result = await service.Update(model);
+            var result = await service.Update(model[0]);
 
             //Assert
             Assert.IsTrue(result);
@@ -128,10 +129,10 @@ namespace ACP.Business.Test
         public async void WhenIdIsPassed_WhenDeleteIsCalled_BeSureEntityIsDelete()
         {
             //Arrange
-            var Id = service.GetAll()[0].Id;
+            var Id = await service.GetAll();
                         
             //Act
-            var result = await service.Remove(Id);
+            var result = await service.Remove(Id[0].Id);
 
             //Assert
             Assert.IsTrue(result);

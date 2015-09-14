@@ -11,7 +11,7 @@ namespace ACP.Business.Services.Interfaces
     {
         Task<RootBookingEntityModel> Add(RootBookingEntityModel model);
         Task<bool> Update(RootBookingEntityModel model);
-        IList<RootBookingEntityModel> GetAll();
+        Task<IList<RootBookingEntityModel>> GetAll();
         Task<Models.RootBookingEntityModel> GetById(int Id);
         Task<bool> Remove(int Id);
     }

@@ -56,7 +56,7 @@ namespace ACP.Business.Test
         {
             var result = await purpleparkingapi.FillAirports();
 
-            var allairports  = airportService.GetAll();
+            var allairports  = await airportService.GetAll();
             var provider = allairports.Select(z=>z.Properties.Where(y => y.Key == "Provider" && y.Value == "PP").ToList());
 
             Assert.IsTrue(result);
