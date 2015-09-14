@@ -385,6 +385,13 @@ namespace ACP.DataAccess.Managers
             Repository.Commit();
 
             return true;
-        }       
+        }
+
+        public async Task<BookingEntityModel> GetByName(string name)
+        {
+            var record = Repository.GetSingle<BookingEntity>(x => x.Name.Contains(name), x => x.Address, x => x.Extras, x => x.Prices.Select(e => e.DayPrices), x => x.Prices.Select(w => w.DayPrices.Select(y => y.HourPrices)));
+
+            return ToDomainModel(record);
+        }
     }
 }

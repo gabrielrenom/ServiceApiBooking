@@ -53,5 +53,10 @@ namespace ACP.Business.Services
                 return _bookingEntityManager.GetById(Id).Availability.Where(x => StartDate > x.StartDate && EndDate < x.EndDate).ToList();
              
         }
+
+        public Task<BookingEntityModel> GetByName(string name)
+        {
+            return _bookingEntityManager.GetByName(name);
+        }
     }
 }

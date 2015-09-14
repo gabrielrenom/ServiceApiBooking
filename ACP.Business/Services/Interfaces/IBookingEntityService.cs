@@ -14,5 +14,6 @@ namespace ACP.Business.Services.Interfaces
         Task<IList<BookingEntityModel>> GetAllBookingEntities();
         Task<BookingEntityModel> GetBookingEntityById(int Id);
         Task<bool> Remove(int Id);
+        Task<BookingEntityModel> GetByName(string name);
     }
 }

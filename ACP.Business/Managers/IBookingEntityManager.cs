@@ -11,5 +11,6 @@ namespace ACP.Business.Managers
     public interface IBookingEntityManager:IBaseManager<BookingEntityModel, BookingEntity>
     {
         IList<BookingEntityModel> GetAllBookingEntities();
+        Task<BookingEntityModel> GetByName(string name);
     }
 }
