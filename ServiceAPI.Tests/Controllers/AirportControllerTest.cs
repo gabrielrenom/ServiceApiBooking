@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Http;
 using NSubstitute;
+using ACP.Business.Models;
 
 namespace ServiceAPI.Tests.Controllers
 {
@@ -34,6 +35,59 @@ namespace ServiceAPI.Tests.Controllers
             service = new RootBookingEntityService(manager);
             airportcontroller = new AirportController(service);
             
+        }
+
+        [TestMethod]
+        public async Task _WhenItsGetitAll_BeSureTheAirportItIsReturned()
+        {
+            //Arrange
+            List<RootBookingEntityModel> value= new List<RootBookingEntityModel>();
+
+            //Act
+            airportcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+            airportcontroller.Configuration = Substitute.For<HttpConfiguration>();
+            var result = await airportcontroller.GetAll();
+
+            //Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.TryGetContentValue<List<RootBookingEntityModel>>(out value));
+        }
+
+
+        [TestMethod]
+        public async Task GivenAnAirportId_WhenItsGetit_BeSureTheAirportItIsReturned()
+        {
+            //Arrange
+            RootBookingEntityModel value;
+            var airports = await service.GetAll();
+
+            airportcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+            airportcontroller.Configuration = Substitute.For<HttpConfiguration>();
+            int record = Convert.ToInt32(Math.Ceiling((double)airports.Count / 2));
+            //Act
+            var result = await airportcontroller.GetById(airports[record].Id);
+
+            //Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.TryGetContentValue<RootBookingEntityModel>(out value));
+        }
+
+        [TestMethod]
+        public async Task GivenAnAirportName_WhenItsGetit_BeSureTheAirportItIsReturned()
+        {
+            //Arrange
+            RootBookingEntityModel value;
+            var airports = await service.GetAll();
+
+            airportcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+            airportcontroller.Configuration = Substitute.For<HttpConfiguration>();
+            int record = Convert.ToInt32(Math.Ceiling((double)airports.Count / 2));
+            //Act
+            var result = await airportcontroller.GetByName(airports[record].Name);
+
+            //Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.TryGetContentValue<RootBookingEntityModel>(out value));
         }
 
         [TestMethod]
