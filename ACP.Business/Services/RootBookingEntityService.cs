@@ -42,5 +42,10 @@ namespace ACP.Business.Services
         {
             return  _rootBookingEntityManager.DeleteById(Id);
         }
+
+        public Task<RootBookingEntityModel> GetByName(string name)
+        {
+            return _rootBookingEntityManager.GetByName(name);
+        }
     }
 }

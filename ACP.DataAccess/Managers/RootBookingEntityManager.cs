@@ -409,5 +409,11 @@ namespace ACP.DataAccess.Managers
 
             return model;
         }
+
+        public async Task<RootBookingEntityModel> GetByName(string name)
+        {
+            var result= Repository.GetSingle<RootBookingEntity>(a => a.Name == name, x => x.Status, x => x.Address, x => x.BookingEntities, x => x.BookingEntities.Select(y => y.Address));
+            return ToDomainModel(result);
+        }
     }
 }

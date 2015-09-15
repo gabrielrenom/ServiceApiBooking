@@ -27,12 +27,12 @@ namespace ServiceAPI.Controllers
 
         [HttpGet]
         [Route("getbyid")]
-        public async Task<HttpResponseMessage> GettById(int id)
+        public async Task<HttpResponseMessage> GetById(int id)
         {
-            RootBookingPropertyViewModel airport    =   null;
+            RootBookingEntityModel airport = null;
             try
-            {                                
-                airport = ToViewModel(await _airportservice.GetById(id));
+            {
+                airport = await _airportservice.GetById(id);
             }
             catch (HttpRequestException ex)
             {
@@ -66,6 +66,133 @@ namespace ServiceAPI.Controllers
 
             return Request.CreateResponse(HttpStatusCode.Created, airport);
         }
+
+        [HttpGet]
+        [Route("getall")]
+        public async Task<HttpResponseMessage> GetAll()
+        {
+            IList<RootBookingEntityModel> airports = null;
+            try
+            {
+                airports = await _airportservice.GetAll();
+            }
+            catch (HttpRequestException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, exceptionMessage);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.Created, airports);
+        }
+
+        [HttpGet]
+        [Route("getall")]
+        public async Task<HttpResponseMessage> GetByName(string name)
+        {
+            RootBookingEntityModel airport = null;
+            try
+            {
+                airport = await _airportservice.GetByName(name);
+            }
+            catch (HttpRequestException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, exceptionMessage);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.Created, airport);
+        }
+
+
+        //[HttpGet]
+        //[Route("getbyid")]
+        //public async Task<HttpResponseMessage> GettById(int id)
+        //{
+        //    RootBookingPropertyViewModel airport    =   null;
+        //    try
+        //    {                                
+        //        airport = ToViewModel(await _airportservice.GetById(id));
+        //    }
+        //    catch (HttpRequestException ex)
+        //    {
+        //        Trace.TraceError(ex.Message);
+        //        return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+        //    }
+        //    catch (SecurityException ex)
+        //    {
+        //        Trace.TraceError(ex.Message);
+        //        return Request.CreateErrorResponse(HttpStatusCode.Forbidden, ex.Message);
+        //    }
+        //    catch (ItemNotFoundException ex)
+        //    {
+        //        Trace.TraceError(ex.Message);
+        //        return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message);
+        //    }
+        //    catch (ValidationErrorsException ex)
+        //    {
+        //        var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+        //        var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+        //        Trace.TraceError(exceptionMessage);
+        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, exceptionMessage);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Trace.TraceError(ex.Message);
+        //        return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+        //    }
+
+        //    return Request.CreateResponse(HttpStatusCode.Created, airport);
+        //}
 
         [HttpPost]
         [Route("add")]
