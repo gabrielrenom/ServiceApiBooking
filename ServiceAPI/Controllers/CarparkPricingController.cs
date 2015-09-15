@@ -14,6 +14,7 @@ using System.Web.Http;
 
 namespace ServiceAPI.Controllers
 {
+    [RoutePrefix("api/v0.1/carparkpricing")]
     public class CarparkPricingController : ApiController
     {
         private IBookingPricingService _carparkpricingservice;

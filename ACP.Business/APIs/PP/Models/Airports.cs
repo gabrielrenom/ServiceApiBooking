@@ -7,7 +7,7 @@ namespace ACP.Business.APIs.PP.Models.Airports
     public partial class response
     {
 
-        private responseAirport[] airportsField;
+        private responseAirportCarpark[] airportsField;
 
         private responseMessages messagesField;
 
@@ -17,7 +17,7 @@ namespace ACP.Business.APIs.PP.Models.Airports
 
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("airport", IsNullable = false)]
-        public responseAirport[] airports
+        public responseAirportCarpark[] airports
         {
             get
             {
@@ -72,7 +72,7 @@ namespace ACP.Business.APIs.PP.Models.Airports
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class responseAirport
+    public partial class responseAirportCarpark
     {
 
         private string nameField;

@@ -15,7 +15,7 @@ using System.Web.Http;
 
 namespace ServiceAPI.Controllers
 {
-    [RoutePrefix("api/v1/pricing")]
+    [RoutePrefix("api/v0.1/pricing")]
     public class PricingController : BaseApiController
     {
         private IPricingService _pricingservice;

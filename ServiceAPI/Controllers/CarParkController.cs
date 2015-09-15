@@ -18,7 +18,7 @@ namespace ServiceAPI.Controllers
     /// CarPark Controller handles the CarPark
     /// NOTE 1: BE AWARE THIS CONTROLLER DON'T USE VIEW MODEL
     /// </summary>
-    [RoutePrefix("api/v1/carpark")]
+    [RoutePrefix("api/v0.1/carpark")]
     public class CarParkController : BaseApiController
     {
         private IBookingEntityService _carparkservice;
@@ -30,7 +30,7 @@ namespace ServiceAPI.Controllers
 
         [HttpGet]
         [Route("getbyname")]
-        public async Task<HttpResponseMessage> GettByName(string name)
+        public async Task<HttpResponseMessage> GetByName(string name)
         {
             BookingEntityModel carpark = null;
             try

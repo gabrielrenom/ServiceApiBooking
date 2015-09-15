@@ -14,6 +14,8 @@ using System.Web.Http;
 
 namespace ServiceAPI.Controllers
 {
+
+    [RoutePrefix("api/v0.1/availability")]
     public class AvailabilityController : ApiController
     {
         private IAvailabilityService _availabilityservice;

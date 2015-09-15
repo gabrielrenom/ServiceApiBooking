@@ -10,7 +10,7 @@ namespace ACP.Business.APIs.PP
 {
     public interface IPurpleParking
     {
-        Task<List<ACP.Business.APIs.PP.Models.Airports.responseAirport>> GetAirports();
+        Task<List<ACP.Business.APIs.PP.Models.Airports.responseAirportCarpark>> GetAirports();
         Task<List<ACP.Business.APIs.PP.Models.Airports.responseAirportCarPark>> GetCarParks();
         Task<bool> FillAirports();
     }

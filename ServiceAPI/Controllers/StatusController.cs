@@ -15,7 +15,7 @@ using System.Web.Http;
 
 namespace ServiceAPI.Controllers
 {
-    [RoutePrefix("api/v1/status")]
+    [RoutePrefix("api/v0.1/status")]
     public class StatusController : BaseApiController
     {
         private IStatusService _statusservice;

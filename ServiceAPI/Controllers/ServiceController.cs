@@ -15,6 +15,7 @@ using System.Web.Http;
 
 namespace ServiceAPI.Controllers
 {
+    [RoutePrefix("api/v0.1/service")]
     public class ServiceController : ApiController
     {
         readonly IBookingServiceService _serviceService;

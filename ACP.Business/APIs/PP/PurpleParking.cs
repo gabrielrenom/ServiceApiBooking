@@ -244,7 +244,7 @@ namespace ACP.Business.APIs.PP
             return result;
         }
    
-        public async Task<List<ACP.Business.APIs.PP.Models.Airports.responseAirport>> GetAirports()
+        public async Task<List<ACP.Business.APIs.PP.Models.Airports.responseAirportCarpark>> GetAirports()
         {
             ACP.Business.APIs.PP.Models.Airports.response response = await GetREST<ACP.Business.APIs.PP.Models.Airports.response>("/r2/rest/xml/GetAirports?params=<request apiKey='G7yNMYkSdX820B1xTM8auQZrlL6yG8o'></request>");
 
@@ -305,20 +305,19 @@ namespace ACP.Business.APIs.PP
                 //    XmlSerializer serializer = new XmlSerializer(typeof(T));
                 //    MemoryStream memStream = new MemoryStream(Encoding.UTF8.GetBytes(product2));
                 //    T resultingMessage = (T)serializer.Deserialize(memStream);
-                //    product = resultingMessage;                    
+                //    product = resultingMessage;
                 //}
                 // END
 
                 //#####################################################
                 //FAKE DATA
                 //#####################################################
-
                 string product2 = fakedata.ToString();
 
                 XmlSerializer serializer = new XmlSerializer(typeof(T));
                 MemoryStream memStream = new MemoryStream(Encoding.UTF8.GetBytes(product2));
                 T resultingMessage = (T)serializer.Deserialize(memStream);
-                product = resultingMessage;                
+                product = resultingMessage;
                 //#####################################################
             }
 

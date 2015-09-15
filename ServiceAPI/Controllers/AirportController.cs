@@ -15,7 +15,7 @@ using System.Web.Http;
 
 namespace ServiceAPI.Controllers
 {
-    [RoutePrefix("api/v1/airport")]
+    [RoutePrefix("api/v0.1/airport")]
     public class AirportController : BaseApiController
     {
         private IRootBookingEntityService _airportservice;

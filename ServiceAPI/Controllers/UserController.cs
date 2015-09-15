@@ -18,7 +18,7 @@ namespace ServiceAPI.Controllers
     /// CarPark Controller handles the CarPark
     /// NOTE 1: BE AWARE THIS CONTROLLER DON'T USE VIEW MODEL
     /// </summary>
-    [RoutePrefix("api/v1/user")]
+    [RoutePrefix("api/v0.1/user")]
     public class UserController : BaseApiController
     {
         private IUserService _userservice;

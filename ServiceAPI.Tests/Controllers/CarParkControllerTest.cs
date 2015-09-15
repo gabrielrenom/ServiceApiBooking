@@ -138,7 +138,7 @@ namespace ServiceAPI.Tests.Controllers
             carparkcontroller.Configuration = Substitute.For<HttpConfiguration>();
             int record = Convert.ToInt32(Math.Ceiling((double)carparks.Count() / 2));
             //Act
-            var result = await carparkcontroller.GettByName(carparks[record].Name);
+            var result = await carparkcontroller.GetByName(carparks[record].Name);
 
             //Assert
             Assert.IsNotNull(result);

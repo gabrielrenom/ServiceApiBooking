@@ -1,6 +1,7 @@
 ﻿using ACP.Business;
+using ACP.Business.APIs.PP;
+using ACP.Business.APIs.PP.Models.Airports;
 using ACP.Business.Exceptions;
-using ACP.Business.Models;
 using ACP.Business.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -14,26 +15,29 @@ using System.Web.Http;
 
 namespace ServiceAPI.Controllers
 {
-    [RoutePrefix("api/v0.1/quote")]
-    public class QuoteController : BaseApiController
+    [RoutePrefix("api/v0.1/purpleparking")]
+    public class PurpleParkingController : ApiController
     {
-        private IQuoteService _bookingservice;
-        private IPricingService _pricingservice;
+        private IRootBookingEntityService _airportservice;
+        private IStatusService _statusservice;
+        private IPurpleParking _purpleparkingapi;
 
-        public QuoteController(IQuoteService bookingservice, IPricingService pricingservice)
+        public PurpleParkingController(IRootBookingEntityService airportservice,  IStatusService statusservice)
         {
-            _bookingservice = bookingservice;
-            _pricingservice = pricingservice;
+            _airportservice = airportservice;
+            _statusservice = statusservice;
+
+            _purpleparkingapi = new PurpleParking(airportservice, statusservice);
         }
 
         [HttpGet]
-        [Route("get")]
-        public async Task<HttpResponseMessage> GetQuote(QuoteModel model)
+        [Route("getallairports")]
+        public async Task<HttpResponseMessage> GetByAllAirports()
         {
-            QuoteModel quote = null;
+            List<responseAirportCarpark> airports = new List<responseAirportCarpark>();
             try
             {
-                quote = await _bookingservice.GetQuote(model);
+                airports = await _purpleparkingapi.GetAirports();
             }
             catch (HttpRequestException ex)
             {
@@ -65,17 +69,17 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, quote);
+            return Request.CreateResponse(HttpStatusCode.Created, airports);
         }
 
         [HttpGet]
-        [Route("add")]
-        public async Task<HttpResponseMessage> Add(BookingModel model)
+        [Route("getallcarparks")]
+        public async Task<HttpResponseMessage> GetByAllCarparks()
         {
-            BookingModel quote = null;
+            List<responseAirportCarPark> carparks = new List<responseAirportCarPark>();
             try
             {
-                quote = await _bookingservice.Add(model);
+                 carparks   =   await _purpleparkingapi.GetCarParks();
             }
             catch (HttpRequestException ex)
             {
@@ -107,7 +111,50 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, quote);
+            return Request.CreateResponse(HttpStatusCode.Created, carparks);
+        }
+
+        [HttpGet]
+        [Route("getallcarparks")]
+        public async Task<HttpResponseMessage> FillAirports()
+        {
+            bool result = false;
+
+            try
+            {
+                result = await _purpleparkingapi.FillAirports();
+            }
+            catch (HttpRequestException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, exceptionMessage);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.Created, result);
         }
     }
 }
