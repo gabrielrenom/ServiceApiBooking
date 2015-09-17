@@ -48,7 +48,7 @@ namespace ACP.Business.Test
                 CreatedBy = localuser,
                 Modified = DateTime.Now,
                 ModifiedBy = localuser,
-                Name = "Active"                
+                StatusType = Enums.StatusType.Free               
             };
 
 

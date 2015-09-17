@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACP.Business.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace ACP.Business.Models
 {
     public class StatusModel:BaseModel
     {
-        public string Name { get; set; }
+        public StatusType StatusType { get; set; }
     }
 }

@@ -23,9 +23,9 @@ namespace ACP.Business.Services
             return  _statusmanager.Add(domainModel);
         }
 
-        public async Task<StatusModel> GetByName(string StatusName)
+        public async Task<StatusModel> GetByName(Enums.StatusType statusname)
         {
-            return  _statusmanager.GetByName(StatusName);
+            return  _statusmanager.GetByName(statusname);
         }
     }
 }

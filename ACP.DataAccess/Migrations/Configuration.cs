@@ -17,8 +17,8 @@ namespace ACP.DataAccess.Migrations
 
         protected override void Seed(ACP.DataAccess.ACPContext context)
         {
-            context.Statuses.AddOrUpdate(x => x.Id, new Status { Id=1, Name="Active"});
-            context.Statuses.AddOrUpdate(x => x.Id, new Status { Id=2, Name="Disable" });
+            context.Statuses.AddOrUpdate(x => x.Id, new Status { Id=1, StatusType= StatusType.Active});
+            context.Statuses.AddOrUpdate(x => x.Id, new Status { Id=2, StatusType = StatusType.Inactive });
 
             context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
             {
@@ -117,7 +117,27 @@ namespace ACP.DataAccess.Migrations
                        {
                          new Property{ Key = "Provider", Value="APH" },
                          new Property{ Key = "Carpark Code", Value="LGW1" }
-                       }
+                       },
+                          Availability = new Collection<Availability> {
+                            new Availability {
+                                    Created = DateTime.Now,
+                                    CreatedBy = "localuser",
+                                    Modified = DateTime.Now,
+                                    ModifiedBy = "localuser",
+                                    StartDate = new DateTime(2015,10,2),
+                                    EndDate = new DateTime(2015,10,8),
+                                    StatusId = 1
+                            },                              
+                                 new Availability {
+                                    Created = DateTime.Now,
+                                    CreatedBy = "localuser",
+                                    Modified = DateTime.Now,
+                                    ModifiedBy = "localuser",
+                                    StartDate = new DateTime(2015,10,3),
+                                    EndDate = new DateTime(2015,10,7),
+                                    StatusId = 2
+                            }
+                        }
                     },
                     new BookingEntity
                     {
@@ -136,7 +156,37 @@ namespace ACP.DataAccess.Migrations
                        Properties = new Collection<Property>
                        {
                          new Property{ Key = "Provider", Value="Purple Parking", Type = PropertyType.String }
-                       }
+                       },
+                        Availability = new Collection<Availability> {
+                            new Availability {
+                                    Created = DateTime.Now,
+                                    CreatedBy = "localuser",
+                                    Modified = DateTime.Now,
+                                    ModifiedBy = "localuser",
+                                    StartDate = new DateTime(2015,10,2),
+                                    EndDate = new DateTime(2015,10,15),
+                                    StatusId = 1                                   
+                            },
+                               new Availability {
+                                    Created = DateTime.Now,
+                                    CreatedBy = "localuser",
+                                    Modified = DateTime.Now,
+                                    ModifiedBy = "localuser",
+                                    StartDate = new DateTime(2015,10,4),
+                                    EndDate = new DateTime(2015,10,18),
+                                    StatusId = 1
+                            },
+                                 new Availability {
+                                    Created = DateTime.Now,
+                                    CreatedBy = "localuser",
+                                    Modified = DateTime.Now,
+                                    ModifiedBy = "localuser",
+                                    StartDate = new DateTime(2015,10,5),
+                                    EndDate = new DateTime(2015,10,19),
+                                    StatusId = 2
+                            }
+                        }
+                       
                     }
                 }
             });

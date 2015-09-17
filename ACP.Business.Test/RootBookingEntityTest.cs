@@ -67,7 +67,7 @@ namespace ACP.Business.Test
             };
             model.Status= new StatusModel
             {
-                Name= "Active"
+                 StatusType = Enums.StatusType.Active
             };
             
             //Act
@@ -111,7 +111,7 @@ namespace ACP.Business.Test
             var model = await service.GetAll();
             model[0].Name = "National";
             model[0].Address.Country = "Biolorrusia";
-            model[0].Status.Name = "Worried";
+            model[0].Status.StatusType = Enums.StatusType.Active;
             foreach (var item in model[0].BookingEntities)
             {
                 item.Name = "Barca";

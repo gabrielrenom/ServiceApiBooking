@@ -55,6 +55,7 @@
     <Compile Include="Classes\DayPrice.cs" />
     <Compile Include="Enums\PropertyType.cs" />
     <Compile Include="Enums\RootBookingPropertyType.cs" />
+    <Compile Include="Enums\StatusType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\BookingService.cs" />
     <Compile Include="Classes\RootBookingProperty.cs" />

@@ -9,7 +9,7 @@ namespace ACP.Business.Services.Interfaces
 {
     public interface IStatusService
     {
-        Task<StatusModel> GetByName(string StatusName);
+        Task<StatusModel> GetByName(Enums.StatusType statusname);
 
         Task<StatusModel> Add(StatusModel domainModel);
     }

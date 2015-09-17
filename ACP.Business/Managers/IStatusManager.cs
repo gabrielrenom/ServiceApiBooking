@@ -10,6 +10,6 @@ namespace ACP.Business.Managers
 {
     public interface IStatusManager: IBaseACPManager<StatusModel, Status>
     {
-        StatusModel GetByName(string StatusName);
+        StatusModel GetByName(Business.Enums.StatusType StatusName);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ACP.Business;
+using ACP.Business.Enums;
 using ACP.Business.Exceptions;
 using ACP.Business.Models;
 using ACP.Business.Services.Interfaces;
@@ -9,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Security;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -64,7 +66,7 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, airport);
+            return Request.CreateResponse(HttpStatusCode.Created, airport, new JsonMediaTypeFormatter());
         }
 
         [HttpGet]
@@ -106,7 +108,7 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, airports);
+            return Request.CreateResponse(HttpStatusCode.Created, airports, new JsonMediaTypeFormatter());
         }
 
         [HttpGet]
@@ -233,7 +235,7 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, airport);
+            return Request.CreateResponse(HttpStatusCode.Created, airport, new JsonMediaTypeFormatter());
         }
 
         [HttpPut]
@@ -275,7 +277,7 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, airport);
+            return Request.CreateResponse(HttpStatusCode.Created, airport, new JsonMediaTypeFormatter());
         }
 
         [HttpDelete]
@@ -317,7 +319,7 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, airport);
+            return Request.CreateResponse(HttpStatusCode.Created, airport, new JsonMediaTypeFormatter());
         }
 
 
@@ -342,8 +344,8 @@ namespace ServiceAPI.Controllers
                 Telephone = dataModel.Telephone,
                 Status = new StatusViewModel
                 {                    
-                    Id=dataModel.Status.Id,
-                    Name = dataModel.Status.Name
+                    Id=dataModel.Status.Id,                    
+                    StatusType = (Enums.StatusType)dataModel.Status.StatusType
                 }
             };            
 
@@ -372,7 +374,7 @@ namespace ServiceAPI.Controllers
             model.Status = new StatusModel
             {
                 Id= dataModel.Status.Id,
-                Name = dataModel.Status.Name
+                StatusType = (StatusType)dataModel.Status.StatusType
             };
             if (dataModel.Id == 0)
             {

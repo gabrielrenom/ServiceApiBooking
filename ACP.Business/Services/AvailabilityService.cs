@@ -43,9 +43,9 @@ namespace ACP.Business.Services
             return _availabilityManager.GetAll().ToList();
         }
 
-        public Task<IList<AvailabilityModel>> GetByAvailability(AvailabilityModel model)
+        public async Task<IList<AvailabilityModel>> GetByAvailability(AvailabilityModel model)
         {
-            throw new NotImplementedException();
+            return  _availabilityManager.FindAvailability(x => x.Status.StatusType== Data.Enums.StatusType.Free && x.StartDate == model.StartDate && x.EndDate == model.EndDate);
         }
     }
 }

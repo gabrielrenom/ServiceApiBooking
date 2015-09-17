@@ -1,4 +1,5 @@
-﻿using ACP.Business.Managers;
+﻿using ACP.Business.Enums;
+using ACP.Business.Managers;
 using ACP.Business.Models;
 using ACP.Business.Services.Interfaces;
 using System;
@@ -45,10 +46,10 @@ namespace ACP.Business.Services
             return _bookingEntityManager.DeleteById(Id);
         }
 
-        public async Task<IList<AvailabilityModel>> GetAvailableSpacesById(int Id, DateTime StartDate, DateTime EndDate,string Status=null)
+        public async Task<IList<AvailabilityModel>> GetAvailableSpacesById(int Id, DateTime StartDate, DateTime EndDate,StatusType? Status=null)
         {
             if (Status!=null)
-                return _bookingEntityManager.GetById(Id).Availability.Where(x => StartDate > x.StartDate && EndDate < x.EndDate && x.Status.Name == Status).ToList();
+                return _bookingEntityManager.GetById(Id).Availability.Where(x => StartDate > x.StartDate && EndDate < x.EndDate && x.Status.StatusType == Status).ToList();
             else
                 return _bookingEntityManager.GetById(Id).Availability.Where(x => StartDate > x.StartDate && EndDate < x.EndDate).ToList();
              

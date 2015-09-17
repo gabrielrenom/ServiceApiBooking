@@ -18,9 +18,9 @@ namespace ACP.DataAccess.Managers
             Repository = repository;
         }
 
-        public StatusModel GetByName(string StatusName)
+        public StatusModel GetByName(Business.Enums.StatusType StatusName)
         {
-            var dataModel = Repository.GetSingle<Status>(x => x.Name == StatusName);
+            var dataModel = Repository.GetSingle<Status>(x => x.StatusType == (Data.Enums.StatusType)StatusName);
 
             return ToDomainModel(dataModel);
         }
@@ -41,7 +41,7 @@ namespace ACP.DataAccess.Managers
             dataModel.CreatedBy = domainModel.CreatedBy;
             dataModel.Modified = domainModel.Modified;
             dataModel.ModifiedBy = domainModel.ModifiedBy;
-            dataModel.Name = domainModel.Name;
+            dataModel.StatusType = (Data.Enums.StatusType)domainModel.StatusType;
 
             return dataModel;
         }
@@ -55,7 +55,7 @@ namespace ACP.DataAccess.Managers
                 CreatedBy = dataModel.CreatedBy,
                 Modified = dataModel.Modified,
                 ModifiedBy = dataModel.ModifiedBy,
-                Name = dataModel.Name        
+                StatusType = (Business.Enums.StatusType)dataModel.StatusType
             };
 
             return model;

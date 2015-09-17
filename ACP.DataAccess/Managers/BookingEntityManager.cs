@@ -152,7 +152,7 @@ namespace ACP.DataAccess.Managers
                     Id = dataModel.Status.Id,
                     Modified = dataModel.Status.Modified,
                     ModifiedBy = dataModel.Status.ModifiedBy,
-                    Name = dataModel.Status.Name
+                     StatusType = (Business.Enums.StatusType)dataModel.Status.StatusType
                 }:null,
                 Properties = dataModel.Properties != null ? dataModel.Properties.Select(x => new RootBookingPropertyModel
                 {

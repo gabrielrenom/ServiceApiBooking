@@ -124,7 +124,7 @@ namespace ServiceAPI.Tests.Controllers
             };
             model.Status = new StatusViewModel
             {
-                Name = "Active"
+                 StatusType = Enums.StatusType.Active
             };
 
             //Act

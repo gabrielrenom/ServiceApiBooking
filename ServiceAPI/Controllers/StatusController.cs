@@ -27,7 +27,7 @@ namespace ServiceAPI.Controllers
 
         [HttpGet]
         [Route("getbyname")]
-        public async Task<HttpResponseMessage> GetByName(string statusname)
+        public async Task<HttpResponseMessage> GetByName(ACP.Business.Enums.StatusType statusname)
         {
             StatusModel status = null;
             try

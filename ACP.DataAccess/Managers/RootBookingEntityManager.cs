@@ -60,7 +60,7 @@ namespace ACP.DataAccess.Managers
                 Id = domainModel.Status.Id,
                 Modified = domainModel.Status.Modified,
                 ModifiedBy = domainModel.Status.ModifiedBy,
-                Name = domainModel.Status.Name
+                StatusType = (Data.Enums.StatusType)domainModel.Status.StatusType
             };
             dataModel.Name = domainModel.Name;
             dataModel.Telephone = domainModel.Telephone;
@@ -191,7 +191,7 @@ namespace ACP.DataAccess.Managers
                 Id = domainModel.Status.Id,                
                 Modified = domainModel.Status.Modified,
                 ModifiedBy = domainModel.Status.ModifiedBy,
-                Name = domainModel.Status.Name 
+                StatusType = (Data.Enums.StatusType)domainModel.Status.StatusType
             }:null;
             dataModel.Name = domainModel.Name;
             dataModel.Telephone = domainModel.Telephone;
@@ -277,7 +277,7 @@ namespace ACP.DataAccess.Managers
                     Id = dataModel.Status.Id,
                     Modified = dataModel.Status.Modified,
                     ModifiedBy = dataModel.Status.ModifiedBy,
-                    Name = dataModel.Status.Name
+                    StatusType = (Business.Enums.StatusType)dataModel.Status.StatusType
                 },
                 Properties = dataModel.Properties != null ? dataModel.Properties.Select(x => new RootBookingPropertyModel
                 {
@@ -374,7 +374,7 @@ namespace ACP.DataAccess.Managers
                     Id = dataModel.Status.Id,
                     Modified = dataModel.Status.Modified,
                     ModifiedBy = dataModel.Status.ModifiedBy,
-                    Name = dataModel.Status.Name
+                    StatusType = (Business.Enums.StatusType)dataModel.Status.StatusType
                 };
 
                 model.BookingEntities = dataModel.BookingEntities != null ? dataModel.BookingEntities.Select(r => new BookingEntityModel

@@ -66,6 +66,7 @@
     <Compile Include="APIs\PP\Models\Airports.cs" />
     <Compile Include="APIs\PP\PurpleParking.cs" />
     <Compile Include="Enums\RootBookingPropertyType.cs" />
+    <Compile Include="Enums\StatusType.cs" />
     <Compile Include="Exceptions\ItemNotFoundException.cs" />
     <Compile Include="Exceptions\ValidationErrorsException.cs" />
     <Compile Include="Managers\IAvailabilityManager.cs" />

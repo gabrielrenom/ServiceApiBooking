@@ -2,6 +2,7 @@
 using ACP.Business.Models;
 using ACP.Business.Repository;
 using ACP.Data;
+using ACP.Data.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,11 @@ namespace ACP.DataAccess.Managers
         protected override IEnumerable<AvailabilityModel> GetListIncluding(Func<Availability, bool> where, params System.Linq.Expressions.Expression<Func<Availability, object>>[] navigationProperties)
         {
             return base.GetListIncluding(where, navigationProperties);
+        }
+
+        public IList<AvailabilityModel> FindAvailability(Func<Availability, bool> where)
+        {
+            return GetListIncluding(where, x => x.Status).ToList();
         }
 
         public IEnumerable<AvailabilityModel> GetAll()
@@ -81,7 +87,7 @@ namespace ACP.DataAccess.Managers
                 CreatedBy = domainModel.Status.CreatedBy,
                 Modified = domainModel.Status.Modified,
                 ModifiedBy = domainModel.Status.ModifiedBy,
-                Name = domainModel.Status.Name
+                StatusType = (Data.Enums.StatusType)domainModel.Status.StatusType
 
             } : null;
 
@@ -107,7 +113,7 @@ namespace ACP.DataAccess.Managers
                 Created = dataModel.Status.Created,
                 ModifiedBy = dataModel.Status.ModifiedBy,
                 Modified = dataModel.Status.Modified,
-                Name = dataModel.Status.Name,
+               StatusType = (Business.Enums.StatusType)dataModel.Status.StatusType,
                 Id = dataModel.Id
             } : null;
 
@@ -136,7 +142,7 @@ namespace ACP.DataAccess.Managers
                 CreatedBy = domainModel.Status.CreatedBy,
                 Modified = domainModel.Status.Modified,    
                 ModifiedBy = domainModel.Status.ModifiedBy,
-                Name = domainModel.Status.Name
+                 StatusType = (StatusType)domainModel.Status.StatusType
              
             } : null;
 
@@ -161,7 +167,7 @@ namespace ACP.DataAccess.Managers
                 Created = dataModel.Status.Created,
                 ModifiedBy = dataModel.Status.ModifiedBy,
                 Modified = dataModel.Status.Modified,
-                 Name = dataModel.Status.Name,
+                 StatusType =(Business.Enums.StatusType) dataModel.Status.StatusType,
                   Id = dataModel.Id
             }:null;
 

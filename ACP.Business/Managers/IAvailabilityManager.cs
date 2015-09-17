@@ -10,6 +10,6 @@ namespace ACP.Business.Managers
 {
     public interface IAvailabilityManager : IBaseManager<AvailabilityModel, Availability>
     {
-
+        IList<AvailabilityModel> FindAvailability(Func<Availability, bool> where);
     }
 }

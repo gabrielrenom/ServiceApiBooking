@@ -58,8 +58,8 @@ namespace ACP.Business.APIs.PP
                 }
 
                 //var result = allairports.Where(x => x.Properties.FirstOrDefault().Key.ToLower() == "provider" && x.Properties.FirstOrDefault().Value.ToLower() == "purple parking").FirstOrDefault().Modified;
-                StatusModel status = await _statusService.GetByName("Active");
-                if (status == null) status = await _statusService.Add(new StatusModel { Name = "Active", CreatedBy = "System", ModifiedBy = "System", Modified = DateTime.Now, Created = DateTime.Now });
+                StatusModel status = await _statusService.GetByName(Enums.StatusType.Active);
+                if (status == null) status = await _statusService.Add(new StatusModel {  StatusType= Enums.StatusType.Active, CreatedBy = "System", ModifiedBy = "System", Modified = DateTime.Now, Created = DateTime.Now });
 
                 if (date.Value.AddHours(1) < DateTime.Now)
                 {
