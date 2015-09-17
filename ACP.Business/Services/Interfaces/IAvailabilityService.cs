@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace ACP.Business.Services.Interfaces
 {
@@ -14,5 +15,6 @@ namespace ACP.Business.Services.Interfaces
         Task<bool> Update(AvailabilityModel model);
         Task<AvailabilityModel> GetById(int Id);
         Task<IList<AvailabilityModel>> GetAll();
+        Task<IList<AvailabilityModel>> GetByAvailability(AvailabilityModel model);
     }
 }

@@ -110,7 +110,7 @@ namespace ServiceAPI.Controllers
         }
 
         [HttpGet]
-        [Route("getall")]
+        [Route("getbyname")]
         public async Task<HttpResponseMessage> GetByName(string name)
         {
             RootBookingEntityModel airport = null;

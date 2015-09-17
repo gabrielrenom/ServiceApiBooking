@@ -42,5 +42,10 @@ namespace ACP.Business.Services
         {
             return _availabilityManager.GetAll().ToList();
         }
+
+        public Task<IList<AvailabilityModel>> GetByAvailability(AvailabilityModel model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

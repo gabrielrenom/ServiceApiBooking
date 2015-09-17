@@ -15,6 +15,9 @@ using System.Web.Http;
 
 namespace ServiceAPI.Controllers
 {
+    /// <summary>
+    /// Controller Purple Parking API.
+    /// </summary>
     [RoutePrefix("api/v0.1/purpleparking")]
     public class PurpleParkingController : ApiController
     {
@@ -22,6 +25,11 @@ namespace ServiceAPI.Controllers
         private IStatusService _statusservice;
         private IPurpleParking _purpleparkingapi;
 
+        /// <summary>
+        /// Purple Parking Constructor.
+        /// </summary>
+        /// <param name="airportservice"></param>
+        /// <param name="statusservice"></param>
         public PurpleParkingController(IRootBookingEntityService airportservice,  IStatusService statusservice)
         {
             _airportservice = airportservice;
@@ -30,6 +38,10 @@ namespace ServiceAPI.Controllers
             _purpleparkingapi = new PurpleParking(airportservice, statusservice);
         }
 
+        /// <summary>
+        /// This asas
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("getallairports")]
         public async Task<HttpResponseMessage> GetByAllAirports()
@@ -115,7 +127,7 @@ namespace ServiceAPI.Controllers
         }
 
         [HttpGet]
-        [Route("getallcarparks")]
+        [Route("fillairports")]
         public async Task<HttpResponseMessage> FillAirports()
         {
             bool result = false;
