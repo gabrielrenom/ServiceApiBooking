@@ -7,7 +7,7 @@ namespace ACP.Data
 {
     public class HourPrice: BaseEntity
     {
-        public DateTime HourMinute { get; set; }
+        public TimeSpan HourMinute { get; set; }
         public decimal Hourprice { get; set; }
         public int DayPriceId { get; set; }
         

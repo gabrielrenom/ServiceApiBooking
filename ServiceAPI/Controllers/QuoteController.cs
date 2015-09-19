@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Security;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -65,7 +66,7 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, quote);
+            return Request.CreateResponse(HttpStatusCode.Created, quote, new JsonMediaTypeFormatter());
         }
 
         [HttpGet]
@@ -107,7 +108,7 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, quote);
+            return Request.CreateResponse(HttpStatusCode.Created, quote, new JsonMediaTypeFormatter());
         }
     }
 }

@@ -15,6 +15,8 @@ namespace ACP.Business.Managers
 
         bool AddPricesWithDays(int bookingEntityId, IList<BookingPricingModel> prices);
 
+        bool AddPricesWithDaysAndTime(int bookingEntityId, IList<BookingPricingModel> prices);        
+
         IList<BookingPricingModel> GetAllPricesWithDaysAndTimes(int bookingEntityId);
 
         IList<BookingPricingModel> GetAllPricesWithDays(int bookingEntityId);

@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Security;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -64,7 +65,7 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, available);
+            return Request.CreateResponse(HttpStatusCode.Created, available, new JsonMediaTypeFormatter());
         }
 
 
@@ -107,7 +108,7 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, available);
+            return Request.CreateResponse(HttpStatusCode.Created, available, new JsonMediaTypeFormatter());
         }
 
         [HttpPost]
@@ -149,7 +150,7 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, available);
+            return Request.CreateResponse(HttpStatusCode.Created, available, new JsonMediaTypeFormatter());
         }
 
         [HttpPut]
@@ -191,7 +192,7 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, available);
+            return Request.CreateResponse(HttpStatusCode.Created, available, new JsonMediaTypeFormatter());
         }
 
         [HttpDelete]
@@ -233,7 +234,7 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, available);
+            return Request.CreateResponse(HttpStatusCode.Created, available, new JsonMediaTypeFormatter());
         }
 
     }

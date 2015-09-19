@@ -288,5 +288,9 @@ namespace ACP.DataAccess.Managers
 
         }
 
+        public bool AddPricesWithDaysAndTime(int bookingEntityId, IList<BookingPricingModel> prices)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

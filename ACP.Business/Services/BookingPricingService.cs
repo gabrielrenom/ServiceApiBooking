@@ -33,7 +33,7 @@ namespace ACP.Business.Services
 
         public async Task<bool> AddPricesWithDaysAndTimes(int bookingEntityId, IList<BookingPricingModel> prices)
         {
-            throw new NotImplementedException();
+            return _bookingPricingManager.AddPricesWithDaysAndTime(bookingEntityId, prices);
         }
         
 

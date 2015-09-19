@@ -150,7 +150,7 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, airport);
+            return Request.CreateResponse(HttpStatusCode.Created, airport, new JsonMediaTypeFormatter());
         }
 
 

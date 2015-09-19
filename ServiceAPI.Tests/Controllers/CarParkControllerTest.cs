@@ -104,9 +104,9 @@ namespace ServiceAPI.Tests.Controllers
                             new HourPriceModel
                             {
                                  Created = DateTime.Now,
-                                 HourMinute = DateTime.Now,
+                                 HourMinute = new TimeSpan(12,00,00),
                                  Hourprice = 666,
-                                  Modified= DateTime.Now
+                                 Modified= DateTime.Now
                             }
                         }
                     }

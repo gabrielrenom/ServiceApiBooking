@@ -152,9 +152,9 @@ namespace ACP.Business.Test
                             new HourPriceModel
                             {
                                  Created = DateTime.Now,                         
-                                 HourMinute = DateTime.Now,
+                                 HourMinute =new TimeSpan(11,00,00),
                                  Hourprice = 666,
-                                  Modified= DateTime.Now
+                                 Modified= DateTime.Now
                             }
                         }
                     }                    

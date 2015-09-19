@@ -101,7 +101,7 @@ namespace ACP.Business.Test
                     new HourPriceModel
                     {
                          Created = DateTime.Now,                         
-                         HourMinute = DateTime.Now,
+                         HourMinute = new TimeSpan(11,00,00),
                          Hourprice = 0,
                           Modified= DateTime.Now
                     }
@@ -168,6 +168,46 @@ namespace ACP.Business.Test
             //Assert
             Assert.IsNotNull(results);
         }
+        public async Task ADayAndTimeIsGiven_WhenIsAdded_BeSureTheyAreReturned()
+        {
+            //Arrange
+            IList<BookingPricingModel> list = new List<BookingPricingModel>();
+          
+            BookingPricingModel model = new BookingPricingModel();
+            model.Created = DateTime.Now;
+            model.CreatedBy = localuser;
+            model.Modified = DateTime.Now;
+            model.Name = "Winter";
+            model.DayPrices = new Collection<DayPriceModel>();
+            model.Start = DateTime.Now;
+            model.End = DateTime.Now;
+            model.DayPrices.Add(new DayPriceModel
+            {
+                Created = DateTime.Now,
+                Day = 1,
+                Modified = DateTime.Now,
+                Dayprice = 0,
+                CreatedBy = localuser,
+                HourPrices = new Collection<HourPriceModel>()
+                {
+                    new HourPriceModel
+                    {
+                        
+                         Created = DateTime.Now,
+                         HourMinute = new TimeSpan(12,00,00),
+                         Hourprice = 0,
+                         Modified= DateTime.Now,
+                         
+                    }
+                }
+            });
+            list.Add(model);
 
+            //Act
+            var results = await service.AddPricesWithDaysAndTimes(2, list);
+
+            //Assert
+            Assert.IsTrue(results);
+        }
     }
 }
