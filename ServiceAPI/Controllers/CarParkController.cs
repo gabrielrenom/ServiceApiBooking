@@ -113,8 +113,6 @@ namespace ServiceAPI.Controllers
             return Request.CreateResponse(HttpStatusCode.Created, carparks, new JsonMediaTypeFormatter());
         }
 
-
-
         [HttpGet]
         [Route("getbyid")]
         public async Task<HttpResponseMessage> GettById(int id)

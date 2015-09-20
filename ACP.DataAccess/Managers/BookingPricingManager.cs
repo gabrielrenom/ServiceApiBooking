@@ -290,7 +290,21 @@ namespace ACP.DataAccess.Managers
 
         public bool AddPricesWithDaysAndTime(int bookingEntityId, IList<BookingPricingModel> prices)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            var bookingentity = Repository.GetSingle<BookingEntity>(x => x.Id == bookingEntityId);
+
+            if (bookingentity != null)
+            {
+                foreach (var item in prices)
+                {
+                    item.BookingEntityId = bookingEntityId;
+                    BookingPricing model = ToDataModelWithChildNodes(item);
+                    Repository.Add<BookingPricing>(model);
+                    Repository.Commit();
+                    result = true;
+                }
+            }
+            return result;
         }
     }
 }

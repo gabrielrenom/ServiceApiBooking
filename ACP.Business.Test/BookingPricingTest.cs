@@ -168,6 +168,8 @@ namespace ACP.Business.Test
             //Assert
             Assert.IsNotNull(results);
         }
+
+        [TestMethod]
         public async Task ADayAndTimeIsGiven_WhenIsAdded_BeSureTheyAreReturned()
         {
             //Arrange
@@ -195,8 +197,10 @@ namespace ACP.Business.Test
                         
                          Created = DateTime.Now,
                          HourMinute = new TimeSpan(12,00,00),
-                         Hourprice = 0,
+                         Hourprice = 10,
                          Modified= DateTime.Now,
+                         CreatedBy= localuser,                           
+                           ModifiedBy =localuser,
                          
                     }
                 }
