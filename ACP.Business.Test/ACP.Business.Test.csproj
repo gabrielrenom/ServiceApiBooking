@@ -70,6 +70,7 @@
     <Compile Include="BookingPricingTest.cs" />
     <Compile Include="AvailabilityTest.cs" />
     <Compile Include="PurpleParkingAPITest.cs" />
+    <Compile Include="TimeTest.cs" />
     <Compile Include="UserTest.cs" />
   </ItemGroup>
   <ItemGroup>

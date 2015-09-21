@@ -58,8 +58,9 @@ namespace ACP.DataAccess.Managers
             dataModel.ModifiedBy = domainModel.ModifiedBy;
             dataModel.StartDate = domainModel.StartDate;
             dataModel.EndDate = domainModel.EndDate;
-            dataModel.BookingEntityId = domainModel.BookingEntityId;
+            dataModel.ZoneId = domainModel.ZoneId;
             dataModel.StatusId = domainModel.StatusId;
+
 
             Repository.Update<Availability>(dataModel);
             Repository.Commit();
@@ -78,7 +79,7 @@ namespace ACP.DataAccess.Managers
             dataModel.ModifiedBy = domainModel.ModifiedBy;
             dataModel.StartDate = domainModel.StartDate;
             dataModel.EndDate = domainModel.EndDate;
-            dataModel.BookingEntityId = domainModel.BookingEntityId;
+            dataModel.ZoneId = domainModel.ZoneId;            
             dataModel.StatusId = domainModel.StatusId;
             dataModel.Status = domainModel.Status != null ? new Status
             {
@@ -105,7 +106,7 @@ namespace ACP.DataAccess.Managers
             model.Created = dataModel.Created;
             model.ModifiedBy = dataModel.ModifiedBy;
             model.Modified = dataModel.Modified;
-            model.BookingEntityId = dataModel.BookingEntityId;
+            model.ZoneId = dataModel.ZoneId;            
             model.StatusId = dataModel.Id;
             model.Status = dataModel.Status != null ? new StatusModel
             {                
@@ -133,7 +134,7 @@ namespace ACP.DataAccess.Managers
             dataModel.ModifiedBy = domainModel.ModifiedBy;
             dataModel.StartDate = domainModel.StartDate;
             dataModel.EndDate = domainModel.EndDate;
-            dataModel.BookingEntityId = domainModel.BookingEntityId;
+            dataModel.ZoneId = domainModel.ZoneId;
             dataModel.StatusId = domainModel.StatusId;
             dataModel.Status = domainModel.Status != null ? new Status
             {
@@ -160,7 +161,7 @@ namespace ACP.DataAccess.Managers
             model.Created = dataModel.Created;
             model.ModifiedBy = dataModel.ModifiedBy;
             model.Modified = dataModel.Modified;
-            model.BookingEntityId = dataModel.BookingEntityId;
+            model.ZoneId = dataModel.ZoneId;
             model.StatusId = dataModel.StatusId;
             model.Status = dataModel.Status!=null?new StatusModel{
                 CreatedBy = dataModel.Status.CreatedBy,

@@ -12,9 +12,9 @@ namespace ACP.Business.Models
         public DateTime EndDate { get; set; }
 
         public int StatusId { get; set; }
-        public int BookingEntityId { get; set; }
+        public int ZoneId { get; set; }
 
         public virtual StatusModel Status { get; set; }
-        public virtual BookingEntityModel BookingEntity { get; set; }
+        public virtual ZoneModel Zone { get; set; }
     }
 }

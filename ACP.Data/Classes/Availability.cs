@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACP.Data.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,10 @@ namespace ACP.Data
         public DateTime EndDate { get; set; }
 
         public int StatusId { get; set; }
-        public int BookingEntityId { get; set; }
+        public int ZoneId { get; set; }
 
         public virtual Status Status { get; set; }
-        public virtual BookingEntity BookingEntity { get; set; }
+        public virtual Zone Zone { get; set; }
 
     }
 }

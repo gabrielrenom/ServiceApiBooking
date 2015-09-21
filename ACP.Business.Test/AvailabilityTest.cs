@@ -38,7 +38,7 @@ namespace ACP.Business.Test
             model.CreatedBy = localuser;
             model.Modified = DateTime.Now;
             model.ModifiedBy = localuser;
-            model.BookingEntityId = 12;
+            model.ZoneId = 1;
             model.StartDate = DateTime.Now;
             model.EndDate = DateTime.Now;
 
@@ -70,7 +70,7 @@ namespace ACP.Business.Test
 
             //Assert
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.BookingEntityId > 0);
+            Assert.IsTrue(result.ZoneId > 0);
             Assert.IsTrue(result.StatusId > 0);
         }
 
@@ -82,7 +82,7 @@ namespace ACP.Business.Test
 
             //Assert
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.FirstOrDefault().BookingEntityId > 0);
+            Assert.IsTrue(result.FirstOrDefault().ZoneId > 0);
             Assert.IsTrue(result.FirstOrDefault().StatusId > 0);
         }
 

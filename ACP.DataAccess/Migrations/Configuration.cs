@@ -1,6 +1,7 @@
 namespace ACP.DataAccess.Migrations
 {
     using ACP.Data;
+    using Data.Classes;
     using Data.Enums;
     using System;
     using System.Collections.ObjectModel;
@@ -118,26 +119,39 @@ namespace ACP.DataAccess.Migrations
                          new Property{ Key = "Provider", Value="APH" },
                          new Property{ Key = "Carpark Code", Value="LGW1" }
                        },
-                          Availability = new Collection<Availability> {
-                            new Availability {
-                                    Created = DateTime.Now,
-                                    CreatedBy = "localuser",
-                                    Modified = DateTime.Now,
-                                    ModifiedBy = "localuser",
-                                    StartDate = new DateTime(2015,10,2),
-                                    EndDate = new DateTime(2015,10,8),
-                                    StatusId = 1
-                            },                              
-                                 new Availability {
-                                    Created = DateTime.Now,
-                                    CreatedBy = "localuser",
-                                    Modified = DateTime.Now,
-                                    ModifiedBy = "localuser",
-                                    StartDate = new DateTime(2015,10,3),
-                                    EndDate = new DateTime(2015,10,7),
-                                    StatusId = 2
-                            }
+                        Zone = new Collection<Zone>
+                        {
+                            new Zone {  Number=13, IsOccupied=false},
+                             new Zone {  IsOccupied = false,
+                                        Number = 12,
+                                                        Created = DateTime.Now,
+                                                                    CreatedBy = "localuser",
+                                                                    Modified = DateTime.Now,
+                                                                    ModifiedBy = "localuser",
+
+                                        Availability = new Collection<Availability> {
+                                                            new Availability {
+                                                                    Created = DateTime.Now,
+                                                                    CreatedBy = "localuser",
+                                                                    Modified = DateTime.Now,
+                                                                    ModifiedBy = "localuser",
+                                                                    StartDate = new DateTime(2015,10,2),
+                                                                    EndDate = new DateTime(2015,10,8),
+                                                                    StatusId = 1
+                                                            },
+                                                                 new Availability {
+                                                                    Created = DateTime.Now,
+                                                                    CreatedBy = "localuser",
+                                                                    Modified = DateTime.Now,
+                                                                    ModifiedBy = "localuser",
+                                                                    StartDate = new DateTime(2015,10,3),
+                                                                    EndDate = new DateTime(2015,10,7),
+                                                                    StatusId = 2
+                                                            }
+                          }
+                                       
                         }
+                          }
                     },
                     new BookingEntity
                     {
@@ -157,36 +171,46 @@ namespace ACP.DataAccess.Migrations
                        {
                          new Property{ Key = "Provider", Value="Purple Parking", Type = PropertyType.String }
                        },
-                        Availability = new Collection<Availability> {
-                            new Availability {
-                                    Created = DateTime.Now,
-                                    CreatedBy = "localuser",
-                                    Modified = DateTime.Now,
-                                    ModifiedBy = "localuser",
-                                    StartDate = new DateTime(2015,10,2),
-                                    EndDate = new DateTime(2015,10,15),
-                                    StatusId = 1                                   
-                            },
-                               new Availability {
-                                    Created = DateTime.Now,
-                                    CreatedBy = "localuser",
-                                    Modified = DateTime.Now,
-                                    ModifiedBy = "localuser",
-                                    StartDate = new DateTime(2015,10,4),
-                                    EndDate = new DateTime(2015,10,18),
-                                    StatusId = 1
-                            },
-                                 new Availability {
-                                    Created = DateTime.Now,
-                                    CreatedBy = "localuser",
-                                    Modified = DateTime.Now,
-                                    ModifiedBy = "localuser",
-                                    StartDate = new DateTime(2015,10,5),
-                                    EndDate = new DateTime(2015,10,19),
-                                    StatusId = 2
-                            }
+                       Zone = new Collection<Zone>
+                       {
+                        new Zone {
+                                        Created = DateTime.Now,
+                                            CreatedBy = "localuser",
+                                            Modified = DateTime.Now,
+                                            ModifiedBy = "localuser",
+                                IsOccupied = false,
+                                Number= 3,
+                                Availability = new Collection<Availability> {
+                                    new Availability {
+                                            Created = DateTime.Now,
+                                            CreatedBy = "localuser",
+                                            Modified = DateTime.Now,
+                                            ModifiedBy = "localuser",
+                                            StartDate = new DateTime(2015,10,2),
+                                            EndDate = new DateTime(2015,10,15),
+                                            StatusId = 1
+                                    },
+                                       new Availability {
+                                            Created = DateTime.Now,
+                                            CreatedBy = "localuser",
+                                            Modified = DateTime.Now,
+                                            ModifiedBy = "localuser",
+                                            StartDate = new DateTime(2015,10,4),
+                                            EndDate = new DateTime(2015,10,18),
+                                            StatusId = 1
+                                    },
+                                         new Availability {
+                                            Created = DateTime.Now,
+                                            CreatedBy = "localuser",
+                                            Modified = DateTime.Now,
+                                            ModifiedBy = "localuser",
+                                            StartDate = new DateTime(2015,10,5),
+                                            EndDate = new DateTime(2015,10,19),
+                                            StatusId = 2
+                                    }
                         }
-                       
+                        }
+                       }
                     }
                 }
             });

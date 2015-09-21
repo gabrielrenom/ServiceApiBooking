@@ -48,10 +48,11 @@ namespace ACP.Business.Services
 
         public async Task<IList<AvailabilityModel>> GetAvailableSpacesById(int Id, DateTime StartDate, DateTime EndDate,StatusType? Status=null)
         {
-            if (Status!=null)
-                return _bookingEntityManager.GetById(Id).Availability.Where(x => StartDate > x.StartDate && EndDate < x.EndDate && x.Status.StatusType == Status).ToList();
-            else
-                return _bookingEntityManager.GetById(Id).Availability.Where(x => StartDate > x.StartDate && EndDate < x.EndDate).ToList();
+            return null;
+            //if (Status!=null)
+            //    return _bookingEntityManager.GetById(Id).Availability.Where(x => StartDate > x.StartDate && EndDate < x.EndDate && x.Status.StatusType == Status).ToList();
+            //else
+            //    return _bookingEntityManager.GetById(Id).Availability.Where(x => StartDate > x.StartDate && EndDate < x.EndDate).ToList();
              
         }
 

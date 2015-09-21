@@ -1,4 +1,5 @@
 ﻿using ACP.Data;
+using ACP.Data.Classes;
 using ACP.DataAccess.Config;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,7 @@ namespace ACP.DataAccess
             modelBuilder.Configurations.Add(new HourPriceConfig());
             modelBuilder.Configurations.Add(new UserConfig());
             modelBuilder.Configurations.Add(new CarConfig());
+            modelBuilder.Configurations.Add(new ZoneConfig());
 
         }
 
@@ -51,6 +53,7 @@ namespace ACP.DataAccess
         public DbSet<DayPrice> DayPrices { get; set; }
         public DbSet<Status> Statuses { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Car> Cars { get; set; }   
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<Zone> Zones { get; set; }
     }
 }

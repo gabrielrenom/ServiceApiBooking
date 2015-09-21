@@ -53,6 +53,7 @@
     <Compile Include="Classes\RootBookingEntity.cs" />
     <Compile Include="Classes\HourPrice.cs" />
     <Compile Include="Classes\DayPrice.cs" />
+    <Compile Include="Classes\Zone.cs" />
     <Compile Include="Enums\PropertyType.cs" />
     <Compile Include="Enums\RootBookingPropertyType.cs" />
     <Compile Include="Enums\StatusType.cs" />

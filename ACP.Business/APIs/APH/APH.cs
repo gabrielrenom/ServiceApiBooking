@@ -111,7 +111,8 @@ namespace ACP.Business.APIs.APH
                                 Name = item.CarParkName,
                                 Prices = new Collection<BookingPricingModel>(),
                                 Service = new Collection<BookingServiceModel>(),
-                                Availability = new Collection<AvailabilityModel>(),
+                                Zone = new Collection<ZoneModel>(),
+                                //Availability = new Collection<AvailabilityModel>(),
                                 Properties = new Collection<PropertyModel> { 
                                 new PropertyModel{Key="Provider", Value="APH"},
                                 new PropertyModel{Key="CarParkCode", Value=item.CarParkCode}                                

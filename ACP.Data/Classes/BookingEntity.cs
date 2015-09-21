@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACP.Data.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,7 @@ namespace ACP.Data
         public virtual ICollection<BookingPricing> Prices {get;set;}
         public virtual Address Address { get; set; }
         public virtual ICollection<BookingService> Service { get; set; }
-        public virtual ICollection<Availability> Availability { get; set; }
+        public virtual ICollection<Zone> Zone { get; set; }
         
     }
 }
