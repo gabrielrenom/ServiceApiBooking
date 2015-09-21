@@ -76,6 +76,7 @@
     <Compile Include="Managers\ServiceManager.cs" />
     <Compile Include="Managers\StatusManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
+    <Compile Include="Managers\ZoneManager.cs" />
     <Compile Include="Migrations\201506172116357_first.cs" />
     <Compile Include="Migrations\201506172116357_first.Designer.cs">
       <DependentUpon>201506172116357_first.cs</DependentUpon>

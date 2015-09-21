@@ -16,5 +16,6 @@ namespace ACP.Business.Models
 
         public virtual StatusModel Status { get; set; }
         public virtual ZoneModel Zone { get; set; }
+
     }
 }

@@ -79,6 +79,7 @@
     <Compile Include="Managers\IServiceManager.cs" />
     <Compile Include="Managers\IStatusManager.cs" />
     <Compile Include="Managers\IUserManager.cs" />
+    <Compile Include="Managers\IZoneManager.cs" />
     <Compile Include="Models\AddressModel.cs" />
     <Compile Include="Models\AvailabilityModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
@@ -123,9 +124,11 @@
     <Compile Include="Services\BookingServiceService.cs" />
     <Compile Include="Services\Interfaces\IStatusService.cs" />
     <Compile Include="Services\Interfaces\IUserService.cs" />
+    <Compile Include="Services\Interfaces\IZoneService.cs" />
     <Compile Include="Services\RootBookingEntityService.cs" />
     <Compile Include="Services\StatusService.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="Services\ZoneService.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

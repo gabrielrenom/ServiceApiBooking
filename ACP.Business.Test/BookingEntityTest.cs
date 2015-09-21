@@ -223,7 +223,7 @@ namespace ACP.Business.Test
             int first = bookingentities[0].Id;
 
             //Act
-            var results = await service.GetBookingEntityById(first);
+            var results = await service.GetBookingEntityById(first);          
 
             //Assert
             Assert.IsNotNull(results);
