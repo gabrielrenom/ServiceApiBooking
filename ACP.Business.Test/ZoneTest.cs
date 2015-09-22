@@ -122,6 +122,64 @@ namespace ACP.Business.Test
             Assert.IsNotNull(result);
         }
 
+        [TestMethod]
+        public async Task GivenAnId_WhenRemoveIsCalled_BeSureTheRecordIsRemoved()
+        {
+            //Arrange
+            var records = await service.GetAll();
+
+            //Act
+            var result = await service.Remove(records.FirstOrDefault().Id);
+
+            //Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public async Task GivenATheFirstZone_WhenUpdateWhenNewAvailabilityCalled_BeSureItReturns()
+        {
+            //Arrange
+            var all = await service.GetAll();
+
+            ZoneModel model = all.FirstOrDefault();
+            model.Number = 15;
+            model.Availability.Add(new AvailabilityModel
+            {
+                Created = DateTime.Now,
+                CreatedBy = "localuser",
+                Modified = DateTime.Now,
+                ModifiedBy = "localuser",
+                StartDate = new DateTime(2016, 10, 2),
+                EndDate = new DateTime(2016, 10, 8),
+                StatusId = 1
+            });                        
+
+            //Act
+            var result = await service.Update(model);
+
+            //Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public async Task GivenATheFirstZone_WhenUpdateWhenWeDeleteAnAvailabilityIsCalled_BeSureItReturns()
+        {
+            //Arrange
+            var all = await service.GetAll();
+
+            ZoneModel model = all.FirstOrDefault();
+            model.Number = 15;
+            if (model.Availability.Count > 1)
+            {
+                model.Availability.Remove(model.Availability.FirstOrDefault());
+            }
+
+            //Act
+            var result = await service.Update(model);
+
+            //Assert
+            Assert.IsTrue(result);
+        }
 
     }
 }

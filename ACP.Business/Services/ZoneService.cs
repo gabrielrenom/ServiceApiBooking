@@ -55,7 +55,8 @@ namespace ACP.Business.Services
 
         public async Task<bool> Update(ZoneModel model)
         {
-            return await _zonemanager.UpdateAsync(model);
+            //return await _zonemanager.UpdateAsync(model);
+            return _zonemanager.Update(model);
         }
     }
 }

@@ -37,7 +37,53 @@ namespace ACP.DataAccess.Managers
 
         public override bool Update(ZoneModel domainModel)
         {
-            return base.Update(domainModel);    
+            bool result = false;
+            var bookingentity = Repository.GetSingle<BookingEntity>(x => x.Id == domainModel.BookingEntityId);
+
+            if (bookingentity != null)
+            {                
+                var model = Repository.GetSingle<Zone>(x => x.Id == domainModel.Id, x => x.Availability);
+                model.Created = domainModel.Created;
+                model.CreatedBy = domainModel.CreatedBy;
+                model.Modified = domainModel.Modified;
+                model.ModifiedBy = domainModel.ModifiedBy;
+                model.Id = domainModel.Id;
+                model.Number = domainModel.Number;
+                model.Identifier = domainModel.Identifier;
+                model.IsOccupied = domainModel.IsOccupied;
+
+                if (model.Availability.Count > 0)
+                    {
+                        Repository.DeleteMany<Availability>(model.Availability.ToArray());
+
+                        model.Availability = domainModel.Availability != null ? domainModel.Availability.Select(r => new Availability
+                        {
+                            Created = r.Created,
+                            CreatedBy = r.CreatedBy,
+                            Modified = r.Modified,
+                            ModifiedBy = r.ModifiedBy,
+                            EndDate = r.EndDate,
+                            StartDate = r.StartDate,
+                            StatusId = r.StatusId,
+                            ZoneId = r.ZoneId,
+                            Id = r.Id,
+                            Status = r.Status!=null?new Status
+                            {
+                                   Created = r.Status.Created,
+                                   CreatedBy = r.Status.CreatedBy,
+                                   Modified = r.Status.Modified,
+                                   ModifiedBy = r.Status.ModifiedBy,
+                                   StatusType = (Data.Enums.StatusType)r.Status.StatusType,
+                                   Id = r.Status.Id
+                               }:null
+                           }).ToList() : null;
+                    }
+
+                    Repository.Update<Zone>(model);
+                    Repository.Commit();
+                    result = true;                
+            }
+            return result;
         }
 
         public override Zone ToDataModel(ZoneModel domainModel, Zone dataModel = null)
