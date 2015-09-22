@@ -13,5 +13,6 @@ namespace ACP.Business.Managers
         Task<IList<ZoneModel>> GetAllFreeAsync();
         Task<IList<ZoneModel>> GetAllOccupiedAsync();
         Task<ZoneModel> GetByNumberIdentifierAsync(int? number = null, string identifier = null);
+        Task<IList<ZoneModel>> FindZoneAvailable(DateTime startdate, DateTime enddate);
     }
 }

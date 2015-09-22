@@ -17,5 +17,6 @@ namespace ACP.Business.Services.Interfaces
         Task<ZoneModel> GetById(int Id);
         Task<ZoneModel> GetByNumberIdentifier(int? number=null, string identifier=null);
         Task<bool> Remove(int Id);
+        Task<IList<ZoneModel>> FindZoneAvailable(DateTime startdate, DateTime enddate);
     }
 }

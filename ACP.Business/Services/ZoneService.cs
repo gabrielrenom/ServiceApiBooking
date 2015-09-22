@@ -22,6 +22,11 @@ namespace ACP.Business.Services
             return await _zonemanager.AddAsync(model);
         }
 
+        public async Task<IList<ZoneModel>> FindZoneAvailable(DateTime startdate, DateTime enddate)
+        {
+            return await _zonemanager.FindZoneAvailable(startdate,enddate);
+        }
+
         public async Task<IList<ZoneModel>> GetAll()
         {
             var result = await _zonemanager.GetAllAsync();

@@ -181,5 +181,22 @@ namespace ACP.Business.Test
             Assert.IsTrue(result);
         }
 
+        [TestMethod]
+        public async Task GivenAStartDateAndEndDate_WhenFindZoneIsCalled_BeSureItReturnsFreeZones()
+        {
+            //Arrange
+            var all = await service.GetAll();
+
+            DateTime startdate = all.FirstOrDefault().Availability.FirstOrDefault().StartDate;//Convert.ToDateTime("2015-10-03 00:00:00.000");
+            DateTime enddate = all.FirstOrDefault().Availability.FirstOrDefault().EndDate; Convert.ToDateTime("2015-10-07 00:00:00.000");
+
+            //Act
+            var result = await service.FindZoneAvailable(startdate,enddate);
+
+            //Assert
+            Assert.IsTrue(result.Where(x=>x.Id == all.FirstOrDefault().Id).ToList().Count == 0);
+        }
+
+
     }
 }

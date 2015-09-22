@@ -86,6 +86,17 @@ namespace ACP.DataAccess.Managers
             return result;
         }
 
+        public async Task<IList<ZoneModel>> FindZoneAvailable(DateTime startdate, DateTime enddate)
+        {             
+            return  GetListIncluding(x => x.IsOccupied == false, 
+                x => x.Availability)
+                .Where(x => x.Availability
+                .Where( y => y.StartDate >= startdate && 
+                        y.StartDate <= enddate)
+                .Count()==0)
+                .ToList();                       
+        }
+
         public override Zone ToDataModel(ZoneModel domainModel, Zone dataModel = null)
         {
             if (dataModel == null)
