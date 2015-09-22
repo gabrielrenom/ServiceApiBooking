@@ -43,7 +43,7 @@ namespace ACP.Business.Services
             return await _zonemanager.GetByIdAsync(Id);
         }
 
-        public async Task<ZoneModel> GetByNumberIdentifier(int number, string identifier)
+        public async Task<ZoneModel> GetByNumberIdentifier(int? number = null, string identifier = null)
         {
             return await _zonemanager.GetByNumberIdentifierAsync(number, identifier);
         }

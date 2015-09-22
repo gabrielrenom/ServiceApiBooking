@@ -116,19 +116,29 @@ namespace ACP.DataAccess.Managers
             return model;
         }
 
-        public Task<IList<ZoneModel>> GetAllFreeAsync()
+        public async Task<IList<ZoneModel>> GetAllFreeAsync()
         {
-            throw new NotImplementedException();
+            var result = await GetListIncludingAsync(x => x.IsOccupied == false, x => x.Availability);
+            return result.ToList();
         }
 
-        public Task<IList<ZoneModel>> GetAllOccupiedAsync()
+        public async Task<IList<ZoneModel>> GetAllOccupiedAsync()
         {
-            throw new NotImplementedException();
+            var result = await GetListIncludingAsync(x => x.IsOccupied == true, x => x.Availability);
+            return result.ToList();
         }
 
-        public Task<ZoneModel> GetByNumberIdentifierAsync(int number, string identifier)
+        public async Task<ZoneModel> GetByNumberIdentifierAsync(int? number=null, string identifier=null)
         {
-            throw new NotImplementedException();
+            if (number != null && identifier == null)
+                return await base.GetSingleAsync(x => x.Number == number);
+            else if (number == null && identifier != null)
+                return await base.GetSingleAsync(x => x.Identifier ==identifier);
+            else if (number != null && identifier != null)
+                return await base.GetSingleAsync(x => x.Number == number && x.Identifier == identifier);
+
+            return null;
+
         }
     }
 }

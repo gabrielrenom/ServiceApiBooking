@@ -42,6 +42,41 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
+        public async Task WhenGellAllOccupied_BeSureAllZonesWithAvailabilitiesAreReturned()
+        {
+
+            //Act
+            var result = await service.GetAllOccupied();
+
+            //Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Count > 0);
+        }
+
+        [TestMethod]
+        public async Task GivenANameOrIdentifier_WhenGeByNameAndGetByAllOccupied_BeSureAllZonesWithAvailabilitiesAreReturned()
+        {
+
+            //Act
+            var result = await service.GetByNumberIdentifier(12);
+
+            //Assert
+            Assert.IsNotNull(result);
+        }
+
+
+        [TestMethod]
+        public async Task WhenGellAllFree_BeSureAllZonesWithAvailabilitiesAreReturned()
+        {
+            //Act
+            var result = await service.GetAllFree();
+
+            //Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Count > 0);
+        }
+
+        [TestMethod]
         public async Task GivenAZone_WhenAddIsCalled_BeSureItReturnsTheStuffAdded()
         {
             //Arrange
@@ -86,5 +121,7 @@ namespace ACP.Business.Test
             //Assert
             Assert.IsNotNull(result);
         }
+
+
     }
 }

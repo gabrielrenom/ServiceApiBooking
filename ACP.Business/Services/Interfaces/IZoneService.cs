@@ -15,7 +15,7 @@ namespace ACP.Business.Services.Interfaces
         Task<IList<ZoneModel>> GetAllOccupied();
         Task<IList<ZoneModel>> GetAllFree();
         Task<ZoneModel> GetById(int Id);
-        Task<ZoneModel> GetByNumberIdentifier(int number, string identifier);
+        Task<ZoneModel> GetByNumberIdentifier(int? number=null, string identifier=null);
         Task<bool> Remove(int Id);
     }
 }

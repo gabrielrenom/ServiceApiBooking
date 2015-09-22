@@ -12,6 +12,6 @@ namespace ACP.Business.Managers
     {
         Task<IList<ZoneModel>> GetAllFreeAsync();
         Task<IList<ZoneModel>> GetAllOccupiedAsync();
-        Task<ZoneModel> GetByNumberIdentifierAsync(int number, string identifier);
+        Task<ZoneModel> GetByNumberIdentifierAsync(int? number = null, string identifier = null);
     }
 }
