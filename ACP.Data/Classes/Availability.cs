@@ -1,4 +1,4 @@
-﻿using ACP.Data.Classes;
+﻿using ACP.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,5 +18,6 @@ namespace ACP.Data
         public virtual Status Status { get; set; }
         public virtual Slot Slot { get; set; }
 
+        public virtual BookingLink BookingLink { get; set; }
     }
 }

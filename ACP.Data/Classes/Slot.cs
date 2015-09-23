@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ACP.Data.Classes
+namespace ACP.Data
 {
     public class Slot: BaseEntity
     {
@@ -15,5 +15,7 @@ namespace ACP.Data.Classes
         public virtual BookingEntity BookingEntity { get; set; }
 
         public virtual ICollection<Availability> Availability { get; set; }
+
+        public virtual ICollection<BookingLink> BookingLink { get; set; }
     }
 }

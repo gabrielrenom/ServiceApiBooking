@@ -13,11 +13,14 @@ namespace ACP.Data
         public decimal Price { get; set; }
         public int StatusId { get; set; }
         public int UserId { get; set; }
-        public int BookingEntityId { get; set; }
+        public int CustomerId { get; set; }
+        public int PaymentId { get; set; }
 
-        
         public virtual Status Status { get; set; }
-        public virtual User User { get; set; }
-        public virtual BookingEntity Entity { get; set; }
+        public virtual User User { get; set; }      
+        public virtual Customer Customer { get; set; }
+        public virtual Payment Payment { get; set; }
+
+        public virtual ICollection<BookingLink> BookingLink { get; set; }
     }
 }

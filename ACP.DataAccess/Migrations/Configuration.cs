@@ -1,7 +1,6 @@
 namespace ACP.DataAccess.Migrations
 {
     using ACP.Data;
-    using Data.Classes;
     using Data.Enums;
     using System;
     using System.Collections.ObjectModel;

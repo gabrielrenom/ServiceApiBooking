@@ -45,10 +45,14 @@
     <Compile Include="Classes\BaseEntity.cs" />
     <Compile Include="Classes\Booking.cs" />
     <Compile Include="Classes\BookingEntity.cs" />
+    <Compile Include="Classes\BookingLink.cs" />
     <Compile Include="Classes\BookingPricing.cs" />
     <Compile Include="Classes\Car.cs" />
+    <Compile Include="Classes\Customer.cs" />
     <Compile Include="Classes\EntityType.cs" />
     <Compile Include="Classes\Extra.cs" />
+    <Compile Include="Classes\Payment.cs" />
+    <Compile Include="Classes\PaymentMethod.cs" />
     <Compile Include="Classes\Property.cs" />
     <Compile Include="Classes\RootBookingEntity.cs" />
     <Compile Include="Classes\HourPrice.cs" />

@@ -20,10 +20,10 @@ namespace ACP.DataAccess.Config
             .HasForeignKey(u => u.AddressId);
 
             
-            HasRequired(p => p.RootBookingEntity)
-             .WithMany(p=>p.BookingEntities)
-             .HasForeignKey(p => p.RootBookingEntityId)
-             .WillCascadeOnDelete(false);
+            //HasRequired(p => p.RootBookingEntity)
+            // .WithMany(p=>p.BookingEntities)
+            // .HasForeignKey(p => p.RootBookingEntityId)
+            // .WillCascadeOnDelete(false);
             
 
         }

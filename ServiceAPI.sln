@@ -18,6 +18,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{54565874-1D32-4EF2-A508-B7AE589A58C6}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\..\..\Downloads\3302-196.pdf = ..\..\..\..\Downloads\3302-196.pdf
+		..\..\..\..\Downloads\airlinereservationsystem.png = ..\..\..\..\Downloads\airlinereservationsystem.png
+		..\..\..\..\Downloads\hotel_room_booking_data_model_image.gif = ..\..\..\..\Downloads\hotel_room_booking_data_model_image.gif
 		..\..\..\..\Downloads\Web Services API 2 rev 1.7.6.pdf = ..\..\..\..\Downloads\Web Services API 2 rev 1.7.6.pdf
 	EndProjectSection
 EndProject
