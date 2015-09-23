@@ -15,9 +15,9 @@ namespace ACP.DataAccess.Config
             //## Primary Key
            HasKey(t => t.Id);
 
-           HasRequired(t => t.Zone)
+           HasRequired(t => t.Slot)
                .WithMany(t => t.Availability)
-               .HasForeignKey(t => t.ZoneId)
+               .HasForeignKey(t => t.SlotId)
                .WillCascadeOnDelete(false);
 
            HasRequired(p => p.Status)

@@ -128,7 +128,7 @@
     <Compile Include="Services\RootBookingEntityService.cs" />
     <Compile Include="Services\StatusService.cs" />
     <Compile Include="Services\UserService.cs" />
-    <Compile Include="Services\ZoneService.cs" />
+    <Compile Include="Services\SlotService.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

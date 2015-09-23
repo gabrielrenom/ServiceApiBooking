@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace ACP.Business.Managers
 {
-    public interface IZoneManager : IBaseManager<ZoneModel, Zone>
+    public interface ISlotManager : IBaseManager<SlotModel, Slot>
     {
-        Task<IList<ZoneModel>> GetAllFreeAsync();
-        Task<IList<ZoneModel>> GetAllOccupiedAsync();
-        Task<ZoneModel> GetByNumberIdentifierAsync(int? number = null, string identifier = null);
-        Task<IList<ZoneModel>> FindZoneAvailable(DateTime startdate, DateTime enddate);
+        Task<IList<SlotModel>> GetAllFreeAsync();
+        Task<IList<SlotModel>> GetAllOccupiedAsync();
+        Task<SlotModel> GetByNumberIdentifierAsync(int? number = null, string identifier = null);
+        Task<IList<SlotModel>> FindSlotAvailable(DateTime startdate, DateTime enddate, string rootname);
     }
 }

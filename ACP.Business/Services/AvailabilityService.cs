@@ -12,7 +12,7 @@ namespace ACP.Business.Services
     public class AvailabilityService : IAvailabilityService
     {
         private readonly IAvailabilityManager _availabilityManager;
-        private readonly IZoneManager _zoneManager;
+        private readonly ISlotManager _SlotManager;
 
         public AvailabilityService(IAvailabilityManager availabilityManager)
         {

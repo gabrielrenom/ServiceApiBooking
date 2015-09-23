@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ACP.Business.Models
 {
  
-    public class ZoneModel : BaseModel
+    public class SlotModel : BaseModel
     {
         public int Number { get; set; }
         public string Identifier { get; set; }

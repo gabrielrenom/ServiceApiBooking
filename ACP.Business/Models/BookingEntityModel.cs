@@ -24,6 +24,6 @@ namespace ACP.Business.Models
         public virtual ICollection<BookingPricingModel> Prices { get; set; }
         public virtual AddressModel Address { get; set; }
         public virtual ICollection<BookingServiceModel> Service { get; set; }
-        public virtual ICollection<ZoneModel> Zone { get; set; }
+        public virtual ICollection<SlotModel> Slot { get; set; }
     }
 }

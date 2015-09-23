@@ -119,10 +119,10 @@ namespace ACP.DataAccess.Migrations
                          new Property{ Key = "Provider", Value="APH" },
                          new Property{ Key = "Carpark Code", Value="LGW1" }
                        },
-                        Zone = new Collection<Zone>
+                        Slot = new Collection<Slot>
                         {
-                            new Zone {  Number=13, IsOccupied=false},
-                             new Zone {  IsOccupied = false,
+                            new Slot {  Number=13, IsOccupied=false},
+                             new Slot {  IsOccupied = false,
                                         Number = 12,
                                                         Created = DateTime.Now,
                                                                     CreatedBy = "localuser",
@@ -171,9 +171,9 @@ namespace ACP.DataAccess.Migrations
                        {
                          new Property{ Key = "Provider", Value="Purple Parking", Type = PropertyType.String }
                        },
-                       Zone = new Collection<Zone>
+                       Slot = new Collection<Slot>
                        {
-                        new Zone {
+                        new Slot {
                                         Created = DateTime.Now,
                                             CreatedBy = "localuser",
                                             Modified = DateTime.Now,

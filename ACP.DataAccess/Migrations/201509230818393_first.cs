@@ -18,6 +18,7 @@ namespace ACP.DataAccess.Migrations
                         Postcode = c.String(),
                         County = c.String(),
                         Country = c.String(),
+                        City = c.String(),
                         CreatedBy = c.String(),
                         ModifiedBy = c.String(),
                         Created = c.DateTime(),
@@ -38,6 +39,7 @@ namespace ACP.DataAccess.Migrations
                         Sameday = c.Boolean(nullable: false),
                         AddressId = c.Int(nullable: false),
                         RootBookingEntityId = c.Int(nullable: false),
+                        EntityType = c.Int(nullable: false),
                         CreatedBy = c.String(),
                         ModifiedBy = c.String(),
                         Created = c.DateTime(),
@@ -48,6 +50,24 @@ namespace ACP.DataAccess.Migrations
                 .ForeignKey("dbo.RootBookingEntities", t => t.RootBookingEntityId)
                 .Index(t => t.AddressId)
                 .Index(t => t.RootBookingEntityId);
+            
+            CreateTable(
+                "dbo.Extras",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Description = c.String(),
+                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        BookingEntityId = c.Int(nullable: false),
+                        CreatedBy = c.String(),
+                        ModifiedBy = c.String(),
+                        Created = c.DateTime(),
+                        Modified = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.BookingEntities", t => t.BookingEntityId, cascadeDelete: true)
+                .Index(t => t.BookingEntityId);
             
             CreateTable(
                 "dbo.BookingPricings",
@@ -89,7 +109,7 @@ namespace ACP.DataAccess.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        HourMinute = c.DateTime(nullable: false),
+                        HourMinute = c.Time(nullable: false, precision: 7),
                         Hourprice = c.Decimal(nullable: false, precision: 18, scale: 2),
                         DayPriceId = c.Int(nullable: false),
                         CreatedBy = c.String(),
@@ -100,6 +120,24 @@ namespace ACP.DataAccess.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.DayPrices", t => t.DayPriceId, cascadeDelete: true)
                 .Index(t => t.DayPriceId);
+            
+            CreateTable(
+                "dbo.Properties",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Key = c.String(),
+                        Value = c.String(),
+                        Type = c.Int(nullable: false),
+                        BookingEntityId = c.Int(nullable: false),
+                        CreatedBy = c.String(),
+                        ModifiedBy = c.String(),
+                        Created = c.DateTime(),
+                        Modified = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.BookingEntities", t => t.BookingEntityId, cascadeDelete: true)
+                .Index(t => t.BookingEntityId);
             
             CreateTable(
                 "dbo.RootBookingEntities",
@@ -122,11 +160,29 @@ namespace ACP.DataAccess.Migrations
                 .Index(t => t.StatusId);
             
             CreateTable(
+                "dbo.RootBookingProperties",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Key = c.String(),
+                        Value = c.String(),
+                        Type = c.Int(nullable: false),
+                        RootBookingEntityId = c.Int(nullable: false),
+                        CreatedBy = c.String(),
+                        ModifiedBy = c.String(),
+                        Created = c.DateTime(),
+                        Modified = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.RootBookingEntities", t => t.RootBookingEntityId, cascadeDelete: true)
+                .Index(t => t.RootBookingEntityId);
+            
+            CreateTable(
                 "dbo.Status",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        StatusType = c.Int(nullable: false),
                         CreatedBy = c.String(),
                         ModifiedBy = c.String(),
                         Created = c.DateTime(),
@@ -151,6 +207,44 @@ namespace ACP.DataAccess.Migrations
                 .Index(t => t.BookingEntity_Id);
             
             CreateTable(
+                "dbo.Slots",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Number = c.Int(nullable: false),
+                        Identifier = c.String(),
+                        IsOccupied = c.Boolean(nullable: false),
+                        BookingEntityId = c.Int(nullable: false),
+                        CreatedBy = c.String(),
+                        ModifiedBy = c.String(),
+                        Created = c.DateTime(),
+                        Modified = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.BookingEntities", t => t.BookingEntityId)
+                .Index(t => t.BookingEntityId);
+            
+            CreateTable(
+                "dbo.Availabilities",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        StartDate = c.DateTime(nullable: false),
+                        EndDate = c.DateTime(nullable: false),
+                        StatusId = c.Int(nullable: false),
+                        SlotId = c.Int(nullable: false),
+                        CreatedBy = c.String(),
+                        ModifiedBy = c.String(),
+                        Created = c.DateTime(),
+                        Modified = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Slots", t => t.SlotId, cascadeDelete: true)
+                .ForeignKey("dbo.Status", t => t.StatusId, cascadeDelete: true)
+                .Index(t => t.StatusId)
+                .Index(t => t.SlotId);
+            
+            CreateTable(
                 "dbo.Bookings",
                 c => new
                     {
@@ -158,21 +252,21 @@ namespace ACP.DataAccess.Migrations
                         StartDate = c.DateTime(nullable: false),
                         EndDate = c.DateTime(nullable: false),
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        StatusId = c.Int(nullable: false),
+                        UserId = c.Int(nullable: false),
+                        BookingEntityId = c.Int(nullable: false),
                         CreatedBy = c.String(),
                         ModifiedBy = c.String(),
                         Created = c.DateTime(),
                         Modified = c.DateTime(),
-                        Entity_Id = c.Int(),
-                        Status_Id = c.Int(),
-                        User_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.BookingEntities", t => t.Entity_Id)
-                .ForeignKey("dbo.Status", t => t.Status_Id)
-                .ForeignKey("dbo.Users", t => t.User_Id)
-                .Index(t => t.Entity_Id)
-                .Index(t => t.Status_Id)
-                .Index(t => t.User_Id);
+                .ForeignKey("dbo.BookingEntities", t => t.BookingEntityId, cascadeDelete: true)
+                .ForeignKey("dbo.Status", t => t.StatusId, cascadeDelete: true)
+                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.StatusId)
+                .Index(t => t.UserId)
+                .Index(t => t.BookingEntityId);
             
             CreateTable(
                 "dbo.Users",
@@ -182,52 +276,93 @@ namespace ACP.DataAccess.Migrations
                         FirstName = c.String(),
                         LastName = c.String(),
                         PhoneNumber = c.String(),
+                        Email = c.String(),
+                        Password = c.String(),
+                        AddressId = c.Int(nullable: false),
                         CreatedBy = c.String(),
                         ModifiedBy = c.String(),
                         Created = c.DateTime(),
                         Modified = c.DateTime(),
-                        Address_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Addresses", t => t.Address_Id)
-                .Index(t => t.Address_Id);
+                .ForeignKey("dbo.Addresses", t => t.AddressId)
+                .Index(t => t.AddressId);
+            
+            CreateTable(
+                "dbo.Cars",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Registration = c.String(),
+                        Make = c.String(),
+                        Model = c.String(),
+                        Colour = c.String(),
+                        UserId = c.Int(nullable: false),
+                        CreatedBy = c.String(),
+                        ModifiedBy = c.String(),
+                        Created = c.DateTime(),
+                        Modified = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Users", t => t.UserId)
+                .Index(t => t.UserId);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Bookings", "User_Id", "dbo.Users");
-            DropForeignKey("dbo.Users", "Address_Id", "dbo.Addresses");
-            DropForeignKey("dbo.Bookings", "Status_Id", "dbo.Status");
-            DropForeignKey("dbo.Bookings", "Entity_Id", "dbo.BookingEntities");
+            DropForeignKey("dbo.Cars", "UserId", "dbo.Users");
+            DropForeignKey("dbo.Bookings", "UserId", "dbo.Users");
+            DropForeignKey("dbo.Users", "AddressId", "dbo.Addresses");
+            DropForeignKey("dbo.Bookings", "StatusId", "dbo.Status");
+            DropForeignKey("dbo.Bookings", "BookingEntityId", "dbo.BookingEntities");
+            DropForeignKey("dbo.Slots", "BookingEntityId", "dbo.BookingEntities");
+            DropForeignKey("dbo.Availabilities", "StatusId", "dbo.Status");
+            DropForeignKey("dbo.Availabilities", "SlotId", "dbo.Slots");
             DropForeignKey("dbo.BookingServices", "BookingEntity_Id", "dbo.BookingEntities");
             DropForeignKey("dbo.BookingEntities", "RootBookingEntityId", "dbo.RootBookingEntities");
             DropForeignKey("dbo.RootBookingEntities", "StatusId", "dbo.Status");
+            DropForeignKey("dbo.RootBookingProperties", "RootBookingEntityId", "dbo.RootBookingEntities");
             DropForeignKey("dbo.RootBookingEntities", "AddressId", "dbo.Addresses");
+            DropForeignKey("dbo.Properties", "BookingEntityId", "dbo.BookingEntities");
             DropForeignKey("dbo.HourPrices", "DayPriceId", "dbo.DayPrices");
             DropForeignKey("dbo.DayPrices", "BookingPricingId", "dbo.BookingPricings");
             DropForeignKey("dbo.BookingPricings", "BookingEntityId", "dbo.BookingEntities");
+            DropForeignKey("dbo.Extras", "BookingEntityId", "dbo.BookingEntities");
             DropForeignKey("dbo.BookingEntities", "AddressId", "dbo.Addresses");
-            DropIndex("dbo.Users", new[] { "Address_Id" });
-            DropIndex("dbo.Bookings", new[] { "User_Id" });
-            DropIndex("dbo.Bookings", new[] { "Status_Id" });
-            DropIndex("dbo.Bookings", new[] { "Entity_Id" });
+            DropIndex("dbo.Cars", new[] { "UserId" });
+            DropIndex("dbo.Users", new[] { "AddressId" });
+            DropIndex("dbo.Bookings", new[] { "BookingEntityId" });
+            DropIndex("dbo.Bookings", new[] { "UserId" });
+            DropIndex("dbo.Bookings", new[] { "StatusId" });
+            DropIndex("dbo.Availabilities", new[] { "SlotId" });
+            DropIndex("dbo.Availabilities", new[] { "StatusId" });
+            DropIndex("dbo.Slots", new[] { "BookingEntityId" });
             DropIndex("dbo.BookingServices", new[] { "BookingEntity_Id" });
+            DropIndex("dbo.RootBookingProperties", new[] { "RootBookingEntityId" });
             DropIndex("dbo.RootBookingEntities", new[] { "StatusId" });
             DropIndex("dbo.RootBookingEntities", new[] { "AddressId" });
+            DropIndex("dbo.Properties", new[] { "BookingEntityId" });
             DropIndex("dbo.HourPrices", new[] { "DayPriceId" });
             DropIndex("dbo.DayPrices", new[] { "BookingPricingId" });
             DropIndex("dbo.BookingPricings", new[] { "BookingEntityId" });
+            DropIndex("dbo.Extras", new[] { "BookingEntityId" });
             DropIndex("dbo.BookingEntities", new[] { "RootBookingEntityId" });
             DropIndex("dbo.BookingEntities", new[] { "AddressId" });
+            DropTable("dbo.Cars");
             DropTable("dbo.Users");
             DropTable("dbo.Bookings");
+            DropTable("dbo.Availabilities");
+            DropTable("dbo.Slots");
             DropTable("dbo.BookingServices");
             DropTable("dbo.Status");
+            DropTable("dbo.RootBookingProperties");
             DropTable("dbo.RootBookingEntities");
+            DropTable("dbo.Properties");
             DropTable("dbo.HourPrices");
             DropTable("dbo.DayPrices");
             DropTable("dbo.BookingPricings");
+            DropTable("dbo.Extras");
             DropTable("dbo.BookingEntities");
             DropTable("dbo.Addresses");
         }

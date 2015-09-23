@@ -25,7 +25,7 @@ namespace ACP.Data
         public virtual ICollection<BookingPricing> Prices {get;set;}
         public virtual Address Address { get; set; }
         public virtual ICollection<BookingService> Service { get; set; }
-        public virtual ICollection<Zone> Zone { get; set; }
+        public virtual ICollection<Slot> Slot { get; set; }
         
     }
 }

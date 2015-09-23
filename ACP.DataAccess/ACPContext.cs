@@ -37,7 +37,7 @@ namespace ACP.DataAccess
             modelBuilder.Configurations.Add(new HourPriceConfig());
             modelBuilder.Configurations.Add(new UserConfig());
             modelBuilder.Configurations.Add(new CarConfig());
-            modelBuilder.Configurations.Add(new ZoneConfig());
+            modelBuilder.Configurations.Add(new SlotConfig());
 
         }
 
@@ -54,6 +54,6 @@ namespace ACP.DataAccess
         public DbSet<Status> Statuses { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Car> Cars { get; set; }
-        public DbSet<Zone> Zones { get; set; }
+        public DbSet<Slot> Slots { get; set; }
     }
 }

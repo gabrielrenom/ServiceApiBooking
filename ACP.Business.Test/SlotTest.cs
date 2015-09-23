@@ -13,24 +13,24 @@ using System.Linq;
 namespace ACP.Business.Test
 {
     [TestClass]
-    public class ZoneTest
+    public class SlotTest
     {
         private IACPRepository repository;
-        private ZoneManager usermanager;
-        private IZoneService service;
+        private SlotManager usermanager;
+        private ISlotService service;
         private string localuser;
 
         [TestInitialize]
         public void Setup()
         {
             repository = new ACPRepository();
-            usermanager = new ZoneManager(repository);
-            service = new ZoneService(usermanager);
+            usermanager = new SlotManager(repository);
+            service = new SlotService(usermanager);
             localuser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
         }
 
         [TestMethod]
-        public async Task WhenGellAll_BeSureAllZonesWithAvailabilitiesAreReturned()
+        public async Task WhenGellAll_BeSureAllSlotsWithAvailabilitiesAreReturned()
         {            
 
             //Act
@@ -42,7 +42,7 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public async Task WhenGellAllOccupied_BeSureAllZonesWithAvailabilitiesAreReturned()
+        public async Task WhenGellAllOccupied_BeSureAllSlotsWithAvailabilitiesAreReturned()
         {
 
             //Act
@@ -54,7 +54,7 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public async Task GivenANameOrIdentifier_WhenGeByNameAndGetByAllOccupied_BeSureAllZonesWithAvailabilitiesAreReturned()
+        public async Task GivenANameOrIdentifier_WhenGeByNameAndGetByAllOccupied_BeSureAllSlotsWithAvailabilitiesAreReturned()
         {
 
             //Act
@@ -66,7 +66,7 @@ namespace ACP.Business.Test
 
 
         [TestMethod]
-        public async Task WhenGellAllFree_BeSureAllZonesWithAvailabilitiesAreReturned()
+        public async Task WhenGellAllFree_BeSureAllSlotsWithAvailabilitiesAreReturned()
         {
             //Act
             var result = await service.GetAllFree();
@@ -77,12 +77,12 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public async Task GivenAZone_WhenAddIsCalled_BeSureItReturnsTheStuffAdded()
+        public async Task GivenASlot_WhenAddIsCalled_BeSureItReturnsTheStuffAdded()
         {
             //Arrange
             var all = await service.GetAll();
 
-            ZoneModel model = new ZoneModel
+            SlotModel model = new SlotModel
             {
                 IsOccupied = false,
                 Number = 12,
@@ -136,12 +136,12 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public async Task GivenATheFirstZone_WhenUpdateWhenNewAvailabilityCalled_BeSureItReturns()
+        public async Task GivenATheFirstSlot_WhenUpdateWhenNewAvailabilityCalled_BeSureItReturns()
         {
             //Arrange
             var all = await service.GetAll();
 
-            ZoneModel model = all.FirstOrDefault();
+            SlotModel model = all.FirstOrDefault();
             model.Number = 15;
             model.Availability.Add(new AvailabilityModel
             {
@@ -162,12 +162,12 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public async Task GivenATheFirstZone_WhenUpdateWhenWeDeleteAnAvailabilityIsCalled_BeSureItReturns()
+        public async Task GivenATheFirstSlot_WhenUpdateWhenWeDeleteAnAvailabilityIsCalled_BeSureItReturns()
         {
             //Arrange
             var all = await service.GetAll();
 
-            ZoneModel model = all.FirstOrDefault();
+            SlotModel model = all.FirstOrDefault();
             model.Number = 15;
             if (model.Availability.Count > 1)
             {
@@ -182,16 +182,16 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public async Task GivenAStartDateAndEndDate_WhenFindZoneIsCalled_BeSureItReturnsFreeZones()
+        public async Task GivenAStartDateAndEndDate_WhenFindSlotIsCalled_BeSureItReturnsFreeSlots()
         {
             //Arrange
             var all = await service.GetAll();
 
             DateTime startdate = all.FirstOrDefault().Availability.FirstOrDefault().StartDate;//Convert.ToDateTime("2015-10-03 00:00:00.000");
             DateTime enddate = all.FirstOrDefault().Availability.FirstOrDefault().EndDate; Convert.ToDateTime("2015-10-07 00:00:00.000");
-
+            string airport = "LGW";
             //Act
-            var result = await service.FindZoneAvailable(startdate,enddate);
+            var result = await service.FindSlotAvailable(startdate,enddate,airport);
 
             //Assert
             Assert.IsTrue(result.Where(x=>x.Id == all.FirstOrDefault().Id).ToList().Count == 0);

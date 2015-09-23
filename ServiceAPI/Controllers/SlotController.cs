@@ -17,24 +17,24 @@ using System.Web.Http;
 
 namespace ServiceAPI.Controllers
 {
-    [RoutePrefix("api/v0.1/zonecontroller")]
-    public class ZoneController : BaseApiController
+    [RoutePrefix("api/v0.1/Slotcontroller")]
+    public class SlotController : BaseApiController
     {
-        private IZoneService _zoneservice;
+        private ISlotService _Slotservice;
 
-        public ZoneController(IZoneService zoneservice)
+        public SlotController(ISlotService Slotservice)
         {
-            _zoneservice = zoneservice;
+            _Slotservice = Slotservice;
         }
 
         [HttpGet]
         [Route("getbyid")]
         public async Task<HttpResponseMessage> GetById(int id)
         {
-            ZoneModel zone = null;
+            SlotModel Slot = null;
             try
             {
-                zone = await _zoneservice.GetById(id);
+                Slot = await _Slotservice.GetById(id);
             }
             catch (HttpRequestException ex)
             {
@@ -66,17 +66,17 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, zone, new JsonMediaTypeFormatter());
+            return Request.CreateResponse(HttpStatusCode.Created, Slot, new JsonMediaTypeFormatter());
         }
 
         [HttpGet]
         [Route("getall")]
         public async Task<HttpResponseMessage> GetAll()
         {
-            IList<ZoneModel> zones = null;
+            IList<SlotModel> Slots = null;
             try
             {
-                zones = await _zoneservice.GetAll();
+                Slots = await _Slotservice.GetAll();
             }
             catch (HttpRequestException ex)
             {
@@ -108,17 +108,17 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, zones, new JsonMediaTypeFormatter());
+            return Request.CreateResponse(HttpStatusCode.Created, Slots, new JsonMediaTypeFormatter());
         }
 
         [HttpGet]
         [Route("getbyname")]
         public async Task<HttpResponseMessage> GetByName(int? number=null,string identifier=null)
         {
-            ZoneModel zone = null;
+            SlotModel Slot = null;
             try
             {
-                zone = await _zoneservice.GetByNumberIdentifier(number,identifier);
+                Slot = await _Slotservice.GetByNumberIdentifier(number,identifier);
             }
             catch (HttpRequestException ex)
             {
@@ -150,17 +150,17 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, zone, new JsonMediaTypeFormatter());
+            return Request.CreateResponse(HttpStatusCode.Created, Slot, new JsonMediaTypeFormatter());
         }
 
         [HttpGet]
         [Route("getallfree")]
         public async Task<HttpResponseMessage> GetAllFree()
         {
-            IList<ZoneModel> zones = null;
+            IList<SlotModel> Slots = null;
             try
             {
-                zones = await _zoneservice.GetAllFree();
+                Slots = await _Slotservice.GetAllFree();
             }
             catch (HttpRequestException ex)
             {
@@ -192,17 +192,17 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, zones, new JsonMediaTypeFormatter());
+            return Request.CreateResponse(HttpStatusCode.Created, Slots, new JsonMediaTypeFormatter());
         }
 
         [HttpGet]
         [Route("getalloccupied")]
         public async Task<HttpResponseMessage> GetAllOccupied()
         {
-            IList<ZoneModel> zones = null;
+            IList<SlotModel> Slots = null;
             try
             {
-                zones = await _zoneservice.GetAllOccupied();
+                Slots = await _Slotservice.GetAllOccupied();
             }
             catch (HttpRequestException ex)
             {
@@ -234,17 +234,17 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, zones, new JsonMediaTypeFormatter());
+            return Request.CreateResponse(HttpStatusCode.Created, Slots, new JsonMediaTypeFormatter());
         }
 
         [HttpGet]
-        [Route("findzoneavailable")]
-        public async Task<HttpResponseMessage> FindZoneAvailable(DateTime startdate, DateTime enddate, string airport)
+        [Route("findSlotavailable")]
+        public async Task<HttpResponseMessage> FindSlotAvailable(DateTime startdate, DateTime enddate, string airport)
         {
-            IList<ZoneModel> zones = null;
+            IList<SlotModel> Slots = null;
             try
             {
-                zones = await _zoneservice.FindZoneAvailable(startdate, enddate);
+                Slots = await _Slotservice.FindSlotAvailable(startdate, enddate, airport);
             }
             catch (HttpRequestException ex)
             {
@@ -276,18 +276,18 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, zones, new JsonMediaTypeFormatter());
+            return Request.CreateResponse(HttpStatusCode.Created, Slots, new JsonMediaTypeFormatter());
         }
 
 
         [HttpPost]
         [Route("add")]
-        public async Task<HttpResponseMessage> Add(ZoneModel model)
+        public async Task<HttpResponseMessage> Add(SlotModel model)
         {
-            ZoneModel zone = null;
+            SlotModel Slot = null;
             try
             {
-                zone = await _zoneservice.Add(model);
+                Slot = await _Slotservice.Add(model);
             }
             catch (HttpRequestException ex)
             {
@@ -319,17 +319,17 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, zone, new JsonMediaTypeFormatter());
+            return Request.CreateResponse(HttpStatusCode.Created, Slot, new JsonMediaTypeFormatter());
         }
 
         [HttpPut]
         [Route("update")]
-        public async Task<HttpResponseMessage> Update(ZoneModel model)
+        public async Task<HttpResponseMessage> Update(SlotModel model)
         {
-            bool zone = false;
+            bool Slot = false;
             try
             {
-                zone = await _zoneservice.Update(model);
+                Slot = await _Slotservice.Update(model);
             }
             catch (HttpRequestException ex)
             {
@@ -361,17 +361,17 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, zone, new JsonMediaTypeFormatter());
+            return Request.CreateResponse(HttpStatusCode.Created, Slot, new JsonMediaTypeFormatter());
         }
 
         [HttpDelete]
         [Route("delete")]
         public async Task<HttpResponseMessage> Delete(int id)
         {
-            bool zone = false;
+            bool Slot = false;
             try
             {
-                zone = await _zoneservice.Remove(id);
+                Slot = await _Slotservice.Remove(id);
             }
             catch (HttpRequestException ex)
             {
@@ -403,7 +403,7 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, zone, new JsonMediaTypeFormatter());
+            return Request.CreateResponse(HttpStatusCode.Created, Slot, new JsonMediaTypeFormatter());
         }
 
 

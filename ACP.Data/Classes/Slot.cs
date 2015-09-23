@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ACP.Data.Classes
 {
-    public class Zone: BaseEntity
+    public class Slot: BaseEntity
     {
         public int Number { get; set; }
         public string Identifier { get; set; }

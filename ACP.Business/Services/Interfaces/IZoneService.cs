@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace ACP.Business.Services.Interfaces
 {
-    public interface IZoneService
+    public interface ISlotService
     {
-        Task<ZoneModel> Add(ZoneModel model);
-        Task<bool> Update(ZoneModel model);
-        Task<IList<ZoneModel>> GetAll();
-        Task<IList<ZoneModel>> GetAllOccupied();
-        Task<IList<ZoneModel>> GetAllFree();
-        Task<ZoneModel> GetById(int Id);
-        Task<ZoneModel> GetByNumberIdentifier(int? number=null, string identifier=null);
+        Task<SlotModel> Add(SlotModel model);
+        Task<bool> Update(SlotModel model);
+        Task<IList<SlotModel>> GetAll();
+        Task<IList<SlotModel>> GetAllOccupied();
+        Task<IList<SlotModel>> GetAllFree();
+        Task<SlotModel> GetById(int Id);
+        Task<SlotModel> GetByNumberIdentifier(int? number=null, string identifier=null);
         Task<bool> Remove(int Id);
-        Task<IList<ZoneModel>> FindZoneAvailable(DateTime startdate, DateTime enddate);
+        Task<IList<SlotModel>> FindSlotAvailable(DateTime startdate, DateTime enddate, string rootname);
     }
 }

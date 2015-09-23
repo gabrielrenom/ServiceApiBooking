@@ -76,66 +76,10 @@
     <Compile Include="Managers\ServiceManager.cs" />
     <Compile Include="Managers\StatusManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
-    <Compile Include="Managers\ZoneManager.cs" />
-    <Compile Include="Migrations\201506172116357_first.cs" />
-    <Compile Include="Migrations\201506172116357_first.Designer.cs">
-      <DependentUpon>201506172116357_first.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506211635222_users.cs" />
-    <Compile Include="Migrations\201506211635222_users.Designer.cs">
-      <DependentUpon>201506211635222_users.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506211642299_addressaddedinUser.cs" />
-    <Compile Include="Migrations\201506211642299_addressaddedinUser.Designer.cs">
-      <DependentUpon>201506211642299_addressaddedinUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506242051213_extras.cs" />
-    <Compile Include="Migrations\201506242051213_extras.Designer.cs">
-      <DependentUpon>201506242051213_extras.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506242120160_extrasandpriceupdated.cs" />
-    <Compile Include="Migrations\201506242120160_extrasandpriceupdated.Designer.cs">
-      <DependentUpon>201506242120160_extrasandpriceupdated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506282043133_addingavailability.cs" />
-    <Compile Include="Migrations\201506282043133_addingavailability.Designer.cs">
-      <DependentUpon>201506282043133_addingavailability.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506301602532_properties.cs" />
-    <Compile Include="Migrations\201506301602532_properties.Designer.cs">
-      <DependentUpon>201506301602532_properties.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201507072026573_properties1.cs" />
-    <Compile Include="Migrations\201507072026573_properties1.Designer.cs">
-      <DependentUpon>201507072026573_properties1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201507081918380_propertychange.cs" />
-    <Compile Include="Migrations\201507081918380_propertychange.Designer.cs">
-      <DependentUpon>201507081918380_propertychange.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201507081927266_properties_key_value.cs" />
-    <Compile Include="Migrations\201507081927266_properties_key_value.Designer.cs">
-      <DependentUpon>201507081927266_properties_key_value.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509071944591_newone.cs" />
-    <Compile Include="Migrations\201509071944591_newone.Designer.cs">
-      <DependentUpon>201509071944591_newone.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509172104479_statuschanged.cs" />
-    <Compile Include="Migrations\201509172104479_statuschanged.Designer.cs">
-      <DependentUpon>201509172104479_statuschanged.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509192243436_timespan_changed_in_timepricing.cs" />
-    <Compile Include="Migrations\201509192243436_timespan_changed_in_timepricing.Designer.cs">
-      <DependentUpon>201509192243436_timespan_changed_in_timepricing.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509211647207_new_zone.cs" />
-    <Compile Include="Migrations\201509211647207_new_zone.Designer.cs">
-      <DependentUpon>201509211647207_new_zone.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509211650500_new_zone_field.cs" />
-    <Compile Include="Migrations\201509211650500_new_zone_field.Designer.cs">
-      <DependentUpon>201509211650500_new_zone_field.cs</DependentUpon>
+    <Compile Include="Managers\SlotManager.cs" />
+    <Compile Include="Migrations\201509230818393_first.cs" />
+    <Compile Include="Migrations\201509230818393_first.Designer.cs">
+      <DependentUpon>201509230818393_first.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -160,50 +104,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201506172116357_first.resx">
-      <DependentUpon>201506172116357_first.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506211635222_users.resx">
-      <DependentUpon>201506211635222_users.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506211642299_addressaddedinUser.resx">
-      <DependentUpon>201506211642299_addressaddedinUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506242051213_extras.resx">
-      <DependentUpon>201506242051213_extras.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506242120160_extrasandpriceupdated.resx">
-      <DependentUpon>201506242120160_extrasandpriceupdated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506282043133_addingavailability.resx">
-      <DependentUpon>201506282043133_addingavailability.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506301602532_properties.resx">
-      <DependentUpon>201506301602532_properties.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201507072026573_properties1.resx">
-      <DependentUpon>201507072026573_properties1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201507081918380_propertychange.resx">
-      <DependentUpon>201507081918380_propertychange.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201507081927266_properties_key_value.resx">
-      <DependentUpon>201507081927266_properties_key_value.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509071944591_newone.resx">
-      <DependentUpon>201509071944591_newone.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509172104479_statuschanged.resx">
-      <DependentUpon>201509172104479_statuschanged.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509192243436_timespan_changed_in_timepricing.resx">
-      <DependentUpon>201509192243436_timespan_changed_in_timepricing.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509211647207_new_zone.resx">
-      <DependentUpon>201509211647207_new_zone.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509211650500_new_zone_field.resx">
-      <DependentUpon>201509211650500_new_zone_field.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201509230818393_first.resx">
+      <DependentUpon>201509230818393_first.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

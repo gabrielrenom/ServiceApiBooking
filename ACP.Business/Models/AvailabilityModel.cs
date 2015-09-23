@@ -12,10 +12,10 @@ namespace ACP.Business.Models
         public DateTime EndDate { get; set; }
 
         public int StatusId { get; set; }
-        public int ZoneId { get; set; }
+        public int SlotId { get; set; }
 
         public virtual StatusModel Status { get; set; }
-        public virtual ZoneModel Zone { get; set; }
+        public virtual SlotModel Slot { get; set; }
 
     }
 }

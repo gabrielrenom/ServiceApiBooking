@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace ACP.DataAccess.Config
 {
-    public class ZoneConfig: EntityTypeConfiguration<Zone>
+    public class SlotConfig: EntityTypeConfiguration<Slot>
     {
-        public ZoneConfig()
+        public SlotConfig()
         {
             HasKey(t => t.Id);
 
             HasRequired(t => t.BookingEntity)
-                .WithMany(t => t.Zone)
+                .WithMany(t => t.Slot)
                 .HasForeignKey(t => t.BookingEntityId)
                 .WillCascadeOnDelete(false);        
         }

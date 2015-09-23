@@ -59,7 +59,7 @@ namespace ACP.DataAccess.Managers
             dataModel.ModifiedBy = domainModel.ModifiedBy;
             dataModel.StartDate = domainModel.StartDate;
             dataModel.EndDate = domainModel.EndDate;
-            dataModel.ZoneId = domainModel.ZoneId;
+            dataModel.SlotId = domainModel.SlotId;
             dataModel.StatusId = domainModel.StatusId;
 
 
@@ -80,7 +80,7 @@ namespace ACP.DataAccess.Managers
             dataModel.ModifiedBy = domainModel.ModifiedBy;
             dataModel.StartDate = domainModel.StartDate;
             dataModel.EndDate = domainModel.EndDate;
-            dataModel.ZoneId = domainModel.ZoneId;            
+            dataModel.SlotId = domainModel.SlotId;            
             dataModel.StatusId = domainModel.StatusId;
             dataModel.Status = domainModel.Status != null ? new Status
             {
@@ -107,7 +107,7 @@ namespace ACP.DataAccess.Managers
             model.Created = dataModel.Created;
             model.ModifiedBy = dataModel.ModifiedBy;
             model.Modified = dataModel.Modified;
-            model.ZoneId = dataModel.ZoneId;            
+            model.SlotId = dataModel.SlotId;            
             model.StatusId = dataModel.Id;
             model.Status = dataModel.Status != null ? new StatusModel
             {                
@@ -135,7 +135,7 @@ namespace ACP.DataAccess.Managers
             dataModel.ModifiedBy = domainModel.ModifiedBy;
             dataModel.StartDate = domainModel.StartDate;
             dataModel.EndDate = domainModel.EndDate;
-            dataModel.ZoneId = domainModel.ZoneId;
+            dataModel.SlotId = domainModel.SlotId;
             dataModel.StatusId = domainModel.StatusId;
             dataModel.Status = domainModel.Status != null ? new Status
             {
@@ -162,7 +162,7 @@ namespace ACP.DataAccess.Managers
             model.Created = dataModel.Created;
             model.ModifiedBy = dataModel.ModifiedBy;
             model.Modified = dataModel.Modified;
-            model.ZoneId = dataModel.ZoneId;
+            model.SlotId = dataModel.SlotId;
             model.StatusId = dataModel.StatusId;
             model.Status = dataModel.Status!=null?new StatusModel{
                 CreatedBy = dataModel.Status.CreatedBy,

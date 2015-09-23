@@ -13,10 +13,10 @@ namespace ACP.Data
         public DateTime EndDate { get; set; }
 
         public int StatusId { get; set; }
-        public int ZoneId { get; set; }
+        public int SlotId { get; set; }
 
         public virtual Status Status { get; set; }
-        public virtual Zone Zone { get; set; }
+        public virtual Slot Slot { get; set; }
 
     }
 }
