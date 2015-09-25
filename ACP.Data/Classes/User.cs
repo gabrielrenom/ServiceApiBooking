@@ -18,7 +18,6 @@ namespace ACP.Data
 
         public virtual Address Address { get; set; }
         public virtual ICollection<Booking> Bookings { get; set; }
-        public virtual ICollection<Car> Cars { get; set; }
-        
+        public virtual ICollection<Car> Cars { get; set; }        
     }
 }

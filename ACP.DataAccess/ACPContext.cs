@@ -37,6 +37,9 @@ namespace ACP.DataAccess
             modelBuilder.Configurations.Add(new UserConfig());
             modelBuilder.Configurations.Add(new CarConfig());
             modelBuilder.Configurations.Add(new SlotConfig());
+            modelBuilder.Configurations.Add(new BookingConfig());
+            modelBuilder.Configurations.Add(new CustomerConfig());
+            modelBuilder.Configurations.Add(new PaymentConfig());
 
         }
 
@@ -54,5 +57,7 @@ namespace ACP.DataAccess
         public DbSet<User> Users { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Slot> Slots { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Payment> Payments { get; set; }
     }
 }

@@ -57,8 +57,10 @@
     <Compile Include="Config\BookingPricingConfig.cs" />
     <Compile Include="Config\BookingServiceConfig.cs" />
     <Compile Include="Config\CarConfig.cs" />
+    <Compile Include="Config\CustomerConfig.cs" />
     <Compile Include="Config\DayPriceConfig.cs" />
     <Compile Include="Config\ExtraConfig.cs" />
+    <Compile Include="Config\PaymentConfig.cs" />
     <Compile Include="Config\PropertiesConfig.cs" />
     <Compile Include="Config\RootBookingEntityConfig.cs" />
     <Compile Include="Config\HourPriceConfig.cs" />

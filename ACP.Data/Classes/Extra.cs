@@ -11,7 +11,10 @@ namespace ACP.Data
         public string Description { get; set; }
         public decimal Price { get; set; }
         public int BookingEntityId { get; set; }
+        public int BookingId { get; set; }
 
         public virtual BookingEntity BookingEntity { get; set; }
+
+        public virtual Booking Booking { get; set; }
     }
 }

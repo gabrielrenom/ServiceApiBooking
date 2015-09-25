@@ -42,12 +42,15 @@
   <ItemGroup>
     <Compile Include="Classes\Address.cs" />
     <Compile Include="Classes\Availability.cs" />
+    <Compile Include="Classes\BankAccount.cs" />
     <Compile Include="Classes\BaseEntity.cs" />
     <Compile Include="Classes\Booking.cs" />
     <Compile Include="Classes\BookingEntity.cs" />
     <Compile Include="Classes\BookingLink.cs" />
     <Compile Include="Classes\BookingPricing.cs" />
     <Compile Include="Classes\Car.cs" />
+    <Compile Include="Classes\CreditCard.cs" />
+    <Compile Include="Classes\Currency.cs" />
     <Compile Include="Classes\Customer.cs" />
     <Compile Include="Classes\EntityType.cs" />
     <Compile Include="Classes\Extra.cs" />
@@ -58,6 +61,7 @@
     <Compile Include="Classes\HourPrice.cs" />
     <Compile Include="Classes\DayPrice.cs" />
     <Compile Include="Classes\Slot.cs" />
+    <Compile Include="Classes\TravelDetails.cs" />
     <Compile Include="Enums\PropertyType.cs" />
     <Compile Include="Enums\RootBookingPropertyType.cs" />
     <Compile Include="Enums\StatusType.cs" />
