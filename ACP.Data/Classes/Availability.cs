@@ -16,8 +16,7 @@ namespace ACP.Data
         public int SlotId { get; set; }
 
         public virtual Status Status { get; set; }
-        public virtual Slot Slot { get; set; }
+        public virtual Slot Slot { get; set; }        
 
-        public virtual BookingLink BookingLink { get; set; }
     }
 }

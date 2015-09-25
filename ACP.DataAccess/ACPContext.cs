@@ -40,6 +40,8 @@ namespace ACP.DataAccess
             modelBuilder.Configurations.Add(new BookingConfig());
             modelBuilder.Configurations.Add(new CustomerConfig());
             modelBuilder.Configurations.Add(new PaymentConfig());
+            modelBuilder.Configurations.Add(new TravelDetailsConfig());
+            modelBuilder.Configurations.Add(new BookingLinkConfig());
 
         }
 
@@ -59,5 +61,7 @@ namespace ACP.DataAccess
         public DbSet<Slot> Slots { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<TravelDetails> TravelDetails { get; set; }
+        public DbSet<BookingLink> BookingLinks { get; set; }
     }
 }
