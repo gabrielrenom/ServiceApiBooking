@@ -27,17 +27,18 @@ namespace ACP.DataAccess
 
             modelBuilder.Configurations.Add(new RootBookingPropertiesConfig());
             modelBuilder.Configurations.Add(new PropertiesConfig());
-            modelBuilder.Configurations.Add(new StatusConfig());
-            modelBuilder.Configurations.Add(new BookingServiceConfig());
-            modelBuilder.Configurations.Add(new BookingEntityConfig());
             modelBuilder.Configurations.Add(new RootBookingEntityConfig());
+            modelBuilder.Configurations.Add(new BookingServiceConfig());
             modelBuilder.Configurations.Add(new AddressConfig());
-            modelBuilder.Configurations.Add(new DayPriceConfig());
+            modelBuilder.Configurations.Add(new BookingConfig());
+            modelBuilder.Configurations.Add(new BookingEntityConfig());
+            ///## BOOKINGPRICING
             modelBuilder.Configurations.Add(new HourPriceConfig());
+            modelBuilder.Configurations.Add(new DayPriceConfig());
+            modelBuilder.Configurations.Add(new StatusConfig());
             modelBuilder.Configurations.Add(new UserConfig());
             modelBuilder.Configurations.Add(new CarConfig());
             modelBuilder.Configurations.Add(new SlotConfig());
-            modelBuilder.Configurations.Add(new BookingConfig());
             modelBuilder.Configurations.Add(new CustomerConfig());
             modelBuilder.Configurations.Add(new PaymentConfig());
             modelBuilder.Configurations.Add(new TravelDetailsConfig());

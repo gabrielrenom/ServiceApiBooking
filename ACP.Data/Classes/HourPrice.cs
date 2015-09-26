@@ -11,6 +11,6 @@ namespace ACP.Data
         public decimal Hourprice { get; set; }
         public int DayPriceId { get; set; }
         
-        public DayPrice DayPrice { get; set; }
+        public virtual DayPrice DayPrice { get; set; }
     }
 }

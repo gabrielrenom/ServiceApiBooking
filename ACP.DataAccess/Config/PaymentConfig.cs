@@ -37,13 +37,13 @@ namespace ACP.DataAccess.Config
           .WillCascadeOnDelete(false);
 
             HasRequired(t => t.BankAccount)
-.WithMany(t => t.Payments)
-.HasForeignKey(t => t.BankAccountId)
-.WillCascadeOnDelete(false);
+            .WithMany(t => t.Payments)
+            .HasForeignKey(t => t.BankAccountId)
+            .WillCascadeOnDelete(false);
 
             HasRequired(t => t.Currency)
-       .WithMany(t => t.Payments)
-       .HasForeignKey(t => t.CurrencyId)
+            .WithMany(t => t.Payments)
+            .HasForeignKey(t => t.CurrencyId)
        .WillCascadeOnDelete(false);
         }
     }

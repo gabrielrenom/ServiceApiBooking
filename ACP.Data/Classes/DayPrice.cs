@@ -12,6 +12,6 @@ namespace ACP.Data
         public int BookingPricingId { get; set; }        
 
         public virtual BookingPricing BookingPricing { get; set; }
-        public ICollection<HourPrice> HourPrices { get; set; }
+        public virtual ICollection<HourPrice> HourPrices { get; set; }
     }
 }
