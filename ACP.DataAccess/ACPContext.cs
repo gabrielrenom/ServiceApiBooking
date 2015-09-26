@@ -42,6 +42,10 @@ namespace ACP.DataAccess
             modelBuilder.Configurations.Add(new PaymentConfig());
             modelBuilder.Configurations.Add(new TravelDetailsConfig());
             modelBuilder.Configurations.Add(new BookingLinkConfig());
+            modelBuilder.Configurations.Add(new PaymentMethodConfig());
+            modelBuilder.Configurations.Add(new CreditCardConfig());
+            modelBuilder.Configurations.Add(new BankAccountConfig());
+            modelBuilder.Configurations.Add(new CurrencyConfig());
 
         }
 
@@ -63,5 +67,9 @@ namespace ACP.DataAccess
         public DbSet<Payment> Payments { get; set; }
         public DbSet<TravelDetails> TravelDetails { get; set; }
         public DbSet<BookingLink> BookingLinks { get; set; }
+        public DbSet<PaymentMethod> PaymentMethods { get; set; }
+        public DbSet<CreditCard> CreditCards { get; set; }
+        public DbSet<BankAccount> BankAccounts { get; set; }
+        public DbSet<Currency> Currencies { get; set; }
     }
 }

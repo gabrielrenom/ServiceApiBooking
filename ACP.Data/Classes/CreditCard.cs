@@ -16,5 +16,7 @@ namespace ACP.Data
         public bool Deleted { get; set; }
         public string GateWayKey { get; set; }
         public string Lock { get; set; }
+
+        public virtual ICollection<Payment> Payments { get; set; }
     }
 }

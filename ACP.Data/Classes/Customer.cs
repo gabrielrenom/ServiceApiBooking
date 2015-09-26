@@ -16,6 +16,7 @@ namespace ACP.Data
         public string Fax { get; set; }
         public string Email { get; set; }    
          
-        public virtual ICollection<Booking> Bookings {get;set;}  
+        public virtual ICollection<Booking> Bookings {get;set;}
+        public virtual ICollection<Payment> Payments { get; set; }
     }
 }

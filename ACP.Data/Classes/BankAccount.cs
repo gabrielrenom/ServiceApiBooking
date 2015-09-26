@@ -1,4 +1,6 @@
-﻿namespace ACP.Data
+﻿using System.Collections.Generic;
+
+namespace ACP.Data
 {
     public class BankAccount: BaseEntity
     {
@@ -8,5 +10,6 @@
         public string BankName { get; set; }
         public string AccountName { get; set; }
         public bool Lock { get; set; }
+        public virtual ICollection<Payment> Payments { get; set; }
     }
 }

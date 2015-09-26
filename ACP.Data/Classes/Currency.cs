@@ -11,5 +11,7 @@ namespace ACP.Data
         public string Symbol { get; set; }
         public string Code { get; set; }
         public string CountryCode { get; set; }
+        public virtual ICollection<Payment> Payments { get; set; }
+
     }
 }

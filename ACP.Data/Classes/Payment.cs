@@ -14,6 +14,7 @@ namespace ACP.Data
         public int CreditCardId { get; set; }
         public int CurrencyId { get; set; }
         public int StatusId { get; set; }
+        public int BankAccountId { get; set; }
 
         public virtual Status Status { get; set; }
         public virtual ICollection<Booking> Bookings { get; set; }
