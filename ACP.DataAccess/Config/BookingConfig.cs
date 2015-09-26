@@ -23,17 +23,7 @@ namespace ACP.DataAccess.Config
             HasRequired(t => t.User)
             .WithMany(t => t.Bookings)
             .HasForeignKey(t => t.UserId)
-            .WillCascadeOnDelete(false);
-
-            HasRequired(t => t.Payment)
-            .WithMany(t => t.Bookings)
-            .HasForeignKey(t => t.PaymentId)
-            .WillCascadeOnDelete(false);
-
-            HasRequired(p => p.Status)
-            .WithMany()
-            .HasForeignKey(p => p.StatusId)
-            .WillCascadeOnDelete(false);
+            .WillCascadeOnDelete(false);         
 
             HasRequired(p => p.TravelDetails)
             .WithMany()

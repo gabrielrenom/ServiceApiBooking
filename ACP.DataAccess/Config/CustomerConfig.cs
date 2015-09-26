@@ -1,4 +1,5 @@
-﻿using ACP.Data;
+﻿
+using ACP.Data;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
@@ -8,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace ACP.DataAccess.Config
 {
-    public class PaymentMethodConfig: EntityTypeConfiguration<PaymentMethod>
+    public class CustomerConfig: EntityTypeConfiguration<Customer>
     {
-        public PaymentMethodConfig()
+        public CustomerConfig()
         {
-            //## Primary Key
             HasKey(t => t.Id);
+         
         }
     }
 }

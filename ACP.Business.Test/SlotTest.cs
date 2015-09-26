@@ -16,7 +16,7 @@ namespace ACP.Business.Test
     public class SlotTest
     {
         private IACPRepository repository;
-        private SlotManager usermanager;
+        private SlotManager slotmanager;
         private ISlotService service;
         private string localuser;
 
@@ -24,8 +24,8 @@ namespace ACP.Business.Test
         public void Setup()
         {
             repository = new ACPRepository();
-            usermanager = new SlotManager(repository);
-            service = new SlotService(usermanager);
+            slotmanager = new SlotManager(repository);
+            service = new SlotService(slotmanager);
             localuser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
         }
 

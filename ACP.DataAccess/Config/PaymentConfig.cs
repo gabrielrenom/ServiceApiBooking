@@ -13,22 +13,16 @@ namespace ACP.DataAccess.Config
         public PaymentConfig()
         {
             //## Primary Key
-            HasKey(t => t.Id);
-
-            HasRequired(p => p.Status)
-            .WithMany()
-            .HasForeignKey(p => p.StatusId)
-            .WillCascadeOnDelete(false);
+            HasKey(t => t.Id);          
 
             HasRequired(t => t.Customer)
             .WithMany(t => t.Payments)
             .HasForeignKey(t => t.CustomerId)
             .WillCascadeOnDelete(false);
 
-
-            HasRequired(p => p.PaymentMethod)
-            .WithMany()
-            .HasForeignKey(p => p.PaymentMethodId)
+            HasRequired(t => t.Booking)
+            .WithMany(t => t.Payments)
+            .HasForeignKey(t => t.BookingId)
             .WillCascadeOnDelete(false);
 
             HasRequired(t => t.CreditCard)

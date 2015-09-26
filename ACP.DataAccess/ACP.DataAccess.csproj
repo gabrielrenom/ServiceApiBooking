@@ -65,7 +65,6 @@
     <Compile Include="Config\DayPriceConfig.cs" />
     <Compile Include="Config\ExtraConfig.cs" />
     <Compile Include="Config\PaymentConfig.cs" />
-    <Compile Include="Config\PaymentMethodConfig.cs" />
     <Compile Include="Config\PropertiesConfig.cs" />
     <Compile Include="Config\RootBookingEntityConfig.cs" />
     <Compile Include="Config\HourPriceConfig.cs" />
@@ -92,6 +91,22 @@
     <Compile Include="Migrations\201509261238243_bookingsadded.cs" />
     <Compile Include="Migrations\201509261238243_bookingsadded.Designer.cs">
       <DependentUpon>201509261238243_bookingsadded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509261527588_bookings_status_added_as_a_flag.cs" />
+    <Compile Include="Migrations\201509261527588_bookings_status_added_as_a_flag.Designer.cs">
+      <DependentUpon>201509261527588_bookings_status_added_as_a_flag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509261758102_bookings_payments_modified.cs" />
+    <Compile Include="Migrations\201509261758102_bookings_payments_modified.Designer.cs">
+      <DependentUpon>201509261758102_bookings_payments_modified.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509261800567_payment_status_changed.cs" />
+    <Compile Include="Migrations\201509261800567_payment_status_changed.Designer.cs">
+      <DependentUpon>201509261800567_payment_status_changed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509261818277_minor_changes_cc.cs" />
+    <Compile Include="Migrations\201509261818277_minor_changes_cc.Designer.cs">
+      <DependentUpon>201509261818277_minor_changes_cc.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -121,6 +136,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509261238243_bookingsadded.resx">
       <DependentUpon>201509261238243_bookingsadded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509261527588_bookings_status_added_as_a_flag.resx">
+      <DependentUpon>201509261527588_bookings_status_added_as_a_flag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509261758102_bookings_payments_modified.resx">
+      <DependentUpon>201509261758102_bookings_payments_modified.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509261800567_payment_status_changed.resx">
+      <DependentUpon>201509261800567_payment_status_changed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509261818277_minor_changes_cc.resx">
+      <DependentUpon>201509261818277_minor_changes_cc.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

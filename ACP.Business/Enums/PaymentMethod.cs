@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace ACP.Business.Enums
 {
-    public enum StatusType
+    public enum PaymentMethod
     {
-        Free = 0,
-        Occupied = 1,
-        Active = 2,
-        Inactive = 3,
-        Processing = 4,
-        Paid = 5
+        CreditCard = 100,
+        BankAccount = 101,
+        PayPal = 102,
+        DebitCard = 103
     }
 }

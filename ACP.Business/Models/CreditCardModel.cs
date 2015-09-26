@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ACP.Data
+namespace ACP.Business.Models
 {
-    public class CreditCard: BaseEntity
+    public class CreditCardModel: BaseModel
     {
         public string Number { get; set; }
         public string PlainNumber { get; set; }
@@ -17,6 +14,6 @@ namespace ACP.Data
         public string GateWayKey { get; set; }
         public bool Lock { get; set; }
 
-        public virtual ICollection<Payment> Payments { get; set; }
+        public virtual ICollection<PaymentModel> Payments { get; set; }
     }
 }

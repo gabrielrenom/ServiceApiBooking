@@ -21,6 +21,8 @@ namespace ACP.Business.Test
         private IBookingManager bookingmanager;
         private IBookingPricingManager bookingpricingmanager;
         private IQuoteService service;
+        private SlotManager slotmanager;
+        private ISlotService slotservice;
 
         [TestInitialize]
         public void Setup()
@@ -29,6 +31,8 @@ namespace ACP.Business.Test
             bookingmanager = new BookingManager(repository);
             bookingpricingmanager= new BookingPricingManager(repository);
             service = new QuoteService(bookingmanager, bookingpricingmanager);
+            slotmanager = new SlotManager(repository);
+            slotservice = new SlotService(slotmanager);
         }
 
         [TestMethod]
@@ -60,5 +64,128 @@ namespace ACP.Business.Test
             
         }
 
-    }
+        [TestMethod]
+        public async Task GivenAQuote_WhenUserDoesABooking_BeSureTheBookingIsDone()
+        {
+            //Arrange
+            var all = await slotservice.GetAll();
+
+            DateTime startdate= Convert.ToDateTime("2015-10-03 00:00:00.000");
+            DateTime enddate =  Convert.ToDateTime("2015-10-07 00:00:00.000");
+            string airport = "LGW";
+            var result = await slotservice.FindSlotAvailable(startdate, enddate, airport);
+           
+            CustomerModel customer = new CustomerModel
+            {
+                 Forename   = "Mike",
+                 Surname    = "Smith",
+                 Email      = "mikesmith@gmail.com",
+                 Mobile     = "07172727272",
+                 Telephone  = "01626363711",
+                 Fax        = "01626363711",
+                 Initials   = "Dr",
+                 Title      = "Mr",                                  
+                 Address = new AddressModel {
+                      Number=3,
+                      Postcode="W1",
+                      Address1 = "10 Downing Street",
+                      Address2 ="W1",
+                      City = "London",
+                      Country="Uk",
+                      County = "Greater London",
+                      Created = DateTime.Now,
+                      Modified = DateTime.Now,
+                      CreatedBy = "localuser",
+                      ModifiedBy="localuser",                          
+                 },                                                  
+                Created = DateTime.Now,
+                Modified = DateTime.Now,
+                CreatedBy = "localuser",
+                ModifiedBy = "localuser",
+            };
+
+            PaymentModel payment = new PaymentModel
+            {
+                Customer = customer,
+                PaymentMethod = Enums.PaymentMethod.CreditCard,
+                CreditCard = new CreditCardModel {
+                    Lock = false,
+                    ExpiryDate = DateTime.Now.AddYears(2),
+                    Deleted = false,
+                    Name = "Mike Smith",
+                    PlainNumber = "6376485484737833",
+                    Type= 2,
+                    Created = DateTime.Now,
+                    Modified = DateTime.Now,
+                    CreatedBy = "localuser",
+                    ModifiedBy = "localuser",
+                },
+                Currency = new CurrencyModel {
+                      CountryCode = "GB",
+                      Code="GPR"
+                },
+                Status = Enums.StatusType.Processing,
+                Created = DateTime.Now,
+                Modified = DateTime.Now,
+                CreatedBy = "localuser",
+                ModifiedBy = "localuser",
+            };
+
+            BookingModel model = new BookingModel
+            {                
+                AgentReference = "CRT98",
+                Cost = 78.90,
+                StartDate = startdate,
+                EndDate = enddate,
+                Status = Enums.StatusType.Processing,
+                Created = DateTime.Now,
+                Modified = DateTime.Now,
+                CreatedBy = "localuser",
+                ModifiedBy = "localuser",
+                Message = "We will arrive late",
+                //## BookingReference TO BE ADDED BY SERVICE,
+                Price = 78.9m,
+                Customer = customer,                
+                TravelDetails = new TravelDetailsModel
+                {
+                    OutboundDate = startdate,
+                    OutboundFlight = "FLG156",
+                    OutboundTerminal = "1",
+                    ReturnboundTerminal = "3",
+                    ReturnDate = enddate,
+                    ReturnFlight = "JKLUYU",
+                    Created = DateTime.Now,
+                    Modified = DateTime.Now,
+                    CreatedBy = "localuser",
+                    ModifiedBy = "localuser",
+                },
+
+                Car = new CarModel
+                {
+                    Colour = "Red",
+                    Make = "Audi",
+                    Model = "A6",
+                    Registration = "CR7",
+                    Created = DateTime.Now,
+                    Modified = DateTime.Now,
+                    CreatedBy = "localuser",
+                    ModifiedBy = "localuser",
+                }
+            };
+
+            //Act
+
+            //Assert
+        }
+
+        private string GenerateReference()
+        {
+            long i = 1;
+            foreach (byte b in Guid.NewGuid().ToByteArray())
+            {
+                i *= ((int)b + 1);
+            }
+            return string.Format("{0:x}", i - DateTime.Now.Ticks);
+        }
+    }  
 }
