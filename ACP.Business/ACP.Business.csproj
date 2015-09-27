@@ -119,11 +119,13 @@
     <Compile Include="Services\BookingEntityService.cs" />
     <Compile Include="Services\BookingPricingService.cs" />
     <Compile Include="Services\BookingService.cs" />
+    <Compile Include="Services\QuoteService.cs" />
     <Compile Include="Services\HMACService.cs" />
     <Compile Include="Services\Interfaces\BaseAuth.cs" />
     <Compile Include="Services\Interfaces\IAvailabilityService.cs" />
     <Compile Include="Services\Interfaces\IBookingEntityService.cs" />
     <Compile Include="Services\Interfaces\IBookingPricingService.cs" />
+    <Compile Include="Services\Interfaces\IBookingService.cs" />
     <Compile Include="Services\Interfaces\IQuoteService.cs" />
     <Compile Include="Services\Interfaces\IHMACService.cs" />
     <Compile Include="Services\Interfaces\IPricingService.cs" />

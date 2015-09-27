@@ -8,6 +8,7 @@ using ACP.DataAccess.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace ACP.Business.Test
         private IQuoteService service;
         private SlotManager slotmanager;
         private ISlotService slotservice;
+        private IBookingService bookingservice; 
 
         [TestInitialize]
         public void Setup()
@@ -33,6 +35,7 @@ namespace ACP.Business.Test
             service = new QuoteService(bookingmanager, bookingpricingmanager);
             slotmanager = new SlotManager(repository);
             slotservice = new SlotService(slotmanager);
+            bookingservice = new BookingService(bookingmanager);
         }
 
         [TestMethod]
@@ -70,10 +73,10 @@ namespace ACP.Business.Test
             //Arrange
             var all = await slotservice.GetAll();
 
-            DateTime startdate= Convert.ToDateTime("2015-10-03 00:00:00.000");
-            DateTime enddate =  Convert.ToDateTime("2015-10-07 00:00:00.000");
+            DateTime startdate = DateTime.Now;//Convert.ToDateTime("2015-10-03 00:00:00.000");
+            DateTime enddate = DateTime.Now; //Convert.ToDateTime("2015-10-07 00:00:00.000");
             string airport = "LGW";
-            var result = await slotservice.FindSlotAvailable(startdate, enddate, airport);
+            var findresult = await slotservice.FindSlotAvailable(startdate, enddate, airport);
            
             CustomerModel customer = new CustomerModel
             {
@@ -106,7 +109,7 @@ namespace ACP.Business.Test
 
             PaymentModel payment = new PaymentModel
             {
-                Customer = customer,
+                Customer = customer,                
                 PaymentMethod = Enums.PaymentMethod.CreditCard,
                 CreditCard = new CreditCardModel {
                     Lock = false,
@@ -128,11 +131,11 @@ namespace ACP.Business.Test
                 Created = DateTime.Now,
                 Modified = DateTime.Now,
                 CreatedBy = "localuser",
-                ModifiedBy = "localuser",
+                ModifiedBy = "localuser",                                                 
             };
 
             BookingModel model = new BookingModel
-            {                
+            {                                                 
                 AgentReference = "CRT98",
                 Cost = 78.90,
                 StartDate = startdate,
@@ -169,23 +172,19 @@ namespace ACP.Business.Test
                     Created = DateTime.Now,
                     Modified = DateTime.Now,
                     CreatedBy = "localuser",
-                    ModifiedBy = "localuser",
-                }
+                    ModifiedBy = "localuser",                   
+                },
+                 Payments = new Collection<PaymentModel>
+                 {
+                     payment
+                 }
             };
 
             //Act
+            var result = await bookingservice.Add(model);
 
             //Assert
-        }
-
-        private string GenerateReference()
-        {
-            long i = 1;
-            foreach (byte b in Guid.NewGuid().ToByteArray())
-            {
-                i *= ((int)b + 1);
-            }
-            return string.Format("{0:x}", i - DateTime.Now.Ticks);
-        }
+            Assert.IsNotNull(result);
+        }        
     }  
 }

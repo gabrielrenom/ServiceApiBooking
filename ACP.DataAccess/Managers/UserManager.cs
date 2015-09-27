@@ -24,15 +24,18 @@ namespace ACP.DataAccess.Managers
 
             try
             {
-                var dataModel = Repository.GetSingle<User>(a => a.Id == id, x => x.Bookings, x => x.Address, x => x.Cars);
+                //## ENABLE THIS WHEN BOOKING ENABLED
+                //## var dataModel = Repository.GetSingle<User>(a => a.Id == id, x => x.Bookings, x => x.Address, x => x.Cars);
+                var dataModel = Repository.GetSingle<User>(a => a.Id == id,  x => x.Address, x => x.Cars);
 
                 if (dataModel != null)
                 {
                     if (dataModel.Cars.Count>0)
                         Repository.DeleteMany<Car>(dataModel.Cars.ToArray());
 
-                    if (dataModel.Bookings.Count > 0)
-                        Repository.DeleteMany<Booking>(dataModel.Bookings.ToArray());
+                    //## ENABLE THIS WHEN BOOKING ENABLED
+                    //if (dataModel.Bookings.Count > 0)
+                    //    Repository.DeleteMany<Booking>(dataModel.Bookings.ToArray());
 
                     if (dataModel.Address!=null)
                         Repository.Delete<Address>(dataModel.Address);
@@ -53,9 +56,11 @@ namespace ACP.DataAccess.Managers
 
         public override bool Update(UserModel domainModel)
         {
-                
-            var dataModel = Repository.GetSingle<User>(a => a.Id == domainModel.Id, x => x.Bookings, x => x.Address, x => x.Cars);
-                
+
+            //## ENABLE THIS WHEN BOOKINGS AVAILABLE   
+            // var dataModel = Repository.GetSingle<User>(a => a.Id == domainModel.Id, x => x.Bookings, x => x.Address, x => x.Cars);
+             var dataModel = Repository.GetSingle<User>(a => a.Id == domainModel.Id, x => x.Address, x => x.Cars);
+
             dataModel.Created = domainModel.Created;
             dataModel.CreatedBy = domainModel.CreatedBy;
             dataModel.Modified = domainModel.Modified;
@@ -86,8 +91,10 @@ namespace ACP.DataAccess.Managers
             
             if (dataModel.Cars.Count>0 )
             {
-                var car = Repository.GetSingle<User>(a => a.Id == domainModel.Id, x => x.Bookings, x => x.Address, x => x.Cars);
-                
+                //## ENABLE THIS WHEN BOOKINGS AVAILABLE
+                //var car = Repository.GetSingle<User>(a => a.Id == domainModel.Id, x => x.Bookings, x => x.Address, x => x.Cars);
+                var car = Repository.GetSingle<User>(a => a.Id == domainModel.Id, x => x.Address, x => x.Cars);
+
                 Repository.DeleteMany<Car>(dataModel.Cars.ToArray());
 
                 dataModel.Cars = domainModel.Cars != null ? domainModel.Cars.Select(x => new Car
@@ -106,15 +113,15 @@ namespace ACP.DataAccess.Managers
             }
 
             //## Needs to be implemented
-            if (dataModel.Bookings.Count>0)
-            {
-                Repository.DeleteMany<Booking>(dataModel.Bookings.ToArray());
+            //if (dataModel.Bookings.Count>0)
+            //{
+            //    Repository.DeleteMany<Booking>(dataModel.Bookings.ToArray());
 
-                dataModel.Bookings = domainModel.Bookings != null ? domainModel.Bookings.Select(x => new Booking
-                {
+            //    dataModel.Bookings = domainModel.Bookings != null ? domainModel.Bookings.Select(x => new Booking
+            //    {
                     
-                }).ToList() : null;
-            }
+            //    }).ToList() : null;
+            //}
 
             Repository.Update<User>(dataModel);
             Repository.Commit();
@@ -124,7 +131,9 @@ namespace ACP.DataAccess.Managers
 
         public override UserModel GetById(int id)
         {
-            return base.GetByIdIncluding(id, x=>x.Address,x=>x.Bookings,x=>x.Cars);
+            //## ENABLE THIS WHEN USERS AVAILABLE
+            // return base.GetByIdIncluding(id, x=>x.Address,x=>x.Bookings,x=>x.Cars);
+            return base.GetByIdIncluding(id, x => x.Address, x => x.Cars);
         }
 
         public override UserModel Add(UserModel domainModel)
@@ -227,7 +236,10 @@ namespace ACP.DataAccess.Managers
         public IList<UserModel> GetAllUsersWithCarsAndBookings()
         {
             //Bookings needs to be implemented in the domain
-            return GetListIncluding(x => x.Id > 0, x => x.Bookings, x => x.Cars, x=>x.Address).ToList();
+            //## ENABLE THIS WHEN USERS AVAILABLE
+            //return GetListIncluding(x => x.Id > 0, x => x.Bookings, x => x.Cars, x=>x.Address).ToList();
+
+            return GetListIncluding(x => x.Id > 0, x => x.Cars, x => x.Address).ToList();
         }
 
         public IList<UserModel> GetAllUsersWithCars()
