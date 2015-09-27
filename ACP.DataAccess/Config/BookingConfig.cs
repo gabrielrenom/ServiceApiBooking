@@ -20,20 +20,20 @@ namespace ACP.DataAccess.Config
             .HasForeignKey(t => t.CustomerId)
             .WillCascadeOnDelete(false);
 
-            //HasRequired(t => t.User)
-            //.WithMany(t => t.Bookings)
-            //.HasForeignKey(t => t.UserId)
-            //.WillCascadeOnDelete(false);         
+            HasRequired(t => t.User)
+            .WithMany(t => t.Bookings)
+            .HasForeignKey(t => t.UserId)
+            .WillCascadeOnDelete(false);
 
             HasRequired(p => p.TravelDetails)
             .WithMany()
             .HasForeignKey(p => p.TravelDetailsId)
             .WillCascadeOnDelete(false);
 
-            //HasRequired(p => p.Car)
-            //.WithMany()
-            //.HasForeignKey(p => p.CarId)
-            //.WillCascadeOnDelete(false);
+            HasRequired(p => p.Car)
+            .WithMany()
+            .HasForeignKey(p => p.CarId)
+            .WillCascadeOnDelete(false);
         }
     }
 }

@@ -11,9 +11,9 @@ namespace ACP.Data
     {
         public int BookingId { get; set; }
         public int CustomerId { get; set; }
-        public int CreditCardId { get; set; }
+        public int? CreditCardId { get; set; }
         public int CurrencyId { get; set; }
-        public int BankAccountId { get; set; }
+        public int? BankAccountId { get; set; }
 
         public StatusType Status { get; set; }
         public virtual Booking Booking { get; set; }

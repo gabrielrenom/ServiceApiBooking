@@ -25,17 +25,19 @@ namespace ACP.DataAccess.Managers
             try
             {
                 //## ENABLE THIS WHEN BOOKING ENABLED
-                //## var dataModel = Repository.GetSingle<User>(a => a.Id == id, x => x.Bookings, x => x.Address, x => x.Cars);
-                var dataModel = Repository.GetSingle<User>(a => a.Id == id,  x => x.Address, x => x.Cars);
+                //var dataModel = Repository.GetSingle<User>(a => a.Id == id, x => x.Bookings, x => x.Address, x => x.Cars);
+                var dataModel = Repository.GetSingle<User>(a => a.Id == id, x => x.Bookings, x => x.Address);
 
                 if (dataModel != null)
                 {
-                    if (dataModel.Cars.Count>0)
-                        Repository.DeleteMany<Car>(dataModel.Cars.ToArray());
 
-                    //## ENABLE THIS WHEN BOOKING ENABLED
-                    //if (dataModel.Bookings.Count > 0)
-                    //    Repository.DeleteMany<Booking>(dataModel.Bookings.ToArray());
+                    //## ENABLE THIS WHEN CARS ENABLED
+                    //if (dataModel.Cars.Count>0)
+                    //    Repository.DeleteMany<Car>(dataModel.Cars.ToArray());
+
+
+                    if (dataModel.Bookings.Count > 0)
+                        Repository.DeleteMany<Booking>(dataModel.Bookings.ToArray());
 
                     if (dataModel.Address!=null)
                         Repository.Delete<Address>(dataModel.Address);
@@ -57,9 +59,9 @@ namespace ACP.DataAccess.Managers
         public override bool Update(UserModel domainModel)
         {
 
-            //## ENABLE THIS WHEN BOOKINGS AVAILABLE   
+            //## ENABLE THIS WHEN CARS AVAILABLE   
             // var dataModel = Repository.GetSingle<User>(a => a.Id == domainModel.Id, x => x.Bookings, x => x.Address, x => x.Cars);
-             var dataModel = Repository.GetSingle<User>(a => a.Id == domainModel.Id, x => x.Address, x => x.Cars);
+            var dataModel = Repository.GetSingle<User>(a => a.Id == domainModel.Id, x => x.Bookings, x => x.Address);
 
             dataModel.Created = domainModel.Created;
             dataModel.CreatedBy = domainModel.CreatedBy;
@@ -88,40 +90,41 @@ namespace ACP.DataAccess.Managers
             dataModel.LastName = domainModel.LastName;
             dataModel.Password = domainModel.Password;
             dataModel.PhoneNumber = domainModel.PhoneNumber;
-            
-            if (dataModel.Cars.Count>0 )
+
+            //## ENABLE THIS WHEN CARS AVAILABLE
+            //if (dataModel.Cars.Count>0 )
+            //{
+              
+            //    var car = Repository.GetSingle<User>(a => a.Id == domainModel.Id, x => x.Bookings, x => x.Address, x => x.Cars);
+            //    //var car = Repository.GetSingle<User>(a => a.Id == domainModel.Id, x => x.Address, x => x.Cars);
+
+            //    Repository.DeleteMany<Car>(dataModel.Cars.ToArray());
+
+            //    dataModel.Cars = domainModel.Cars != null ? domainModel.Cars.Select(x => new Car
+            //    {
+            //        Created = x.Created,
+            //        CreatedBy = x.CreatedBy,
+            //        Id = x.Id,
+            //        Modified = x.Modified,
+            //        ModifiedBy = x.ModifiedBy,
+            //        Colour = x.Colour,
+            //        Make = x.Make,
+            //        Model = x.Model,
+            //        Registration = x.Registration
+
+            //    }).ToList() : null;
+            //}
+
+            //## Needs to be implemented
+            if (dataModel.Bookings.Count > 0)
             {
-                //## ENABLE THIS WHEN BOOKINGS AVAILABLE
-                //var car = Repository.GetSingle<User>(a => a.Id == domainModel.Id, x => x.Bookings, x => x.Address, x => x.Cars);
-                var car = Repository.GetSingle<User>(a => a.Id == domainModel.Id, x => x.Address, x => x.Cars);
+                Repository.DeleteMany<Booking>(dataModel.Bookings.ToArray());
 
-                Repository.DeleteMany<Car>(dataModel.Cars.ToArray());
-
-                dataModel.Cars = domainModel.Cars != null ? domainModel.Cars.Select(x => new Car
+                dataModel.Bookings = domainModel.Bookings != null ? domainModel.Bookings.Select(x => new Booking
                 {
-                    Created = x.Created,
-                    CreatedBy = x.CreatedBy,
-                    Id = x.Id,
-                    Modified = x.Modified,
-                    ModifiedBy = x.ModifiedBy,
-                    Colour = x.Colour,
-                    Make = x.Make,
-                    Model = x.Model,
-                    Registration = x.Registration
 
                 }).ToList() : null;
             }
-
-            //## Needs to be implemented
-            //if (dataModel.Bookings.Count>0)
-            //{
-            //    Repository.DeleteMany<Booking>(dataModel.Bookings.ToArray());
-
-            //    dataModel.Bookings = domainModel.Bookings != null ? domainModel.Bookings.Select(x => new Booking
-            //    {
-                    
-            //    }).ToList() : null;
-            //}
 
             Repository.Update<User>(dataModel);
             Repository.Commit();
@@ -131,9 +134,9 @@ namespace ACP.DataAccess.Managers
 
         public override UserModel GetById(int id)
         {
-            //## ENABLE THIS WHEN USERS AVAILABLE
-            // return base.GetByIdIncluding(id, x=>x.Address,x=>x.Bookings,x=>x.Cars);
-            return base.GetByIdIncluding(id, x => x.Address, x => x.Cars);
+            //## ENABLE THIS WHEN CARS AVAILABLE
+            //return base.GetByIdIncluding(id, x=>x.Address,x=>x.Bookings,x=>x.Cars);
+            return base.GetByIdIncluding(id, x => x.Address, x => x.Bookings);
         }
 
         public override UserModel Add(UserModel domainModel)
@@ -172,17 +175,17 @@ namespace ACP.DataAccess.Managers
             dataModel.Password = domainModel.Password;
             dataModel.PhoneNumber = domainModel.PhoneNumber;
             dataModel.AddressId = domainModel.AddressId;
-            dataModel.Cars=domainModel.Cars!=null?domainModel.Cars.Select(x=>new Car{
-                Created = x.Created,
-                CreatedBy = x.CreatedBy,
-                Id = x.Id,
-                Modified = x.Modified,
-                ModifiedBy = x.ModifiedBy,
-                Colour = x.Colour,
-                Make = x.Make,
-                Model = x.Model,
-                Registration = x.Registration                     
-            }).ToList():null;   
+            //dataModel.Cars=domainModel.Cars!=null?domainModel.Cars.Select(x=>new Car{
+            //    Created = x.Created,
+            //    CreatedBy = x.CreatedBy,
+            //    Id = x.Id,
+            //    Modified = x.Modified,
+            //    ModifiedBy = x.ModifiedBy,
+            //    Colour = x.Colour,
+            //    Make = x.Make,
+            //    Model = x.Model,
+            //    Registration = x.Registration                     
+            //}).ToList():null;   
             return dataModel;            
         }
 
@@ -217,17 +220,17 @@ namespace ACP.DataAccess.Managers
                   LastName = dataModel.LastName,
                   Email = dataModel.Email,
                   Password = dataModel.Password,
-                  Cars = dataModel.Cars!=null?dataModel.Cars.Select(x=>new CarModel{
-                         Created = x.Created,
-                         CreatedBy = x.CreatedBy,
-                         Id = x.Id,
-                         Modified = x.Modified,
-                         ModifiedBy = x.ModifiedBy,
-                         Colour = x.Colour,
-                         Make = x.Make,
-                         Model = x.Model,
-                         Registration = x.Registration                     
-                  }).ToList():null                     
+                  //Cars = dataModel.Cars!=null?dataModel.Cars.Select(x=>new CarModel{
+                  //       Created = x.Created,
+                  //       CreatedBy = x.CreatedBy,
+                  //       Id = x.Id,
+                  //       Modified = x.Modified,
+                  //       ModifiedBy = x.ModifiedBy,
+                  //       Colour = x.Colour,
+                  //       Make = x.Make,
+                  //       Model = x.Model,
+                  //       Registration = x.Registration                     
+                  //}).ToList():null                     
             };
 
             return model;
@@ -237,14 +240,17 @@ namespace ACP.DataAccess.Managers
         {
             //Bookings needs to be implemented in the domain
             //## ENABLE THIS WHEN USERS AVAILABLE
+            return GetListIncluding(x => x.Id > 0, x => x.Bookings, x => x.Address).ToList();
             //return GetListIncluding(x => x.Id > 0, x => x.Bookings, x => x.Cars, x=>x.Address).ToList();
 
-            return GetListIncluding(x => x.Id > 0, x => x.Cars, x => x.Address).ToList();
+            //return GetListIncluding(x => x.Id > 0, x => x.Cars, x => x.Address).ToList();
         }
 
         public IList<UserModel> GetAllUsersWithCars()
         {
-            return GetListIncluding(x => x.Id > 0, x => x.Cars,x=>x.Address).ToList();
+            //## ENABLE THIS WHEN USERS AVAILABLE
+            //return GetListIncluding(x => x.Id > 0, x => x.Cars,x=>x.Address).ToList();
+            return GetListIncluding(x => x.Id > 0, x => x.Address).ToList();
         }
     }
 }

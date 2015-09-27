@@ -7,9 +7,9 @@ namespace ACP.Business.Models
     {
         public int BookingId { get; set; }
         public int CustomerId { get; set; }
-        public int CreditCardId { get; set; }
+        public int? CreditCardId { get; set; }
         public int CurrencyId { get; set; }
-        public int BankAccountId { get; set; }
+        public int? BankAccountId { get; set; }
 
         public virtual StatusType Status { get; set; }
         public virtual BookingModel Booking { get; set; }

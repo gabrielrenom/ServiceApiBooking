@@ -25,16 +25,24 @@ namespace ACP.DataAccess.Config
             .HasForeignKey(t => t.BookingId)
             .WillCascadeOnDelete(false);
 
-            HasRequired(t => t.CreditCard)
-          .WithMany(t => t.Payments)
-          .HasForeignKey(t => t.CreditCardId)
-          .WillCascadeOnDelete(false);
+          //  HasRequired(t => t.CreditCard)
+          //.WithMany(t => t.Payments)
+          //.HasForeignKey(t => t.CreditCardId)
+          //.WillCascadeOnDelete(false);
 
-            HasRequired(t => t.BankAccount)
-            .WithMany(t => t.Payments)
-            .HasForeignKey(t => t.BankAccountId)
-            .WillCascadeOnDelete(false);
+            this.HasOptional(s => s.CreditCard)
+            .WithMany(s => s.Payments)
+            .HasForeignKey(s => s.CreditCardId);
+            
+            //HasRequired(t => t.BankAccount)
+            //.WithMany(t => t.Payments)
+            //.HasForeignKey(t => t.BankAccountId)
+            //.WillCascadeOnDelete(false);
 
+            this.HasOptional(s => s.BankAccount)
+            .WithMany(s => s.Payments)
+            .HasForeignKey(s => s.BankAccountId);
+            
             HasRequired(t => t.Currency)
             .WithMany(t => t.Payments)
             .HasForeignKey(t => t.CurrencyId)

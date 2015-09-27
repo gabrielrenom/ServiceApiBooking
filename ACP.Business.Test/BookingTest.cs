@@ -174,6 +174,14 @@ namespace ACP.Business.Test
                     CreatedBy = "localuser",
                     ModifiedBy = "localuser",                   
                 },
+                User = new UserModel {
+                     FirstName = customer.Forename,
+                      LastName = customer.Surname,
+                    Created = DateTime.Now,
+                    Modified = DateTime.Now,
+                    CreatedBy = "localuser",
+                    ModifiedBy = "localuser",
+                },
                  Payments = new Collection<PaymentModel>
                  {
                      payment

@@ -12,10 +12,10 @@ namespace ACP.DataAccess.Config
     {
         public CarConfig()
         {
-            HasRequired(p => p.User)
-                .WithMany(p => p.Cars)
-                .HasForeignKey(p => p.UserId)
-                .WillCascadeOnDelete(false);
+            //HasRequired(p => p.User)
+            //    .WithMany(p => p.Cars)
+            //    .HasForeignKey(p => p.UserId)
+            //    .WillCascadeOnDelete(false);
         }
         
     }
