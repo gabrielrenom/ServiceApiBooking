@@ -23,6 +23,209 @@ namespace ACP.DataAccess.Managers
             return base.AddAsync(domainModel);
         }
 
+        public override Task<bool> DeleteByIdAsync(int id)
+        {
+            return base.DeleteByIdAsync(id);
+        }
+
+        public IEnumerable<BookingModel> GetAll()
+        {
+            return GetListIncluding(x => x.Id > 0, 
+                x => x.Car, 
+                x=>x.Customer, 
+                x=>x.Customer.Address,
+                x=>x.Extras, 
+                x=>x.TravelDetails, 
+                x=>x.Payments, 
+                x=>x.Payments.Select(y=>y.CreditCard),
+                x => x.Payments.Select(y => y.BankAccount),
+                x => x.Payments.Select(y => y.Currency)      
+                );
+        }
+
+        public override BookingModel ToDomainModel(Booking dataModel)
+        {
+            BookingModel domainModel = new BookingModel();
+            domainModel.Created = dataModel.Created;
+            domainModel.Id = dataModel.Id;
+            domainModel.CreatedBy = dataModel.CreatedBy;
+            domainModel.Modified = dataModel.Modified;
+            domainModel.ModifiedBy = dataModel.ModifiedBy;
+            domainModel.StartDate = dataModel.StartDate;
+            domainModel.EndDate = dataModel.EndDate;
+            domainModel.Status = (Business.Enums.StatusType)dataModel.Status;
+            domainModel.AgentReference = dataModel.AgentReference;
+            domainModel.Cost = dataModel.Cost;
+            domainModel.BookingReference = GenerateReference();
+            domainModel.CarId = dataModel.CarId;
+            domainModel.Car = dataModel.Car != null ? new CarModel
+            {
+                Colour = dataModel.Car.Colour,
+                Id = dataModel.Car.Id,
+                Registration = dataModel.Car.Registration,
+                Model = dataModel.Car.Model,
+                Make = dataModel.Car.Make,
+                Created = dataModel.Car.Created,
+                CreatedBy = dataModel.Car.CreatedBy,
+                ModifiedBy = dataModel.Car.ModifiedBy,
+                Modified = dataModel.Car.Modified,
+                UserId = dataModel.Car.UserId,
+                //User = dataModel.Car.User != null ? new User
+                //{                    
+                //    Id= dataModel.Id,
+                //    Address = null,
+                //    Created = dataModel.Car.User.Created,
+                //    CreatedBy = dataModel.Car.User.CreatedBy,
+                //    ModifiedBy = dataModel.Car.User.ModifiedBy,
+                //    Modified = dataModel.Car.User.Modified,
+                //} : null,
+            } : null;
+            domainModel.CustomerId = dataModel.Id;
+            domainModel.Customer = dataModel.Customer != null ? new CustomerModel
+            {
+                Id = dataModel.Customer.Id,
+                Created = dataModel.Customer.Created,
+                CreatedBy = dataModel.Customer.CreatedBy,
+                ModifiedBy = dataModel.Customer.ModifiedBy,
+                Modified = dataModel.Customer.Modified,
+                Address = dataModel.Customer.Address != null ? new AddressModel
+                {
+                    Id = dataModel.Customer.Address.Id,
+                    Address1 = dataModel.Customer.Address.Address1,
+                    Address2 = dataModel.Customer.Address.Address2,
+                    City = dataModel.Customer.Address.City,
+                    Country = dataModel.Customer.Address.Country,
+                    County = dataModel.Customer.Address.County,
+                    Number = dataModel.Customer.Address.Number,
+                    Postcode = dataModel.Customer.Address.Postcode,
+                    Created = dataModel.Customer.Address.Created,
+                    CreatedBy = dataModel.Customer.Address.CreatedBy,
+                    ModifiedBy = dataModel.Customer.Address.ModifiedBy,
+                    Modified = dataModel.Customer.Address.Modified,
+                } : null,
+                Email = dataModel.Customer.Email,
+                AddressId = dataModel.Customer.AddressId,
+                Fax = dataModel.Customer.Fax,
+                Forename = dataModel.Customer.Forename,
+                Initials = dataModel.Customer.Initials,
+                Mobile = dataModel.Customer.Mobile,
+                Surname = dataModel.Customer.Surname,
+                Telephone = dataModel.Customer.Telephone,
+                Title = dataModel.Customer.Title,
+            } : null;
+            domainModel.Extras = dataModel.Extras != null ? dataModel.Extras.Select(x => new ExtraModel
+            {
+                Created = x.Created,
+                CreatedBy = x.CreatedBy,
+                ModifiedBy = x.ModifiedBy,
+                Modified = x.Modified,
+                Id = x.Id,
+                BookingEntityId = x.BookingEntityId,
+                Name = x.Name,
+                Price = x.Price,
+                Description = x.Description,
+            }).ToList() : null;
+            domainModel.Message = dataModel.Message;
+
+            domainModel.Payments = dataModel.Payments != null ? dataModel.Payments.Select(x => new PaymentModel
+            {
+                BankAccountId = x.BankAccountId,
+                Status = (Business.Enums.StatusType)x.Status,
+                Customer = domainModel.Customer,
+                Created = x.Created,
+                CreatedBy = x.CreatedBy,
+                ModifiedBy = x.ModifiedBy,
+                Modified = x.Modified,
+                CreditCardId = x.CreditCardId,
+                CreditCard = x.CreditCard != null ? new CreditCardModel
+                {
+                    Created = x.CreditCard.Created,
+                    CreatedBy = x.CreditCard.CreatedBy,
+                    ModifiedBy = x.CreditCard.ModifiedBy,
+                    Modified = x.CreditCard.Modified,
+                    Id = x.CreditCard.Id,
+                    Deleted = x.CreditCard.Deleted,
+                    ExpiryDate = x.CreditCard.ExpiryDate,
+                    GateWayKey = x.CreditCard.GateWayKey,
+                    Lock = x.CreditCard.Lock,
+                    Type = x.CreditCard.Type,
+                    Name = x.CreditCard.Name,
+                    Number = x.CreditCard.Number,
+                    PlainNumber = x.CreditCard.PlainNumber
+                } : null,
+                BankAccount = x.BankAccount != null ? new BankAccountModel
+                {
+                    Created = x.BankAccount.Created,
+                    CreatedBy = x.BankAccount.CreatedBy,
+                    ModifiedBy = x.BankAccount.ModifiedBy,
+                    Modified = x.BankAccount.Modified,
+                    Id = x.BankAccount.Id,
+                    AbaRouting = x.BankAccount.AbaRouting,
+                    AccountName = x.BankAccount.AccountName,
+                    BankName = x.BankAccount.BankName,
+                    Type = x.BankAccount.Type,
+                    Lock = x.BankAccount.Lock,
+                    BankAccountNumber = x.BankAccount.BankAccountNumber,
+                } : null,
+                PaymentMethod = (Business.Enums.PaymentMethod)x.PaymentMethod,
+                Currency = x.Currency != null ? new CurrencyModel
+                {
+                    Created = x.Currency.Created,
+                    CreatedBy = x.Currency.CreatedBy,
+                    ModifiedBy = x.Currency.ModifiedBy,
+                    Modified = x.Currency.Modified,
+                    Id = x.Currency.Id,
+                    Code = x.Currency.Code,
+                    CountryCode = x.Currency.CountryCode,
+                    Symbol = x.Currency.Symbol
+                } : null,
+            }).ToList() : null;
+            domainModel.Price = dataModel.Price;
+            domainModel.SourceCode = dataModel.SourceCode;
+            domainModel.TravelDetailsId = dataModel.TravelDetailsId;
+            domainModel.TravelDetails = dataModel.TravelDetails != null ? new TravelDetailsModel
+            {
+                Id = dataModel.TravelDetails.Id,
+                OutboundDate = dataModel.TravelDetails.OutboundDate,
+                ReturnDate = dataModel.TravelDetails.ReturnDate,
+                Created = dataModel.TravelDetails.Created,
+                CreatedBy = dataModel.TravelDetails.CreatedBy,
+                ModifiedBy = dataModel.TravelDetails.ModifiedBy,
+                Modified = dataModel.TravelDetails.Modified,
+            } : null;
+            domainModel.UserId = dataModel.UserId;
+            domainModel.User = dataModel.User != null ? new UserModel
+            {
+                Email = dataModel.User.Email,
+                FirstName = dataModel.User.FirstName,
+                LastName = dataModel.User.LastName,
+                Password = dataModel.User.Password,
+                PhoneNumber = dataModel.User.PhoneNumber,
+                Address = dataModel.User.Address != null ? new AddressModel
+                {
+                    Id = dataModel.User.Address.Id,
+                    Address1 = dataModel.User.Address.Address1,
+                    Address2 = dataModel.User.Address.Address2,
+                    City = dataModel.User.Address.City,
+                    Country = dataModel.User.Address.Country,
+                    County = dataModel.User.Address.County,
+                    Number = dataModel.User.Address.Number,
+                    Postcode = dataModel.User.Address.Postcode,
+                    Created = dataModel.User.Address.Created,
+                    CreatedBy = dataModel.User.Address.CreatedBy,
+                    ModifiedBy = dataModel.User.Address.ModifiedBy,
+                    Modified = dataModel.User.Address.Modified,
+                } : null,
+                Id = dataModel.User.Id,
+                Created = dataModel.User.Created,
+                CreatedBy = dataModel.User.CreatedBy,
+                ModifiedBy = dataModel.User.ModifiedBy,
+                Modified = dataModel.User.Modified,
+            } : null;
+
+            return domainModel;
+        }
+
         public override Booking ToDataModel(BookingModel domainModel, Booking dataModel = null)
         {
             if (dataModel == null)
@@ -51,7 +254,7 @@ namespace ACP.DataAccess.Managers
                 CreatedBy = domainModel.Car.CreatedBy,
                 ModifiedBy = domainModel.Car.ModifiedBy,
                 Modified = domainModel.Car.Modified,
-                UserId = domainModel.Car.UserId,
+                UserId = domainModel.Car.UserId,                 
                 //User = domainModel.Car.User != null ? new User
                 //{                    
                 //    Id= domainModel.Id,
@@ -176,7 +379,27 @@ namespace ACP.DataAccess.Managers
             dataModel.UserId = domainModel.UserId;
             dataModel.User = domainModel.User != null ? new User
             {           
-                Id= domainModel.User.Id,
+                 Email = domainModel.User.Email,
+                 FirstName = domainModel.User.FirstName,
+                 LastName= domainModel.User.LastName,
+                 Password = domainModel.User.Password,
+                 PhoneNumber = domainModel.User.PhoneNumber,
+                 Address= domainModel.User.Address != null ? new Address
+                 {
+                    Id = domainModel.User.Address.Id,
+                    Address1 = domainModel.User.Address.Address1,
+                    Address2 = domainModel.User.Address.Address2,
+                    City = domainModel.User.Address.City,
+                    Country = domainModel.User.Address.Country,
+                    County = domainModel.User.Address.County,
+                    Number = domainModel.User.Address.Number,
+                    Postcode = domainModel.User.Address.Postcode,
+                    Created = domainModel.User.Address.Created,
+                    CreatedBy = domainModel.User.Address.CreatedBy,
+                    ModifiedBy = domainModel.User.Address.ModifiedBy,
+                    Modified = domainModel.User.Address.Modified,
+                } : null,
+                Id = domainModel.User.Id,
                 Created = domainModel.User.Created,
                 CreatedBy = domainModel.User.CreatedBy,
                 ModifiedBy = domainModel.User.ModifiedBy,
