@@ -208,6 +208,18 @@ namespace ACP.Business.Test
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Count > 0);
         }
+        [TestMethod]
+        public async Task GivenAnId_WhenGetByIsCalled_BeSureThatReturnsTherecord()
+        {
+            //Arrange
+            var all = await bookingservice.GetAll();
+
+            //Act
+            var result = await bookingservice.GetById(all.FirstOrDefault().Id);
+
+            //Assert
+            Assert.IsNotNull(result);
+        }
 
         [TestMethod]
         public async Task GivenAnId_WhenDeleteByIsCalled_BeSureThatReturnsTrue()
@@ -221,5 +233,25 @@ namespace ACP.Business.Test
             //Assert
             Assert.IsTrue(result);            
         }
+
+        [TestMethod]
+        public async Task GivenAnId_WhenUpdateByIsCalled_BeSureThatReturnsTrue()
+        {
+            //Arrange
+            var all = await bookingservice.GetAll();
+            var record = all.FirstOrDefault();
+
+            record.Car.Colour = "Yellow";
+            record.Cost = 666;
+            record.Status = Enums.StatusType.Paid;
+            record.TravelDetails.OutboundDate = DateTime.Now;
+
+            //Act
+            var result = await bookingservice.Update(record);
+
+            //Assert
+            Assert.IsTrue(result);
+        }
+
     }  
 }
