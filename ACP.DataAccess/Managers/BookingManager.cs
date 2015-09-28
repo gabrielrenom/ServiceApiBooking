@@ -23,9 +23,52 @@ namespace ACP.DataAccess.Managers
             return base.AddAsync(domainModel);
         }
 
-        public override Task<bool> DeleteByIdAsync(int id)
+        public  override async Task<bool> DeleteByIdAsync(int id)
         {
-            return base.DeleteByIdAsync(id);
+            var record =  await Repository.GetSingleAsync<Booking>(x => x.Id > 0
+                //x => x.Car,
+                //x => x.Customer,
+                //x => x.Customer.Address,
+                //x => x.Extras
+                //x => x.TravelDetails
+                //x => x.Payments
+                //x => x.Payments.Select(y => y.CreditCard),
+                //x => x.Payments.Select(y => y.BankAccount),
+                //x => x.Payments.Select(y => y.Currency)
+                );
+            //if (record.Car != null)
+            //{
+            //    Repository.Delete<Car>(record.Car);
+            //}
+
+            //if (record.Customer != null)
+            //{
+            //    Repository.Delete<Customer>(record.Customer);
+            //}
+
+            if (record.TravelDetails != null)
+            {
+                Repository.Delete<TravelDetails>(record.TravelDetails);
+            }
+
+            if (record.Payments != null)
+            {
+                Repository.DeleteMany<Payment>(record.Payments.ToArray());
+            }
+
+            //if (record.Extras!=null )
+            //{
+            //    Repository.DeleteMany<Extra>(record.Extras.ToArray());
+            //}
+            if (record.BookingLink!=null )
+            {
+                Repository.DeleteMany<BookingLink>(record.BookingLink.ToArray());
+            }           
+
+            Repository.Delete<Booking>(record);
+            Repository.Commit();
+
+            return true;
         }
 
         public IEnumerable<BookingModel> GetAll()

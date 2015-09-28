@@ -23,9 +23,9 @@ namespace ACP.Business.Services
             return _bookingManager.AddAsync(model);
         }
 
-        public Task<IList<BookingModel>> GetAll()
+        public async Task<IList<BookingModel>> GetAll()
         {
-            throw new NotImplementedException();
+            return _bookingManager.GetAll().ToList();
         }
 
         public Task<BookingModel> GetById(int Id)
@@ -33,9 +33,9 @@ namespace ACP.Business.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> Remove(int Id)
+        public async Task<bool> Remove(int Id)
         {
-            throw new NotImplementedException();
+            return await _bookingManager.DeleteByIdAsync(Id);
         }
 
         public Task<bool> Update(BookingModel model)

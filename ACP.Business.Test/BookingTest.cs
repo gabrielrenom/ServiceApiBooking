@@ -193,6 +193,33 @@ namespace ACP.Business.Test
 
             //Assert
             Assert.IsNotNull(result);
-        }        
+        }
+
+        [TestMethod]
+        public async Task BeingAskedToGetAllBookings_WhenGetAllIsCalled_BeSureThatItIsAllReturned()
+        {
+            //Arrange
+
+
+            //Act
+            var result = await bookingservice.GetAll();
+
+            //Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Count > 0);
+        }
+
+        [TestMethod]
+        public async Task GivenAnId_WhenDeleteByIsCalled_BeSureThatReturnsTrue()
+        {
+            //Arrange
+            var all = await bookingservice.GetAll();
+
+            //Act
+            var result = await bookingservice.Remove(all.FirstOrDefault().Id);
+
+            //Assert
+            Assert.IsTrue(result);            
+        }
     }  
 }
