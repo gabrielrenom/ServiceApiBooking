@@ -355,7 +355,7 @@ namespace ACP.DataAccess.Managers
             domainModel.Status = (Business.Enums.StatusType)dataModel.Status;
             domainModel.AgentReference = dataModel.AgentReference;
             domainModel.Cost = dataModel.Cost;
-            domainModel.BookingReference = GenerateReference();
+            domainModel.BookingReference = dataModel.BookingReference;
             domainModel.CarId = dataModel.CarId;
             domainModel.Car = dataModel.Car != null ? new CarModel
             {
@@ -719,16 +719,16 @@ namespace ACP.DataAccess.Managers
 
         public async Task<BookingModel> GetByReference(string reference)
         {
-            var result = Repository.GetSingle<Booking>(x => x.BookingReference == reference,
-               x => x.Car
-               //x => x.Customer,
-               //x => x.Customer.Address,
-               //x => x.Extras,
-               //x => x.TravelDetails,
-               //x => x.Payments,
-               //x => x.Payments.Select(y => y.CreditCard),
-               //x => x.Payments.Select(y => y.BankAccount),
-               //x => x.Payments.Select(y => y.Currency)
+            var result = Repository.GetSingle<Booking>(x => x.BookingReference ==reference ,
+               x => x.Car,
+               x => x.Customer,
+               x => x.Customer.Address,
+               x => x.Extras,
+               x => x.TravelDetails,
+               x => x.Payments,
+               x => x.Payments.Select(y => y.CreditCard),
+               x => x.Payments.Select(y => y.BankAccount),
+               x => x.Payments.Select(y => y.Currency)
                );
 
             return ToDomainModel(result);
