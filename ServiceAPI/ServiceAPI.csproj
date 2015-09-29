@@ -245,6 +245,7 @@
     <Compile Include="Controllers\AirportController.cs" />
     <Compile Include="Controllers\AvailabilityController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
+    <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\CarparkPricingController.cs" />
     <Compile Include="Controllers\PricingController.cs" />
     <Compile Include="Controllers\PurpleParkingController.cs" />

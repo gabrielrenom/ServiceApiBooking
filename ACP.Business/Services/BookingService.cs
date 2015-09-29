@@ -33,6 +33,11 @@ namespace ACP.Business.Services
             return await _bookingManager.GetByIdAsync(Id);
         }
 
+        public async Task<BookingModel> GetByReference(string reference)
+        {
+           return await _bookingManager.GetByReference(reference);
+        }
+
         public async Task<bool> Remove(int Id)
         {
             return await _bookingManager.DeleteByIdAsync(Id);

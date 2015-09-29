@@ -13,6 +13,7 @@ namespace ACP.Business.Services.Interfaces
         Task<bool> Remove(int Id);
         Task<bool> Update(BookingModel model);
         Task<BookingModel> GetById(int Id);
-        Task<IList<BookingModel>> GetAll();        
+        Task<IList<BookingModel>> GetAll();
+        Task<BookingModel> GetByReference(string reference);
     }
 }

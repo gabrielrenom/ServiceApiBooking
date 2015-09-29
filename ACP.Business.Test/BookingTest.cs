@@ -253,5 +253,18 @@ namespace ACP.Business.Test
             Assert.IsTrue(result);
         }
 
+        [TestMethod]
+        public async Task GivenAReference_WhenGetByReferenceIsCalled_BeSureThatReturnsTheRecord()
+        {
+            //Arrange
+            var all = await bookingservice.GetAll();
+            var record = all.FirstOrDefault();         
+
+            //Act
+            var result = await bookingservice.GetByReference(record.BookingReference);
+
+            //Assert
+            Assert.IsNotNull(result);
+        }
     }  
 }

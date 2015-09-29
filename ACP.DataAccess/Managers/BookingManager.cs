@@ -716,5 +716,22 @@ namespace ACP.DataAccess.Managers
             }
             return string.Format("{0:x}", i - DateTime.Now.Ticks);
         }
+
+        public async Task<BookingModel> GetByReference(string reference)
+        {
+            var result = Repository.GetSingle<Booking>(x => x.BookingReference == reference,
+               x => x.Car
+               //x => x.Customer,
+               //x => x.Customer.Address,
+               //x => x.Extras,
+               //x => x.TravelDetails,
+               //x => x.Payments,
+               //x => x.Payments.Select(y => y.CreditCard),
+               //x => x.Payments.Select(y => y.BankAccount),
+               //x => x.Payments.Select(y => y.Currency)
+               );
+
+            return ToDomainModel(result);
+        }
     }
 }
