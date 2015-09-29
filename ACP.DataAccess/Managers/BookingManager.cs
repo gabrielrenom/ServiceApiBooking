@@ -102,19 +102,31 @@ namespace ACP.DataAccess.Managers
                 );
         }
 
-        public override Task<bool> UpdateAsync(BookingModel domainModel)
+        public async override Task<bool> UpdateAsync(BookingModel domainModel)
         {
-            var dataModel = Repository.GetSingle<Booking>(x => x.Id == domainModel.Id,
-                x => x.Car,
-                x => x.Customer,
-                x => x.Customer.Address,
-                x => x.Extras,
-                x => x.TravelDetails,
-                x => x.Payments,
-                x => x.Payments.Select(y => y.CreditCard),
-                x => x.Payments.Select(y => y.BankAccount),
-                x => x.Payments.Select(y => y.Currency)
-                );
+            //var dataModel = Repository.GetSingle<Booking>(x => x.Id == domainModel.Id,
+            //    x => x.Car,
+            //    x => x.Customer,
+            //    x => x.Customer.Address,
+            //    x => x.Extras,
+            //    x => x.TravelDetails,
+            //    x => x.Payments,
+            //    x => x.Payments.Select(y => y.CreditCard),
+            //    x => x.Payments.Select(y => y.BankAccount),
+            //    x => x.Payments.Select(y => y.Currency)
+            //    );
+
+            var dataModel = await Repository.GetSingleAsync<Booking>(x => x.Id == domainModel.Id
+         //x => x.Car,
+         //x => x.Customer,
+         //x => x.Customer.Address,
+         //x => x.Extras
+         //x => x.TravelDetails
+         //x => x.Payments
+         //x => x.Payments.Select(y => y.CreditCard),
+         //x => x.Payments.Select(y => y.BankAccount),
+         //x => x.Payments.Select(y => y.Currency)
+         );
 
 
             dataModel.Created = domainModel.Created;
@@ -151,119 +163,129 @@ namespace ACP.DataAccess.Managers
                 //    Modified = domainModel.Car.User.Modified,
                 //} : null,
             } : null;
-            dataModel.CustomerId = domainModel.Id;
-            dataModel.Customer = domainModel.Customer != null ? new Customer
-            {
-                Id = domainModel.Customer.Id,
-                Created = domainModel.Customer.Created,
-                CreatedBy = domainModel.Customer.CreatedBy,
-                ModifiedBy = domainModel.Customer.ModifiedBy,
-                Modified = domainModel.Customer.Modified,
-                Address = domainModel.Customer.Address != null ? new Address
-                {
-                    Id = domainModel.Customer.Address.Id,
-                    Address1 = domainModel.Customer.Address.Address1,
-                    Address2 = domainModel.Customer.Address.Address2,
-                    City = domainModel.Customer.Address.City,
-                    Country = domainModel.Customer.Address.Country,
-                    County = domainModel.Customer.Address.County,
-                    Number = domainModel.Customer.Address.Number,
-                    Postcode = domainModel.Customer.Address.Postcode,
-                    Created = domainModel.Customer.Address.Created,
-                    CreatedBy = domainModel.Customer.Address.CreatedBy,
-                    ModifiedBy = domainModel.Customer.Address.ModifiedBy,
-                    Modified = domainModel.Customer.Address.Modified,
-                } : null,
-                Email = domainModel.Customer.Email,
-                AddressId = domainModel.Customer.AddressId,
-                Fax = domainModel.Customer.Fax,
-                Forename = domainModel.Customer.Forename,
-                Initials = domainModel.Customer.Initials,
-                Mobile = domainModel.Customer.Mobile,
-                Surname = domainModel.Customer.Surname,
-                Telephone = domainModel.Customer.Telephone,
-                Title = domainModel.Customer.Title,
-            } : null;
-            dataModel.Extras = domainModel.Extras != null ? domainModel.Extras.Select(x => new Extra
-            {
-                Created = x.Created,
-                CreatedBy = x.CreatedBy,
-                ModifiedBy = x.ModifiedBy,
-                Modified = x.Modified,
-                Id = x.Id,
-                BookingEntityId = x.BookingEntityId,
-                Name = x.Name,
-                Price = x.Price,
-                Description = x.Description,
-            }).ToList() : null;
-            dataModel.Message = domainModel.Message;
 
-            dataModel.Payments = domainModel.Payments != null ? domainModel.Payments.Select(x => new Payment
+            if (domainModel.TravelDetails != null)
             {
-                BankAccountId = x.BankAccountId,
-                Status = (Data.Enums.StatusType)x.Status,
-                Customer = dataModel.Customer,
-                Created = x.Created,
-                CreatedBy = x.CreatedBy,
-                ModifiedBy = x.ModifiedBy,
-                Modified = x.Modified,
-                CreditCardId = x.CreditCardId,
-                CreditCard = x.CreditCard != null ? new CreditCard
+                Repository.Delete<TravelDetails>(dataModel.TravelDetails);
+
+                dataModel.TravelDetailsId = domainModel.TravelDetailsId;
+
+                dataModel.TravelDetails = domainModel.TravelDetails != null ? new TravelDetails
                 {
-                    Created = x.CreditCard.Created,
-                    CreatedBy = x.CreditCard.CreatedBy,
-                    ModifiedBy = x.CreditCard.ModifiedBy,
-                    Modified = x.CreditCard.Modified,
-                    Id = x.CreditCard.Id,
-                    Deleted = x.CreditCard.Deleted,
-                    ExpiryDate = x.CreditCard.ExpiryDate,
-                    GateWayKey = x.CreditCard.GateWayKey,
-                    Lock = x.CreditCard.Lock,
-                    Type = x.CreditCard.Type,
-                    Name = x.CreditCard.Name,
-                    Number = x.CreditCard.Number,
-                    PlainNumber = x.CreditCard.PlainNumber
-                } : null,
-                BankAccount = x.BankAccount != null ? new BankAccount
+                    Id = domainModel.TravelDetails.Id,
+                    OutboundDate = domainModel.TravelDetails.OutboundDate,
+                    ReturnDate = domainModel.TravelDetails.ReturnDate,
+                    Created = domainModel.TravelDetails.Created,
+                    CreatedBy = domainModel.TravelDetails.CreatedBy,
+                    ModifiedBy = domainModel.TravelDetails.ModifiedBy,
+                    Modified = domainModel.TravelDetails.Modified,
+                } : null;
+            }
+
+
+            if (domainModel.Payments != null)
+            {
+                Repository.DeleteMany<Payment>(dataModel.Payments.ToArray());
+
+                dataModel.Payments = domainModel.Payments != null ? domainModel.Payments.Select(x => new Payment
                 {
-                    Created = x.BankAccount.Created,
-                    CreatedBy = x.BankAccount.CreatedBy,
-                    ModifiedBy = x.BankAccount.ModifiedBy,
-                    Modified = x.BankAccount.Modified,
-                    Id = x.BankAccount.Id,
-                    AbaRouting = x.BankAccount.AbaRouting,
-                    AccountName = x.BankAccount.AccountName,
-                    BankName = x.BankAccount.BankName,
-                    Type = x.BankAccount.Type,
-                    Lock = x.BankAccount.Lock,
-                    BankAccountNumber = x.BankAccount.BankAccountNumber,
-                } : null,
-                PaymentMethod = (Data.Enums.PaymentMethod)x.PaymentMethod,
-                Currency = x.Currency != null ? new Currency
+                    BankAccountId = x.BankAccountId,
+                    Status = (Data.Enums.StatusType)x.Status,
+                    //Customer = dataModel.Customer,
+                    Created = x.Created,
+                    CreatedBy = x.CreatedBy,
+                    ModifiedBy = x.ModifiedBy,
+                    Modified = x.Modified,
+                    CreditCardId = x.CreditCardId,
+                    CreditCard = x.CreditCard != null ? new CreditCard
+                    {
+                        Created = x.CreditCard.Created,
+                        CreatedBy = x.CreditCard.CreatedBy,
+                        ModifiedBy = x.CreditCard.ModifiedBy,
+                        Modified = x.CreditCard.Modified,
+                        Id = x.CreditCard.Id,
+                        Deleted = x.CreditCard.Deleted,
+                        ExpiryDate = x.CreditCard.ExpiryDate,
+                        GateWayKey = x.CreditCard.GateWayKey,
+                        Lock = x.CreditCard.Lock,
+                        Type = x.CreditCard.Type,
+                        Name = x.CreditCard.Name,
+                        Number = x.CreditCard.Number,
+                        PlainNumber = x.CreditCard.PlainNumber
+                    } : null,
+                    BankAccount = x.BankAccount != null ? new BankAccount
+                    {
+                        Created = x.BankAccount.Created,
+                        CreatedBy = x.BankAccount.CreatedBy,
+                        ModifiedBy = x.BankAccount.ModifiedBy,
+                        Modified = x.BankAccount.Modified,
+                        Id = x.BankAccount.Id,
+                        AbaRouting = x.BankAccount.AbaRouting,
+                        AccountName = x.BankAccount.AccountName,
+                        BankName = x.BankAccount.BankName,
+                        Type = x.BankAccount.Type,
+                        Lock = x.BankAccount.Lock,
+                        BankAccountNumber = x.BankAccount.BankAccountNumber,
+                    } : null,
+                    PaymentMethod = (Data.Enums.PaymentMethod)x.PaymentMethod,
+                    Currency = x.Currency != null ? new Currency
+                    {
+                        Created = x.Currency.Created,
+                        CreatedBy = x.Currency.CreatedBy,
+                        ModifiedBy = x.Currency.ModifiedBy,
+                        Modified = x.Currency.Modified,
+                        Id = x.Currency.Id,
+                        Code = x.Currency.Code,
+                        CountryCode = x.Currency.CountryCode,
+                        Symbol = x.Currency.Symbol
+                    } : null,
+                }).ToList() : null;
+
+            }
+
+
+            if (domainModel.Customer != null)
+            {           
+                Repository.Delete<Customer>(dataModel.Customer);
+
+                //dataModel.CustomerId = domainModel.CustomerId;
+                dataModel.Customer = domainModel.Customer != null ? new Customer
                 {
-                    Created = x.Currency.Created,
-                    CreatedBy = x.Currency.CreatedBy,
-                    ModifiedBy = x.Currency.ModifiedBy,
-                    Modified = x.Currency.Modified,
-                    Id = x.Currency.Id,
-                    Code = x.Currency.Code,
-                    CountryCode = x.Currency.CountryCode,
-                    Symbol = x.Currency.Symbol
-                } : null,
-            }).ToList() : null;
+                    Id = domainModel.Customer.Id,
+                    Created = domainModel.Customer.Created,
+                    CreatedBy = domainModel.Customer.CreatedBy,
+                    ModifiedBy = domainModel.Customer.ModifiedBy,
+                    Modified = domainModel.Customer.Modified,
+                    AddressId = domainModel.Customer.AddressId,
+                    Address = domainModel.Customer.Address != null ? new Address
+                    {
+                        Id = domainModel.Customer.Address.Id,
+                        Address1 = domainModel.Customer.Address.Address1,
+                        Address2 = domainModel.Customer.Address.Address2,
+                        City = domainModel.Customer.Address.City,
+                        Country = domainModel.Customer.Address.Country,
+                        County = domainModel.Customer.Address.County,
+                        Number = domainModel.Customer.Address.Number,
+                        Postcode = domainModel.Customer.Address.Postcode,
+                        Created = domainModel.Customer.Address.Created,
+                        CreatedBy = domainModel.Customer.Address.CreatedBy,
+                        ModifiedBy = domainModel.Customer.Address.ModifiedBy,
+                        Modified = domainModel.Customer.Address.Modified,
+                    } : null,
+                    Email = domainModel.Customer.Email,
+                    Fax = domainModel.Customer.Fax,
+                    Forename = domainModel.Customer.Forename,
+                    Initials = domainModel.Customer.Initials,
+                    Mobile = domainModel.Customer.Mobile,
+                    Surname = domainModel.Customer.Surname,
+                    Telephone = domainModel.Customer.Telephone,
+                    Title = domainModel.Customer.Title,
+
+                } : null;
+            }
+
             dataModel.Price = domainModel.Price;
             dataModel.SourceCode = domainModel.SourceCode;
-            dataModel.TravelDetailsId = domainModel.TravelDetailsId;
-            dataModel.TravelDetails = domainModel.TravelDetails != null ? new TravelDetails
-            {
-                Id = domainModel.TravelDetails.Id,
-                OutboundDate = domainModel.TravelDetails.OutboundDate,
-                ReturnDate = domainModel.TravelDetails.ReturnDate,
-                Created = domainModel.TravelDetails.Created,
-                CreatedBy = domainModel.TravelDetails.CreatedBy,
-                ModifiedBy = domainModel.TravelDetails.ModifiedBy,
-                Modified = domainModel.TravelDetails.Modified,
-            } : null;
             dataModel.UserId = domainModel.UserId;
             dataModel.User = domainModel.User != null ? new User
             {
@@ -301,6 +323,7 @@ namespace ACP.DataAccess.Managers
 
                 dataModel.Extras = domainModel.Extras != null ? domainModel.Extras.Select(x => new Extra
                 {
+                    Id = x.Id,                                         
                     Created = x.Created,
                     CreatedBy = x.CreatedBy,
                     Modified = x.Modified,
@@ -312,11 +335,11 @@ namespace ACP.DataAccess.Managers
                 }).ToList() : null;
             }
 
-                      
-            Repository.Update<Booking>(dataModel);
-            Repository.Commit();
 
-            return new Task<bool>(() => true);
+            Repository.Update<Booking>(dataModel);
+            var result = Repository.Commit();
+
+            return  true;
         }
 
         public override BookingModel ToDomainModel(Booking dataModel)
@@ -407,7 +430,7 @@ namespace ACP.DataAccess.Managers
             {
                 BankAccountId = x.BankAccountId,
                 Status = (Business.Enums.StatusType)x.Status,
-                Customer = domainModel.Customer,
+                //Customer = domainModel.Customer,
                 Created = x.Created,
                 CreatedBy = x.CreatedBy,
                 ModifiedBy = x.ModifiedBy,
@@ -592,7 +615,7 @@ namespace ACP.DataAccess.Managers
             {
                 BankAccountId = x.BankAccountId,
                 Status = (Data.Enums.StatusType)x.Status,
-                Customer = dataModel.Customer,
+                //Customer = dataModel.Customer,
                 Created = x.Created,
                 CreatedBy = x.CreatedBy,
                 ModifiedBy = x.ModifiedBy,

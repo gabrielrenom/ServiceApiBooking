@@ -16,6 +16,6 @@ namespace ACP.Business.Models
         public string Email { get; set; }
 
         public virtual ICollection<BookingModel> Bookings { get; set; }
-        public virtual ICollection<PaymentModel> Payments { get; set; }
+        //public virtual ICollection<PaymentModel> Payments { get; set; }
     }
 }

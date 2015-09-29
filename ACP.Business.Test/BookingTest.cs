@@ -109,7 +109,7 @@ namespace ACP.Business.Test
 
             PaymentModel payment = new PaymentModel
             {
-                Customer = customer,                
+                //Customer = customer,                
                 PaymentMethod = Enums.PaymentMethod.CreditCard,
                 CreditCard = new CreditCardModel {
                     Lock = false,
@@ -242,7 +242,7 @@ namespace ACP.Business.Test
             var record = all.FirstOrDefault();
 
             record.Car.Colour = "Yellow";
-            record.Cost = 666;
+            record.Cost = 777;
             record.Status = Enums.StatusType.Paid;
             record.TravelDetails.OutboundDate = DateTime.Now;
 

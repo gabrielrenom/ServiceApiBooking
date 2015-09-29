@@ -15,10 +15,10 @@ namespace ACP.DataAccess.Config
             //## Primary Key
             HasKey(t => t.Id);          
 
-            HasRequired(t => t.Customer)
-            .WithMany(t => t.Payments)
-            .HasForeignKey(t => t.CustomerId)
-            .WillCascadeOnDelete(false);
+            //HasRequired(t => t.Customer)
+            //.WithMany(t => t.Payments)
+            //.HasForeignKey(t => t.CustomerId)
+            //.WillCascadeOnDelete(false);
 
             HasRequired(t => t.Booking)
             .WithMany(t => t.Payments)
