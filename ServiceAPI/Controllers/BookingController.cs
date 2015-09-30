@@ -15,7 +15,11 @@ using System.Web.Http;
 
 namespace ServiceAPI.Controllers
 {
-
+    /// <summary>
+    /// This controller it will be in charge of manage the bbookings from the admin and user.
+    /// It allows to do all the CRUD operations plus exxtra functionality.
+    /// v0.1
+    /// </summary>
     [RoutePrefix("api/v0.1/booking")]
     public class BookingController : ApiController
     {
@@ -26,6 +30,11 @@ namespace ServiceAPI.Controllers
             _bookingservice = bookingservice;
         }
 
+        /// <summary>
+        /// It will get a booking by passing the booking refence.
+        /// </summary>
+        /// <param name="reference"></param>
+        /// <returns>It returns the booking.</returns>
         [HttpGet]
         [Route("getbybookingreference")]
         public async Task<HttpResponseMessage> GettByBookingReference(string reference)
@@ -68,6 +77,11 @@ namespace ServiceAPI.Controllers
             return Request.CreateResponse(HttpStatusCode.Created, booking, new JsonMediaTypeFormatter());
         }
 
+        /// <summary>
+        /// It will retrieve the booking after passing the id.
+        /// </summary>
+        /// <param name="id">The id of the booking</param>
+        /// <returns>The booking</returns>
         [HttpGet]
         [Route("getbyid")]
         public async Task<HttpResponseMessage> GettById(int id)
@@ -110,6 +124,11 @@ namespace ServiceAPI.Controllers
             return Request.CreateResponse(HttpStatusCode.Created, booking, new JsonMediaTypeFormatter());
         }
 
+        /// <summary>
+        /// It will add a booking to the service including the payment.
+        /// </summary>
+        /// <param name="model">Booking</param>
+        /// <returns>Booking added</returns>
         [HttpPost]
         [Route("add")]
         public async Task<HttpResponseMessage> Add(BookingModel model)
