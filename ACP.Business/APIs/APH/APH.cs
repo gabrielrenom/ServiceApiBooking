@@ -17,53 +17,67 @@ namespace ACP.Business.APIs.APH
     {
         private readonly IBookingEntityManager _bookingEntityManager;
         private readonly IRootBookingEntityManager _rootBookingEntityManager;
+        private List<Airport> _airportList = new List<Airport>();
 
         public APH(IRootBookingEntityManager rootBookingEntityManager, IBookingEntityManager bookingEntityManager)
         {
             _bookingEntityManager = bookingEntityManager;
             _rootBookingEntityManager = rootBookingEntityManager;
+
+            #region [ AIRPORTS ]
+            _airportList.Add(new Airport("Aberdeen", "ABZ"));
+            _airportList.Add(new Airport("Belfast International", "BFS"));
+            _airportList.Add(new Airport("Birmingham", "BT1"));
+            _airportList.Add(new Airport("Bristol", "BRS"));
+            _airportList.Add(new Airport("Cardiff", "CWL"));
+            _airportList.Add(new Airport("Dover", "DOV"));
+            _airportList.Add(new Airport("Doncaster Robin Hood", "DSA"));
+            _airportList.Add(new Airport("Durham Tees Valley", "MME"));
+            _airportList.Add(new Airport("Edinburgh", "EDI"));
+            _airportList.Add(new Airport("East Midlands", "EMA"));
+            _airportList.Add(new Airport("Exeter", "EXT"));
+            _airportList.Add(new Airport("Glasgow", "GLA"));
+            _airportList.Add(new Airport("Leeds Bradford", "LBA"));
+            _airportList.Add(new Airport("London Gatwick", "N"));
+            _airportList.Add(new Airport("London Gatwick", "S"));
+            _airportList.Add(new Airport("London Heathrow", "HT1"));
+            _airportList.Add(new Airport("London Heathrow", "HT2"));
+            _airportList.Add(new Airport("London Heathrow", "HT3"));
+            _airportList.Add(new Airport("London Heathrow", "HT4"));
+            _airportList.Add(new Airport("London Heathrow", "HT5"));
+            _airportList.Add(new Airport("London Luton", "LTN"));
+            _airportList.Add(new Airport("London Southend", "SOU"));
+            _airportList.Add(new Airport("London Stansted", "STN"));
+            _airportList.Add(new Airport("Liverpool", "LPL"));
+            _airportList.Add(new Airport("Prestwick", "PIK"));
+            _airportList.Add(new Airport("Manchester", "MT1"));
+            _airportList.Add(new Airport("Manchester", "MT2"));
+            _airportList.Add(new Airport("Manchester", "MT3"));
+            _airportList.Add(new Airport("Newcastle", "NCL"));
+            _airportList.Add(new Airport("Southampton Airport", "SOU"));
+            _airportList.Add(new Airport("Southampton Port", "SOP"));
+            #endregion
         }
 
-        public bool FillBookingEnties()
+        private void GetCarParkCodes(ref List<Airport> airports)
         {
-            bool result = false;
-
-            var rootentities = _rootBookingEntityManager.GetAll();
-
-            foreach (var airport in rootentities)
+            foreach (var item in airports)
             {
-                //## Check if the airport has a APH car park
-                if (airport.BookingEntities
-                    .Where(x=>x.Properties
-                        .Where(y => y.Key == "Provider" && y.Value.ToString() == "APH")
-                        .Count() > 0)
-                            .Count()>0)
-                    {
-                        foreach (var carpark in airport.BookingEntities)
-                        {
-                            //## If so, we delete teh car park to fill it again.
-                            if (carpark.Properties.Where(y => y.Key == "Provider" && y.Value.ToString() == "APH").Count() > 0)
-                            {
-                                _bookingEntityManager.DeleteById(carpark.Id);
-                            }
-                        }    
-                    }
-                //## START Adding a new carparks
                 API_Request request = new API_Request
                 {
                     Agent = new Agent
                     {
-                        ABTANumber = "WA789",   
+                        ABTANumber = "WA789",
                         Initials = "thecarparksuper",
                         Password = ""
                     },
                     Itinerary = new Itinerary
                     {
-                        ArrivalDate = DateTime.Now.AddDays(3).ToString("dMMMyy"),
-                        DepartDate = DateTime.Now.AddDays(4).ToString("dMMMyy"),
+                        ArrivalDate = DateTime.Now.AddMonths(1).ToString("dMMMyy"),
+                        DepartDate = DateTime.Now.AddMonths(2).ToString("dMMMyy"),
                         ArrivalTime = "0600",
                         DepartTime = "1800",
-                        Location = airport.Name,
+                        Location = item.Code,
                         Terminals = "ALL"
                     },
                     System = "APH",
@@ -74,59 +88,187 @@ namespace ACP.Business.APIs.APH
                     RequestCode = "11"
                 };
 
-                var response = this.CarParkAvailability(request);
+                //API_Request request = new API_Request
+                //{
+                //    Agent = new Agent
+                //    {
+                //        ABTANumber = "WA789",
+                //        Initials = "thecarparksuper",
+                //        Password = ""
+                //    },
+                //    Itinerary = new Itinerary
+                //    {
+                //        ArrivalDate = "20Nov15",
+                //        DepartDate = "27Nov15",
+                //        ArrivalTime = "0600",
+                //        DepartTime = "1800",
+                //        Location = item.Code,
+                //        Terminals = "ALL"
+                //    },
+                //    System = "APH",
+                //    Version = "1.0",
+                //    Product = "CarPark",
+                //    Customer = "X",
+                //    Session = "000000003",
+                //    RequestCode = "11"
+                //};
 
-                if (response.Result == "OK") 
+                var response = this.CarParkAvailability(request);               
+
+                foreach (var carpark in response.CarPark)
                 {
-                    foreach (var item in response.CarPark)
-                    {
-                        API_Request informationrequest = new API_Request
-                        {
-                            Agent = new Agent
-                            {
-                                ABTANumber = "WA789",
-                                Initials = "thecarparksuper",
-                                Password = ""
-                            },
-                            Itinerary = new Itinerary
-                            {
-                                ArrivalDate = DateTime.Now.AddDays(3).ToString("dMMMyy"),
-                                CarParkCode = item.CarParkCode
-                            },
-                            System = "APH",
-                            Version = "1.0",
-                            Product = "CarPark",
-                            Customer = "X",
-                            Session = "000000004",
-                            RequestCode = "6",
-                            Request = new Request { RequestType = "1" }
-                        };
+                    CarPark carparkitem = new CarPark();
+                    carparkitem.Code = carpark.CarParkCode;
+                    carparkitem.Name = carpark.CarParkName;
+                    carparkitem.ProductName = carpark.productName;
+                    carparkitem.Terminals = carpark.Terminals;
+                    carparkitem.Commision = carpark.Commission;
 
-                        //Ac
-                        var information = this.CarParkInformation(informationrequest);
-                        if (information.Result == "OK")
-                        {
-                            airport.BookingEntities.Add(new BookingEntityModel
-                            {
-                                Name = item.CarParkName,
-                                Prices = new Collection<BookingPricingModel>(),
-                                Service = new Collection<BookingServiceModel>(),
-                                Slot = new Collection<SlotModel>(),
-                                //Availability = new Collection<AvailabilityModel>(),
-                                Properties = new Collection<PropertyModel> { 
-                                new PropertyModel{Key="Provider", Value="APH"},
-                                new PropertyModel{Key="CarParkCode", Value=item.CarParkCode}                                
-                            },
-                                Address = new AddressModel { }
-                            });
-                        }
-                    }
+                    item.CarParks.Add(carparkitem);
                 }
-
-                //## ?? It does
-                _rootBookingEntityManager.Update(airport);
-                //## END
             }
+        }
+
+        public bool FillBookingEnties()
+        {
+            bool result = false;
+
+            GetCarParkCodes(ref _airportList);
+
+            foreach (var airport in _airportList)
+            {
+                foreach (var carpark in airport.CarParks)
+                {
+                    API_Request request = new API_Request
+                    {
+                        Agent = new Agent
+                        {
+                            ABTANumber = "WA789",
+                            Initials = "thecarparksuper",
+                            Password = ""
+                        },
+                        Itinerary = new Itinerary
+                        {
+                            ArrivalDate = DateTime.Now.AddMonths(1).ToString("dMMMyy"),
+                            CarParkCode= carpark.Code,
+                        },
+                        Request = new Request
+                        {
+                             RequestType= "1"
+                        },
+                        //System = "APH",
+                        //Version = "1.0",
+                        //Product = "CarPark",
+                        //Customer = "X",
+                        //Session = "000000003",
+                        //RequestCode = "11"
+                    };
+
+                    API_Reply reply = CarParkInformation(request);
+                    
+                    //carpark.
+                }
+            }
+
+         ////   var rootentities = _rootBookingEntityManager.GetAll();
+
+         //   foreach (var airport in _airportList)
+         //   {
+         //       //## Check if the airport has a APH car park
+         //       //if (airport.BookingEntities
+         //       //    .Where(x=>x.Properties
+         //       //        .Where(y => y.Key == "Provider" && y.Value.ToString() == "APH")
+         //       //        .Count() > 0)
+         //       //            .Count()>0)
+         //       //    {
+         //       //        foreach (var carpark in airport.BookingEntities)
+         //       //        {
+         //       //            //## If so, we delete teh car park to fill it again.
+         //       //            if (carpark.Properties.Where(y => y.Key == "Provider" && y.Value.ToString() == "APH").Count() > 0)
+         //       //            {
+         //       //                _bookingEntityManager.DeleteById(carpark.Id);
+         //       //            }
+         //       //        }    
+         //       //    }
+         //       //## START Adding a new carparks
+         //       //API_Request request = new API_Request
+         //       //{
+         //       //    Agent = new Agent
+         //       //    {
+         //       //        ABTANumber = "WA789",   
+         //       //        Initials = "thecarparksuper",
+         //       //        Password = ""
+         //       //    },
+         //       //    Itinerary = new Itinerary
+         //       //    {
+         //       //        ArrivalDate = DateTime.Now.AddDays(3).ToString("dMMMyy"),
+         //       //        DepartDate = DateTime.Now.AddDays(4).ToString("dMMMyy"),
+         //       //        ArrivalTime = "0600",
+         //       //        DepartTime = "1800",
+         //       //        Location = airport.Name,
+         //       //        Terminals = "ALL"
+         //       //    },
+         //       //    System = "APH",
+         //       //    Version = "1.0",
+         //       //    Product = "CarPark",
+         //       //    Customer = "X",
+         //       //    Session = "000000003",
+         //       //    RequestCode = "11"
+         //       //};
+
+         //       var response = this.CarParkAvailability(request);
+
+         //       if (response.Result == "OK") 
+         //       {
+         //           foreach (var item in response.CarPark)
+         //           {
+         //               API_Request informationrequest = new API_Request
+         //               {
+         //                   Agent = new Agent
+         //                   {
+         //                       ABTANumber = "WA789",
+         //                       Initials = "thecarparksuper",
+         //                       Password = ""
+         //                   },
+         //                   Itinerary = new Itinerary
+         //                   {
+         //                       ArrivalDate = DateTime.Now.AddDays(3).ToString("dMMMyy"),
+         //                       CarParkCode = item.CarParkCode
+         //                   },
+         //                   System = "APH",
+         //                   Version = "1.0",
+         //                   Product = "CarPark",
+         //                   Customer = "X",
+         //                   Session = "000000004",
+         //                   RequestCode = "6",
+         //                   Request = new Request { RequestType = "1" }
+         //               };
+
+         //               //Ac
+         //               var information = this.CarParkInformation(informationrequest);
+         //               if (information.Result == "OK")
+         //               {
+         //                   airport.BookingEntities.Add(new BookingEntityModel
+         //                   {
+         //                       Name = item.CarParkName,
+         //                       Prices = new Collection<BookingPricingModel>(),
+         //                       Service = new Collection<BookingServiceModel>(),
+         //                       Slot = new Collection<SlotModel>(),
+         //                       //Availability = new Collection<AvailabilityModel>(),
+         //                       Properties = new Collection<PropertyModel> { 
+         //                       new PropertyModel{Key="Provider", Value="APH"},
+         //                       new PropertyModel{Key="CarParkCode", Value=item.CarParkCode}                                
+         //                   },
+         //                       Address = new AddressModel { }
+         //                   });
+         //               }
+         //           }
+         //       }
+
+         //       //## ?? It does
+         //       _rootBookingEntityManager.Update(airport);
+         //       //## END
+         //   }
             
             return result;
         }
@@ -138,6 +280,15 @@ namespace ACP.Business.APIs.APH
 
             return reply;
         }
+
+        public API_Reply CarParkInformation(API_Request request)
+        {
+            string result = this.PostFormData(this.Serialize(request));
+            var reply = this.Deserialize<API_Reply>(result);
+
+            return reply;
+        }
+
 
         public string PostFormData(string data)
         {
@@ -202,14 +353,5 @@ namespace ACP.Business.APIs.APH
 
             return reply;
         }
-
-
-        public API_Reply CarParkInformation(API_Request request)
-        {
-            string result = this.PostFormData(this.Serialize(request));
-            var reply = this.Deserialize<API_Reply>(result);
-
-            return reply;
-        }        
     }
 }

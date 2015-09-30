@@ -171,6 +171,11 @@ namespace ServiceAPI.Controllers
             return Request.CreateResponse(HttpStatusCode.Created, booking, new JsonMediaTypeFormatter());
         }
 
+        /// <summary>
+        /// It will update a particular booking. The whole booking need to be passed.
+        /// </summary>
+        /// <param name="model">Booking</param>
+        /// <returns>Returns true if the booking succed.</returns>
         [HttpPut]
         [Route("update")]
         public async Task<HttpResponseMessage> Update(BookingModel model)
@@ -213,6 +218,11 @@ namespace ServiceAPI.Controllers
             return Request.CreateResponse(HttpStatusCode.Created, booking, new JsonMediaTypeFormatter());
         }
 
+        /// <summary>
+        /// It will delete a booking by passing the Id.
+        /// </summary>
+        /// <param name="id">Id of the booking.</param>
+        /// <returns>It will return true if it was removed properly</returns>
         [HttpDelete]
         [Route("delete")]
         public async Task<HttpResponseMessage> Delete(int id)

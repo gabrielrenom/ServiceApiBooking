@@ -503,6 +503,48 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="T:ServiceAPI.Controllers.BookingController">
+            <summary>
+            This controller it will be in charge of manage the bbookings from the admin and user.
+            It allows to do all the CRUD operations plus exxtra functionality.
+            v0.1
+            </summary>
+        </member>
+        <member name="M:ServiceAPI.Controllers.BookingController.GettByBookingReference(System.String)">
+            <summary>
+            It will get a booking by passing the booking refence.
+            </summary>
+            <param name="reference"></param>
+            <returns>It returns the booking.</returns>
+        </member>
+        <member name="M:ServiceAPI.Controllers.BookingController.GettById(System.Int32)">
+            <summary>
+            It will retrieve the booking after passing the id.
+            </summary>
+            <param name="id">The id of the booking</param>
+            <returns>The booking</returns>
+        </member>
+        <member name="M:ServiceAPI.Controllers.BookingController.Add(ACP.Business.Models.BookingModel)">
+            <summary>
+            It will add a booking to the service including the payment.
+            </summary>
+            <param name="model">Booking</param>
+            <returns>Booking added</returns>
+        </member>
+        <member name="M:ServiceAPI.Controllers.BookingController.Update(ACP.Business.Models.BookingModel)">
+            <summary>
+            It will update a particular booking. The whole booking need to be passed.
+            </summary>
+            <param name="model">Booking</param>
+            <returns>Returns true if the booking succed.</returns>
+        </member>
+        <member name="M:ServiceAPI.Controllers.BookingController.Delete(System.Int32)">
+            <summary>
+            It will delete a booking by passing the Id.
+            </summary>
+            <param name="id">Id of the booking.</param>
+            <returns>It will return true if it was removed properly</returns>
+        </member>
         <member name="T:ServiceAPI.Controllers.PricingController">
             <summary>
             The pricing controller is in charge on do all the CRUD opreations of the prices for teh parkings.
