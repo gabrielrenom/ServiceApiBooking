@@ -63,31 +63,6 @@ namespace ACP.Business.APIs.APH
         {
             foreach (var item in airports)
             {
-                API_Request request = new API_Request
-                {
-                    Agent = new Agent
-                    {
-                        ABTANumber = "WA789",
-                        Initials = "thecarparksuper",
-                        Password = ""
-                    },
-                    Itinerary = new Itinerary
-                    {
-                        ArrivalDate = DateTime.Now.AddMonths(1).ToString("dMMMyy"),
-                        DepartDate = DateTime.Now.AddMonths(2).ToString("dMMMyy"),
-                        ArrivalTime = "0600",
-                        DepartTime = "1800",
-                        Location = item.Code,
-                        Terminals = "ALL"
-                    },
-                    System = "APH",
-                    Version = "1.0",
-                    Product = "CarPark",
-                    Customer = "X",
-                    Session = "000000003",
-                    RequestCode = "11"
-                };
-
                 //API_Request request = new API_Request
                 //{
                 //    Agent = new Agent
@@ -98,8 +73,8 @@ namespace ACP.Business.APIs.APH
                 //    },
                 //    Itinerary = new Itinerary
                 //    {
-                //        ArrivalDate = "20Nov15",
-                //        DepartDate = "27Nov15",
+                //        ArrivalDate = DateTime.Now.AddMonths(1).ToString("dMMMyy"),
+                //        DepartDate = DateTime.Now.AddMonths(2).ToString("dMMMyy"),
                 //        ArrivalTime = "0600",
                 //        DepartTime = "1800",
                 //        Location = item.Code,
@@ -112,6 +87,31 @@ namespace ACP.Business.APIs.APH
                 //    Session = "000000003",
                 //    RequestCode = "11"
                 //};
+
+                API_Request request = new API_Request
+                {
+                    Agent = new Agent
+                    {
+                        ABTANumber = "WA789",
+                        Initials = "thecarparksuper",
+                        Password = ""
+                    },
+                    Itinerary = new Itinerary
+                    {
+                        ArrivalDate = "20Nov15",
+                        DepartDate = "27Nov15",
+                        ArrivalTime = "0600",
+                        DepartTime = "1800",
+                        Location = item.Code,
+                        Terminals = "ALL"
+                    },
+                    System = "APH",
+                    Version = "1.0",
+                    Product = "CarPark",
+                    Customer = "X",
+                    Session = "000000003",
+                    RequestCode = "11"
+                };
 
                 var response = this.CarParkAvailability(request);               
 
@@ -156,16 +156,40 @@ namespace ACP.Business.APIs.APH
                         {
                              RequestType= "1"
                         },
-                        //System = "APH",
-                        //Version = "1.0",
-                        //Product = "CarPark",
-                        //Customer = "X",
-                        //Session = "000000003",
-                        //RequestCode = "11"
+                        System = "APH",
+                        Version = "1.0",
+                        Product = "CarPark",
+                        Customer = "X",
+                        Session = "000000003",
+                        RequestCode = "11"
                     };
 
-                    API_Reply reply = CarParkInformation(request);
+
+                    < API_Request
+   //////// System = "APH"
+   //////// Version = "1.0"
+   //////// Product = "CarPark"
+   //////// Customer = "X"
+   //////// Session = "000000007"
+   //////// RequestCode = "6" >
+   //////// < Agent >
+   ////////     < ABTANumber > WA789 </ ABTANumber >
+   ////////     < Password ></ Password >
+   ////////     < Initials > thecarparksuper </ Initials >
+   //////// </ Agent >
+   //////// < Itinerary >
+   ////////     < ArrivalDate > 20Nov15 </ ArrivalDate >
+   ////////        < CarParkCode > LGW1 </ CarParkCode >
+   ////////    </ Itinerary >
+   ////////    < Request >
+   ////////        < RequestType > 1 </ RequestType >
+   ////////    </ Request >
+   ////////</ API_Request >
+
+                       ReplyDetails reply = CarParkInformationDetails(request);
                     
+
+
                     //carpark.
                 }
             }
@@ -289,6 +313,13 @@ namespace ACP.Business.APIs.APH
             return reply;
         }
 
+        public ReplyDetails CarParkInformationDetails(API_Request request)
+        {
+            string result = this.PostFormData(this.Serialize(request));
+            var reply = this.Deserialize<ReplyDetails>(result);
+
+            return reply;
+        }
 
         public string PostFormData(string data)
         {

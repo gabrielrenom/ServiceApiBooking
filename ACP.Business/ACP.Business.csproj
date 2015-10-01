@@ -61,6 +61,7 @@
     <Compile Include="APIs\APH\Models\Info.cs" />
     <Compile Include="APIs\APH\Models\Itinerary.cs" />
     <Compile Include="APIs\APH\Models\Pricing.cs" />
+    <Compile Include="APIs\APH\Models\ReplyDetails.cs" />
     <Compile Include="APIs\APH\Models\Request.cs" />
     <Compile Include="APIs\APH\Models\Terminal.cs" />
     <Compile Include="APIs\PP\IPurpleParking.cs" />
