@@ -11,6 +11,8 @@ namespace ACP.Business.Models
     {
         public string Name { get; set; }
         public string Telephone { get; set; }
+        public string Code { get; set; }
+        public string Website { get; set; }
         public int AddressId { get; set; }
         public int StatusId { get; set; }
 

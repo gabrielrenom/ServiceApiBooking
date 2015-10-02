@@ -31,7 +31,9 @@ namespace ACP.DataAccess.Managers
         public override bool Update(RootBookingEntityModel domainModel)
         {
             var dataModel = Repository.GetSingle<RootBookingEntity>(a => a.Id == domainModel.Id, x => x.Status, x => x.Address, x => x.BookingEntities, x => x.BookingEntities.Select(y => y.Address));
-            
+
+            dataModel.Code = domainModel.Code;
+            dataModel.Website = domainModel.Website;
             dataModel.Created = domainModel.Created;
             dataModel.CreatedBy = domainModel.CreatedBy;
             dataModel.Modified = domainModel.Modified;
@@ -148,7 +150,8 @@ namespace ACP.DataAccess.Managers
             {
                 dataModel = new RootBookingEntity();
             }
-
+            dataModel.Code = domainModel.Code;
+            dataModel.Website = domainModel.Website;
             dataModel.Created = domainModel.Created;
             dataModel.CreatedBy = domainModel.CreatedBy;
             dataModel.Modified = domainModel.Modified;
@@ -246,6 +249,8 @@ namespace ACP.DataAccess.Managers
         {
             RootBookingEntityModel model = new RootBookingEntityModel
             {
+                 Website = dataModel.Website,
+                  Code = dataModel.Code,
                 Created = dataModel.Created, 
                 Id = dataModel.Id,
                 CreatedBy = dataModel.CreatedBy,
@@ -348,6 +353,8 @@ namespace ACP.DataAccess.Managers
                 model.Modified = dataModel.Modified;
                 model.ModifiedBy = dataModel.ModifiedBy;
                 model.Name = dataModel.Name;
+                model.Website = dataModel.Website;
+                model.Code = dataModel.Code;
                 model.Address = new AddressModel
                 {
 

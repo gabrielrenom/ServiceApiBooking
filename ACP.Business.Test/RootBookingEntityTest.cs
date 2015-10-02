@@ -34,6 +34,48 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
+        public void GivenALlAirportsRootBookingEntity_WhenIsAdded_BeSureItRestunsTrue()
+        {
+            //Arrange
+
+            StatusModel status = new StatusModel {
+                StatusType = Enums.StatusType.Active,
+                CreatedBy = localuser,
+                Modified = DateTime.Now,
+                ModifiedBy = localuser,
+                Created = DateTime.Now,
+            };
+            #region [ Aberdeen Airport ]
+            RootBookingEntityModel AberdeenAirport = new RootBookingEntityModel {
+                Telephone = "+441415856000",
+                Name = "Aberdeen Airport",
+                Code = "ABZ",
+                Status = status,                
+                Address = new AddressModel
+                {
+                    Address1 = "Dyce",
+                    City = "Aberdeen",
+                    Postcode = "AB21 7DU",
+                    Country = "Scotland",
+                    CreatedBy = localuser,
+                    Modified = DateTime.Now,
+                    ModifiedBy = localuser,
+                    Created = DateTime.Now,
+                },
+                CreatedBy = localuser,
+                Modified = DateTime.Now,
+                ModifiedBy =localuser,
+                Created = DateTime.Now,                         
+            };
+            #endregion
+            //Act
+            var result = service.Add(AberdeenAirport);
+
+            //Assert
+            Assert.IsTrue(result.Id > 0);
+        }
+
+        [TestMethod]
         public void GivenARootBookingEntity_WhenIsAdded_BeSureItRestunsTrue()
         { 
             //Arrange

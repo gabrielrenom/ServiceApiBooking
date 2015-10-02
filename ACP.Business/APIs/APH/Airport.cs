@@ -2,7 +2,7 @@
 
 namespace ACP.Business.APIs.APH
 {
-    internal class Airport
+    public class Airport
     {
         private string _Name;
         private string _Code;
@@ -28,10 +28,11 @@ namespace ACP.Business.APIs.APH
         }
     }
 
-    internal class CarPark
+    public class CarPark
     {
         public string Code { get; set; }
         public string Commision { get; internal set; }
+        public string Details { get; internal set; }
         public string Name { get; set; }
         public string ProductName { get; internal set; }
         public string Terminals { get; internal set; }
