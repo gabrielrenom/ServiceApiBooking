@@ -12,16 +12,45 @@ namespace ACP.Business.Services
     public class BookingService : IBookingService
     {
         private IBookingManager _bookingManager;
+        private IAvailabilityManager _availability;
+        private IBookingPricingManager _pricemanager;
 
-        public BookingService(IBookingManager bookingManager)
+        public BookingService(IBookingManager bookingManager, IAvailabilityManager availability)
         {
-            _bookingManager = bookingManager;            
+            _bookingManager = bookingManager;
+            _availability = availability;
         }
 
-        public Task<BookingModel> Add(BookingModel model)
+        public async Task<BookingModel> Add(BookingModel model)
         {
-            return _bookingManager.AddAsync(model);
+            //## 1- Generate the Booking reference
+            model.BookingReference = GenerateReference();
+
+            //## 2- Generate the price
+            var availability = _availability.FindAvailability(x => x.Status.StatusType == Data.Enums.StatusType.Active && x.StartDate == model.StartDate && x.EndDate == model.EndDate && x.Slot.BookingEntity.Code.ToLower().Contains(model.SourceCode.ToLower())).FirstOrDefault();
+            var price =  _pricemanager.GetAllPricesByBookEntity(availability.Slot.BookingEntityId, model.EndDate, model.StartDate).FirstOrDefault();
+            model.Price = price.DayPrices.Where(x => x.Day == Math.Round((model.EndDate - model.StartDate).TotalDays)).FirstOrDefault().Dayprice;
+            
+            //## 3- Block Slot
+            //## 4- Block Availability
+            //##    a) REMOVE AVAILABILITY I AM GETTINGS
+            //##    b) FROM CURRENT availability START until My Availability (model) START CREATE A NEW AVAILABILITY -free
+            //##    c) CREATE 1 WITH My availability (model) set - as occupied
+            //##    d) CREATE FROM END my availability (model) until END in availability - free
+            return await _bookingManager.AddAsync(model);
+
         }
+
+        private string GenerateReference()
+        {
+            long i = 1;
+            foreach (byte b in Guid.NewGuid().ToByteArray())
+            {
+                i *= ((int)b + 1);
+            }
+            return string.Format("{0:x}", i - DateTime.Now.Ticks);
+        }
+
 
         public async Task<IList<BookingModel>> GetAll()
         {

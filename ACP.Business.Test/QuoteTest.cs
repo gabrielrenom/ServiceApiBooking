@@ -25,6 +25,7 @@ namespace ACP.Business.Test
         private SlotManager slotmanager;
         private ISlotService slotservice;
         private IBookingService bookingservice;
+        private IAvailabilityManager availabilitymanager;
 
         [TestInitialize]
         public void Setup()
@@ -32,10 +33,11 @@ namespace ACP.Business.Test
             repository = new ACPRepository();
             bookingmanager = new BookingManager(repository);
             bookingpricingmanager = new BookingPricingManager(repository);
+            availabilitymanager = new AvailabilityManager(repository);
             service = new QuoteService(bookingmanager, bookingpricingmanager);
             slotmanager = new SlotManager(repository);
             slotservice = new SlotService(slotmanager);
-            bookingservice = new BookingService(bookingmanager);
+            bookingservice = new BookingService(bookingmanager, availabilitymanager);
         }
 
         [TestMethod]
