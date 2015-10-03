@@ -21,6 +21,6 @@ namespace ACP.Business.Models
         public List<BookingServiceModel> BookingServices;
         public List<BookingItemModel> BookingItems;
         public List<BookingPricingModel> BookingPricingItems;
-
+        public decimal Price { get; set; }
     }
 }

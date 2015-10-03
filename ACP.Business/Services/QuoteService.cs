@@ -29,10 +29,40 @@ namespace ACP.Business.Services
         {
             QuoteModel quoteresult = quote;
 
-            var list = _bookingPricingManager.GetAllPrices(quote.Pickup, quote.Dropoff);//_bookingPricingManager.GetAllPrices().Where(x => quote.Pickup>x.Start  && quote.Dropoff<x.End ).ToList();
-            
+            var list = _bookingPricingManager.GetAllPricesByPickLocationAndDropLocation(quote.PickupLocation.Name, quote.DropoffLocation.Name, quote.Pickup, quote.Dropoff);//_bookingPricingManager.GetAllPrices().Where(x => quote.Pickup>x.Start  && quote.Dropoff<x.End ).ToList();
+
             foreach (var item in list)
             {
+                quote.BookingPricingItems.Add(item);
+            }
+
+            return quoteresult;
+        }
+
+        public async Task<QuoteModel> GetQuoteWithPrice(Models.QuoteModel quote)
+        {
+            QuoteModel quoteresult = quote;
+
+            var list = _bookingPricingManager.GetAllPricesByPickLocationAndDropLocation(quote.PickupLocation.Name, quote.DropoffLocation.Name, quote.Pickup, quote.Dropoff);//_bookingPricingManager.GetAllPrices().Where(x => quote.Pickup>x.Start  && quote.Dropoff<x.End ).ToList();
+
+            foreach (var item in list)
+            {
+                quote.Price = item.DayPrices.Where(x => x.Day == (quote.Pickup - quote.Dropoff).TotalDays).FirstOrDefault().Dayprice;
+                quote.BookingPricingItems.Add(item);
+            }
+
+            return quoteresult;
+        }
+
+        public async Task<QuoteModel> GetQuoteWithPriceByBookingEntityId(int Id, Models.QuoteModel quote)
+        {
+            QuoteModel quoteresult = quote;
+
+            var list = _bookingPricingManager.GetAllPricesByBookEntity(Id, quote.Pickup, quote.Dropoff);//_bookingPricingManager.GetAllPrices().Where(x => quote.Pickup>x.Start  && quote.Dropoff<x.End ).ToList();
+
+            foreach (var item in list)
+            {
+                quote.Price = item.DayPrices.Where(x => x.Day == (quote.Pickup - quote.Dropoff).TotalDays).FirstOrDefault().Dayprice;
                 quote.BookingPricingItems.Add(item);
             }
 

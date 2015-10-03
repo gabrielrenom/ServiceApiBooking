@@ -20,10 +20,14 @@ namespace ServiceAPI.Controllers
     public class AvailabilityController : ApiController
     {
         private IAvailabilityService _availabilityservice;
+        private IQuoteService _quoteservice;
         //
-        public AvailabilityController(IAvailabilityService availabilityservice)
+        public AvailabilityController(
+            IAvailabilityService availabilityservice, 
+            IQuoteService quoteservice)
         {
             _availabilityservice = availabilityservice;
+            _quoteservice = quoteservice;
         }
 
         [HttpGet]
@@ -32,7 +36,7 @@ namespace ServiceAPI.Controllers
         {
             IList<AvailabilityModel> available = null;
             try
-            {
+            {                
                 available = await _availabilityservice.GetByAvailability(model);
             }
             catch (HttpRequestException ex)
@@ -67,6 +71,65 @@ namespace ServiceAPI.Controllers
 
             return Request.CreateResponse(HttpStatusCode.Created, available, new JsonMediaTypeFormatter());
         }
+
+
+        [HttpGet]
+        [Route("gettbyavailabilitywithprice")]
+        public async Task<HttpResponseMessage> GettByAvailabilityWithPrice(AvailabilityModel model)
+        {
+            IList<AvailabilityModel> available = null;
+            try
+            {
+
+                available = await _availabilityservice.GetByAvailability(model);
+                if (available != null)
+                {
+ 
+                    foreach (var slot in available)
+                    {
+                        var price = _quoteservice.GetQuoteWithPriceByBookingEntityId(
+                        slot.Slot.BookingEntityId, new QuoteModel
+                        {
+                             Dropoff = model.StartDate,
+                              Pickup = model.EndDate
+                        });
+                    }
+                  
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, exceptionMessage);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.Created, available, new JsonMediaTypeFormatter());
+        }
+
 
 
         [HttpGet]

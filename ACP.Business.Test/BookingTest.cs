@@ -39,12 +39,12 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public void GivenADateAndPlace_WhenUserGetQuote_ThenEnsureAllResultsAreReturned()
+        public async Task GivenADateAndPlace_WhenUserGetQuote_ThenEnsureAllResultsAreReturned()
         { 
             //Arrange            
             QuoteModel quote = new QuoteModel();
-            quote.Pickup= new DateTime(2015, 07, 14,18,40,00);
-            quote.Dropoff=new DateTime(2015, 07, 16,16,30,00);
+            quote.Pickup= new DateTime(2016, 07, 16,18,40,00);
+            quote.Dropoff=new DateTime(2016, 07, 14,16,30,00);
             quote.PickupLocation = new LocationModel(){Id=1,Name="Manchester"};
             quote.DropoffLocation= new LocationModel(){Id=1,Name="Manchester"};
             quote.BookingServices.Add(new BookingServiceModel(){ Name="Carpark"});
@@ -59,7 +59,8 @@ namespace ACP.Business.Test
             //SELECT * FROM `carparks_availability` WHERE `cpid`='1'")
 
             //Act
-            var result = service.GetQuote(quote);
+            var result = await service.GetQuote(quote);
+           
 
            //Assert
             Assert.IsNotNull(result);

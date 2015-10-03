@@ -35,6 +35,7 @@ namespace ServiceAPI.Controllers
             try
             {
                 quote = await _bookingservice.GetQuote(model);
+                
             }
             catch (HttpRequestException ex)
             {

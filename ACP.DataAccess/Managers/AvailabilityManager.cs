@@ -35,6 +35,14 @@ namespace ACP.DataAccess.Managers
             //return GetListIncluding(x=>x.StartDate >=  && x.StartDate <= endDate3, x => x.Status, x).ToList();
         }
 
+        public IList<AvailabilityModel> FindAvailabilityWithPrices(Func<Availability, bool> where)
+        {
+           
+
+            return GetListIncluding(where, x => x.Status).ToList();
+            //return GetListIncluding(x=>x.StartDate >=  && x.StartDate <= endDate3, x => x.Status, x).ToList();
+        }       
+
         public IEnumerable<AvailabilityModel> GetAll()
         {
             return GetListIncluding(x => x.Id > 0, x => x.Status);

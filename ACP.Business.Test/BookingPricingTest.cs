@@ -44,32 +44,31 @@ namespace ACP.Business.Test
             model.Created = DateTime.Now;
             model.CreatedBy = localuser;
             model.Modified = DateTime.Now;
-            model.Name = "Winter";
+            model.Name = "Summer";
             model.DayPrices = new Collection<DayPriceModel>();
-            model.Start = DateTime.Now;
-            model.End = DateTime.Now;
-            model.DayPrices.Add(new DayPriceModel
-            {
-                Created = DateTime.Now,
-                Day = 1,
-                Modified = DateTime.Now,
-                Dayprice = 0,
-                CreatedBy = localuser,
-                //HourPrices = new Collection<HourPriceModel>() 
-                //{ 
-                //    new HourPriceModel
-                //    {
-                //         Created = DateTime.Now,                         
-                //         HourMinute = DateTime.Now,
-                //         Hourprice = 0,
-                //          Modified= DateTime.Now
-                //    }
-                //}
-            });
+            model.Start =DateTime.Now.AddMonths(7);
+            model.End  = DateTime.Now.AddMonths(11);
+            model.DayPrices= new List<DayPriceModel>{
+                new DayPriceModel { Day = 1, Dayprice = 10, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser },
+                new DayPriceModel { Day = 2, Dayprice = 20, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser },
+                new DayPriceModel { Day = 3, Dayprice = 30, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser },
+                new DayPriceModel { Day = 4, Dayprice = 40, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser },
+                new DayPriceModel { Day = 5, Dayprice = 40, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser },
+                new DayPriceModel { Day = 6, Dayprice = 50, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser },
+                new DayPriceModel { Day = 7, Dayprice = 50, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser },
+                new DayPriceModel { Day = 8, Dayprice = 90, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser },
+                new DayPriceModel { Day = 9, Dayprice = 90, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser },
+                new DayPriceModel { Day = 10, Dayprice = 90, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser },
+                new DayPriceModel { Day = 11, Dayprice = 90, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser },
+                new DayPriceModel { Day = 12, Dayprice = 100, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser },
+                new DayPriceModel { Day = 13, Dayprice = 100, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser },
+
+                };
             list.Add(model);
 
             //Act
             var results = await service.AddPricesWithDays(2, list);
+            var results2 = await service.AddPricesWithDays(1, list);
 
             //Assert
             Assert.IsTrue(results);
@@ -146,12 +145,12 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
-        public void OnPrices_WhenGetAllPricesWithDaysIsCalled_BeSureAllThePricesAreReturned()
+        public async Task OnPrices_WhenGetAllPricesWithDaysIsCalled_BeSureAllThePricesAreReturned()
         {
             //Arrange
             var bookentityid = 2;
             //Act
-            var results = service.GetAllPricesWithDays(bookentityid);
+            var results =await  service.GetAllPricesWithDays(bookentityid);
 
             //Assert
             Assert.IsNotNull(results);

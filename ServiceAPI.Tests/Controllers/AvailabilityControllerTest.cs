@@ -23,8 +23,11 @@ namespace ServiceAPI.Tests.Controllers
     {
         private AvailabilityController availabilitycontroller;
         private IAvailabilityService service;
+        private IQuoteService quoteservice;
         private IAvailabilityManager manager;
         private IACPRepository repository;
+        private IBookingManager bookingManager;
+        private IBookingPricingManager bookingPricingManager;
 
         [TestInitialize]
         public void Setup()
@@ -32,7 +35,10 @@ namespace ServiceAPI.Tests.Controllers
             repository = new ACPRepository();
             manager = new AvailabilityManager(repository);
             service = new AvailabilityService(manager);
-            availabilitycontroller = new AvailabilityController(service);
+            bookingPricingManager = new BookingPricingManager(repository);
+            bookingManager = new BookingManager(repository);
+            quoteservice = new QuoteService(bookingManager, bookingPricingManager);
+            availabilitycontroller = new AvailabilityController(service, quoteservice);
         }
 
         [TestMethod]

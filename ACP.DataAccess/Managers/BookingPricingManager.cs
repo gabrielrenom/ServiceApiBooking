@@ -33,8 +33,34 @@ namespace ACP.DataAccess.Managers
         public IList<BookingPricingModel> GetAllPrices(DateTime pickup, DateTime dropoff)
         {
 
-            return GetListIncluding(x => pickup > x.Start && dropoff < x.End, x => x.BookingEntity)           
-           .OrderBy(a => a.Name).ToList();
+            return GetListIncluding(x => pickup > x.Start && dropoff < x.End,
+                x => x.BookingEntity,
+                x => x.BookingEntity.Prices,
+                x => x.BookingEntity.Prices.Select(y => x.DayPrices))
+                .OrderBy(a => a.Name).ToList();
+
+        }
+
+        public IList<BookingPricingModel> GetAllPricesByBookEntity(int bookingentityid, DateTime pickup, DateTime dropoff)
+        {
+
+            return GetListIncluding(x=>x.BookingEntityId == bookingentityid && pickup > x.Start && dropoff < x.End,
+                x => x.BookingEntity,
+                x => x.BookingEntity.Prices,
+                x => x.BookingEntity.Prices.Select(y => x.DayPrices))
+                .OrderBy(a => a.Name).ToList();
+
+        }
+
+        public IList<BookingPricingModel> GetAllPricesByPickLocationAndDropLocation(string pickuplocation, string droplocation, DateTime pickup, DateTime dropoff)
+        {
+
+            return GetListIncluding(x => x.BookingEntity.Name.ToLower().Contains(droplocation.ToLower())==true && pickup > x.Start && dropoff < x.End,
+                x => x.BookingEntity,
+                x => x.BookingEntity.Prices,
+                x => x.BookingEntity.Prices.Select(y => x.DayPrices))
+                .OrderBy(a => a.Name).ToList();
+
         }
 
         public override BookingPricingModel ToDomainModelWithChildNodes(BookingPricing dataModel)
@@ -50,6 +76,7 @@ namespace ACP.DataAccess.Managers
             domainModel.Created = dataModel.Created ?? dataModel.Created;
             domainModel.ModifiedBy = dataModel.ModifiedBy;
             domainModel.Modified = dataModel.Modified;
+            domainModel.BookingEntityId = dataModel.BookingEntityId;
             domainModel.BookingEntity = dataModel.BookingEntity != null ? new BookingEntityModel
             {
                 Id = dataModel.BookingEntity.Id,
