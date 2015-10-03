@@ -47,7 +47,7 @@ namespace ACP.Business.Test
             model.Name = "Summer";
             model.DayPrices = new Collection<DayPriceModel>();
             model.Start =DateTime.Now.AddMonths(7);
-            model.End  = DateTime.Now.AddMonths(11);
+            model.End = DateTime.Now.AddMonths(11);
             model.DayPrices= new List<DayPriceModel>{
                 new DayPriceModel { Day = 1, Dayprice = 10, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser },
                 new DayPriceModel { Day = 2, Dayprice = 20, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser },
@@ -67,7 +67,7 @@ namespace ACP.Business.Test
             list.Add(model);
 
             //Act
-            var results = await service.AddPricesWithDays(2, list);
+            var results = await service.AddPricesWithDays(3, list);
             var results2 = await service.AddPricesWithDays(1, list);
 
             //Assert

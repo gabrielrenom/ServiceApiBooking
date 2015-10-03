@@ -73,6 +73,7 @@ namespace ACP.DataAccess.Managers
 
                 dataModel.BookingEntities = domainModel.BookingEntities != null ? domainModel.BookingEntities.Select(r => new BookingEntity
                 {
+                    Code = r.Code,
                     Comission = r.Comission,
                     Created = r.Created,
                     Id = r.Id,
@@ -200,6 +201,7 @@ namespace ACP.DataAccess.Managers
             dataModel.Telephone = domainModel.Telephone;
             dataModel.BookingEntities = domainModel.BookingEntities != null ? domainModel.BookingEntities.Select(r => new BookingEntity
             {
+                Code=r.Code,
                 Comission = r.Comission,
                 Created = r.Created,
                 Id = r.Id,
@@ -298,6 +300,7 @@ namespace ACP.DataAccess.Managers
                 }).ToList() : null,
             BookingEntities = dataModel.BookingEntities != null ? dataModel.BookingEntities.Select(r => new BookingEntityModel
                 {
+                    Code=r.Code,
                     Comission = r.Comission,
                     Created = r.Created,
                     Id = r.Id,
@@ -346,7 +349,7 @@ namespace ACP.DataAccess.Managers
         {
             RootBookingEntityModel model = new RootBookingEntityModel();
 
-            
+            model.Code = dataModel.Code;
                 model.Created = dataModel.Created;
                 model.Id = dataModel.Id;
                 model.CreatedBy = dataModel.CreatedBy;
@@ -386,6 +389,7 @@ namespace ACP.DataAccess.Managers
 
                 model.BookingEntities = dataModel.BookingEntities != null ? dataModel.BookingEntities.Select(r => new BookingEntityModel
                 {
+                    Code=r.Code,
                     Comission = r.Comission,
                     Created = r.Created,
                     Id = r.Id,

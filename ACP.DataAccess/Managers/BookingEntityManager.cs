@@ -23,6 +23,7 @@ namespace ACP.DataAccess.Managers
             BookingEntityModel model = new BookingEntityModel
             {
                 Comission = dataModel.Comission,
+                 Code = dataModel.Code,
                 Created = dataModel.Created,
                 Id = dataModel.Id,
                 CreatedBy = dataModel.CreatedBy,
@@ -127,6 +128,8 @@ namespace ACP.DataAccess.Managers
                 Modified = dataModel.Modified,
                 ModifiedBy = dataModel.ModifiedBy,
                 Name = dataModel.Name,
+                 Code = dataModel.Code,
+                  Website = dataModel.Website,
                 Address = dataModel.Address!=null?new AddressModel
                 {
 
@@ -176,6 +179,7 @@ namespace ACP.DataAccess.Managers
         {
             BookingEntityModel model = new BookingEntityModel
             {
+                 Code = dataModel.Code,
                 Comission = dataModel.Comission,
                 Created = dataModel.Created,
                 Id = dataModel.Id,
@@ -268,6 +272,7 @@ namespace ACP.DataAccess.Managers
             if (dataModel == null)
                 dataModel = new BookingEntity();
 
+                dataModel.Code = domainModel.Code;
                 dataModel.Comission = domainModel.Comission;
                 dataModel.Created = domainModel.Created;
                 dataModel.Id = domainModel.Id;
@@ -371,7 +376,8 @@ namespace ACP.DataAccess.Managers
         public override bool Update(BookingEntityModel domainModel)
         {
             var record = Repository.GetSingle<BookingEntity>(x=>x.Id==domainModel.Id,x => x.Address, x=>x.Extras, x => x.Properties,x => x.Prices.Select(e=>e.DayPrices), x=>x.Prices.Select(w=>w.DayPrices.Select(y=>y.HourPrices) ));
-            
+
+                record.Code = domainModel.Code;
                 record.Comission = domainModel.Comission;
                 record.Created = domainModel.Created;
                 record.Id = domainModel.Id;

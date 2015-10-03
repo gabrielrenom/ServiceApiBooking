@@ -62,7 +62,7 @@ namespace ACP.Business.Services
 
             foreach (var item in list)
             {
-                quote.Price = item.DayPrices.Where(x => x.Day == (quote.Pickup - quote.Dropoff).TotalDays).FirstOrDefault().Dayprice;
+                quote.Price = item.DayPrices.Where(x => x.Day == Math.Round((quote.Pickup - quote.Dropoff).TotalDays)).FirstOrDefault().Dayprice;
                 quote.BookingPricingItems.Add(item);
             }
 

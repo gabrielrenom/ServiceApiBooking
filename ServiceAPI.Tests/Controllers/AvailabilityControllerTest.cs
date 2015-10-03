@@ -8,6 +8,7 @@ using ACP.DataAccess.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using ServiceAPI.Controllers;
+using ServiceAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,8 +51,8 @@ namespace ServiceAPI.Tests.Controllers
             AvailabilityModel model = new AvailabilityModel
             {
                 StartDate = new DateTime(2015, 10, 4),
-                 EndDate =  new DateTime(2015,10,3),
-                 Status = new StatusModel { StatusType= ACP.Business.Enums.StatusType.Active }
+                EndDate =  new DateTime(2015,10,3),
+                Status = new StatusModel { StatusType= ACP.Business.Enums.StatusType.Active }
                   
             };
 
@@ -65,6 +66,33 @@ namespace ServiceAPI.Tests.Controllers
             Assert.IsNotNull(result);
 
             Assert.IsTrue(result.TryGetContentValue<bool>(out value));
+
+        }
+
+        [TestMethod]
+        public async Task GuivenADayInOut_WhenGettByAvailabilityWithPriceCalled_BeSureTheAvailabilityIsreturned()
+        {
+            //Arrange
+            List<AvailabilityViewModel> value = new List<AvailabilityViewModel>();
+
+            AvailabilityViewModel model = new AvailabilityViewModel
+            {
+                StartDate = new DateTime(2015, 10, 2),
+                EndDate = new DateTime(2015, 10, 8),
+                StatusType = 2,                
+
+            };
+
+            availabilitycontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+            availabilitycontroller.Configuration = Substitute.For<HttpConfiguration>();
+
+            //Act
+            var result = await availabilitycontroller.GettByAvailabilityWithPrice(model);
+
+            //Assert
+            Assert.IsNotNull(result);
+
+            Assert.IsTrue(result.TryGetContentValue(out value));
 
         }
     }

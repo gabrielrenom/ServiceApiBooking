@@ -64,6 +64,7 @@
     <Compile Include="APHTest.cs" />
     <Compile Include="BookingTest.cs" />
     <Compile Include="BookingEntityTest.cs" />
+    <Compile Include="QuoteTest.cs" />
     <Compile Include="response.cs" />
     <Compile Include="ServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

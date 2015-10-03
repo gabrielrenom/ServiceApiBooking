@@ -10,6 +10,8 @@ namespace ACP.Data
     public class BookingEntity: BaseEntity
     {
         public string Name { get; set; }
+
+        public string Code { get; set; }
         public byte[] Image { get; set; }
         public byte[] Logo { get; set; }
         public decimal Price { get; set; }

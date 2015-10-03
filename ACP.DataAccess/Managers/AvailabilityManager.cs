@@ -31,7 +31,8 @@ namespace ACP.DataAccess.Managers
 
         public IList<AvailabilityModel> FindAvailability(Func<Availability, bool> where)
         {
-            return GetListIncluding(where, x => x.Status).ToList();
+            return GetListIncluding(where, x => x.Status, x=>x.Slot,x=>x.Slot.BookingEntity,x=>x.Slot.BookingEntity.RootBookingEntity).ToList();
+            //return GetListIncluding(where, x => x.Status, x => x.Slot, x => x.Slot.BookingEntity).ToList()
             //return GetListIncluding(x=>x.StartDate >=  && x.StartDate <= endDate3, x => x.Status, x).ToList();
         }
 
@@ -126,6 +127,29 @@ namespace ACP.DataAccess.Managers
                StatusType = (Business.Enums.StatusType)dataModel.Status.StatusType,
                 Id = dataModel.Id
             } : null;
+            model.Slot = dataModel.Slot != null ? new SlotModel
+            {
+                Created = dataModel.Slot.Created,
+                Id = dataModel.Slot.Id,
+                CreatedBy = dataModel.Slot.CreatedBy,
+                Modified = dataModel.Slot.Modified,
+                ModifiedBy = dataModel.Slot.ModifiedBy,
+                BookingEntityId = dataModel.Slot.BookingEntityId,
+                IsOccupied = dataModel.Slot.IsOccupied,
+                Identifier = dataModel.Slot.Identifier,
+                BookingEntity = dataModel.Slot.BookingEntity != null ? new BookingEntityModel
+                {
+                    Name = dataModel.Slot.BookingEntity.Name,
+                    Code = dataModel.Slot.BookingEntity.Code,
+                    Id = dataModel.Slot.BookingEntity.Id,
+                    RootBookingEntity = dataModel.Slot.BookingEntity.RootBookingEntity != null ? new RootBookingEntityModel
+                    {
+                        Name = dataModel.Slot.BookingEntity.RootBookingEntity.Name,
+                        Code = dataModel.Slot.BookingEntity.RootBookingEntity.Code,
+                        Id = dataModel.Slot.BookingEntity.RootBookingEntity.Id
+                    } : null
+                } : null
+            } : null;
 
             return model;
             
@@ -180,7 +204,29 @@ namespace ACP.DataAccess.Managers
                  StatusType =(Business.Enums.StatusType) dataModel.Status.StatusType,
                   Id = dataModel.Id
             }:null;
-
+            model.Slot = dataModel.Slot != null ? new SlotModel
+            {
+                Created = dataModel.Slot.Created,
+                Id = dataModel.Slot.Id,
+                CreatedBy = dataModel.Slot.CreatedBy,
+                Modified = dataModel.Slot.Modified,
+                ModifiedBy = dataModel.Slot.ModifiedBy,
+                BookingEntityId = dataModel.Slot.BookingEntityId,
+                IsOccupied = dataModel.Slot.IsOccupied,
+                Identifier = dataModel.Slot.Identifier,
+                BookingEntity = dataModel.Slot.BookingEntity != null ? new BookingEntityModel
+                {
+                    Name = dataModel.Slot.BookingEntity.Name,
+                    Code = dataModel.Slot.BookingEntity.Code,
+                    Id = dataModel.Slot.BookingEntity.Id,
+                    RootBookingEntity = dataModel.Slot.BookingEntity.RootBookingEntity != null ? new RootBookingEntityModel
+                    {
+                        Name = dataModel.Slot.BookingEntity.RootBookingEntity.Name,
+                        Code = dataModel.Slot.BookingEntity.RootBookingEntity.Code,
+                        Id = dataModel.Slot.BookingEntity.RootBookingEntity.Id
+                    } : null
+                } : null
+            } : null;
             return model;
             
         }

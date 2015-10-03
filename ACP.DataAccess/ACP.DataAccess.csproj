@@ -136,6 +136,10 @@
     <Compile Include="Migrations\201510030905382_website.Designer.cs">
       <DependentUpon>201510030905382_website.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510031353484_codeaddedinbooking.cs" />
+    <Compile Include="Migrations\201510031353484_codeaddedinbooking.Designer.cs">
+      <DependentUpon>201510031353484_codeaddedinbooking.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ACPRepository.cs" />
@@ -197,6 +201,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510030905382_website.resx">
       <DependentUpon>201510030905382_website.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510031353484_codeaddedinbooking.resx">
+      <DependentUpon>201510031353484_codeaddedinbooking.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

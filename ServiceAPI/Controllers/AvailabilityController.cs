@@ -2,6 +2,7 @@
 using ACP.Business.Exceptions;
 using ACP.Business.Models;
 using ACP.Business.Services.Interfaces;
+using ServiceAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -75,24 +76,42 @@ namespace ServiceAPI.Controllers
 
         [HttpGet]
         [Route("gettbyavailabilitywithprice")]
-        public async Task<HttpResponseMessage> GettByAvailabilityWithPrice(AvailabilityModel model)
+        public async Task<HttpResponseMessage> GettByAvailabilityWithPrice(AvailabilityViewModel model)
         {
             IList<AvailabilityModel> available = null;
+            IList<AvailabilityViewModel> listavailable = new List<AvailabilityViewModel>();
             try
             {
-
-                available = await _availabilityservice.GetByAvailability(model);
+                available = await _availabilityservice.GetByAvailability(new AvailabilityModel {
+                    StartDate = model.StartDate,
+                    EndDate = model.EndDate,
+                    Status = new StatusModel {  StatusType= (ACP.Business.Enums.StatusType)model.StatusType}
+                });
                 if (available != null)
                 {
  
                     foreach (var slot in available)
                     {
-                        var price = _quoteservice.GetQuoteWithPriceByBookingEntityId(
-                        slot.Slot.BookingEntityId, new QuoteModel
-                        {
-                             Dropoff = model.StartDate,
-                              Pickup = model.EndDate
-                        });
+                        AvailabilityViewModel view = new AvailabilityViewModel();
+
+                        var price = await _quoteservice.GetQuoteWithPriceByBookingEntityId(
+                       slot.Slot.BookingEntityId, new QuoteModel
+                       {
+                           Dropoff = model.StartDate,
+                           Pickup = model.EndDate
+                       });
+
+                        view.SlotId = slot.Id;
+                        view.StatusType = (int)slot.Status.StatusType;
+                        view.StartDate = model.StartDate;
+                        view.EndDate = model.EndDate;
+                        view.Price = price.Price;
+                        view.CarPark = slot.Slot.BookingEntity.Name;
+                        view.CarParkCode = slot.Slot.BookingEntity.Code;
+                        view.Airport = slot.Slot.BookingEntity.RootBookingEntity.Name;
+                        view.AirportCode = slot.Slot.BookingEntity.RootBookingEntity.Code;
+
+                        listavailable.Add(view);
                     }
                   
                 }
@@ -127,7 +146,7 @@ namespace ServiceAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            return Request.CreateResponse(HttpStatusCode.Created, available, new JsonMediaTypeFormatter());
+            return Request.CreateResponse(HttpStatusCode.Created, listavailable, new JsonMediaTypeFormatter());
         }
 
 

@@ -110,6 +110,7 @@
     <Compile Include="Controllers\AvailabilityControllerTest.cs" />
     <Compile Include="Controllers\BookingControllerTest.cs" />
     <Compile Include="Controllers\CarParkControllerTest.cs" />
+    <Compile Include="Controllers\QuoteControllerTest.cs" />
     <Compile Include="Controllers\ServiceControllerTest.cs" />
     <Compile Include="Controllers\AirportControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

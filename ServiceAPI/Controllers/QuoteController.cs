@@ -19,16 +19,15 @@ namespace ServiceAPI.Controllers
     public class QuoteController : BaseApiController
     {
         private IQuoteService _bookingservice;
-        private IPricingService _pricingservice;
 
-        public QuoteController(IQuoteService bookingservice, IPricingService pricingservice)
+        public QuoteController(IQuoteService bookingservice)
         {
             _bookingservice = bookingservice;
-            _pricingservice = pricingservice;
+           
         }
 
         [HttpGet]
-        [Route("get")]
+        [Route("getsimple")]
         public async Task<HttpResponseMessage> GetQuote(QuoteModel model)
         {
             QuoteModel quote = null;
@@ -69,6 +68,95 @@ namespace ServiceAPI.Controllers
 
             return Request.CreateResponse(HttpStatusCode.Created, quote, new JsonMediaTypeFormatter());
         }
+
+
+        [HttpGet]
+        [Route("getquotewithprice")]
+        public async Task<HttpResponseMessage> GetQuoteWithPrice(QuoteModel model)
+        {
+            QuoteModel quote = null;
+            try
+            {
+                quote = await _bookingservice.GetQuoteWithPrice(model);
+
+            }
+            catch (HttpRequestException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, exceptionMessage);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.Created, quote, new JsonMediaTypeFormatter());
+        }
+
+        [HttpGet]
+        [Route("getquotewithprice/{id:int}")]
+        public async Task<HttpResponseMessage> GetQuoteWithPriceByCarcarkId(int id, QuoteModel model)
+        {
+            QuoteModel quote = null;
+            try
+            {
+                quote = await _bookingservice.GetQuoteWithPriceByBookingEntityId(id, model);
+
+            }
+            catch (HttpRequestException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, exceptionMessage);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.Created, quote, new JsonMediaTypeFormatter());
+        }
+
+
 
         [HttpGet]
         [Route("add")]
