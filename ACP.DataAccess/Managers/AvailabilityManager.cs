@@ -68,8 +68,8 @@ namespace ACP.DataAccess.Managers
             dataModel.ModifiedBy = domainModel.ModifiedBy;
             dataModel.StartDate = domainModel.StartDate;
             dataModel.EndDate = domainModel.EndDate;
-            dataModel.SlotId = domainModel.SlotId;
-            dataModel.StatusId = domainModel.StatusId;
+            dataModel.Status = (AvailabilityStatus)domainModel.Status;
+            
 
 
             Repository.Update<Availability>(dataModel);
@@ -90,17 +90,8 @@ namespace ACP.DataAccess.Managers
             dataModel.StartDate = domainModel.StartDate;
             dataModel.EndDate = domainModel.EndDate;
             dataModel.SlotId = domainModel.SlotId;            
-            dataModel.StatusId = domainModel.StatusId;
-            dataModel.Status = domainModel.Status != null ? new Status
-            {
-                Created = domainModel.Status.Created,
-                Id = domainModel.Status.Id,
-                CreatedBy = domainModel.Status.CreatedBy,
-                Modified = domainModel.Status.Modified,
-                ModifiedBy = domainModel.Status.ModifiedBy,
-                StatusType = (Data.Enums.StatusType)domainModel.Status.StatusType
-
-            } : null;
+            dataModel.Status = (AvailabilityStatus)domainModel.Status;
+           
 
             return dataModel;
         }
@@ -117,16 +108,8 @@ namespace ACP.DataAccess.Managers
             model.ModifiedBy = dataModel.ModifiedBy;
             model.Modified = dataModel.Modified;
             model.SlotId = dataModel.SlotId;            
-            model.StatusId = dataModel.Id;
-            model.Status = dataModel.Status != null ? new StatusModel
-            {                
-                CreatedBy = dataModel.Status.CreatedBy,
-                Created = dataModel.Status.Created,
-                ModifiedBy = dataModel.Status.ModifiedBy,
-                Modified = dataModel.Status.Modified,
-               StatusType = (Business.Enums.StatusType)dataModel.Status.StatusType,
-                Id = dataModel.Id
-            } : null;
+            model.Status = (ACP.Business.Enums.AvailabilityStatus)dataModel.Status;
+            
             model.Slot = dataModel.Slot != null ? new SlotModel
             {
                 Created = dataModel.Slot.Created,
@@ -168,18 +151,8 @@ namespace ACP.DataAccess.Managers
             dataModel.StartDate = domainModel.StartDate;
             dataModel.EndDate = domainModel.EndDate;
             dataModel.SlotId = domainModel.SlotId;
-            dataModel.StatusId = domainModel.StatusId;
-            dataModel.Status = domainModel.Status != null ? new Status
-            {
-                Created = domainModel.Status.Created,
-                Id = domainModel.Status.Id,
-                CreatedBy = domainModel.Status.CreatedBy,
-                Modified = domainModel.Status.Modified,    
-                ModifiedBy = domainModel.Status.ModifiedBy,
-                 StatusType = (StatusType)domainModel.Status.StatusType
-             
-            } : null;
-
+            dataModel.Status = (AvailabilityStatus)domainModel.Status;
+            
             return dataModel;
         }
 
@@ -195,15 +168,8 @@ namespace ACP.DataAccess.Managers
             model.ModifiedBy = dataModel.ModifiedBy;
             model.Modified = dataModel.Modified;
             model.SlotId = dataModel.SlotId;
-            model.StatusId = dataModel.StatusId;
-            model.Status = dataModel.Status!=null?new StatusModel{
-                CreatedBy = dataModel.Status.CreatedBy,
-                Created = dataModel.Status.Created,
-                ModifiedBy = dataModel.Status.ModifiedBy,
-                Modified = dataModel.Status.Modified,
-                 StatusType =(Business.Enums.StatusType) dataModel.Status.StatusType,
-                  Id = dataModel.Id
-            }:null;
+            model.Status = (ACP.Business.Enums.AvailabilityStatus)dataModel.Status;
+            
             model.Slot = dataModel.Slot != null ? new SlotModel
             {
                 Created = dataModel.Slot.Created,

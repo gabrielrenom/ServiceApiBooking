@@ -85,7 +85,7 @@ namespace ServiceAPI.Controllers
                 available = await _availabilityservice.GetByAvailability(new AvailabilityModel {
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
-                    Status = new StatusModel {  StatusType= (ACP.Business.Enums.StatusType)model.StatusType}
+                    Status = (ACP.Business.Enums.AvailabilityStatus)model.StatusType
                 });
                 if (available != null)
                 {
@@ -102,7 +102,7 @@ namespace ServiceAPI.Controllers
                        });
 
                         view.SlotId = slot.Id;
-                        view.StatusType = (int)slot.Status.StatusType;
+                        view.StatusType = (int)slot.Status;
                         view.StartDate = model.StartDate;
                         view.EndDate = model.EndDate;
                         view.Price = price.Price;

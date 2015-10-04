@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACP.Business.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,10 +12,12 @@ namespace ACP.Business.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        public int StatusId { get; set; }
+        public AvailabilityStatus Status { get; set; }
+
+        //public int StatusId { get; set; }
         public int SlotId { get; set; }
 
-        public virtual StatusModel Status { get; set; }
+        //public virtual StatusModel Status { get; set; }
         public virtual SlotModel Slot { get; set; }
 
     }

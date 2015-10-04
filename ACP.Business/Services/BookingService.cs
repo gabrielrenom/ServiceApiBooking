@@ -27,7 +27,7 @@ namespace ACP.Business.Services
             model.BookingReference = GenerateReference();
 
             //## 2- Generate the price
-            var availability = _availability.FindAvailability(x => x.Status.StatusType == Data.Enums.StatusType.Active && x.StartDate == model.StartDate && x.EndDate == model.EndDate && x.Slot.BookingEntity.Code.ToLower().Contains(model.SourceCode.ToLower())).FirstOrDefault();
+            var availability = _availability.FindAvailability(x => x.Status == Data.Enums.AvailabilityStatus.Free && x.StartDate == model.StartDate && x.EndDate == model.EndDate && x.Slot.BookingEntity.Code.ToLower().Contains(model.SourceCode.ToLower())).FirstOrDefault();
             var price =  _pricemanager.GetAllPricesByBookEntity(availability.Slot.BookingEntityId, model.EndDate, model.StartDate).FirstOrDefault();
             model.Price = price.DayPrices.Where(x => x.Day == Math.Round((model.EndDate - model.StartDate).TotalDays)).FirstOrDefault().Dayprice;
             

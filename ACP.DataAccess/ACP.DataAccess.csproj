@@ -140,6 +140,18 @@
     <Compile Include="Migrations\201510031353484_codeaddedinbooking.Designer.cs">
       <DependentUpon>201510031353484_codeaddedinbooking.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510040819243_statustableremoveitfromavailability.cs" />
+    <Compile Include="Migrations\201510040819243_statustableremoveitfromavailability.Designer.cs">
+      <DependentUpon>201510040819243_statustableremoveitfromavailability.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510040824334_constrainscachngedforaddressinroot.cs" />
+    <Compile Include="Migrations\201510040824334_constrainscachngedforaddressinroot.Designer.cs">
+      <DependentUpon>201510040824334_constrainscachngedforaddressinroot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510040828419_addreswhereitwas.cs" />
+    <Compile Include="Migrations\201510040828419_addreswhereitwas.Designer.cs">
+      <DependentUpon>201510040828419_addreswhereitwas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ACPRepository.cs" />
@@ -204,6 +216,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510031353484_codeaddedinbooking.resx">
       <DependentUpon>201510031353484_codeaddedinbooking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510040819243_statustableremoveitfromavailability.resx">
+      <DependentUpon>201510040819243_statustableremoveitfromavailability.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510040824334_constrainscachngedforaddressinroot.resx">
+      <DependentUpon>201510040824334_constrainscachngedforaddressinroot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510040828419_addreswhereitwas.resx">
+      <DependentUpon>201510040828419_addreswhereitwas.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

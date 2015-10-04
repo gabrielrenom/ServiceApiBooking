@@ -9,6 +9,7 @@ using ACP.Business.Services;
 using System.Linq;
 using ACP.Business.Models;
 using System.Threading.Tasks;
+using ACP.Business.Enums;
 
 namespace ACP.Business.Test
 {
@@ -41,16 +42,8 @@ namespace ACP.Business.Test
             model.SlotId = 1;
             model.StartDate = DateTime.Now;
             model.EndDate = DateTime.Now;
-
-            model.Status = new StatusModel
-            {
-                Created = DateTime.Now,
-                CreatedBy = localuser,
-                Modified = DateTime.Now,
-                ModifiedBy = localuser,
-                StatusType = Enums.StatusType.Free               
-            };
-
+            model.Status = Enums.AvailabilityStatus.Free;
+            
 
             //Act
             var result = service.Add(model);
@@ -71,7 +64,7 @@ namespace ACP.Business.Test
             //Assert
             Assert.IsNotNull(result);
             Assert.IsTrue(result.SlotId > 0);
-            Assert.IsTrue(result.StatusId > 0);
+            Assert.IsTrue(result.Status > 0);
         }
 
         [TestMethod]
@@ -83,7 +76,7 @@ namespace ACP.Business.Test
             //Assert
             Assert.IsNotNull(result);
             Assert.IsTrue(result.FirstOrDefault().SlotId > 0);
-            Assert.IsTrue(result.FirstOrDefault().StatusId > 0);
+            Assert.IsTrue(result.FirstOrDefault().Status > 0);
         }
 
         [TestMethod]
@@ -93,7 +86,7 @@ namespace ACP.Business.Test
             AvailabilityModel model = await service.GetById(2);
             model.StartDate = DateTime.Now;
             model.EndDate = DateTime.Now;
-            model.StatusId = 7;
+            model.Status = AvailabilityStatus.Free;
             
             //Act
             var result =await service.Update(model);

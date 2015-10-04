@@ -63,18 +63,9 @@ namespace ACP.DataAccess.Managers
                             ModifiedBy = r.ModifiedBy,
                             EndDate = r.EndDate,
                             StartDate = r.StartDate,
-                            StatusId = r.StatusId,
+                            Status = (ACP.Data.Enums.AvailabilityStatus)r.Status,
                             SlotId = r.SlotId,
                             Id = r.Id,
-                            Status = r.Status!=null?new Status
-                            {
-                                   Created = r.Status.Created,
-                                   CreatedBy = r.Status.CreatedBy,
-                                   Modified = r.Status.Modified,
-                                   ModifiedBy = r.Status.ModifiedBy,
-                                   StatusType = (Data.Enums.StatusType)r.Status.StatusType,
-                                   Id = r.Status.Id
-                               }:null
                            }).ToList() : null;
                     }
 
@@ -124,16 +115,8 @@ namespace ACP.DataAccess.Managers
                 StartDate = x.StartDate,
                 EndDate = x.EndDate,
                 SlotId = x.SlotId,
-                StatusId = x.StatusId,
-                Status = x.Status != null ? new Status
-                {
-                    Created = x.Status.Created,
-                    Id = x.Status.Id,
-                    CreatedBy = x.Status.CreatedBy,
-                    Modified = x.Status.Modified,
-                    ModifiedBy = x.Status.ModifiedBy,
-                    StatusType = (Data.Enums.StatusType)x.Status.StatusType
-                } : null,
+                Status = (ACP.Data.Enums.AvailabilityStatus)x.Status,
+                
             }).ToList() : null;
            
 
@@ -298,15 +281,8 @@ namespace ACP.DataAccess.Managers
                      StartDate = x.StartDate,
                      EndDate = x.EndDate,
                      SlotId = x.SlotId,
-                     StatusId = x.StatusId,
-                     Status = x.Status!=null?new StatusModel {
-                             Created = x.Status.Created,
-                             Id = x.Status.Id,
-                             CreatedBy = x.Status.CreatedBy,
-                             Modified = x.Status.Modified,
-                             ModifiedBy = x.Status.ModifiedBy,
-                             StatusType = (Business.Enums.StatusType)x.Status.StatusType
-                         }:null,
+                     Status = (ACP.Business.Enums.AvailabilityStatus)x.Status
+                     
                  }).ToList():null,                                  
             };
 

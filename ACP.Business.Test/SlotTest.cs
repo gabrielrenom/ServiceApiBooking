@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using ACP.Business.Models;
 using System.Collections.ObjectModel;
 using System.Linq;
+using ACP.Business.Enums;
 
 namespace ACP.Business.Test
 {
@@ -101,7 +102,7 @@ namespace ACP.Business.Test
                                         ModifiedBy = "localuser",
                                         StartDate = new DateTime(2015,10,2),
                                         EndDate = new DateTime(2015,10,8),
-                                        StatusId = 1
+                                        Status = AvailabilityStatus.Free
                                    },
                                    new AvailabilityModel {
                                         Created = DateTime.Now,
@@ -110,7 +111,7 @@ namespace ACP.Business.Test
                                         ModifiedBy = "localuser",
                                         StartDate = new DateTime(2015,10,3),
                                         EndDate = new DateTime(2015,10,7),
-                                        StatusId = 2
+                                        Status = AvailabilityStatus.Occupied
                                    }
                     }
             };
@@ -151,7 +152,7 @@ namespace ACP.Business.Test
                 ModifiedBy = "localuser",
                 StartDate = new DateTime(2016, 10, 2),
                 EndDate = new DateTime(2016, 10, 8),
-                StatusId = 1
+                Status = AvailabilityStatus.Free
             });                        
 
             //Act

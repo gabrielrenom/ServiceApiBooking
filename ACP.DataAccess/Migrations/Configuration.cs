@@ -139,7 +139,7 @@ namespace ACP.DataAccess.Migrations
                                                                     ModifiedBy = "localuser",
                                                                     StartDate = new DateTime(2015,10,2),
                                                                     EndDate = new DateTime(2015,10,8),
-                                                                    StatusId = 1
+                                                                    Status =  AvailabilityStatus.Free
                                                             },
                                                                  new Availability {
                                                                     Created = DateTime.Now,
@@ -148,7 +148,7 @@ namespace ACP.DataAccess.Migrations
                                                                     ModifiedBy = "localuser",
                                                                     StartDate = new DateTime(2015,10,3),
                                                                     EndDate = new DateTime(2015,10,7),
-                                                                    StatusId = 2
+                                                                    Status =  AvailabilityStatus.Occupied
                                                             }
                           }
 
@@ -190,7 +190,7 @@ namespace ACP.DataAccess.Migrations
                                             ModifiedBy = "localuser",
                                             StartDate = new DateTime(2015,10,2),
                                             EndDate = new DateTime(2015,10,15),
-                                            StatusId = 1
+                                            Status =  AvailabilityStatus.Free
                                     },
                                        new Availability {
                                             Created = DateTime.Now,
@@ -199,7 +199,7 @@ namespace ACP.DataAccess.Migrations
                                             ModifiedBy = "localuser",
                                             StartDate = new DateTime(2015,10,4),
                                             EndDate = new DateTime(2015,10,18),
-                                            StatusId = 1
+                                            Status =  AvailabilityStatus.Free
                                     },
                                          new Availability {
                                             Created = DateTime.Now,
@@ -208,7 +208,7 @@ namespace ACP.DataAccess.Migrations
                                             ModifiedBy = "localuser",
                                             StartDate = new DateTime(2015,10,5),
                                             EndDate = new DateTime(2015,10,19),
-                                            StatusId = 2
+                                            Status =  AvailabilityStatus.Free
                                     }
                         }
                         }

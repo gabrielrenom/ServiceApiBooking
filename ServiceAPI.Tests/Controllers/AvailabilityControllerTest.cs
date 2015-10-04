@@ -1,4 +1,5 @@
-﻿using ACP.Business.Managers;
+﻿using ACP.Business.Enums;
+using ACP.Business.Managers;
 using ACP.Business.Models;
 using ACP.Business.Repository;
 using ACP.Business.Services;
@@ -51,8 +52,8 @@ namespace ServiceAPI.Tests.Controllers
             AvailabilityModel model = new AvailabilityModel
             {
                 StartDate = new DateTime(2015, 10, 4),
-                EndDate =  new DateTime(2015,10,3),
-                Status = new StatusModel { StatusType= ACP.Business.Enums.StatusType.Active }
+                EndDate = new DateTime(2015, 10, 3),
+                Status = AvailabilityStatus.Free
                   
             };
 

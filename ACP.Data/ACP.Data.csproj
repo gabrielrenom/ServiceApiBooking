@@ -61,6 +61,7 @@
     <Compile Include="Classes\DayPrice.cs" />
     <Compile Include="Classes\Slot.cs" />
     <Compile Include="Classes\TravelDetails.cs" />
+    <Compile Include="Enums\AvailabilityStatus.cs" />
     <Compile Include="Enums\PaymentMethod.cs" />
     <Compile Include="Enums\PropertyType.cs" />
     <Compile Include="Enums\RootBookingPropertyType.cs" />
