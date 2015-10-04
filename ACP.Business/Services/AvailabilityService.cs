@@ -45,8 +45,13 @@ namespace ACP.Business.Services
         }
 
         public async Task<IList<AvailabilityModel>> GetByAvailability(AvailabilityModel model)
-        {            
+        {
             return  _availabilityManager.FindAvailability(x => x.Status==(Data.Enums.AvailabilityStatus) model.Status && x.StartDate == model.StartDate && x.EndDate == model.EndDate);
+        }
+
+        public async Task<IList<AvailabilityModel>> IsAvailableThisDay(AvailabilityModel model)
+        {
+            return _availabilityManager.FindAvailability(x => x.Status == Data.Enums.AvailabilityStatus.Free && model.EndDate > x.StartDate && model.StartDate < x.EndDate);
         }
     }
 }

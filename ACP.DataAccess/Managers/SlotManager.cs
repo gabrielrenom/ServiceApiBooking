@@ -91,6 +91,21 @@ namespace ACP.DataAccess.Managers
                 .ToList();         
         }
 
+        public async Task<IList<SlotModel>> FindSlotAvailableByBookingEntityCode(DateTime startdate, DateTime enddate, string code)
+        {
+            //##REVISE
+            return GetListIncluding(x => x.IsOccupied == false,
+                x => x.Availability,
+                x => x.BookingEntity,
+                x => x.BookingEntity.RootBookingEntity)
+                .Where(x => x.BookingEntity.Code.Contains(code))
+                .Where(x => x.Availability
+                .Where(y => y.StartDate >= startdate &&
+                       y.StartDate <= enddate)
+                .Count() == 0)
+                .ToList();
+        }
+
         public override Slot ToDataModel(SlotModel domainModel, Slot dataModel = null)
         {
             if (dataModel == null)
@@ -137,6 +152,7 @@ namespace ACP.DataAccess.Managers
                 Identifier = dataModel.Identifier,
                 BookingEntity = dataModel.BookingEntity!=null?
                 new BookingEntityModel {
+                    Code = dataModel.BookingEntity.Code,
                     Comission = dataModel.BookingEntity.Comission,
                     Created = dataModel.BookingEntity.Created,
                     Id = dataModel.BookingEntity.Id,
@@ -178,6 +194,7 @@ namespace ACP.DataAccess.Managers
                     RootBookingEntity = dataModel.BookingEntity.RootBookingEntity!=null?
                     new RootBookingEntityModel
                     {
+                        Code = dataModel.BookingEntity.RootBookingEntity.Code,
                         Created = dataModel.BookingEntity.RootBookingEntity.Created,
                         Id = dataModel.BookingEntity.RootBookingEntity.Id,
                         CreatedBy = dataModel.BookingEntity.RootBookingEntity.CreatedBy,
@@ -294,6 +311,13 @@ namespace ACP.DataAccess.Managers
             var result = await GetListIncludingAsync(x => x.IsOccupied == false, x => x.Availability);
             return result.ToList();
         }
+
+        public async Task<IList<SlotModel>> GetAllFreeAsync(string bookingentitycode)
+        {
+            var result = await GetListIncludingAsync(x => x.IsOccupied == false && x.BookingEntity.Code.ToLower().Contains(bookingentitycode.ToLower()), x => x.Availability, x=>x.BookingEntity);
+            return result.ToList();
+        }
+
 
         public async Task<IList<SlotModel>> GetAllOccupiedAsync()
         {

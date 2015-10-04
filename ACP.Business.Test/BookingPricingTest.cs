@@ -69,6 +69,7 @@ namespace ACP.Business.Test
             //Act
             var results = await service.AddPricesWithDays(3, list);
             var results2 = await service.AddPricesWithDays(1, list);
+            var results3 = await service.AddPricesWithDays(2, list);
 
             //Assert
             Assert.IsTrue(results);

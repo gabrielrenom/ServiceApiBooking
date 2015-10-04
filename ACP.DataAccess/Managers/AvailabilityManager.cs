@@ -31,7 +31,7 @@ namespace ACP.DataAccess.Managers
 
         public IList<AvailabilityModel> FindAvailability(Func<Availability, bool> where)
         {
-            return GetListIncluding(where, x => x.Status, x=>x.Slot,x=>x.Slot.BookingEntity,x=>x.Slot.BookingEntity.RootBookingEntity).ToList();
+            return GetListIncluding(where, x=>x.Slot,x=>x.Slot.BookingEntity,x=>x.Slot.BookingEntity.RootBookingEntity).ToList();
             //return GetListIncluding(where, x => x.Status, x => x.Slot, x => x.Slot.BookingEntity).ToList()
             //return GetListIncluding(x=>x.StartDate >=  && x.StartDate <= endDate3, x => x.Status, x).ToList();
         }
@@ -40,13 +40,13 @@ namespace ACP.DataAccess.Managers
         {
            
 
-            return GetListIncluding(where, x => x.Status).ToList();
+            return GetListIncluding(where).ToList();
             //return GetListIncluding(x=>x.StartDate >=  && x.StartDate <= endDate3, x => x.Status, x).ToList();
         }       
 
         public IEnumerable<AvailabilityModel> GetAll()
         {
-            return GetListIncluding(x => x.Id > 0, x => x.Status);
+            return GetListIncluding(x => x.Id > 0);
         }
 
         public override bool DeleteById(int id)
@@ -56,7 +56,7 @@ namespace ACP.DataAccess.Managers
 
         public override AvailabilityModel GetById(int id)
         {
-            return GetSingleIncluding(x => x.Id == id, y => y.Status);
+            return GetSingleIncluding(x => x.Id == id);
         }
         public override bool Update(AvailabilityModel domainModel)
         {

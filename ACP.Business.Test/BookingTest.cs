@@ -37,7 +37,7 @@ namespace ACP.Business.Test
             service = new QuoteService(bookingmanager, bookingpricingmanager);
             slotmanager = new SlotManager(repository);
             slotservice = new SlotService(slotmanager);
-            bookingservice = new BookingService(bookingmanager, availabilitymanager);
+            bookingservice = new BookingService(bookingmanager, availabilitymanager, slotmanager, bookingpricingmanager);
         }
 
         [TestMethod]

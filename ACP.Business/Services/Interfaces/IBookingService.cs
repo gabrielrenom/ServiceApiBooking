@@ -15,5 +15,6 @@ namespace ACP.Business.Services.Interfaces
         Task<BookingModel> GetById(int Id);
         Task<IList<BookingModel>> GetAll();
         Task<BookingModel> GetByReference(string reference);
+        Task<BookingModel> Add(BookingModel model, bool IsBookingEntity);
     }
 }

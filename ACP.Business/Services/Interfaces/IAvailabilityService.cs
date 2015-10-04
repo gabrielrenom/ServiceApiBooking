@@ -16,5 +16,6 @@ namespace ACP.Business.Services.Interfaces
         Task<AvailabilityModel> GetById(int Id);
         Task<IList<AvailabilityModel>> GetAll();
         Task<IList<AvailabilityModel>> GetByAvailability(AvailabilityModel model);
+        Task<IList<AvailabilityModel>> IsAvailableThisDay(AvailabilityModel model);
     }
 }
