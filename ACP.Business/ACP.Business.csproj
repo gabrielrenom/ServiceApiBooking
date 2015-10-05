@@ -57,6 +57,8 @@
     <Compile Include="APIs\APH\Models\API_Reply.cs" />
     <Compile Include="APIs\APH\Models\API_Request.cs" />
     <Compile Include="APIs\APH\Models\CarPark.cs" />
+    <Compile Include="APIs\APH\Models\CarParkReplyAvailability.cs" />
+    <Compile Include="APIs\APH\Models\CarParkReplyDetails.cs" />
     <Compile Include="APIs\APH\Models\Details.cs" />
     <Compile Include="APIs\APH\Models\Info.cs" />
     <Compile Include="APIs\APH\Models\Itinerary.cs" />

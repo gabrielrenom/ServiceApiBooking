@@ -203,9 +203,8 @@ namespace ACP.DataAccess.Managers
                     Key = x.Key,
                     Value = x.Value
                 }).ToList() : null,
-                Address = new AddressModel
+                Address = dataModel.Address!=null?new AddressModel
                 {
-
                     Address1 = dataModel.Address.Address1,
                     Address2 = dataModel.Address.Address2,
                     Country = dataModel.Address.Country,
@@ -217,7 +216,7 @@ namespace ACP.DataAccess.Managers
                     ModifiedBy = dataModel.Address.ModifiedBy,
                     Number = dataModel.Address.Number,
                     Postcode = dataModel.Address.Postcode
-                },
+                }:null,
                 Extras = dataModel.Extras != null ? dataModel.Extras.Select(x => new ExtraModel
                 {
                     Created = x.Created,
@@ -503,6 +502,13 @@ namespace ACP.DataAccess.Managers
         public async Task<BookingEntityModel> GetByName(string name)
         {
             var record = Repository.GetSingle<BookingEntity>(x => x.Name.Contains(name),x=>x.RootBookingEntity, x => x.Address, x => x.Extras,x=>x.Properties, x => x.Prices.Select(e => e.DayPrices), x => x.Prices.Select(w => w.DayPrices.Select(y => y.HourPrices)));
+
+            return ToDomainModel(record);
+        }
+
+        public async Task<BookingEntityModel> GetByCode(string code)
+        {
+            var record = await Repository.GetSingleAsync<BookingEntity>(x => x.Code.ToLower()==code, x => x.RootBookingEntity, x => x.Address, x => x.Extras, x => x.Properties, x => x.Prices.Select(e => e.DayPrices), x => x.Prices.Select(w => w.DayPrices.Select(y => y.HourPrices)));
 
             return ToDomainModel(record);
         }

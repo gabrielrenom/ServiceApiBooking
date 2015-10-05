@@ -2,6 +2,14 @@
 
 namespace ACP.Business.APIs.APH
 {
+    public class APHAirports
+    {
+        public List<Airport> AirportList { get; set; }
+        public APHAirports()
+        {
+            AirportList = new List<Airport>();
+        }
+    }
     public class Airport
     {
         private string _Name;
@@ -31,10 +39,11 @@ namespace ACP.Business.APIs.APH
     public class CarPark
     {
         public string Code { get; set; }
-        public string Commision { get; internal set; }
+        public byte Commision { get; internal set; }
         public string Details { get; internal set; }
         public string Name { get; set; }
         public string ProductName { get; internal set; }
         public string Terminals { get; internal set; }
+        public string ProductCode { get; internal set; }
     }
 }

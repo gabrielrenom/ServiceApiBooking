@@ -426,5 +426,11 @@ namespace ACP.DataAccess.Managers
             var result= Repository.GetSingle<RootBookingEntity>(a => a.Name == name, x => x.Status, x => x.Address, x => x.BookingEntities, x => x.BookingEntities.Select(y => y.Address));
             return ToDomainModel(result);
         }
+
+        public async Task<RootBookingEntityModel> GetByCode(string code)
+        {
+            var result = Repository.GetSingle<RootBookingEntity>(a => a.Code.ToLower() == code.ToLower(), x => x.Status, x => x.Address, x => x.BookingEntities, x => x.BookingEntities.Select(y => y.Address));
+            return ToDomainModel(result);
+        }
     }
 }

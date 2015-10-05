@@ -12,5 +12,6 @@ namespace ACP.Business.Managers
     {
         IList<RootBookingEntityModel> GetAll();
         Task<RootBookingEntityModel> GetByName(string name);
+        Task<RootBookingEntityModel> GetByCode(string code);
     }
 }

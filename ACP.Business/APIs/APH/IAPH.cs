@@ -9,7 +9,7 @@ namespace ACP.Business.APIs.APH
 {
     public interface IAPH
     {
-        API_Reply CarParkAvailability(API_Request request);
+        ACP.Business.APIs.APH.Models.Availability.API_Reply CarParkAvailability(API_Request request);
 
         API_Reply CarPrice(API_Request request);
 
