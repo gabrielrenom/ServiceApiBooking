@@ -339,6 +339,207 @@ namespace ACP.DataAccess.Migrations
                 ModifiedBy = "localuser",
                 Created = DateTime.Now,
             });
+            context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
+            {
+                Id = 6 + testid,
+                Telephone = "+441212542600",
+                Name = "Coventry Airport",
+                Code = "CVT",                
+                Website = "www.coventryairport.co.uk",
+                StatusId = 1,
+                Address = new Address
+                {
+                    Address1= "Passenger Terminal",
+                    Address2= "Siskin Parkway West",
+                    City = "Coventry",
+                    Postcode = "CV3 4PB",
+                    Country = "England",
+                    CreatedBy = "localuser",
+                    Modified = DateTime.Now,
+                    ModifiedBy = "localuser",
+                    Created = DateTime.Now,
+                },
+                CreatedBy = "localuser",
+                Modified = DateTime.Now,
+                ModifiedBy = "localuser",
+                Created = DateTime.Now,
+            });
+
+            context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
+            {
+                Id = 7 + testid,
+                Telephone = "+442476762220",
+                Name = "Coventry Airport",
+                Code = "CVT",
+                Website = "www.coventryairport.co.uk",
+                StatusId = 1,
+                Address = new Address
+                {
+                    Address1 = "Passenger Terminal",
+                    Address2 = "Siskin Parkway West",
+                    City = "Coventry",
+                    Postcode = "CV3 4PB",
+                    Country = "England",
+                    CreatedBy = "localuser",
+                    Modified = DateTime.Now,
+                    ModifiedBy = "localuser",
+                    Created = DateTime.Now,
+                },
+                CreatedBy = "localuser",
+                Modified = DateTime.Now,
+                ModifiedBy = "localuser",
+                Created = DateTime.Now,
+            });
+
+            context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
+            {
+                Id = 8 + testid,
+                Telephone = "+441452857700 ",
+                Name = "Gloucestershire Airport",
+                Code = "GLO",
+                Website = "www.gloucestershireairport.co.uk",
+                StatusId = 1,
+                Address = new Address
+                {
+                    Address1 = "Staverton",
+                    Address2 = "Cheltenham",
+                    City = "Gloucestershire",
+                    Postcode = "GL51 6SR",
+                    Country = "England",
+                    CreatedBy = "localuser",
+                    Modified = DateTime.Now,
+                    ModifiedBy = "localuser",
+                    Created = DateTime.Now,
+                },
+                CreatedBy = "localuser",
+                Modified = DateTime.Now,
+                ModifiedBy = "localuser",
+                Created = DateTime.Now,
+            });
+
+            context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
+            {
+                Id = 9 + testid,
+                Telephone = "+448719199000",
+                Name = "Nottingham East Midlands Airport",
+                Code = "EMA",
+                Website = "www.eastmidlandsairport.com",
+                StatusId = 1,
+                Address = new Address
+                {
+                    Address1 = "Castle Donington",
+                    City = "Derbyshire",
+                    Postcode = "DE34 5HH",
+                    Country = "England",
+                    CreatedBy = "localuser",
+                    Modified = DateTime.Now,
+                    ModifiedBy = "localuser",
+                    Created = DateTime.Now,
+                },
+                CreatedBy = "localuser",
+                Modified = DateTime.Now,
+                ModifiedBy = "localuser",
+                Created = DateTime.Now,
+            });
+
+            context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
+            {
+                Id = 10 + testid,
+                Telephone = "+441223373765",
+                Name = "Cambridge City Airport",
+                Code = "CBG",
+                Website = "www.cambridgecityairport.com",
+                StatusId = 1,
+                Address = new Address
+                {
+                    Postcode="",
+                    City = "Cambridge",
+                    Country = "England",
+                    CreatedBy = "localuser",
+                    Modified = DateTime.Now,
+                    ModifiedBy = "localuser",
+                    Created = DateTime.Now,
+                },
+                CreatedBy = "localuser",
+                Modified = DateTime.Now,
+                ModifiedBy = "localuser",
+                Created = DateTime.Now,
+            });
+
+            context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
+            {
+                Id = 11 + testid,
+                Telephone = " +441652688456",
+                Name = "Humberside International Airport",
+                Code = "HUY",
+                Website = "www.humbersideairport.com",
+                StatusId = 1,
+                Address = new Address
+                {
+                    Address1 = "Kirmington ",
+                    Address2 = "North Lincolnshire",
+                    Postcode = "DN39 6YH",
+                    Country = "England",
+                    CreatedBy = "localuser",
+                    Modified = DateTime.Now,
+                    ModifiedBy = "localuser",
+                    Created = DateTime.Now,
+                },
+                CreatedBy = "localuser",
+                Modified = DateTime.Now,
+                ModifiedBy = "localuser",
+                Created = DateTime.Now,
+            });
+
+            context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
+            {
+                Id = 12 + testid,
+                Telephone = "+441603411923",
+                Name = "Norwich International Airport",
+                Code = "NWI",
+                Website = "www.norwichairport.co.uk",
+                StatusId = 1,
+                Address = new Address
+                {
+                    Address1 = "Amsterdam Way",
+                    Postcode = "NR6 6JA",
+                    City= "Norwich",
+                    Country = "England",
+                    CreatedBy = "localuser",
+                    Modified = DateTime.Now,
+                    ModifiedBy = "localuser",
+                    Created = DateTime.Now,
+                },
+                CreatedBy = "localuser",
+                Modified = DateTime.Now,
+                ModifiedBy = "localuser",
+                Created = DateTime.Now,
+            });
+
+            context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
+            {
+                Id = 13 + testid,
+                Telephone = "+448701212747",
+                Name = "Bristol International Airport",
+                Code = "BRS",
+                Website = "www.bristolairport.co.uk",
+                StatusId = 1,
+                Address = new Address
+                {
+                    Postcode = "BS48 3DY",
+                    City = "Bristol",
+                    Country = "England",
+                    CreatedBy = "localuser",
+                    Modified = DateTime.Now,
+                    ModifiedBy = "localuser",
+                    Created = DateTime.Now,
+                },
+                CreatedBy = "localuser",
+                Modified = DateTime.Now,
+                ModifiedBy = "localuser",
+                Created = DateTime.Now,
+            });
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
