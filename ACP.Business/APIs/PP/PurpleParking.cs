@@ -74,7 +74,8 @@ namespace ACP.Business.APIs.PP
                         airport.ModifiedBy = "System";
                         airport.CreatedBy = "System";
                         airport.Properties = new Collection<RootBookingPropertyModel>();
-                        airport.Properties.Add(new RootBookingPropertyModel { Key = "Code", Value = item.code, PropertyType = ACP.Business.Enums.RootBookingPropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System", });
+                        airport.Code = item.code;
+                        //airport.Properties.Add(new RootBookingPropertyModel { Key = "Code", Value = item.code, PropertyType = ACP.Business.Enums.RootBookingPropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System", });
                         airport.Properties.Add(new RootBookingPropertyModel { Key = "Provider", Value = "Purple Parking", PropertyType = ACP.Business.Enums.RootBookingPropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System", });
                         airport.Address = new AddressModel();
                         airport.Status = status;
@@ -243,7 +244,7 @@ namespace ACP.Business.APIs.PP
 
             return result;
         }
-   
+
         public async Task<List<ACP.Business.APIs.PP.Models.Airports.responseAirportCarpark>> GetAirports()
         {
             ACP.Business.APIs.PP.Models.Airports.response response = await GetREST<ACP.Business.APIs.PP.Models.Airports.response>("/r2/rest/xml/GetAirports?params=<request apiKey='G7yNMYkSdX820B1xTM8auQZrlL6yG8o'></request>");
