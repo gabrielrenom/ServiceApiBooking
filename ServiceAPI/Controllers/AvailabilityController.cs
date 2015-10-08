@@ -73,7 +73,6 @@ namespace ServiceAPI.Controllers
             return Request.CreateResponse(HttpStatusCode.Created, available, new JsonMediaTypeFormatter());
         }
 
-
         [HttpGet]
         [Route("gettbyavailabilitywithprice")]
         public async Task<HttpResponseMessage> GettByAvailabilityWithPrice(AvailabilityViewModel model)
@@ -148,8 +147,6 @@ namespace ServiceAPI.Controllers
 
             return Request.CreateResponse(HttpStatusCode.Created, listavailable, new JsonMediaTypeFormatter());
         }
-
-
 
         [HttpGet]
         [Route("getbyid")]

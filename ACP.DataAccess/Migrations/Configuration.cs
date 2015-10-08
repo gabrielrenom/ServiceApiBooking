@@ -1549,6 +1549,56 @@ namespace ACP.DataAccess.Migrations
                 ModifiedBy = "localuser",
                 Created = DateTime.Now,
             });
+            context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
+            {
+                Id = 49 + testid,
+                Telephone = "+448715218484",
+                Name = "Liverpool John Lennon Airport",
+                Website = "www.liverpoolairport.com",
+                Code = "LIV",
+                StatusId = 1,
+                Address = new Address
+                {
+                    Address1 = "Merseyside",
+                    City = "Liverpool",
+                    Postcode = "L24 1YD",
+                    Country = "UK",
+                    CreatedBy = "localuser",
+                    Modified = DateTime.Now,
+                    ModifiedBy = "localuser",
+                    Created = DateTime.Now,
+                },
+                CreatedBy = "localuser",
+                Modified = DateTime.Now,
+                ModifiedBy = "localuser",
+                Created = DateTime.Now,
+            });
+
+            context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
+            {
+                Id = 50 + testid,
+                Telephone = "+441325332811",
+                Name = "Durham Tees Valley Airport",
+                Website = "www.durhamteesvalleyairport.com",
+                Code = "MME",
+                StatusId = 1,
+                Address = new Address
+                {
+                    Address1 = "Darlington",
+                    Address2 = "Tees Valley",
+                    City = "Durham",
+                    Postcode = "DL2 1LU",
+                    Country = "UK",
+                    CreatedBy = "localuser",
+                    Modified = DateTime.Now,
+                    ModifiedBy = "localuser",
+                    Created = DateTime.Now,
+                },
+                CreatedBy = "localuser",
+                Modified = DateTime.Now,
+                ModifiedBy = "localuser",
+                Created = DateTime.Now,
+            });
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

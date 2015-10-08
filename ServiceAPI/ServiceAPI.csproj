@@ -74,6 +74,14 @@
     <Reference Include="Ninject.Web.WebApi.WebHost">
       <HintPath>..\packages\Ninject.Web.WebApi.WebHost.3.2.4.0\lib\net45-full\Ninject.Web.WebApi.WebHost.dll</HintPath>
     </Reference>
+    <Reference Include="NSubstitute, Version=1.5.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\NSubstitute.1.5.0.0\lib\NET40\NSubstitute.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NSubstituteAutoMocker, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NSubstituteAutoMocker.1.0.0.2\lib\net45\NSubstituteAutoMocker.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
       <HintPath>..\packages\Swashbuckle.Core.5.0.0\lib\net40\Swashbuckle.Core.dll</HintPath>
       <Private>True</Private>
@@ -205,6 +213,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administration\AdministrationController.cs" />
+    <Compile Include="Administration\AirportAdminController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -354,6 +364,8 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Administration\Index.cshtml" />
+    <Content Include="Views\AirportAdmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Attributes\" />
