@@ -1449,6 +1449,106 @@ namespace ACP.DataAccess.Migrations
                 ModifiedBy = "localuser",
                 Created = DateTime.Now,
             });
+
+            context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
+            {
+                Id = 45+ testid,
+                Telephone = "+441446711111",
+                Name = "Cardiff International Airport",
+                Website = "www.cwlfly.com",
+                Code = "CWL",
+                StatusId = 1,
+                Address = new Address
+                {
+                    Address1= "Vale of Glamorgan",
+                    City = "Cardiff",
+                    Postcode= "CF62 3BD",
+                    Country = "UK",
+                    CreatedBy = "localuser",
+                    Modified = DateTime.Now,
+                    ModifiedBy = "localuser",
+                    Created = DateTime.Now,
+                },
+                CreatedBy = "localuser",
+                Modified = DateTime.Now,
+                ModifiedBy = "localuser",
+                Created = DateTime.Now,
+            });
+
+            context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
+            {
+                Id = 46 + testid,
+                Telephone = "+441792204063",
+                Name = "Swansea",
+                Website = "www.swanseaairport.com",
+                Code = "SWS",
+                StatusId = 1,
+                Address = new Address
+                {
+                    Address1 = "Swansea Airport",
+                    Address2= "Fairwood",
+                    City = "Swansea",
+                    Postcode = "SA2 7JU",
+                    Country = "UK",
+                    CreatedBy = "localuser",
+                    Modified = DateTime.Now,
+                    ModifiedBy = "localuser",
+                    Created = DateTime.Now,
+                },
+                CreatedBy = "localuser",
+                Modified = DateTime.Now,
+                ModifiedBy = "localuser",
+                Created = DateTime.Now,
+            });
+
+            context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
+            {
+                Id = 47 + testid,
+                Telephone = "+441253343434",
+                Name = "Backpool",
+                Website = "www.blackpoolairport.com ",
+                Code = "BLK",
+                StatusId = 1,
+                Address = new Address
+                {
+                    City = "Backpool",
+                    Country = "UK",
+                    CreatedBy = "localuser",
+                    Modified = DateTime.Now,
+                    ModifiedBy = "localuser",
+                    Created = DateTime.Now,
+                },
+                CreatedBy = "localuser",
+                Modified = DateTime.Now,
+                ModifiedBy = "localuser",
+                Created = DateTime.Now,
+            });
+
+            context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
+            {
+                Id = 48 + testid,
+                Telephone = "+441624821600",
+                Name = "Isle of Man - Ronaldsway",
+                Website = "www.iom-airport.com",
+                Code = "IOM",
+                StatusId = 1,
+                Address = new Address
+                {
+                    Address1 = "Isle of Man Airport,Isle of Man",
+                    Address2 = " British Isles",
+                    City = "Ballasalla",
+                    Postcode = "IM9 2AS",
+                    Country = "UK",
+                    CreatedBy = "localuser",
+                    Modified = DateTime.Now,
+                    ModifiedBy = "localuser",
+                    Created = DateTime.Now,
+                },
+                CreatedBy = "localuser",
+                Modified = DateTime.Now,
+                ModifiedBy = "localuser",
+                Created = DateTime.Now,
+            });
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
