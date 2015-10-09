@@ -377,6 +377,7 @@
     <Content Include="Views\Shared\_Cover.cshtml" />
     <Content Include="Views\Administration\Index.cshtml" />
     <Content Include="Views\APIAdministration\Index.cshtml" />
+    <Content Include="Views\AirportAdmin\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Administration\" />
