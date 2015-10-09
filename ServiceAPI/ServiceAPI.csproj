@@ -213,8 +213,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Administration\AdministrationController.cs" />
-    <Compile Include="Administration\AirportAdminController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -252,7 +250,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\Action1DebugActionWebApiFilter .cs" />
+    <Compile Include="Controllers\AdministrationController.cs" />
+    <Compile Include="Controllers\AirportAdminController.cs" />
     <Compile Include="Controllers\AirportController.cs" />
+    <Compile Include="Controllers\APIAdministrationController.cs" />
     <Compile Include="Controllers\AvailabilityController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
@@ -268,6 +269,13 @@
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VersionController.cs" />
     <Compile Include="Controllers\SlotController.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Enums\StatusType.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -309,6 +317,7 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -364,10 +373,13 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Administration\Index.cshtml" />
     <Content Include="Views\AirportAdmin\Index.cshtml" />
+    <Content Include="Views\Shared\_Cover.cshtml" />
+    <Content Include="Views\Administration\Index.cshtml" />
+    <Content Include="Views\APIAdministration\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Administration\" />
     <Folder Include="Attributes\" />
   </ItemGroup>
   <ItemGroup>
