@@ -1599,6 +1599,186 @@ namespace ACP.DataAccess.Migrations
                 ModifiedBy = "localuser",
                 Created = DateTime.Now,
             });
+
+            context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
+            {
+                Id = 51 + testid,
+                Telephone = "+441132509696",
+                Name = "Leeds Bradford International Airport",
+                Website = "www.lbia.co.uk",
+                Code = "LBA",
+                StatusId = 1,
+                Address = new Address
+                {
+                    City = "Leeds",
+                    Postcode = "LS19 7TU",
+                    Country = "UK",
+                    CreatedBy = "localuser",
+                    Modified = DateTime.Now,
+                    ModifiedBy = "localuser",
+                    Created = DateTime.Now,
+                },
+                CreatedBy = "localuser",
+                Modified = DateTime.Now,
+                ModifiedBy = "localuser",
+                Created = DateTime.Now,
+            });
+
+            context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
+            {
+                Id = 52 + testid,
+                Telephone = "+44870122488",
+                Name = "Newcastle International Airport",
+                Website = "www.newcastleairport.com",
+                Code = "NCL",
+                StatusId = 1,
+                Address = new Address
+                {
+
+                    Address1= "Newcastle upon Tyne",
+                    City = "Woolsington",
+                    Postcode = "NE13 8BZ",
+                    Country = "UK",
+                    CreatedBy = "localuser",
+                    Modified = DateTime.Now,
+                    ModifiedBy = "localuser",
+                    Created = DateTime.Now,
+                },
+                CreatedBy = "localuser",
+                Modified = DateTime.Now,
+                ModifiedBy = "localuser",
+                Created = DateTime.Now,
+            });
+
+            context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
+            {
+                Id = 53 + testid,
+                Telephone = "+4408708332210",
+                Name = "Robin Hood Airport Doncaster Sheffield",
+                Website = "www.robinhoodairport.com",
+                Code = "DSA",
+                StatusId = 1,
+                Address = new Address
+                {
+
+                    Address1 = "First Avenue",
+                    City = "Doncaster",
+                    Postcode = "DN9 3RH",
+                    Country = "UK",
+                    CreatedBy = "localuser",
+                    Modified = DateTime.Now,
+                    ModifiedBy = "localuser",
+                    Created = DateTime.Now,
+                },
+                CreatedBy = "localuser",
+                Modified = DateTime.Now,
+                ModifiedBy = "localuser",
+                Created = DateTime.Now,
+            });
+
+            context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
+            {
+                Id = 54 + testid,
+                Telephone = "+448707335511",
+                Name = "Birmingham International Airport",
+                Website = "www.birminghamairport.co.uk",
+                Code = "BHX",
+                StatusId = 1,
+                Address = new Address
+                {
+                    Address1 = "Birmingham International Airport Ltd",
+                    City = "Birmingham",
+                    Postcode = "B26 3QJ",
+                    Country = "UK",
+                    CreatedBy = "localuser",
+                    Modified = DateTime.Now,
+                    ModifiedBy = "localuser",
+                    Created = DateTime.Now,
+                },
+                CreatedBy = "localuser",
+                Modified = DateTime.Now,
+                ModifiedBy = "localuser",
+                Created = DateTime.Now,
+            });
+
+            context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
+            {
+                Id = 55 + testid,
+                Telephone = "+442476762220",
+                Name = "Coventry Airport",
+                Website = "www.coventryairport.co.uk",
+                Code = "CVT",
+                StatusId = 1,
+                Address = new Address
+                {
+                    Address1 = "Passenger Terminal",
+                    Address2= "Siskin Parkway West",
+                    City = "Coventry",
+                    Postcode = "CV3 4PB",
+                    Country = "UK",
+                    CreatedBy = "localuser",
+                    Modified = DateTime.Now,
+                    ModifiedBy = "localuser",
+                    Created = DateTime.Now,
+                },
+                CreatedBy = "localuser",
+                Modified = DateTime.Now,
+                ModifiedBy = "localuser",
+                Created = DateTime.Now,
+            });
+
+            context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
+            {
+                Id = 56 + testid,
+                Telephone = "+441452857700",
+                Name = "Gloucestershire Airport",
+                Website = "www.coventryairport.co.uk",
+                Code = "GLO",
+                StatusId = 1,
+                Address = new Address
+                {
+                    Address1 = "Staverton",
+                    Address2 = "Cheltenham",
+                    City = "Gloucestershire",
+                    Postcode = "GL51 6SR",
+                    Country = "UK",
+                    CreatedBy = "localuser",
+                    Modified = DateTime.Now,
+                    ModifiedBy = "localuser",
+                    Created = DateTime.Now,
+                },
+                CreatedBy = "localuser",
+                Modified = DateTime.Now,
+                ModifiedBy = "localuser",
+                Created = DateTime.Now,
+            });
+
+            context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
+            {
+                Id = 56 + testid,
+                Telephone = "+441959578500",
+                Name = "London Biggin Hill Airport",
+                Website = "www.bigginhillairport.com",
+                Code = "BQH",
+                StatusId = 1,
+                Address = new Address
+                {
+                    Address1 = "Passenger & Executive Terminal",
+                    Address2 = "Biggin Hill",
+                    City = "Kent",
+                    Postcode = "TN16 3BN",
+                    Country = "UK",
+                    CreatedBy = "localuser",
+                    Modified = DateTime.Now,
+                    ModifiedBy = "localuser",
+                    Created = DateTime.Now,
+                },
+                CreatedBy = "localuser",
+                Modified = DateTime.Now,
+                ModifiedBy = "localuser",
+                Created = DateTime.Now,
+            });
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

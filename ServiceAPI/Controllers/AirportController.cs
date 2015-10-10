@@ -198,12 +198,12 @@ namespace ServiceAPI.Controllers
 
         [HttpPost]
         [Route("add")]
-        public async Task<HttpResponseMessage> Add(RootBookingPropertyViewModel model)
+        public async Task<HttpResponseMessage> Add(RootBookingEntityModel model)
         {
-            RootBookingPropertyViewModel airport = null;
+            RootBookingEntityModel airport = null;
             try
             {
-                airport = ToViewModel(await _airportservice.Add(ToDataModel(model)));
+                airport = await _airportservice.Add(model);
             }
             catch (HttpRequestException ex)
             {

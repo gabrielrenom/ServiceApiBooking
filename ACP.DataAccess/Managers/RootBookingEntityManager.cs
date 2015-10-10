@@ -259,7 +259,7 @@ namespace ACP.DataAccess.Managers
                 Modified = dataModel.Modified,
                 ModifiedBy = dataModel.ModifiedBy,
                 Name = dataModel.Name,                
-                Address = new AddressModel
+                Address = dataModel.Address!=null? new AddressModel
                 {
 
                     Address1 = dataModel.Address.Address1,
@@ -273,11 +273,11 @@ namespace ACP.DataAccess.Managers
                     ModifiedBy = dataModel.Address.ModifiedBy,
                     Number = dataModel.Address.Number,
                     Postcode = dataModel.Address.Postcode
-                },
+                }:null,
                 AddressId = dataModel.AddressId,
                 StatusId = dataModel.StatusId,
                 Telephone = dataModel.Telephone,
-                Status = new StatusModel
+                Status = dataModel.Status!=null? new StatusModel
                 {
                     Created = dataModel.Status.Created,
                     CreatedBy = dataModel.Status.CreatedBy,
@@ -285,7 +285,7 @@ namespace ACP.DataAccess.Managers
                     Modified = dataModel.Status.Modified,
                     ModifiedBy = dataModel.Status.ModifiedBy,
                     StatusType = (Business.Enums.StatusType)dataModel.Status.StatusType
-                },
+                }:null,
                 Properties = dataModel.Properties != null ? dataModel.Properties.Select(x => new RootBookingPropertyModel
                 {
                     Id = x.Id,
@@ -324,7 +324,7 @@ namespace ACP.DataAccess.Managers
                         Modified = y.Modified,
                         ModifiedBy = y.ModifiedBy,
                     }).ToList():null,
-                    Address = new AddressModel
+                    Address = r.Address!=null?new AddressModel
                     {
                         Address1 = r.Address.Address1,
                         Address2 = r.Address.Address2,
@@ -337,7 +337,7 @@ namespace ACP.DataAccess.Managers
                         ModifiedBy = r.Address.ModifiedBy,
                         Number = r.Address.Number,
                         Postcode = r.Address.Postcode
-                    }
+                    }:null
                 }).ToList() : null,
 
             };

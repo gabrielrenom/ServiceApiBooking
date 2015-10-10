@@ -31,8 +31,6 @@ namespace ServiceAPI.Administration
             result.TryGetContentValue<List<RootBookingEntityModel>>(out airports);
 
             return View(airports);
-
-            return View();
         }
 
         // GET: AirportAdmin/Details/5
@@ -49,18 +47,29 @@ namespace ServiceAPI.Administration
 
         // POST: AirportAdmin/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public async Task<ActionResult> Create(RootBookingEntityModel model)
         {
             try
             {
-                // TODO: Add insert logic here
+                RootBookingEntityModel airport = new RootBookingEntityModel();
+                if (ModelState.IsValid)
+                {
+                    _airportcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                    _airportcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                    var result = await _airportcontroller.Add(model);
 
-                return RedirectToAction("Index");
+                    result.TryGetContentValue(out airport);
+
+                    if (airport!=null)
+                        return RedirectToAction("Index");
+                }
             }
             catch
             {
-                return View();
+                return View("Create");
             }
+
+            return View("Create");
         }
 
         // GET: AirportAdmin/Edit/5
