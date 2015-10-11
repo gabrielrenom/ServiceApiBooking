@@ -505,10 +505,16 @@
         </member>
         <member name="T:ServiceAPI.Controllers.BookingController">
             <summary>
-            This controller it will be in charge of manage the bbookings from the admin and user.
-            It allows to do all the CRUD operations plus exxtra functionality.
+            This controller it will be in charge of manage the bookings from the admin and user.
+            It allows to do all the CRUD operations plus extra functionality.
             v0.1
             </summary>
+        </member>
+        <member name="M:ServiceAPI.Controllers.BookingController.GetAll">
+            <summary>
+            It will get all the bookings.
+            </summary>
+            <returns>It returns the booking.</returns>
         </member>
         <member name="M:ServiceAPI.Controllers.BookingController.GettByBookingReference(System.String)">
             <summary>

@@ -16,8 +16,8 @@ using System.Web.Http;
 namespace ServiceAPI.Controllers
 {
     /// <summary>
-    /// This controller it will be in charge of manage the bbookings from the admin and user.
-    /// It allows to do all the CRUD operations plus exxtra functionality.
+    /// This controller it will be in charge of manage the bookings from the admin and user.
+    /// It allows to do all the CRUD operations plus extra functionality.
     /// v0.1
     /// </summary>
     [RoutePrefix("api/v0.1/booking")]
@@ -29,6 +29,54 @@ namespace ServiceAPI.Controllers
         {
             _bookingservice = bookingservice;
         }
+
+
+        /// <summary>
+        /// It will get all the bookings.
+        /// </summary>
+        /// <returns>It returns the booking.</returns>
+        [HttpGet]
+        [Route("getall")]
+        public async Task<HttpResponseMessage> GetAll()
+        {
+            IList<BookingModel> bookings = null;
+            try
+            {
+                bookings = await _bookingservice.GetAll();
+            }
+            catch (HttpRequestException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, exceptionMessage);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.Created, bookings, new JsonMediaTypeFormatter());
+        }
+
 
         /// <summary>
         /// It will get a booking by passing the booking refence.

@@ -1,0 +1,150 @@
+﻿@model IEnumerable<ACP.Business.Models.BookingModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
+      rel="stylesheet" type="text/css">
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="text-info">
+                    <i class="fa fa-1x fa-fw fa-send text-success"></i>Airports
+                </h3>
+            </div>
+        </div>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ModifiedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Created)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Modified)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustomerId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CarId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TravelDetailsId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SourceCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AgentReference)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BookingReference)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cost)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Message)
+                </th>
+                <th><a href="@Url.Action("Create","BookingAdmin")"><i class="fa fa-2x fa-fw fa-plus text-success"></i></a></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModifiedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Created)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Modified)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CarId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TravelDetailsId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SourceCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AgentReference)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookingReference)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Message)
+                    </td>
+                    <td>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a href="@Url.Action("Details", "BookingAdmin", new { id=item.Id })" class="btn">
+                                    <i class="fa fa-2x fa-fw fa-th-large text-primary"></i>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <div>
+                                    <a href="@Url.Action("Edit", "BookingAdmin", new { id=item.Id })" class="btn">
+                                        <i class="fa fa-2x fa-edit fa-fw text-success"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="@Url.Action("Delete", "BookingAdmin", new { id=item.Id })" class="btn">
+                                    <i class="fa fa-2x fa-fw fa-close text-danger"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </table>
+        </div>
+</div>

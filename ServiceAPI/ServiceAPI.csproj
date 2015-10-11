@@ -256,6 +256,7 @@
     <Compile Include="Controllers\APIAdministrationController.cs" />
     <Compile Include="Controllers\AvailabilityController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
+    <Compile Include="Controllers\BookingAdminController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\CarparkPricingController.cs" />
     <Compile Include="Controllers\PricingController.cs" />
@@ -381,6 +382,7 @@
     <Content Include="Views\AirportAdmin\Create.cshtml" />
     <Content Include="Views\AirportAdmin\Edit.cshtml" />
     <Content Include="Views\AirportAdmin\Details.cshtml" />
+    <Content Include="Views\BookingAdmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Administration\" />
