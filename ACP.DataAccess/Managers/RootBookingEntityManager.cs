@@ -40,7 +40,7 @@ namespace ACP.DataAccess.Managers
             dataModel.ModifiedBy = domainModel.ModifiedBy;
             dataModel.Id = domainModel.Id;
             dataModel.AddressId = domainModel.AddressId;
-            dataModel.Address = new Address
+            dataModel.Address = dataModel.Address!=null? new Address
             {
                 Address1 = domainModel.Address.Address1,
                 Address2 = domainModel.Address.Address2,
@@ -53,9 +53,9 @@ namespace ACP.DataAccess.Managers
                 ModifiedBy = domainModel.Address.ModifiedBy,
                 Number = domainModel.Address.Number,
                 Postcode = domainModel.Address.Postcode
-            };
+            }:null;
             dataModel.StatusId = domainModel.StatusId;
-            dataModel.Status = new Status
+            dataModel.Status = dataModel.Status!=null?new Status
             {
                 Created = domainModel.Status.Created,
                 CreatedBy = domainModel.Status.CreatedBy,
@@ -63,7 +63,7 @@ namespace ACP.DataAccess.Managers
                 Modified = domainModel.Status.Modified,
                 ModifiedBy = domainModel.Status.ModifiedBy,
                 StatusType = (Data.Enums.StatusType)domainModel.Status.StatusType
-            };
+            }:null;
             dataModel.Name = domainModel.Name;
             dataModel.Telephone = domainModel.Telephone;
 

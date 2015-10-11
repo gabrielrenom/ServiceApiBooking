@@ -73,30 +73,79 @@ namespace ServiceAPI.Administration
         }
 
         // GET: AirportAdmin/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: AirportAdmin/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public async Task<ActionResult> Edit(int id)
         {
             try
             {
-                // TODO: Add update logic here
+                RootBookingEntityModel airport = new RootBookingEntityModel();
+                if (ModelState.IsValid)
+                {
+                    _airportcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                    _airportcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                    var result = await _airportcontroller.GetById(id);
 
-                return RedirectToAction("Index");
+                    result.TryGetContentValue(out airport);
+
+                    if (airport != null)
+                        return View(airport);
+                }
             }
             catch
             {
                 return View();
             }
+
+            return View();
+        }
+
+        // POST: AirportAdmin/Edit/5
+        [HttpPost]
+        public async Task<ActionResult> Edit(int id, RootBookingEntityModel model)
+        {
+            try
+            {
+                RootBookingEntityModel airport = new RootBookingEntityModel();
+                if (ModelState.IsValid)
+                {
+                    _airportcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                    _airportcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                    var result = await _airportcontroller.Update(model);
+
+                    result.TryGetContentValue(out airport);
+
+                    if (airport != null)
+                        return RedirectToAction("Index");
+                }
+            }
+            catch
+            {
+                return View("Edit");
+            }
+
+            return View("Edit");
         }
 
         // GET: AirportAdmin/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
+            try
+            {
+                bool isdeleted = false;
+                    _airportcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                    _airportcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                    var result = await _airportcontroller.Delete(id);
+
+                    result.TryGetContentValue(out isdeleted);
+
+                    if (isdeleted)
+                        return RedirectToAction("Index");
+                
+            }
+            catch
+            {
+                return View();
+            }
+
             return View();
         }
 

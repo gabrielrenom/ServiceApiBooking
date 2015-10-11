@@ -240,12 +240,12 @@ namespace ServiceAPI.Controllers
 
         [HttpPut]
         [Route("update")]
-        public async Task<HttpResponseMessage> Update(RootBookingPropertyViewModel model)
+        public async Task<HttpResponseMessage> Update(RootBookingEntityModel model)
         {
             bool airport = false;
             try
             {
-                airport = await _airportservice.Update(ToDataModel(model));
+                airport = await _airportservice.Update(model);
             }
             catch (HttpRequestException ex)
             {
