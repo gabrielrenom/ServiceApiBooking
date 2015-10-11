@@ -39,31 +39,34 @@ namespace ACP.DataAccess.Managers
             dataModel.Modified = domainModel.Modified;
             dataModel.ModifiedBy = domainModel.ModifiedBy;
             dataModel.Id = domainModel.Id;
-            dataModel.AddressId = domainModel.AddressId;
-            dataModel.Address = dataModel.Address!=null? new Address
+            //dataModel.AddressId = domainModel.Address!=null?domainModel.AddressId:0;
+            if (domainModel.Address != null)
             {
-                Address1 = domainModel.Address.Address1,
-                Address2 = domainModel.Address.Address2,
-                Country = domainModel.Address.Country,
-                County = domainModel.Address.County,
-                Created = domainModel.Address.Created,
-                CreatedBy = domainModel.Address.CreatedBy,
-                Id = domainModel.Address.Id,
-                Modified = domainModel.Address.Modified,
-                ModifiedBy = domainModel.Address.ModifiedBy,
-                Number = domainModel.Address.Number,
-                Postcode = domainModel.Address.Postcode
-            }:null;
-            dataModel.StatusId = domainModel.StatusId;
-            dataModel.Status = dataModel.Status!=null?new Status
+                dataModel.AddressId = domainModel.AddressId;
+                dataModel.Address.Address1 = domainModel.Address.Address1;
+                dataModel.Address.Address2 = domainModel.Address.Address2;
+                dataModel.Address.Country = domainModel.Address.Country;
+                dataModel.Address.County = domainModel.Address.County;
+                dataModel.Address.Created = domainModel.Address.Created;
+                dataModel.Address.CreatedBy = domainModel.Address.CreatedBy;
+                dataModel.Address.Id = domainModel.Address.Id;
+                dataModel.Address.Modified = domainModel.Address.Modified;
+                dataModel.Address.ModifiedBy = domainModel.Address.ModifiedBy;
+                dataModel.Address.Number = domainModel.Address.Number;
+                dataModel.Address.Postcode = domainModel.Address.Postcode;
+            }
+            //dataModel.StatusId = domainModel.Status!=null?domainModel.StatusId:0;
+           
+            if (domainModel.Status != null)
             {
-                Created = domainModel.Status.Created,
-                CreatedBy = domainModel.Status.CreatedBy,
-                Id = domainModel.Status.Id,
-                Modified = domainModel.Status.Modified,
-                ModifiedBy = domainModel.Status.ModifiedBy,
-                StatusType = (Data.Enums.StatusType)domainModel.Status.StatusType
-            }:null;
+                dataModel.StatusId = domainModel.Status != null ? domainModel.StatusId : 0;
+                dataModel.Status.Created = domainModel.Status.Created;
+                dataModel.Status.CreatedBy = domainModel.Status.CreatedBy;
+                dataModel.Status.Id = domainModel.Status.Id;
+                dataModel.Status.Modified = domainModel.Status.Modified;
+                dataModel.Status.ModifiedBy = domainModel.Status.ModifiedBy;
+                dataModel.Status.StatusType = (Data.Enums.StatusType)domainModel.Status.StatusType;
+            }
             dataModel.Name = domainModel.Name;
             dataModel.Telephone = domainModel.Telephone;
 

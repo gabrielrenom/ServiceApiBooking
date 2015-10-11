@@ -380,6 +380,7 @@
     <Content Include="Views\APIAdministration\Index.cshtml" />
     <Content Include="Views\AirportAdmin\Create.cshtml" />
     <Content Include="Views\AirportAdmin\Edit.cshtml" />
+    <Content Include="Views\AirportAdmin\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Administration\" />

@@ -34,8 +34,28 @@ namespace ServiceAPI.Administration
         }
 
         // GET: AirportAdmin/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
+            try
+            {
+                RootBookingEntityModel airport = new RootBookingEntityModel();
+                if (ModelState.IsValid)
+                {
+                    _airportcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                    _airportcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                    var result = await _airportcontroller.GetById(id);
+
+                    result.TryGetContentValue(out airport);
+
+                    if (airport != null)
+                        return View(airport);
+                }
+            }
+            catch
+            {
+                return View();
+            }
+
             return View();
         }
 
@@ -103,8 +123,8 @@ namespace ServiceAPI.Administration
         public async Task<ActionResult> Edit(int id, RootBookingEntityModel model)
         {
             try
-            {
-                RootBookingEntityModel airport = new RootBookingEntityModel();
+            {                 
+                bool airport = false;
                 if (ModelState.IsValid)
                 {
                     _airportcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
@@ -113,7 +133,7 @@ namespace ServiceAPI.Administration
 
                     result.TryGetContentValue(out airport);
 
-                    if (airport != null)
+                    if (airport)
                         return RedirectToAction("Index");
                 }
             }
