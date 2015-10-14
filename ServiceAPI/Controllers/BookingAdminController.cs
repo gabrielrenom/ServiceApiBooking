@@ -13,7 +13,7 @@ namespace ServiceAPI.Controllers
     public class BookingAdminController : Controller
     {
         BookingController _bookingcontroller;
-
+        
         public BookingAdminController(BookingController bookingcontroller)
         {
             _bookingcontroller = bookingcontroller;
@@ -41,15 +41,93 @@ namespace ServiceAPI.Controllers
         // GET: BookingAdmin/Create
         public ActionResult Create()
         {
+            var cctypelist = new List<SelectListItem>();
+            cctypelist.Add(new SelectListItem() { Text = "Visa", Value = "1" });
+            cctypelist.Add(new SelectListItem() { Text = "Mastercard", Value = "2" });
+            cctypelist.Add(new SelectListItem() { Text = "American Express", Value = "3" });
+            cctypelist.Add(new SelectListItem() { Text = "Maestro", Value = "3" });
+            ViewBag.cctype = cctypelist;
+
+            var paymenttypelist = new List<SelectListItem>();
+            paymenttypelist.Add(new SelectListItem() { Text = "Bank Account", Value = "1" });
+            paymenttypelist.Add(new SelectListItem() { Text = "Credit Card", Value = "2" });
+           
+            ViewBag.paymenttype = paymenttypelist;
+
+
+            List<PaymentModel> payments = new List<PaymentModel>
+            {
+                new PaymentModel
+                {
+                    Id=1,
+                    //Customer = customer,                
+                    PaymentMethod =  ACP.Business.Enums.PaymentMethod.CreditCard,
+                    CreditCard = new CreditCardModel {
+                        Lock = false,
+                        ExpiryDate = DateTime.Now.AddYears(2),
+                        Deleted = false,
+                        Name = "Mike Smith",
+                        PlainNumber = "6376485484737833",
+                        Type= 2,
+                        Created = DateTime.Now,
+                        Modified = DateTime.Now,
+                        CreatedBy = "localuser",
+                        ModifiedBy = "localuser",
+                    },
+                    Currency = new CurrencyModel {
+                          CountryCode = "GB",
+                          Code="GPR"
+                    },
+                    Status =  ACP.Business.Enums.StatusType.Active,
+                    Created = DateTime.Now,
+                    Modified = DateTime.Now,
+                    CreatedBy = "localuser",
+                    ModifiedBy = "localuser",
+                },
+                    new PaymentModel
+                {
+                    Id=2,
+                    PaymentMethod =  ACP.Business.Enums.PaymentMethod.CreditCard,
+                    CreditCard = new CreditCardModel {
+                        Lock = false,
+                        ExpiryDate = DateTime.Now.AddYears(2),
+                        Deleted = false,
+                        Name = "Susana Lajusticia",
+                        PlainNumber = "6376485484737833",
+                        Type= 2,
+                        Created = DateTime.Now,
+                        Modified = DateTime.Now,
+                        CreatedBy = "localuser",
+                        ModifiedBy = "localuser",
+                    },
+                    Currency = new CurrencyModel {
+                          CountryCode = "GB",
+                          Code="GPR"
+                    },
+                    Status =  ACP.Business.Enums.StatusType.Active,
+                    Created = DateTime.Now,
+                    Modified = DateTime.Now,
+                    CreatedBy = "localuser",
+                    ModifiedBy = "localuser",
+                }
+            };
+
+            ViewBag.payments = payments;
+
             return View();
         }
 
         // POST: BookingAdmin/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(FormCollection model)
         {
             try
             {
+                foreach (var key in model.AllKeys)
+                {
+                    var value = model[key];
+                    // etc.
+                }
                 // TODO: Add insert logic here
 
                 return RedirectToAction("Index");

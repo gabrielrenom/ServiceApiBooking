@@ -1,20 +1,21 @@
 ﻿@model ACP.Business.Models.BookingModel
 
+
 @{
     ViewBag.Title = "Create";
 }
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>BookingModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-      
+
         <div class="form-group">
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -30,7 +31,7 @@
                 @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
             </div>
         </div>
-        
+
         <div class="form-group">
             @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -39,7 +40,7 @@
             </div>
         </div>
 
-          
+
         <div class="form-group">
             @Html.LabelFor(model => model.Customer.Title, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -55,7 +56,7 @@
                 @Html.ValidationMessageFor(model => model.Customer.Initials, "", new { @class = "text-danger" })
             </div>
         </div>
-        
+
         <div class="form-group">
             @Html.LabelFor(model => model.Customer.Forename, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -160,16 +161,178 @@
             </div>
         </div>
 
-      
+
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Car.Make, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Car.Make, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Car.Make, "", new { @class = "text-danger" })
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.Car.Model, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Car.Model, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Car.Model, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Car.Colour, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Car.Colour, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Car.Colour, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Car.Registration, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Car.Registration, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Car.Registration, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TravelDetails.OutboundDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TravelDetails.OutboundDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TravelDetails.OutboundDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TravelDetails.OutboundFlight, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TravelDetails.OutboundFlight, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TravelDetails.OutboundFlight, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TravelDetails.OutboundTerminal, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TravelDetails.OutboundTerminal, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TravelDetails.OutboundTerminal, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TravelDetails.ReturnDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TravelDetails.ReturnDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TravelDetails.ReturnDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TravelDetails.ReturnFlight, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TravelDetails.ReturnFlight, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TravelDetails.ReturnFlight, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TravelDetails.ReturnboundTerminal, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TravelDetails.ReturnboundTerminal, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TravelDetails.ReturnboundTerminal, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                <div class="col-md-4"><h1>
+                    <i class="fa fa-fw fa-credit-card">
+                    </i>Payment</h1></div><div class="col-md-8">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <div class="col-sm-2">
+                                <label for="inputEmail3" class="control-label">Payment Type</label>
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.DropDownList("paymenttype", (IEnumerable<SelectListItem>)ViewBag.paymenttype, "-- Please Select --", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div id="bankdetails">
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label for="baname" class="control-label">Name</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="baname" placeholder="Bank Account Name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                <label for="banumber" class="control-label">Number</label>
+                                </div>
+                                <div class="col-sm-10">
+                                <input type="number" class="form-control" id="banumber" placeholder="Bank Account Number">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                <label for="baname" class="control-label">Bank Name</label>
+                                </div>
+                                <div class="col-sm-10">
+                                <input type="text" class="form-control"  id="baname" placeholder="Bank Name">
+                                </div>
+                                </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label for="basortcode" class="control-label">Sort Code</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="basortcode" placeholder="Sort Code" >
+                                </div>
+                            </div>
+                        </div>
+                        <div id="creditcard">
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label for="inputEmail3" class="control-label">Credit Card</label>
+                                </div>
+                                <div class="col-sm-10">
+                                     @Html.DropDownList("ccardtype", (IEnumerable<SelectListItem>)ViewBag.cctype, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label for="inputEmail3" class="control-label">Number</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="ccnumber" placeholder="Credit Card Number">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label for="inputPassword3" class="control-label">Name</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="ccname" placeholder="Credit Card Name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label for="inputPassword3" class="control-label">CSV</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="cccsv" placeholder="CSV">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                        
+                        </div>
+                </div>
+            </div>
+        </div>
+  
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -181,3 +344,25 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script>
+    $("#bankdetails").hide();
+    $("#creditcard").hide();
+    $("#paymenttype").change(function () {       
+        alert("Handler for .change() called.");
+        $("#paymenttype option:selected").each(function () {
+            str += $(this).text();
+            if (str === "Credit Card") {
+                $("#bankdetails").hide();
+                $("#creditcard").show();
+            }
+            else {
+                $("#bankdetails").show();
+                $("#creditcard").hide();
+            }
+     
+        });
+    });
+
+</script>
