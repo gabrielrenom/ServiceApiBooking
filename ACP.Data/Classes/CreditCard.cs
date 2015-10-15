@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACP.Data.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace ACP.Data
         public string PlainNumber { get; set; }
         public DateTime ExpiryDate { get; set; }
         public string Name { get; set; }
-        public int Type { get; set; }
+        public CreditCardTypes Type { get; set; }
         public bool Deleted { get; set; }
         public string GateWayKey { get; set; }
         public bool Lock { get; set; }

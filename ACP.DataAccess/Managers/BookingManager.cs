@@ -208,7 +208,7 @@ namespace ACP.DataAccess.Managers
                         ExpiryDate = x.CreditCard.ExpiryDate,
                         GateWayKey = x.CreditCard.GateWayKey,
                         Lock = x.CreditCard.Lock,
-                        Type = x.CreditCard.Type,
+                        Type = (Data.Enums.CreditCardTypes)x.CreditCard.Type,
                         Name = x.CreditCard.Name,
                         Number = x.CreditCard.Number,
                         PlainNumber = x.CreditCard.PlainNumber
@@ -447,7 +447,7 @@ namespace ACP.DataAccess.Managers
                     ExpiryDate = x.CreditCard.ExpiryDate,
                     GateWayKey = x.CreditCard.GateWayKey,
                     Lock = x.CreditCard.Lock,
-                    Type = x.CreditCard.Type,
+                    Type = (Business.Enums.CreditCardTypes)x.CreditCard.Type,
                     Name = x.CreditCard.Name,
                     Number = x.CreditCard.Number,
                     PlainNumber = x.CreditCard.PlainNumber
@@ -631,7 +631,7 @@ namespace ACP.DataAccess.Managers
                     ExpiryDate = x.CreditCard.ExpiryDate,
                     GateWayKey = x.CreditCard.GateWayKey,
                     Lock = x.CreditCard.Lock,
-                    Type = x.CreditCard.Type,
+                    Type = (Data.Enums.CreditCardTypes)x.CreditCard.Type,
                     Name = x.CreditCard.Name,
                     Number = x.CreditCard.Number,
                     PlainNumber = x.CreditCard.PlainNumber

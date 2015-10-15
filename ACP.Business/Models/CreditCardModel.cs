@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACP.Business.Enums;
+using System;
 using System.Collections.Generic;
 
 namespace ACP.Business.Models
@@ -9,7 +10,7 @@ namespace ACP.Business.Models
         public string PlainNumber { get; set; }
         public DateTime ExpiryDate { get; set; }
         public string Name { get; set; }
-        public int Type { get; set; }
+        public CreditCardTypes Type { get; set; }
         public bool Deleted { get; set; }
         public string GateWayKey { get; set; }
         public bool Lock { get; set; }

@@ -120,7 +120,7 @@ namespace ACP.Business.Test
                     Deleted = false,
                     Name = "Mike Smith",
                     PlainNumber = "6376485484737833",
-                    Type= 2,
+                    Type= Business.Enums.CreditCardTypes.Visa,
                     Created = DateTime.Now,
                     Modified = DateTime.Now,
                     CreatedBy = "localuser",

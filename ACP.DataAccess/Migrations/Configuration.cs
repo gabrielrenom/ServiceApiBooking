@@ -17,12 +17,14 @@ namespace ACP.DataAccess.Migrations
 
         protected override void Seed(ACP.DataAccess.ACPContext context)
         {
+            #region [ STATUS ]
             context.Statuses.AddOrUpdate(x => x.Id, new Status { Id=1, StatusType= StatusType.Active});
             context.Statuses.AddOrUpdate(x => x.Id, new Status { Id=2, StatusType = StatusType.Inactive });
-
+            #endregion
 
             int testid = 2;
 
+            #region [ AIRPORTS ]
             context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
             {
                 Id = 1,
@@ -1778,7 +1780,13 @@ namespace ACP.DataAccess.Migrations
                 ModifiedBy = "localuser",
                 Created = DateTime.Now,
             });
+            #endregion
 
+            #region [ CREDIT CARD TYPES ]
+            context.CreditCards.AddOrUpdate(x => x.Id, new CreditCard { Id = 1,});
+            context.Statuses.AddOrUpdate(x => x.Id, new Status { Id = 2, StatusType = StatusType.Inactive });
+            #endregion
+            //##
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

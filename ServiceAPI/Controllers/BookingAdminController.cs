@@ -55,87 +55,42 @@ namespace ServiceAPI.Controllers
             ViewBag.paymenttype = paymenttypelist;
 
 
-            List<PaymentModel> payments = new List<PaymentModel>
-            {
-                new PaymentModel
-                {
-                    Id=1,
-                    //Customer = customer,                
-                    PaymentMethod =  ACP.Business.Enums.PaymentMethod.CreditCard,
-                    CreditCard = new CreditCardModel {
-                        Lock = false,
-                        ExpiryDate = DateTime.Now.AddYears(2),
-                        Deleted = false,
-                        Name = "Mike Smith",
-                        PlainNumber = "6376485484737833",
-                        Type= 2,
-                        Created = DateTime.Now,
-                        Modified = DateTime.Now,
-                        CreatedBy = "localuser",
-                        ModifiedBy = "localuser",
-                    },
-                    Currency = new CurrencyModel {
-                          CountryCode = "GB",
-                          Code="GPR"
-                    },
-                    Status =  ACP.Business.Enums.StatusType.Active,
-                    Created = DateTime.Now,
-                    Modified = DateTime.Now,
-                    CreatedBy = "localuser",
-                    ModifiedBy = "localuser",
-                },
-                    new PaymentModel
-                {
-                    Id=2,
-                    PaymentMethod =  ACP.Business.Enums.PaymentMethod.CreditCard,
-                    CreditCard = new CreditCardModel {
-                        Lock = false,
-                        ExpiryDate = DateTime.Now.AddYears(2),
-                        Deleted = false,
-                        Name = "Susana Lajusticia",
-                        PlainNumber = "6376485484737833",
-                        Type= 2,
-                        Created = DateTime.Now,
-                        Modified = DateTime.Now,
-                        CreatedBy = "localuser",
-                        ModifiedBy = "localuser",
-                    },
-                    Currency = new CurrencyModel {
-                          CountryCode = "GB",
-                          Code="GPR"
-                    },
-                    Status =  ACP.Business.Enums.StatusType.Active,
-                    Created = DateTime.Now,
-                    Modified = DateTime.Now,
-                    CreatedBy = "localuser",
-                    ModifiedBy = "localuser",
-                }
-            };
-
-            ViewBag.payments = payments;
+          
 
             return View();
         }
 
         // POST: BookingAdmin/Create
         [HttpPost]
-        public ActionResult Create(FormCollection model)
+        public async Task<ActionResult> Create(BookingModel model)
         {
             try
             {
-                foreach (var key in model.AllKeys)
+                var paymentform = Request.Form;
+                foreach (var key in paymentform.AllKeys)
                 {
-                    var value = model[key];
-                    // etc.
+                    var value = paymentform[key];
                 }
-                // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
+                BookingModel booking = new BookingModel();
+                if (ModelState.IsValid)
+                {
+                    _bookingcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                    _bookingcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                    var result = await _bookingcontroller.Add(model);
+
+                    result.TryGetContentValue(out booking);
+
+                    if (booking != null)
+                        return RedirectToAction("Index");
+                }
             }
             catch
             {
-                return View();
+                return View("Create");
             }
+
+            return View("Create");
         }
 
         // GET: BookingAdmin/Edit/5
