@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Collections;
 
 namespace ServiceAPI.Controllers
 {
@@ -66,15 +67,39 @@ namespace ServiceAPI.Controllers
         {
             try
             {
-                var paymentform = Request.Form;
-                foreach (var key in paymentform.AllKeys)
-                {
-                    var value = paymentform[key];
-                }
+             
 
                 BookingModel booking = new BookingModel();
                 if (ModelState.IsValid)
                 {
+                    model.Payments = new List<PaymentModel>();
+                    PaymentModel payment = new PaymentModel();
+                    
+                    var paymentform = Request.Form;
+
+                    //## Bank account
+                    if (paymentform["paymenttype"] == "1")
+                    {
+                        BankAccountModel bankaccount = new BankAccountModel();
+                        bankaccount.AccountName = paymentform["baname"];
+                        bankaccount.BankName = paymentform["babankname"];
+                        bankaccount.AbaRouting = paymentform["basortcode"];
+                        payment.BankAccount = bankaccount;
+                    }
+                    else
+                    {
+                        //##Credit card
+                        CreditCardModel creditcard = new CreditCardModel();
+                        creditcard.Type = (ACP.Business.Enums.CreditCardTypes) Convert.ToInt32(paymentform["ccardtype"]);
+                        creditcard.Name = paymentform["ccname"];
+                        creditcard.Number = paymentform["ccnumber"];
+                        creditcard.ExpiryDate = Convert.ToDateTime(paymentform["ccexpirydate"]);
+                        creditcard.GateWayKey = paymentform["cccsv"];
+                        payment.CreditCard = creditcard;
+                    }
+                    model.Payments.Add(payment);
+                        
+
                     _bookingcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
                     _bookingcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
                     var result = await _bookingcontroller.Add(model);
