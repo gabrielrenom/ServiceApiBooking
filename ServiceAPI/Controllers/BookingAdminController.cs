@@ -17,6 +17,7 @@ namespace ServiceAPI.Controllers
         CarParkController _carparkcontroller;
         AirportController _airportcontroller;
 
+
         public BookingAdminController(BookingController bookingcontroller, AirportController airportcontroller, CarParkController carparkcontroller)
         {
             _bookingcontroller = bookingcontroller;
@@ -47,47 +48,7 @@ namespace ServiceAPI.Controllers
         // GET: BookingAdmin/Create
         public async Task<ActionResult> Create()
         {
-            var cctypelist = new List<SelectListItem>();
-            cctypelist.Add(new SelectListItem() { Text = "Visa", Value = "1" });
-            cctypelist.Add(new SelectListItem() { Text = "Mastercard", Value = "2" });
-            cctypelist.Add(new SelectListItem() { Text = "American Express", Value = "3" });
-            cctypelist.Add(new SelectListItem() { Text = "Maestro", Value = "3" });
-            ViewBag.cctype = cctypelist;
-
-            var paymenttypelist = new List<SelectListItem>();
-            paymenttypelist.Add(new SelectListItem() { Text = "Bank Account", Value = "1" });
-            paymenttypelist.Add(new SelectListItem() { Text = "Credit Card", Value = "2" });
-            ViewBag.paymenttype = paymenttypelist;
-
-            //var carparkslist = new List<SelectListItem>();
-            //List<BookingEntityModel> carparks = new List<BookingEntityModel>();
-            //_carparkcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
-            //_carparkcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
-            //var result = await _carparkcontroller.GetAll();
-            //result.TryGetContentValue(out carparks);
-            //if (carparks != null)
-            //{
-            //    foreach (var carpark in carparks)
-            //    {
-            //        carparkslist.Add(new SelectListItem() { Text = carpark.Name, Value = carpark.Id.ToString() });
-            //    }
-            //}
-            //ViewBag.carparkslist = carparkslist;
-
-            var airportlist = new List<SelectListItem>();
-            List<RootBookingEntityModel> airports = new List<RootBookingEntityModel>();
-            _airportcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
-            _airportcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
-            var airportsresult = await _airportcontroller.GetAll();
-            airportsresult.TryGetContentValue(out airports);
-            if (airports != null)
-            {
-                foreach (var airport in airports)
-                {
-                    airportlist.Add(new SelectListItem() { Text = airport.Name, Value = airport.Code });
-                }
-            }
-            ViewBag.airportlist = airportlist;
+            await FillDropBoxes();
 
             return View();
         }
@@ -103,24 +64,25 @@ namespace ServiceAPI.Controllers
                 BookingModel booking = new BookingModel();
                 if (ModelState.IsValid)
                 {
-                    CurrencyModel currency = new CurrencyModel {
-                         Code="GBP",
-                         Symbol="£",
-                         CountryCode="GB",
-                         Created = DateTime.Now,
-                         Modified = DateTime.Now,
-                         CreatedBy = model.Customer.Forename + " " + model.Customer.Surname,
-                         ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname                         
-                        };
+                    //CurrencyModel currency = new CurrencyModel {
+                    //     Code="GBP",
+                    //     Symbol="£",
+                    //     CountryCode="GB",
+                    //     Created = DateTime.Now,
+                    //     Modified = DateTime.Now,
+                    //     CreatedBy = model.Customer.Forename + " " + model.Customer.Surname,
+                    //     ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname                         
+                    //    };
                     model.Payments = new List<PaymentModel>();
                     PaymentModel payment = new PaymentModel();
                     payment.Created = DateTime.Now;
                     payment.Modified = DateTime.Now;
                     payment.CreatedBy = model.Customer.Forename + " " + model.Customer.Surname;
                     payment.ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname;
-                    payment.Currency = currency;
-
+                   
                     var paymentform = Request.Form;
+
+                    payment.CurrencyId = Convert.ToInt32(paymentform["currency"]);
 
                     //## Bank account
                     if (paymentform["paymenttype"] == "1")
@@ -143,7 +105,7 @@ namespace ServiceAPI.Controllers
                         creditcard.Type = (ACP.Business.Enums.CreditCardTypes) Convert.ToInt32(paymentform["ccardtype"]);
                         creditcard.Name = paymentform["ccname"];
                         creditcard.Number = paymentform["ccnumber"];
-                        creditcard.ExpiryDate = DateTime.Now;//Convert.ToDateTime(paymentform["ccexpirydate"]);
+                        creditcard.ExpiryDate = Convert.ToDateTime(paymentform["ccexpirydate"]);
                         creditcard.GateWayKey = paymentform["cccsv"];
                         creditcard.Created = DateTime.Now;
                         creditcard.Modified = DateTime.Now;
@@ -197,39 +159,15 @@ namespace ServiceAPI.Controllers
                 }
                 else
                 {
-                    var cctypelist = new List<SelectListItem>();
-                    cctypelist.Add(new SelectListItem() { Text = "Visa", Value = "1" });
-                    cctypelist.Add(new SelectListItem() { Text = "Mastercard", Value = "2" });
-                    cctypelist.Add(new SelectListItem() { Text = "American Express", Value = "3" });
-                    cctypelist.Add(new SelectListItem() { Text = "Maestro", Value = "3" });
-                    ViewBag.cctype = cctypelist;
-
-                    var paymenttypelist = new List<SelectListItem>();
-                    paymenttypelist.Add(new SelectListItem() { Text = "Bank Account", Value = "1" });
-                    paymenttypelist.Add(new SelectListItem() { Text = "Credit Card", Value = "2" });
-
-                    ViewBag.paymenttype = paymenttypelist;
-
-                    var airportlist = new List<SelectListItem>();
-                    List<RootBookingEntityModel> airports = new List<RootBookingEntityModel>();
-                    _airportcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
-                    _airportcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
-                    var airportsresult = await _airportcontroller.GetAll();
-                    airportsresult.TryGetContentValue(out airports);
-                    if (airports != null)
-                    {
-                        foreach (var airport in airports)
-                        {
-                            airportlist.Add(new SelectListItem() { Text = airport.Name, Value = airport.Code });
-                        }
-                    }
-                    ViewBag.airportlist = airportlist;
-
+                    await FillDropBoxes();
+                            
                     return View();
                 }
             }
             catch
             {
+                await FillDropBoxes();
+
                 return View("Create");
             }
 
@@ -278,6 +216,55 @@ namespace ServiceAPI.Controllers
             {
                 return View();
             }
+        }
+
+        private async Task FillDropBoxes()
+        {
+            var cctypelist = new List<SelectListItem>();
+            cctypelist.Add(new SelectListItem() { Text = "Visa", Value = "1" });
+            cctypelist.Add(new SelectListItem() { Text = "Mastercard", Value = "2" });
+            cctypelist.Add(new SelectListItem() { Text = "American Express", Value = "3" });
+            cctypelist.Add(new SelectListItem() { Text = "Maestro", Value = "3" });
+            ViewBag.cctype = cctypelist;
+
+            var paymenttypelist = new List<SelectListItem>();
+            paymenttypelist.Add(new SelectListItem() { Text = "Bank Account", Value = "1" });
+            paymenttypelist.Add(new SelectListItem() { Text = "Credit Card", Value = "2" });
+            ViewBag.paymenttype = paymenttypelist;
+
+            var currency = new List<SelectListItem>();
+            currency.Add(new SelectListItem() { Text = "£", Value = "1" });
+            ViewBag.currency = currency;
+
+            //var carparkslist = new List<SelectListItem>();
+            //List<BookingEntityModel> carparks = new List<BookingEntityModel>();
+            //_carparkcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+            //_carparkcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+            //var result = await _carparkcontroller.GetAll();
+            //result.TryGetContentValue(out carparks);
+            //if (carparks != null)
+            //{
+            //    foreach (var carpark in carparks)
+            //    {
+            //        carparkslist.Add(new SelectListItem() { Text = carpark.Name, Value = carpark.Id.ToString() });
+            //    }
+            //}
+            //ViewBag.carparkslist = carparkslist;
+
+            var airportlist = new List<SelectListItem>();
+            List<RootBookingEntityModel> airports = new List<RootBookingEntityModel>();
+            _airportcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+            _airportcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+            var airportsresult = await _airportcontroller.GetAll();
+            airportsresult.TryGetContentValue(out airports);
+            if (airports != null)
+            {
+                foreach (var airport in airports)
+                {
+                    airportlist.Add(new SelectListItem() { Text = airport.Name, Value = airport.Code });
+                }
+            }
+            ViewBag.airportlist = airportlist;
         }
     }
 }
