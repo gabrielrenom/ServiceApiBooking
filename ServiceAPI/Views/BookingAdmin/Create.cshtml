@@ -17,7 +17,7 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <form class="form-horizontal" role="form">
             <div class="section">
-                <div class="container">
+                <div class="container"> 
                     <div class="row">
                         <div class="col-md-12">
                             <h3 class="text-success"><i class="fa fa-fw fa-calendar"></i>Booking Dates</h3>
@@ -25,9 +25,17 @@
                                 <div class="col-md-6">
                                     @*<form class="form-horizontal" role="form">*@
                                     <div class="form-group">
+                                        <div class="control-label col-md-2">
+                                            <label  class="control-label">Airport</label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            @Html.DropDownList("airport", (IEnumerable<SelectListItem>)ViewBag.airportlist, "-- Please Select --", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
-                                            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control",  type = "date" } })
                                             @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -35,7 +43,7 @@
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
-                                            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
                                             @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -46,7 +54,7 @@
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
-                                            @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.TextAreaFor(model => model.Message, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -329,14 +337,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     @*<form class="form-horizontal" role="form">*@
-                                    <div class="form-group">
-                                        <div class="col-sm-2">
-                                            <label for="inputEmail3" class="control-label">Credit Card</label>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            @Html.DropDownList("cctype", (IEnumerable<SelectListItem>)ViewBag.cctype, "-- Please Select --", new { @class = "form-control" })
-                                        </div>
-                                    </div>
+                                    
                                     <div id="bankdetails">
                                         <div class="form-group">
                                             <div class="col-sm-4">

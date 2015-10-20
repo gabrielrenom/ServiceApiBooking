@@ -72,8 +72,12 @@ namespace ServiceAPI.Tests.Controllers
         {
             //Arrange
             var prices = await bookingpricingservice.GetAll();
-            DateTime startdate = prices.FirstOrDefault().End.AddDays(-12);//Convert.ToDateTime("2015-10-03 00:00:00.000");
-            DateTime enddate = prices.FirstOrDefault().End.AddDays(-7); //Convert.ToDateTime("2015-10-07 00:00:00.000");
+            //## To set the start/end date
+            //##    1- Go to BookingPricing table
+            //##    2- Then get a slot between Start and End
+            //##    3- Be sure the booking entityid matches with the one in the model
+            DateTime startdate = Convert.ToDateTime("2016-06-03 00:00:00.000");//prices.FirstOrDefault().End.AddDays(-12);//Convert.ToDateTime("2015-10-03 00:00:00.000");
+            DateTime enddate = Convert.ToDateTime("2016-06-07 00:00:00.000");//prices.FirstOrDefault().End.AddDays(-7); //Convert.ToDateTime("2015-10-07 00:00:00.000");
 
             CustomerModel customer = new CustomerModel
             {

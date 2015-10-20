@@ -44,7 +44,8 @@ namespace ACP.DataAccess.Managers
         public IList<BookingPricingModel> GetAllPricesByBookEntity(int bookingentityid, DateTime pickup, DateTime dropoff)
         {
 
-            return GetListIncluding(x=>x.BookingEntityId == bookingentityid && pickup > x.Start && dropoff < x.End,
+            //return GetListIncluding(x=>x.BookingEntityId == bookingentityid && pickup > x.Start && dropoff < x.End,
+            return GetListIncluding(x => x.BookingEntityId == bookingentityid && dropoff > x.Start && pickup < x.End,
                 x => x.BookingEntity,
                 x => x.BookingEntity.Prices,
                 x => x.BookingEntity.Prices.Select(y => x.DayPrices))

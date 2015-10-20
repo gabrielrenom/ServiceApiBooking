@@ -67,6 +67,7 @@ namespace ACP.Business.Test
             list.Add(model);
 
             //Act
+            var results4 = await service.AddPricesWithDays(4, list);
             var results = await service.AddPricesWithDays(3, list);
             var results2 = await service.AddPricesWithDays(1, list);
             var results3 = await service.AddPricesWithDays(2, list);
