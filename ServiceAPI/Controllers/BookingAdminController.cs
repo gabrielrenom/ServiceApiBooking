@@ -175,25 +175,43 @@ namespace ServiceAPI.Controllers
         }
 
         // GET: BookingAdmin/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
+            await FillDropBoxes();
+
+            BookingModel booking = new BookingModel();
+            if (ModelState.IsValid)
+            {
+                _bookingcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                _bookingcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                var result = await _bookingcontroller.GettById(id);
+
+                result.TryGetContentValue(out booking);
+
+                if (booking != null)
+                {
+                    
+                }
+                    return View(booking);
+            }
+
             return View();
         }
 
         // POST: BookingAdmin/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public async Task<ActionResult> Edit(int id, FormCollection collection)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+               
             }
             catch
             {
                 return View();
             }
+
+            return View();
         }
 
         // GET: BookingAdmin/Delete/5

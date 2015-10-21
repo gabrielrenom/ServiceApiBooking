@@ -384,6 +384,7 @@
     <Content Include="Views\AirportAdmin\Details.cshtml" />
     <Content Include="Views\BookingAdmin\Index.cshtml" />
     <Content Include="Views\BookingAdmin\Create.cshtml" />
+    <Content Include="Views\BookingAdmin\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Administration\" />

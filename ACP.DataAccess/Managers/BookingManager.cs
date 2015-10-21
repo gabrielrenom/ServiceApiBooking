@@ -621,6 +621,7 @@ namespace ACP.DataAccess.Managers
                 ModifiedBy = x.ModifiedBy,
                 Modified = x.Modified,
                 CreditCardId = x.CreditCardId,
+                CurrencyId = x.CurrencyId,
                 CreditCard = x.CreditCard!=null? new CreditCard {
                     Created = x.CreditCard.Created,
                     CreatedBy = x.CreditCard.CreatedBy,
