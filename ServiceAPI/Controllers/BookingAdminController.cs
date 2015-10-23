@@ -200,33 +200,149 @@ namespace ServiceAPI.Controllers
 
         // POST: BookingAdmin/Edit/5
         [HttpPost]
-        public async Task<ActionResult> Edit(int id, FormCollection collection)
+        public async Task<ActionResult> Edit(BookingModel model)
         {
+            bool updated = false;
             try
-            {
-               
+            {                
+                BookingModel booking = new BookingModel();
+                if (ModelState.IsValid)
+                {
+                    _bookingcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                    _bookingcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                    var bookingresult = await _bookingcontroller.GettById(model.Id);
+
+                    bookingresult.TryGetContentValue(out booking);
+                                       
+                    booking.Payments.FirstOrDefault().Modified = DateTime.Now;
+                    booking.Payments.FirstOrDefault().ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname;
+
+                    var paymentform = Request.Form;
+
+                    booking.Payments.FirstOrDefault().CurrencyId = Convert.ToInt32(paymentform["currency"]);
+
+                    //## Bank account
+                    if (paymentform["paymenttype"] == "1")
+                    {
+                        if (booking.Payments.FirstOrDefault().BankAccount == null)
+                            booking.Payments.FirstOrDefault().BankAccount = new BankAccountModel();
+                        booking.Payments.FirstOrDefault().BankAccount.AccountName = paymentform["baname"];
+                        booking.Payments.FirstOrDefault().BankAccount.BankName = paymentform["babankname"];
+                        booking.Payments.FirstOrDefault().BankAccount.AbaRouting = paymentform["basortcode"];
+                        booking.Payments.FirstOrDefault().BankAccount.Modified = DateTime.Now;
+                        booking.Payments.FirstOrDefault().BankAccount.ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname;
+
+                    }
+                    else
+                    {
+                        //##Credit card
+                        if (booking.Payments.FirstOrDefault().CreditCard== null)
+                            booking.Payments.FirstOrDefault().CreditCard=new CreditCardModel();
+                        booking.Payments.FirstOrDefault().CreditCard.Type = (ACP.Business.Enums.CreditCardTypes)Convert.ToInt32(paymentform["ccardtype"]);
+                        booking.Payments.FirstOrDefault().CreditCard.Name = paymentform["ccname"];
+                        booking.Payments.FirstOrDefault().CreditCard.Number = paymentform["ccnumber"];
+                        booking.Payments.FirstOrDefault().CreditCard.ExpiryDate = Convert.ToDateTime(paymentform["ccexpirydate"]);
+                        booking.Payments.FirstOrDefault().CreditCard.GateWayKey = paymentform["cccsv"];
+                        booking.Payments.FirstOrDefault().CreditCard.Modified = DateTime.Now;
+                        booking.Payments.FirstOrDefault().CreditCard.ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname;                       
+
+                    }
+
+                    booking.Modified = DateTime.Now;
+                    booking.CreatedBy = model.Customer.Forename + " " + model.Customer.Surname;
+                    booking.ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname;
+                    booking.Message = model.Message;                    
+
+                    booking.TravelDetails.Modified = DateTime.Now;                    
+                    booking.TravelDetails.ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname;
+                    booking.TravelDetails.OutboundDate = model.TravelDetails.OutboundDate;
+                    booking.TravelDetails.OutboundFlight = model.TravelDetails.OutboundFlight;
+                    booking.TravelDetails.OutboundTerminal = model.TravelDetails.OutboundTerminal;
+
+
+                    booking.Car.Created = DateTime.Now;
+                    booking.Car.Modified = DateTime.Now;
+                    booking.Car.CreatedBy = model.Customer.Forename + " " + model.Customer.Surname;
+                    booking.Car.ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname;
+                    booking.Car.Colour = model.Car.Colour;
+                    booking.Car.Make = model.Car.Make;
+                    booking.Car.Registration = model.Car.Registration;
+
+                    booking.Customer.Modified = DateTime.Now;
+                    booking.Customer.CreatedBy = model.Customer.Forename + " " + model.Customer.Surname;
+                    booking.Customer.ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname;
+                    booking.Customer.Fax = model.Customer.Fax;
+                    booking.Customer.Forename = model.Customer.Forename;
+                    booking.Customer.Initials = model.Customer.Initials;
+                    booking.Customer.Mobile = model.Customer.Mobile;
+                    booking.Customer.Surname = model.Customer.Surname;
+                    booking.Customer.Telephone = model.Customer.Telephone;
+                    booking.Customer.Title = model.Customer.Title;
+                    booking.StartDate = model.StartDate;
+                    booking.EndDate = model.EndDate;
+
+                    _bookingcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                    _bookingcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                    model.SourceCode = paymentform["airport"];
+                    var result = await _bookingcontroller.Update(model);
+
+                    result.TryGetContentValue(out updated);
+
+                    if (updated == true)
+                        return RedirectToAction("Index");
+                }
+                else
+                {
+                    await FillDropBoxes();
+
+                    return View();
+                }
             }
             catch
             {
-                return View();
+                await FillDropBoxes();
+
+                return View("Edit");
             }
 
-            return View();
+            return View("Edit");
         }
 
         // GET: BookingAdmin/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+
+            BookingModel booking = new BookingModel();
+            if (ModelState.IsValid)
+            {
+                _bookingcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                _bookingcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                var result = await _bookingcontroller.GettById(id);
+
+                result.TryGetContentValue(out booking);
+                
+                return View(booking);
+            }
+
+            return View();            
         }
 
         // POST: BookingAdmin/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public async Task<ActionResult> Delete(int id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                BookingModel booking = new BookingModel();
+                if (ModelState.IsValid)
+                {
+                    _bookingcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                    _bookingcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                    var result = await _bookingcontroller.Delete(id);
+
+                    result.TryGetContentValue(out booking);                    
+                }
+
 
                 return RedirectToAction("Index");
             }
