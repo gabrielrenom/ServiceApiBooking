@@ -386,6 +386,8 @@
     <Content Include="Views\BookingAdmin\Create.cshtml" />
     <Content Include="Views\BookingAdmin\Edit.cshtml" />
     <Content Include="Views\BookingAdmin\Delete.cshtml" />
+    <Content Include="Views\Shared\_ActionLayout.cshtml" />
+    <Content Include="Views\BookingAdmin\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Administration\" />

@@ -40,8 +40,24 @@ namespace ServiceAPI.Controllers
         }
 
         // GET: BookingAdmin/Details/5
-        public ActionResult Details(int id)
+        public async  Task<ActionResult> Details(int id)
         {
+            BookingModel booking = new BookingModel();
+            if (ModelState.IsValid)
+            {
+                _bookingcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                _bookingcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                var result = await _bookingcontroller.GettById(id);
+
+                result.TryGetContentValue(out booking);
+
+                if (booking != null)
+                {
+
+                }
+                return View(booking);
+            }
+
             return View();
         }
 
