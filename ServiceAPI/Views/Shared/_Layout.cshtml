@@ -3,12 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
-          rel="stylesheet" type="text/css">
-    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
-          rel="stylesheet" type="text/css">
+   
+    @Styles.Render("~/Content/theme-bootstrap")
+    @Scripts.Render("~/bundles/modernizr")
 </head>
 
 <body>
@@ -21,7 +18,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand"><span>TheCarParkSupermarket</span></a>
+                <span>
+                    @Html.ActionLink("NationalParkingServices", "Index", "Home", null, new { @class = "navbar-brand" })
+                </span>
             </div>
             <div class="collapse navbar-collapse" id="navbar-ex-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -42,8 +41,12 @@
         </div>
     </div>
     <div>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
         @RenderBody()
     </div>
+    
 </body>
 
 </html>

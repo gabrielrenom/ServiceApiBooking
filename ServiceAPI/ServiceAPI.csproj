@@ -258,6 +258,7 @@
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\BookingAdminController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
+    <Compile Include="Controllers\CarparkAdminController.cs" />
     <Compile Include="Controllers\CarparkPricingController.cs" />
     <Compile Include="Controllers\PricingController.cs" />
     <Compile Include="Controllers\PurpleParkingController.cs" />
@@ -318,6 +319,9 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\googlefonts.css" />
+    <Content Include="Content\theme-bootstrap.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -346,6 +350,10 @@
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
     <Content Include="apiapp.json" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\1YwB1sO8YE1Lyjf12WNiUA.woff2" />
+    <Content Include="fonts\UyBMtLsHKBKXelqf4x7VRQ.woff2" />
+    <None Include="Properties\PublishProfiles\NationalParkingServices.pubxml" />
     <None Include="Properties\PublishProfiles\thecarparksupermarket.pubxml" />
     <None Include="Properties\PublishProfiles\TheCarParkSupermarketAPI%28Default-Web-WestEurope%29.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -388,6 +396,9 @@
     <Content Include="Views\BookingAdmin\Delete.cshtml" />
     <Content Include="Views\Shared\_ActionLayout.cshtml" />
     <Content Include="Views\BookingAdmin\Details.cshtml" />
+    <Content Include="Views\CarparkAdmin\Index.cshtml" />
+    <Content Include="Views\CarparkAdmin\Details.cshtml" />
+    <Content Include="Views\CarparkAdmin\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Administration\" />

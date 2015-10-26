@@ -1,0 +1,116 @@
+﻿@model ACP.Business.Models.BookingEntityModel
+
+@{
+    //## Change it in the view
+    ViewBag.actionIcon = "fa-automobile";
+
+    //## Action, change it in the view
+    ViewBag.actionLabel = "Details";
+
+    Layout = "~/Views/Shared/_ActionLayout.cshtml";
+
+}
+
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modified)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comission)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comission)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sameday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sameday)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RootBookEntityId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RootBookEntityId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+                @Html.ActionLink("Edit", "Edit", null, new { @class = "btn btn-success" })
+            </div>
+        </div>
+    </div>
+
+</p>

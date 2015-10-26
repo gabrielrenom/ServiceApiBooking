@@ -1,8 +1,7 @@
 ﻿@model IEnumerable<ACP.Business.Models.BookingModel>
 
-
-<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
-      rel="stylesheet" type="text/css">
+@Styles.Render("~/Content/theme-bootstrap")
+@Scripts.Render("~/bundles/modernizr")
 <div class="section">
     <div class="container">
         <div class="row">
@@ -48,13 +47,13 @@
                     @Html.DisplayNameFor(model => model.Message)
                 </th>
                 <th>
+                   
+                </th>
+                <th>
+
+                </th>
+                <th>
                     <a href="@Url.Action("Create","BookingAdmin")"><i class="fa fa-2x fa-fw fa-plus text-success"></i></a>
-                </th>
-                <th>
-
-                </th>
-                <th>
-
                 </th>
             </tr>
 

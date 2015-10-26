@@ -430,30 +430,26 @@
                                         @*</form>*@
                                     </div>
                                 </div>
-                            </div>
-                            <div>
-                                <div class="col-md-12">
-                                    <a class="btn btn-primary">Create Booking</a>
-                                </div>
+                            </div>                          
+                        </div>
+                    </div>
+                </div>       
+                <p>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+                                <input type="submit" value="Create" class="btn btn-success" />                            
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-default" />
-                    </div>
-                </div>
+
+                </p>
             </form>
         </div>
     }
 </div>
 </div>
-        <div>
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-
-        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
         <script>
             $("#bankdetails").hide();
             $("#creditcard").hide();

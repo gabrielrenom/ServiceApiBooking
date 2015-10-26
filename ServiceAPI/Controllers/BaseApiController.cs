@@ -9,6 +9,6 @@ namespace ServiceAPI.Controllers
 {
     public class BaseApiController : ApiController
     {
-
+        public string User { get; set; }
     }
 }

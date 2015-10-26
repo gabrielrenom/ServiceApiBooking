@@ -22,6 +22,10 @@ namespace ACP.DataAccess.Migrations
             context.Statuses.AddOrUpdate(x => x.Id, new Status { Id=2, StatusType = StatusType.Inactive });
             #endregion
 
+            #region [ CURRENCY ]
+            context.Currencies.AddOrUpdate(x => x.Id, new Currency { Id = 1,  Symbol="£", Code="GBP", CountryCode="GB" });
+            #endregion
+
             int testid = 2;
 
             #region [ AIRPORTS ]

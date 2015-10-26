@@ -21,13 +21,14 @@ namespace ServiceAPI.Controllers
     /// v0.1
     /// </summary>
     [RoutePrefix("api/v0.1/booking")]
-    public class BookingController : ApiController
+    public class BookingController : BaseApiController
     {
         private IBookingService _bookingservice;
         //
         public BookingController(IBookingService bookingservice)
         {
             _bookingservice = bookingservice;
+
         }
 
 
@@ -183,7 +184,7 @@ namespace ServiceAPI.Controllers
         {
             BookingModel booking = null;
             try
-            {
+            {                
                 booking = await _bookingservice.Add(model);
             }
             catch (HttpRequestException ex)

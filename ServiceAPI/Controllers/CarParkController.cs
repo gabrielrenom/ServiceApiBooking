@@ -162,6 +162,16 @@ namespace ServiceAPI.Controllers
             bool carpark = false;
             try
             {
+                model.CreatedBy = User;
+                model.ModifiedBy = User;
+                model.Created = DateTime.Now;
+                model.Modified = DateTime.Now;
+                model.Address = model.Address != null?new AddressModel{
+                     CreatedBy=User,
+                     ModifiedBy = User,
+                     Created = DateTime.Now,
+                     Modified=DateTime.Now
+                }:null;
                 carpark = await _carparkservice.Add(model);
             }
             catch (HttpRequestException ex)

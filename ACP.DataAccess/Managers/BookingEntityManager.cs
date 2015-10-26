@@ -169,6 +169,7 @@ namespace ACP.DataAccess.Managers
                     Key = x.Key,
                     Value = x.Value
                 }).ToList() : null               
+              
             };
 
             return model;
@@ -359,12 +360,12 @@ namespace ACP.DataAccess.Managers
 
         public IList<BookingEntityModel> GetAllBookingEntities()
         {
-            return GetListIncluding(x => x.Id > 0, x => x.Address, x => x.Extras, x => x.Properties, x => x.Prices.Select(e => e.DayPrices), x => x.Prices.Select(w => w.DayPrices.Select(y => y.HourPrices))).ToList();                        
+            return GetListIncluding(x => x.Id > 0, x => x.Address, x => x.Extras, x => x.Properties,x=>x.RootBookingEntity, x => x.Prices.Select(e => e.DayPrices), x => x.Prices.Select(w => w.DayPrices.Select(y => y.HourPrices))).ToList();                        
         }
 
         public override BookingEntityModel GetById(int id)
         {
-            return GetByIdIncluding(id, x => x.Address, x=>x.Extras, x => x.Properties, x => x.Prices.Select(e=>e.DayPrices), x=>x.Prices.Select(w=>w.DayPrices.Select(y=>y.HourPrices)));
+            return GetByIdIncluding(id, x => x.Address, x=>x.Extras, x => x.Properties,x=>x.RootBookingEntity, x => x.Prices.Select(e=>e.DayPrices), x=>x.Prices.Select(w=>w.DayPrices.Select(y=>y.HourPrices)));
         }
 
         public override BookingEntityModel Add(BookingEntityModel domainModel)
