@@ -327,6 +327,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\carpark.jpg" />
+    <Content Include="Images\placeholder.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -399,6 +400,8 @@
     <Content Include="Views\CarparkAdmin\Index.cshtml" />
     <Content Include="Views\CarparkAdmin\Details.cshtml" />
     <Content Include="Views\CarparkAdmin\Create.cshtml" />
+    <Content Include="Views\CarparkAdmin\Edit.cshtml" />
+    <Content Include="Views\CarparkAdmin\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Administration\" />

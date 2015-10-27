@@ -193,47 +193,240 @@ namespace ServiceAPI.Controllers
         }
 
         // GET: CarparkAdmin/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            BookingEntityModel carpark = new BookingEntityModel();
+
+            try
+            {
+                _carparkcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                _carparkcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                var result = await _carparkcontroller.GettById(id);
+
+                result.TryGetContentValue(out carpark);
+
+                await FillDropBoxes();
+
+            }
+            catch (HttpRequestException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return View(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+
+            return View(carpark);
+
         }
 
         // POST: CarparkAdmin/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public async Task<ActionResult> Edit(BookingEntityModel model, FormCollection collection)
         {
+            BookingEntityModel carpark = new BookingEntityModel();
+            bool hasbeenupdated = false;
+
             try
             {
-                // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+                    _carparkcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                    _carparkcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                    var result = await _carparkcontroller.GettById(model.Id);
 
-                return RedirectToAction("Index");
+                    result.TryGetContentValue(out carpark);
+
+                    carpark.Code = model.Code;
+                    carpark.Comission = model.Comission;
+                    carpark.Name = model.Name;
+                    carpark.Sameday = model.Sameday;
+                    carpark.Price = model.Price;
+                    carpark.RootBookEntityId = Convert.ToInt32(collection["airport"]);
+                    if (carpark.Address!=null)
+                    {
+                        carpark.Address.Address1 = model.Address.Address1;
+                        carpark.Address.Address2 = model.Address.Address2;
+                        carpark.Address.City = model.Address.City;
+                        carpark.Address.Country = model.Address.Country;
+                        carpark.Address.County = model.Address.County;
+                        carpark.Address.Number = model.Address.Number;
+                        carpark.Address.Postcode = model.Address.Postcode;
+                    }
+
+                    var updateresult = await _carparkcontroller.Update(carpark);
+
+                    updateresult.TryGetContentValue(out hasbeenupdated);
+
+                    if (!hasbeenupdated)
+                    {
+                        await FillDropBoxes();
+                        return View();
+                    }
+                }
+                else
+                {
+                    await FillDropBoxes();
+                    return View();
+                }
+
             }
-            catch
+            catch (HttpRequestException ex)
             {
-                return View();
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
             }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return View(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+
+            return RedirectToAction("Index");
+
         }
 
         // GET: CarparkAdmin/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            BookingEntityModel carpark = new BookingEntityModel();
+
+            try
+            {
+                _carparkcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                _carparkcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                var result = await _carparkcontroller.GettById(id);
+
+                result.TryGetContentValue(out carpark);
+
+            }
+            catch (HttpRequestException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return View(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+
+            return View(carpark);
+
         }
 
         // POST: CarparkAdmin/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public async Task<ActionResult> Delete(int id, FormCollection collection)
         {
+            bool carpark = false;
+
             try
             {
-                // TODO: Add delete logic here
+                _carparkcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                _carparkcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                var result = await _carparkcontroller.Delete(id);
 
-                return RedirectToAction("Index");
+                result.TryGetContentValue(out carpark);
+
+                if (!carpark)
+                {
+                    return View();
+                }
             }
-            catch
+            catch (HttpRequestException ex)
             {
-                return View();
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
             }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return View(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+
+            return RedirectToAction("Index");
+
+
         }
 
         private async Task FillDropBoxes()

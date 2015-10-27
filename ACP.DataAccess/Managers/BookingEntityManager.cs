@@ -180,7 +180,9 @@ namespace ACP.DataAccess.Managers
         {
             BookingEntityModel model = new BookingEntityModel
             {
-                 Code = dataModel.Code,
+                RootBookingEntity = ToDomainModelRootBookingModel(dataModel.RootBookingEntity),
+                RootBookEntityId = dataModel.RootBookingEntityId,
+                Code = dataModel.Code,
                 Comission = dataModel.Comission,
                 Created = dataModel.Created,
                 Id = dataModel.Id,
@@ -377,6 +379,7 @@ namespace ACP.DataAccess.Managers
         {
             var record = Repository.GetSingle<BookingEntity>(x=>x.Id==domainModel.Id,x => x.Address, x=>x.Extras, x => x.Properties,x => x.Prices.Select(e=>e.DayPrices), x=>x.Prices.Select(w=>w.DayPrices.Select(y=>y.HourPrices) ));
 
+                record.RootBookingEntityId = domainModel.RootBookEntityId;
                 record.Code = domainModel.Code;
                 record.Comission = domainModel.Comission;
                 record.Created = domainModel.Created;
