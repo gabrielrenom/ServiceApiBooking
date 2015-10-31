@@ -24,7 +24,7 @@ namespace ServiceAPI.Controllers
     [RoutePrefix("api/v0.1/pricing")]
     public class PricingController : BaseApiController
     {
-        private IPricingService _pricingservice;
+        //private IPricingService _pricingservice;
         private IBookingPricingService _bookingpricingservice;
 
         /// <summary>
@@ -32,9 +32,15 @@ namespace ServiceAPI.Controllers
         /// </summary>
         /// <param name="pricingservice"></param>
         /// <param name="bookingpricingservice"></param>
-        public PricingController(IPricingService pricingservice, IBookingPricingService bookingpricingservice)
+        //public PricingController(IPricingService pricingservice, IBookingPricingService bookingpricingservice)
+        //{
+        //    _pricingservice = pricingservice;
+        //    _bookingpricingservice = bookingpricingservice;
+        //}
+
+        public PricingController(IBookingPricingService bookingpricingservice)
         {
-            _pricingservice = pricingservice;
+           
             _bookingpricingservice = bookingpricingservice;
         }
 
@@ -43,47 +49,47 @@ namespace ServiceAPI.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns>It will get the quote with price.</returns>
-        [HttpGet]
-        [Route("getprice")]
-        public async Task<HttpResponseMessage> GetPrice(QuoteModel model)
-        {
-            PriceQuoteModel quote = null;
-            try
-            {
-                quote = await _pricingservice.GetPrice(model);
-            }
-            catch (HttpRequestException ex)
-            {
-                Trace.TraceError(ex.Message);
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
-            }
-            catch (SecurityException ex)
-            {
-                Trace.TraceError(ex.Message);
-                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, ex.Message);
-            }
-            catch (ItemNotFoundException ex)
-            {
-                Trace.TraceError(ex.Message);
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message);
-            }
-            catch (ValidationErrorsException ex)
-            {
-                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+        //[HttpGet]
+        //[Route("getprice")]
+        //public async Task<HttpResponseMessage> GetPrice(QuoteModel model)
+        //{
+        //    PriceQuoteModel quote = null;
+        //    try
+        //    {
+        //        quote = await _pricingservice.GetPrice(model);
+        //    }
+        //    catch (HttpRequestException ex)
+        //    {
+        //        Trace.TraceError(ex.Message);
+        //        return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+        //    }
+        //    catch (SecurityException ex)
+        //    {
+        //        Trace.TraceError(ex.Message);
+        //        return Request.CreateErrorResponse(HttpStatusCode.Forbidden, ex.Message);
+        //    }
+        //    catch (ItemNotFoundException ex)
+        //    {
+        //        Trace.TraceError(ex.Message);
+        //        return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message);
+        //    }
+        //    catch (ValidationErrorsException ex)
+        //    {
+        //        var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
 
-                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+        //        var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
 
-                Trace.TraceError(exceptionMessage);
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, exceptionMessage);
-            }
-            catch (Exception ex)
-            {
-                Trace.TraceError(ex.Message);
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
-            }
+        //        Trace.TraceError(exceptionMessage);
+        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, exceptionMessage);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Trace.TraceError(ex.Message);
+        //        return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+        //    }
 
-            return Request.CreateResponse(HttpStatusCode.Created, quote, new JsonMediaTypeFormatter());
-        }
+        //    return Request.CreateResponse(HttpStatusCode.Created, quote, new JsonMediaTypeFormatter());
+        //}
 
         /// <summary>
         /// It will get all teh prices from days and times.

@@ -558,19 +558,12 @@
             Prices can be setup by days and times.
             </summary>
         </member>
-        <member name="M:ServiceAPI.Controllers.PricingController.#ctor(ACP.Business.Services.Interfaces.IPricingService,ACP.Business.Services.Interfaces.IBookingPricingService)">
+        <member name="M:ServiceAPI.Controllers.PricingController.#ctor(ACP.Business.Services.Interfaces.IBookingPricingService)">
             <summary>
             The pricing controller will interact with the pricing services(quotes) as well as the carparkpark prices. 
             </summary>
             <param name="pricingservice"></param>
             <param name="bookingpricingservice"></param>
-        </member>
-        <member name="M:ServiceAPI.Controllers.PricingController.GetPrice(ACP.Business.Models.QuoteModel)">
-            <summary>
-            It get the price for a particular quote. Very useful for client side queries.
-            </summary>
-            <param name="model"></param>
-            <returns>It will get the quote with price.</returns>
         </member>
         <member name="M:ServiceAPI.Controllers.PricingController.GetAll">
             <summary>
