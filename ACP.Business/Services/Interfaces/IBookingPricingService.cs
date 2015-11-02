@@ -18,5 +18,7 @@ namespace ACP.Business.Services.Interfaces
 
         Task<bool> UpdatePricesWithDays(int p, IList<BookingPricingModel> list);
         Task<BookingPricingModel> GetById(int id);
+
+        Task<bool> Update(BookingPricingModel model);
     }
 }

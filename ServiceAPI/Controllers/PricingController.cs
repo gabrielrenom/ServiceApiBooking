@@ -244,7 +244,25 @@ namespace ServiceAPI.Controllers
             bool bookingpricing = false;
             try
             {
-                 bookingpricing = await _bookingpricingservice.AddPricesWithDays(carparkid,model);
+                foreach (var price in model)
+                {
+                    price.CreatedBy = base.User;
+                    price.ModifiedBy = base.User;
+                    price.Created = DateTime.Now;
+                    price.Modified = DateTime.Now;
+                    if (price.DayPrices != null)
+                    {
+                        foreach (var day in price.DayPrices)
+                        {
+                            day.CreatedBy = base.User;
+                            day.ModifiedBy = base.User;
+                            day.Created = DateTime.Now;
+                            day.Modified = DateTime.Now;
+                        }
+                    }
+                }
+
+                bookingpricing = await _bookingpricingservice.AddPricesWithDays(carparkid,model);
             }
             catch (HttpRequestException ex)
             {
@@ -292,6 +310,32 @@ namespace ServiceAPI.Controllers
             bool bookingpricing = false;
             try
             {
+                foreach (var price in model)
+                {
+                    price.CreatedBy = base.User;
+                    price.ModifiedBy = base.User;
+                    price.Created = DateTime.Now;
+                    price.Modified = DateTime.Now;
+                    if (price.DayPrices != null)
+                    {
+                        foreach (var day in price.DayPrices)
+                        {
+                            day.CreatedBy = base.User;
+                            day.ModifiedBy = base.User;
+                            day.Created = DateTime.Now;
+                            day.Modified = DateTime.Now;
+
+                            foreach (var hour in day.HourPrices)
+                            {
+                                hour.CreatedBy = base.User;
+                                hour.ModifiedBy = base.User;
+                                hour.Created = DateTime.Now;
+                                hour.Modified = DateTime.Now;
+                            }
+                        }
+                    }
+                }
+
                 bookingpricing = await _bookingpricingservice.AddPricesWithDaysAndTimes(carparkid, model);
             }
             catch (HttpRequestException ex)
@@ -340,6 +384,19 @@ namespace ServiceAPI.Controllers
             bool bookingpricing = false;
             try
             {
+                foreach (var price in model)
+                {
+                    price.ModifiedBy = base.User;
+                    price.Modified = DateTime.Now;
+                    if (price.DayPrices != null)
+                    {
+                        foreach (var day in price.DayPrices)
+                        {
+                            day.ModifiedBy = base.User;
+                            day.Modified = DateTime.Now;
+                        }
+                    }
+                }
                 bookingpricing = await _bookingpricingservice.UpdatePricesWithDays(carparkid, model);
             }
             catch (HttpRequestException ex)
@@ -374,6 +431,67 @@ namespace ServiceAPI.Controllers
 
             return Request.CreateResponse(HttpStatusCode.Created, bookingpricing, new JsonMediaTypeFormatter());
         }
+
+        /// <summary>
+        /// It will update the prices with days from a particular carpark by passing the carparkid and model.
+        /// </summary>
+        /// <param name="carparkid"></param>
+        /// <param name="model"></param>
+        /// <returns>It returns true/false if it has been sucessful.</returns>
+        [HttpPut]
+        [Route("updatepricewithdays")]
+        public async Task<HttpResponseMessage> UpdatePriceWithDays(BookingPricingModel model)
+        {       
+            bool bookingpricing = false;
+            try
+            {
+
+                model.ModifiedBy = base.User;
+                model.Modified = DateTime.Now;
+                if (model.DayPrices != null)
+                {
+                   foreach (var day in model.DayPrices)
+                   {
+                      day.ModifiedBy = base.User;
+                      day.Modified = DateTime.Now;
+                   }
+                }
+                
+                bookingpricing = await _bookingpricingservice.Update(model);
+            }
+            catch (HttpRequestException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, exceptionMessage);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.Created, bookingpricing, new JsonMediaTypeFormatter());
+        }
+
 
         /// <summary>
         /// It will delete the prices in cascade by passing the id of a particular price.

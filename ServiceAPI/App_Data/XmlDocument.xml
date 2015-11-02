@@ -609,6 +609,14 @@
             <param name="model"></param>
             <returns>It returns true/false if it has been sucessful.</returns>
         </member>
+        <member name="M:ServiceAPI.Controllers.PricingController.UpdatePriceWithDays(ACP.Business.Models.BookingPricingModel)">
+            <summary>
+            It will update the prices with days from a particular carpark by passing the carparkid and model.
+            </summary>
+            <param name="carparkid"></param>
+            <param name="model"></param>
+            <returns>It returns true/false if it has been sucessful.</returns>
+        </member>
         <member name="M:ServiceAPI.Controllers.PricingController.Delete(System.Int32)">
             <summary>
             It will delete the prices in cascade by passing the id of a particular price.

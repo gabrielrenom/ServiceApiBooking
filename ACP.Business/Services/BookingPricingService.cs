@@ -63,5 +63,10 @@ namespace ACP.Business.Services
         {
             return await _bookingPricingManager.GetByIdAsync(id);
         }
+
+        public async Task<bool> Update(BookingPricingModel model)
+        {
+            return await _bookingPricingManager.UpdateAsync(model);            
+        }
     }
 }

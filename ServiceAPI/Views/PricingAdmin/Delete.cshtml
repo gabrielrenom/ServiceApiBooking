@@ -1,0 +1,100 @@
+﻿@model ACP.Business.Models.BookingPricingModel
+
+@{
+    //## Change it in the view
+    ViewBag.actionIcon = "fa-table";
+
+    //## Action, change it in the view
+    ViewBag.actionLabel = "Delete";
+
+    Layout = "~/Views/Shared/_ActionLayout.cshtml";
+
+}
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modified)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Start)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.End)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.End)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingEntityId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingEntityId)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <p>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+                        <input type="submit" value="Delete" class="btn btn-warning" />
+                    </div>
+                </div>
+            </div>
+        </p>
+    }
+</div>

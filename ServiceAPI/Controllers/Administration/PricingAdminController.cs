@@ -75,9 +75,52 @@ namespace ServiceAPI.Controllers
         }
 
         // GET: PricingAdmin/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            BookingPricingModel prices = new BookingPricingModel();
+         
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _pricingcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                    _pricingcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                    var result = await _pricingcontroller.GetById(id);
+
+                    result.TryGetContentValue(out prices);
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return View(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+
+            return View(prices);
         }
 
         // GET: PricingAdmin/Create
@@ -119,7 +162,7 @@ namespace ServiceAPI.Controllers
 
                     if (bresult)
                     {
-                        RedirectToAction("Index");
+                       return RedirectToAction("Index");
                     }
                   
                 }
@@ -173,8 +216,6 @@ namespace ServiceAPI.Controllers
                     var result = await _pricingcontroller.GetById(id);
 
                     result.TryGetContentValue(out prices);
-
-                                   
                 }
             }
             catch (HttpRequestException ex)
@@ -207,47 +248,189 @@ namespace ServiceAPI.Controllers
                 return View(ex.Message);
             }
 
-      
-
             return View(prices);
         }
 
         // POST: PricingAdmin/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public async Task<ActionResult> Edit(int id, BookingPricingModel model,FormCollection collection)
         {
+            BookingPricingModel prices = new BookingPricingModel();
+            string localuser = "";
+            bool bresult = false;
             try
             {
-                // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+                    _pricingcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                    _pricingcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
 
-                return RedirectToAction("Index");
+                    var result = await _pricingcontroller.GetById(id);
+                    result.TryGetContentValue(out prices);
+
+                    prices.Start = model.Start;
+                    prices.End = model.End;
+                    prices.Name = model.Name;
+
+                    if (prices.DayPrices == null)
+                        prices.DayPrices = new List<DayPriceModel>();
+
+                    for (int i = 1; i < 31; i++)
+                    {
+                        if (prices.DayPrices.Where(x => x.Day == i).FirstOrDefault() == null)
+                        {
+                            prices.DayPrices.Add(new DayPriceModel { Day = i, Dayprice = Convert.ToDecimal(collection[Convert.ToString(i++)]), Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser });
+                        }
+                        else
+                        {
+                            prices.DayPrices.Where(x => x.Day == i).FirstOrDefault().Dayprice= Convert.ToDecimal(collection[Convert.ToString(i++)]);                            
+                        }
+                    }
+                   
+                    var updateresult = await _pricingcontroller.UpdatePriceWithDays(prices);
+
+                    updateresult.TryGetContentValue(out bresult);
+
+                    if (bresult)
+                    {
+                       return RedirectToAction("Index");
+                    }
+
+                }
             }
-            catch
+            catch (HttpRequestException ex)
             {
-                return View();
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
             }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return View(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            return View();
         }
 
         // GET: PricingAdmin/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            BookingPricingModel prices = new BookingPricingModel();
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _pricingcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                    _pricingcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                    var result = await _pricingcontroller.GetById(id);
+
+                    result.TryGetContentValue(out prices);
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return View(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+
+            return View(prices);
+
         }
 
         // POST: PricingAdmin/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public async  Task<ActionResult> Delete(int id, FormCollection collection)
         {
+            bool bresult = false;
+
             try
             {
-                // TODO: Add delete logic here
+                _pricingcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                _pricingcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                var result = await _pricingcontroller.Delete(id);
 
-                return RedirectToAction("Index");
+                result.TryGetContentValue(out bresult);
+
+                if (bresult)
+                {
+                    return RedirectToAction("Index");
+                }
+
             }
-            catch
+            catch (HttpRequestException ex)
             {
-                return View();
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
             }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return View(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+
+            return View();
         }
 
         private async Task FillDropBoxes()
