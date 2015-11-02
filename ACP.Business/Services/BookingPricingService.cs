@@ -58,5 +58,10 @@ namespace ACP.Business.Services
         {
             return _bookingPricingManager.DeleteById(Id);
         }
+
+        public async Task<BookingPricingModel> GetById(int id)
+        {
+            return await _bookingPricingManager.GetByIdAsync(id);
+        }
     }
 }

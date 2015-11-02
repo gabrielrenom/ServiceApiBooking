@@ -250,17 +250,17 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\Action1DebugActionWebApiFilter .cs" />
-    <Compile Include="Controllers\AdministrationController.cs" />
-    <Compile Include="Controllers\AirportAdminController.cs" />
+    <Compile Include="Controllers\Administration\AdministrationController.cs" />
+    <Compile Include="Controllers\Administration\AirportAdminController.cs" />
     <Compile Include="Controllers\AirportController.cs" />
     <Compile Include="Controllers\APIAdministrationController.cs" />
     <Compile Include="Controllers\AvailabilityController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
-    <Compile Include="Controllers\BookingAdminController.cs" />
+    <Compile Include="Controllers\Administration\BookingAdminController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
-    <Compile Include="Controllers\CarparkAdminController.cs" />
+    <Compile Include="Controllers\Administration\CarparkAdminController.cs" />
     <Compile Include="Controllers\CarparkPricingController.cs" />
-    <Compile Include="Controllers\PricingAdminController.cs" />
+    <Compile Include="Controllers\Administration\PricingAdminController.cs" />
     <Compile Include="Controllers\PricingController.cs" />
     <Compile Include="Controllers\PurpleParkingController.cs" />
     <Compile Include="Controllers\QuoteController.cs" />
@@ -404,6 +404,8 @@
     <Content Include="Views\CarparkAdmin\Edit.cshtml" />
     <Content Include="Views\CarparkAdmin\Delete.cshtml" />
     <Content Include="Views\PricingAdmin\Index.cshtml" />
+    <Content Include="Views\PricingAdmin\Create.cshtml" />
+    <Content Include="Views\PricingAdmin\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Administration\" />

@@ -15,6 +15,7 @@ namespace ACP.DataAccess.Managers
     public class BookingPricingManager : BaseACPManager<BookingPricingModel, BookingPricing>, IBookingPricingManager
     {
         private IBookingEntityManager bookingEntityManager;
+        
 
         public BookingPricingManager(IACPRepository repository)
             : base(repository)
@@ -23,8 +24,11 @@ namespace ACP.DataAccess.Managers
             bookingEntityManager = new BookingEntityManager(repository);
         }
 
+        public override async Task<BookingPricingModel> GetByIdAsync(int id)
+        {
+            return await base.GetByIdIncludingAsync(id, x=>x.DayPrices);
+        }
 
-        
         //IEnumerable<BookingPricingModel> IBaseManager<BookingPricingModel, BookingPricing>.GetAll()
         //{
         //    return GetList(x => x.Id > 0);
