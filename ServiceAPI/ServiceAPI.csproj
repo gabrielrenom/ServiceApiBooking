@@ -252,6 +252,7 @@
     <Compile Include="Controllers\Action1DebugActionWebApiFilter .cs" />
     <Compile Include="Controllers\Administration\AdministrationController.cs" />
     <Compile Include="Controllers\Administration\AirportAdminController.cs" />
+    <Compile Include="Controllers\Administration\SlotAdminController.cs" />
     <Compile Include="Controllers\AirportController.cs" />
     <Compile Include="Controllers\APIAdministrationController.cs" />
     <Compile Include="Controllers\AvailabilityController.cs" />
@@ -408,6 +409,7 @@
     <Content Include="Views\PricingAdmin\Edit.cshtml" />
     <Content Include="Views\PricingAdmin\Delete.cshtml" />
     <Content Include="Views\PricingAdmin\Details.cshtml" />
+    <Content Include="Views\SlotAdmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Administration\" />
