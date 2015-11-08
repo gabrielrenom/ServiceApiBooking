@@ -17,14 +17,40 @@ namespace ServiceAPI.Controllers
     public class SlotAdminController : Controller
     {
         private SlotController _slotcontroller;
-        public SlotAdminController(SlotController slotcontroller)
+        private CarParkController _carparkcontroller;
+
+        public SlotAdminController(SlotController slotcontroller, CarParkController carparkcontroller)
         {
             _slotcontroller = slotcontroller;
+            _carparkcontroller = carparkcontroller;
+        }
+
+        private async Task LoadCarparks()
+        {
+            if (ViewBag.carparkslist == null)
+            {
+                var carparkslist = new List<SelectListItem>();
+                List<BookingEntityModel> carparks = new List<BookingEntityModel>();
+                _carparkcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                _carparkcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                var result = await _carparkcontroller.GetAll();
+                result.TryGetContentValue(out carparks);
+                if (carparks != null)
+                {
+                    foreach (var carpark in carparks)
+                    {
+                        carparkslist.Add(new SelectListItem() { Text = carpark.Name, Value = carpark.Id.ToString() });
+                    }
+                }
+                ViewBag.carparkslist = carparkslist;
+            }
         }
 
         // GET: SlotAdmin
         public async Task<ActionResult> Index()
         {
+            await LoadCarparks();
+
             List<SlotModel> slots = new List<SlotModel>();
 
             try
