@@ -1,0 +1,166 @@
+﻿@model ACP.Business.Models.SlotModel
+
+@{
+    ViewBag.Title = "Availability";
+    Layout = "~/Views/Shared/_ActionLayout.cshtml";
+}
+
+//http://jsfiddle.net/MusicMonkey5555/Zs657/1/
+
+<div class="panel panel-default">
+    <div class="panel-heading">        
+            <div class="row">
+                <div class="col-md-4">
+
+                    <h3 class="text-success"><i class="fa fa-fw fa-calendar"></i>Availability</h3>
+                </div>
+                </div>
+            <div class="row">
+                
+                <div class="col-md-10">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label class="sr-only" for="exampleInputAmount">Start Date</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">Start Date</div>
+                                <input class="form-control text-box single-line" id="StartDate" name="StartDate" type="date" value="">
+                                <div class="input-group-addon">End Date</div>
+                                <input class="form-control text-box single-line" id="EndDate" name="EndDate" type="date" value="">
+                            </div>
+                        </div>
+                        <button id="addevents" type="button" class="btn btn-default">Add Availability</button>
+                    </form>
+                </div>
+            </div>        
+    </div>
+    <div class="section">
+        <div id="calendar" class="fc fc-ltr fc-unthemed">
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<input id="delete" type="submit" value="Delete" />
+
+<link href="~/Content/fullcalendar.css" rel="stylesheet">
+<link href="~/Content/fullcalendar.print.css" rel="stylesheet" media="print">
+<script src="~/Scripts/moment.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/fullcalendar.min.js"></script>
+<script>
+
+	$(document).ready(function() {
+
+		$('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			defaultDate: '2015-02-12',
+			editable: true,
+			eventLimit: true, // allow "more" link when too many events
+			events: [
+				{
+                    id:1,
+					title: 'All Day Event',
+					start: '2015-02-01'
+				},
+				{
+					title: 'Long Event',
+					start: '2015-02-07',
+					end: '2015-02-10'
+				},
+				{
+					id: 999,
+					title: 'Repeating Event',
+					start: '2015-02-09T16:00:00'
+				},
+				{
+					id: 999,
+					title: 'Repeating Event',
+					start: '2015-02-16T16:00:00'
+				},
+				{
+					title: 'Conference',
+					start: '2015-02-11',
+					end: '2015-02-13'
+				},
+				{
+					title: 'Meeting',
+					start: '2015-02-12T10:30:00',
+					end: '2015-02-12T12:30:00'
+				},
+				{
+					title: 'Lunch',
+					start: '2015-02-12T12:00:00'
+				},
+				{
+					title: 'Meeting',
+					start: '2015-02-12T14:30:00'
+				},
+				{
+					title: 'Happy Hour',
+					start: '2015-02-12T17:30:00'
+				},
+				{
+					title: 'Dinner',
+					start: '2015-02-12T20:00:00'
+				},
+				{
+					title: 'Birthday Party',
+					start: '2015-02-13T07:00:00'
+				},
+				{
+					title: 'Click for Google',
+					url: 'http://google.com/',
+					start: '2015-02-28'
+				}
+			]
+
+		    , eventClick: function (calEvent, jsEvent, view) {
+		        var r = confirm("Delete " + calEvent.title);
+		        if (r === true) {
+		            $('#calendar').fullCalendar('removeEvents', calEvent._id);
+		        }
+		    }
+		});
+
+		$("#getevents").click(function ()
+		{
+		
+
+		    var events = $('#calendar').fullCalendar('clientEvents');
+		    $('#calendar').fullCalendar('removeResource', 1);
+		    alert(events);
+		});
+
+		$("#addevents").click(function () {
+		    var event = {
+		        title: "my new event",
+		        allDay: true,
+		        start: $("#StartDate").val(),//"2015-02-12",
+		        end: $("#EndDate").val()//"2015-02-15"
+		    };
+		    $('#calendar').fullCalendar('renderEvent', event);
+		    alert(event);
+		});
+	});
+
+</script>
+<style>
+    body {
+        margin: 40px 10px;
+        padding: 0;
+        font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+        font-size: 14px;
+    }
+
+    #calendar {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+</style>
+

@@ -322,6 +322,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fullcalendar.css" />
+    <Content Include="Content\fullcalendar.print.css" />
     <Content Include="Content\googlefonts.css" />
     <Content Include="Content\theme-bootstrap.css" />
     <Content Include="Default.aspx" />
@@ -360,6 +362,7 @@
     <None Include="Properties\PublishProfiles\thecarparksupermarket.pubxml" />
     <None Include="Properties\PublishProfiles\TheCarParkSupermarketAPI%28Default-Web-WestEurope%29.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\fullcalendar.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -368,6 +371,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config" />
@@ -410,6 +414,7 @@
     <Content Include="Views\PricingAdmin\Delete.cshtml" />
     <Content Include="Views\PricingAdmin\Details.cshtml" />
     <Content Include="Views\SlotAdmin\Index.cshtml" />
+    <Content Include="Views\SlotAdmin\Availability.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Administration\" />

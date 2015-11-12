@@ -25,6 +25,12 @@ namespace ServiceAPI.Controllers
             _carparkcontroller = carparkcontroller;
         }
 
+        public async Task<ActionResult> Availability()
+        {
+
+            return View();
+        }
+
         private async Task LoadCarparks()
         {
             if (ViewBag.carparkslist == null)
@@ -61,6 +67,13 @@ namespace ServiceAPI.Controllers
 
                 result.TryGetContentValue(out slots);
 
+                slots.Add(new SlotModel());
+                slots.Add(new SlotModel());
+                slots.Add(new SlotModel());
+                slots.Add(new SlotModel());
+                slots.Add(new SlotModel());
+                slots.Add(new SlotModel());
+                slots.Add(new SlotModel());
             }
             catch (HttpRequestException ex)
             {
