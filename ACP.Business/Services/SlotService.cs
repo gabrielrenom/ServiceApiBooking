@@ -18,7 +18,7 @@ namespace ACP.Business.Services
         }
 
         public async Task<SlotModel> Add(SlotModel model)
-        {
+        {   
             return await _Slotmanager.AddAsync(model);
         }
 
@@ -62,6 +62,12 @@ namespace ACP.Business.Services
         {
             //return await _Slotmanager.UpdateAsync(model);
             return _Slotmanager.Update(model);
+        }
+
+        public async Task<SlotModel> GetByIdWithAllAvailabilities(int id)
+        {
+            return await _Slotmanager.GetWithAllAvailabilitiesById(id);
+            
         }
     }
 }

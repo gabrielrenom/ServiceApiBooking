@@ -16,21 +16,49 @@ namespace ServiceAPI.Controllers
 {
     public class SlotAdminController : Controller
     {
+        private AvailabilityController _availabilitycontroller;
         private SlotController _slotcontroller;
         private CarParkController _carparkcontroller;
 
-        public SlotAdminController(SlotController slotcontroller, CarParkController carparkcontroller)
+        public SlotAdminController(SlotController slotcontroller, CarParkController carparkcontroller, AvailabilityController availabilitycontroller)
         {
+            _availabilitycontroller = availabilitycontroller;
             _slotcontroller = slotcontroller;
             _carparkcontroller = carparkcontroller;
         }
 
-        public async Task<ActionResult> Availability()
+        public async Task<ActionResult> Availability(int id)
         {
+            SlotModel slot  = new SlotModel();
 
-            return View();
+            _slotcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+            _slotcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+            var result = await _slotcontroller.GetByIdWithAllAvailabilities(id);
+
+            result.TryGetContentValue(out slot);
+            if (slot != null)
+            {
+            }
+
+
+            return View(slot);
         }
 
+        public async Task<JsonResult> AddAvailability(AvailabilityModel model)
+        {
+            AvailabilityModel availability = new AvailabilityModel();
+
+            _availabilitycontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+            _availabilitycontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+            var slot = await _availabilitycontroller.Add(model);
+           
+            slot.TryGetContentValue(out availability);
+            if (availability != null)
+            {
+            }
+
+            return Json(availability, JsonRequestBehavior.DenyGet);  
+        }
         private async Task LoadCarparks()
         {
             if (ViewBag.carparkslist == null)

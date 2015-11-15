@@ -129,8 +129,7 @@
 		});
 
 		$("#getevents").click(function ()
-		{
-		
+		{		
 
 		    var events = $('#calendar').fullCalendar('clientEvents');
 		    $('#calendar').fullCalendar('removeResource', 1);
@@ -138,6 +137,32 @@
 		});
 
 		$("#addevents").click(function () {
+		    var slotid = @Model.Id;
+		    var availability =
+                {
+                    StartDate: $("#StartDate").val(),
+                    EndDate: $("#EndDate").val(),
+                    Status:202,
+                    SlotId:slotid
+                };
+
+		    $.ajax({
+		        url: '/SlotAdmin/AddAvailability',
+		        type: 'POST',
+		        data: JSON.stringify(availability),
+		        dataType: 'json',
+		        contentType: 'application/json; charset=utf-8',
+		        error: function (xhr) {
+		            alert('Error: ' + xhr.statusText);
+		        },
+		        success: function (result) {
+		            CheckIfInvoiceFound(result);
+		        },
+		        async: true,
+		        processData: false
+		    });
+
+
 		    var event = {
 		        title: "my new event",
 		        allDay: true,

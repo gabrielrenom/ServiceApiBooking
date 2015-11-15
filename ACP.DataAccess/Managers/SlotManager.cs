@@ -34,6 +34,11 @@ namespace ACP.DataAccess.Managers
             return base.DeleteById(id);
         }
 
+        public async Task<SlotModel> GetWithAllAvailabilitiesById(int id)
+        {
+            return await base.GetByIdIncludingAsync(id, x => x.Availability);  
+        }
+
         public override bool Update(SlotModel domainModel)
         {
             bool result = false;
@@ -317,7 +322,6 @@ namespace ACP.DataAccess.Managers
             var result = await GetListIncludingAsync(x => x.IsOccupied == false && x.BookingEntity.Code.ToLower().Contains(bookingentitycode.ToLower()), x => x.Availability, x=>x.BookingEntity);
             return result.ToList();
         }
-
 
         public async Task<IList<SlotModel>> GetAllOccupiedAsync()
         {

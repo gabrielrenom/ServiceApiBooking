@@ -18,5 +18,6 @@ namespace ACP.Business.Services.Interfaces
         Task<SlotModel> GetByNumberIdentifier(int? number=null, string identifier=null);
         Task<bool> Remove(int Id);
         Task<IList<SlotModel>> FindSlotAvailable(DateTime startdate, DateTime enddate, string rootname);
+        Task<SlotModel> GetByIdWithAllAvailabilities(int id);
     }
 }

@@ -16,5 +16,6 @@ namespace ACP.Business.Managers
         Task<IList<SlotModel>> FindSlotAvailable(DateTime startdate, DateTime enddate, string rootname);
         Task<IList<SlotModel>> GetAllFreeAsync(string bookingentitycode);
         Task<IList<SlotModel>> FindSlotAvailableByBookingEntityCode(DateTime startdate, DateTime enddate, string code);
+        Task<SlotModel> GetWithAllAvailabilitiesById(int id);
     }
 }
