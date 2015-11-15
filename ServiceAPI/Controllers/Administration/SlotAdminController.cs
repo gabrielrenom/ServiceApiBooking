@@ -59,6 +59,20 @@ namespace ServiceAPI.Controllers
 
             return Json(availability, JsonRequestBehavior.DenyGet);  
         }
+
+        [HttpDelete]
+        public async Task<JsonResult> RemoveAvailability(int id)
+        {
+            bool result = false;
+
+            _availabilitycontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+            _availabilitycontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+            var slot = await _availabilitycontroller.Delete(id);
+
+            slot.TryGetContentValue(out result);
+            
+            return Json(result);
+        }
         private async Task LoadCarparks()
         {
             if (ViewBag.carparkslist == null)

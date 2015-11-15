@@ -5,7 +5,58 @@
     Layout = "~/Views/Shared/_ActionLayout.cshtml";
 }
 
-//http://jsfiddle.net/MusicMonkey5555/Zs657/1/
+ <!-- Modal -->
+<div class="modal fade" id="doyouwanttoremove" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Availability Times</h4>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to remove this time for the slot?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="yesremove" type="button" class="btn btn-default" data-dismiss="modal">Yes</button>
+                <button type="button" class="btn btn-default" data-="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="couldntbeadded" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Availability Times</h4>
+            </div>
+            <div class="modal-body">
+                <p>The time for the slot could not be added.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Yes</button>             
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="couldntberemoved" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Availability Times</h4>
+            </div>
+            <div class="modal-body">
+                <p>The time for the slot could not be removed.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="panel panel-default">
     <div class="panel-heading">        
@@ -42,107 +93,82 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-<input id="delete" type="submit" value="Delete" />
 
 <link href="~/Content/fullcalendar.css" rel="stylesheet">
 <link href="~/Content/fullcalendar.print.css" rel="stylesheet" media="print">
 <script src="~/Scripts/moment.min.js"></script>
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/fullcalendar.min.js"></script>
 <script>
 
 	$(document).ready(function() {
 
+	    var idtoberemoved;
+	    var calendardates = @Html.Raw(Json.Encode(Model.Availability));
+	    var events = [];
+	    
+	    for (var i=0; i<calendardates.length;i++)
+	    {
+	        var event = {
+	            title:calendardates[i].Status===201?"Free":"Occupied",
+	            id:calendardates[i].Id,
+	            start: calendardates[i].StartDate,
+	            end:calendardates[i].EndDate,	            
+	            color: calendardates[i].Status===201?"green":"red"
+	        };
+
+	        events.push(event);
+	    }
+
+	    $('#yesremove').click(function ()
+	    {	        
+	        $.ajax({
+	            url: '/SlotAdmin/RemoveAvailability/'+idtoberemoved,
+	            type: 'DELETE',	            
+	            dataType: 'json',
+	            contentType: 'application/json; charset=utf-8',
+	            error: function (xhr) {
+	                alert('Error: ' + xhr.statusText);
+	            },
+	            success: function (result) {
+	                if (result)
+	                {
+	                    $('#calendar').fullCalendar('removeEvents', idtoberemoved);
+	                }
+	                else
+	                {
+	                    $('#couldntberemoved').modal('show');
+	                }
+	                
+	            },
+	            async: true,
+	            processData: false
+	        });
+	    });
+	    
 		$('#calendar').fullCalendar({
 			header: {
 				left: 'prev,next today',
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
-			defaultDate: '2015-02-12',
+			defaultDate: new Date(),
 			editable: true,
 			eventLimit: true, // allow "more" link when too many events
-			events: [
-				{
-                    id:1,
-					title: 'All Day Event',
-					start: '2015-02-01'
-				},
-				{
-					title: 'Long Event',
-					start: '2015-02-07',
-					end: '2015-02-10'
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: '2015-02-09T16:00:00'
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: '2015-02-16T16:00:00'
-				},
-				{
-					title: 'Conference',
-					start: '2015-02-11',
-					end: '2015-02-13'
-				},
-				{
-					title: 'Meeting',
-					start: '2015-02-12T10:30:00',
-					end: '2015-02-12T12:30:00'
-				},
-				{
-					title: 'Lunch',
-					start: '2015-02-12T12:00:00'
-				},
-				{
-					title: 'Meeting',
-					start: '2015-02-12T14:30:00'
-				},
-				{
-					title: 'Happy Hour',
-					start: '2015-02-12T17:30:00'
-				},
-				{
-					title: 'Dinner',
-					start: '2015-02-12T20:00:00'
-				},
-				{
-					title: 'Birthday Party',
-					start: '2015-02-13T07:00:00'
-				},
-				{
-					title: 'Click for Google',
-					url: 'http://google.com/',
-					start: '2015-02-28'
-				}
-			]
-
-		    , eventClick: function (calEvent, jsEvent, view) {
-		        var r = confirm("Delete " + calEvent.title);
-		        if (r === true) {
-		            $('#calendar').fullCalendar('removeEvents', calEvent._id);
-		        }
-		    }
+			events: events,
+			eventClick: function (calEvent, jsEvent, view) {
+			    $('#doyouwanttoremove').modal('show');			    			    
+			    idtoberemoved = calEvent._id;		   
+			}
 		});
-
-		$("#getevents").click(function ()
-		{		
-
-		    var events = $('#calendar').fullCalendar('clientEvents');
-		    $('#calendar').fullCalendar('removeResource', 1);
-		    alert(events);
-		});
-
+		
 		$("#addevents").click(function () {
+
 		    var slotid = @Model.Id;
 		    var availability =
                 {
                     StartDate: $("#StartDate").val(),
                     EndDate: $("#EndDate").val(),
-                    Status:202,
+                    Status:201,
                     SlotId:slotid
                 };
 
@@ -153,24 +179,29 @@
 		        dataType: 'json',
 		        contentType: 'application/json; charset=utf-8',
 		        error: function (xhr) {
-		            alert('Error: ' + xhr.statusText);
+		            $('#couldntbeadded').modal('show');
 		        },
 		        success: function (result) {
-		            CheckIfInvoiceFound(result);
+		            if (result.Id>0)
+		            {
+		                var newevent = {
+		                    title:result.Status===201?"Free":"Occupied",
+		                    id:result.Id,
+		                    start: result.StartDate,
+		                    end:result.EndDate,	            
+		                    color: result.Status===201?"green":"red"
+		                };
+
+		                $('#calendar').fullCalendar('renderEvent', newevent);
+		            }
+		            else
+		            {
+		                $('#couldntbeadded').modal('show');
+		            }
 		        },
 		        async: true,
 		        processData: false
 		    });
-
-
-		    var event = {
-		        title: "my new event",
-		        allDay: true,
-		        start: $("#StartDate").val(),//"2015-02-12",
-		        end: $("#EndDate").val()//"2015-02-15"
-		    };
-		    $('#calendar').fullCalendar('renderEvent', event);
-		    alert(event);
 		});
 	});
 
