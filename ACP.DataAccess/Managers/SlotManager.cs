@@ -125,6 +125,7 @@ namespace ACP.DataAccess.Managers
             dataModel.BookingEntityId = domainModel.BookingEntityId;
             dataModel.IsOccupied = domainModel.IsOccupied;
             dataModel.Identifier = domainModel.Identifier;
+            dataModel.Number = domainModel.Number;
             dataModel.Availability = domainModel.Availability != null ? domainModel.Availability.Select(x => new Availability
             {
                 Created = x.Created,
@@ -155,6 +156,7 @@ namespace ACP.DataAccess.Managers
                 BookingEntityId = dataModel.BookingEntityId,
                 IsOccupied = dataModel.IsOccupied,
                 Identifier = dataModel.Identifier,
+                Number = dataModel.Number,
                 BookingEntity = dataModel.BookingEntity!=null?
                 new BookingEntityModel {
                     Code = dataModel.BookingEntity.Code,

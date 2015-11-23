@@ -157,27 +157,42 @@ namespace ServiceAPI.Controllers
         }
 
         // GET: SlotAdmin/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
+            await LoadCarparks();
             return View();
         }
 
         // POST: SlotAdmin/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public async Task<ActionResult> Create(SlotModel model)
         {
+            string localuser = "";
+            SlotModel sresult;
             try
             {
-                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    _slotcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                    _slotcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                    var result = await _slotcontroller.Add(model);
 
-                return RedirectToAction("Index");
+                    result.TryGetContentValue(out sresult);
+
+                    if (sresult!=null)
+                    {
+                        return RedirectToAction("Index");
+                    }
+
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return View(ex.ToString());
             }
-        }
 
+            return View();
+        }
         // GET: SlotAdmin/Edit/5
         public ActionResult Edit(int id)
         {
