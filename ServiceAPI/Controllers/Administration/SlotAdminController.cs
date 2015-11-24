@@ -60,7 +60,7 @@ namespace ServiceAPI.Controllers
             return Json(availability, JsonRequestBehavior.DenyGet);  
         }
 
-        [HttpDelete]
+        [HttpDelete]        
         public async Task<JsonResult> RemoveAvailability(int id)
         {
             bool result = false;
@@ -194,47 +194,145 @@ namespace ServiceAPI.Controllers
             return View();
         }
         // GET: SlotAdmin/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+
+            SlotModel slot = new SlotModel();
+
+            try
+            {
+                _slotcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                _slotcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                var result = await _slotcontroller.GetById(id);
+
+                result.TryGetContentValue(out slot);
+
+                await LoadCarparks();
+
+            }
+            catch (HttpRequestException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return View(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+
+            return View(slot);
+
         }
 
         // POST: SlotAdmin/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public async Task<ActionResult> Edit(SlotModel model)
         {
+            string localuser = "";
+
+            bool bresult=false;
             try
             {
-                // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+                    _slotcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                    _slotcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                    var result = await _slotcontroller.Update(model);
 
-                return RedirectToAction("Index");
+                    result.TryGetContentValue(out bresult);
+
+                    if (bresult)
+                    {
+                        return RedirectToAction("Index");
+                    }
+
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return View(ex.ToString());
             }
+
+            return View();
         }
 
         // GET: SlotAdmin/Delete/5
-        public ActionResult Delete(int id)
+    
+        public async Task<ActionResult> Delete(int id)
         {
+            SlotModel sresult;
+            try
+            {
+                    _slotcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                    _slotcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                    var result = await _slotcontroller.GetById(id);
+
+                    result.TryGetContentValue(out sresult);
+
+                    if (sresult != null)
+                    {
+                        return View(sresult);
+                    }
+
+                
+            }
+            catch (Exception ex)
+            {
+                return View(ex.ToString());
+            }
             return View();
         }
 
         // POST: SlotAdmin/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+       // [HttpPost]
+        public async Task<ActionResult> DeleteSlot(int id)
         {
+            string localuser = "";
+
+            bool bresult = false;
             try
             {
-                // TODO: Add delete logic here
+                if (ModelState.IsValid)
+                {
+                    _slotcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                    _slotcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                    var result = await _slotcontroller.Delete(id);
 
-                return RedirectToAction("Index");
+                    result.TryGetContentValue(out bresult);
+
+                    if (bresult)
+                    {
+                        return RedirectToAction("Index");
+                    }
+
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return View(ex.ToString());
             }
+
+            return View();
         }
     }
 }

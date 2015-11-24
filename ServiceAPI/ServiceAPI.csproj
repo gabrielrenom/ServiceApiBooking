@@ -416,6 +416,9 @@
     <Content Include="Views\SlotAdmin\Index.cshtml" />
     <Content Include="Views\SlotAdmin\Availability.cshtml" />
     <Content Include="Views\SlotAdmin\Create.cshtml" />
+    <Content Include="Views\SlotAdmin\Edit.cshtml" />
+    <Content Include="Views\SlotAdmin\_Delete.cshtml" />
+    <Content Include="Views\SlotAdmin\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Administration\" />
