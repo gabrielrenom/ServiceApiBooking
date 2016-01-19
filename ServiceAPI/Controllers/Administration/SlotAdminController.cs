@@ -107,15 +107,7 @@ namespace ServiceAPI.Controllers
                 _slotcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
                 var result = await _slotcontroller.GetAll();
 
-                result.TryGetContentValue(out slots);
-
-                slots.Add(new SlotModel());
-                slots.Add(new SlotModel());
-                slots.Add(new SlotModel());
-                slots.Add(new SlotModel());
-                slots.Add(new SlotModel());
-                slots.Add(new SlotModel());
-                slots.Add(new SlotModel());
+                result.TryGetContentValue(out slots);         
             }
             catch (HttpRequestException ex)
             {
@@ -151,9 +143,49 @@ namespace ServiceAPI.Controllers
         }
 
         // GET: SlotAdmin/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            SlotModel slots = new SlotModel();
+
+            try
+            {
+                _slotcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                _slotcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                var result = await _slotcontroller.GetById(id);
+
+                result.TryGetContentValue(out slots);
+            }
+            catch (HttpRequestException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return View(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+
+            return View(slots);
         }
 
         // GET: SlotAdmin/Create

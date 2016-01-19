@@ -1,102 +1,94 @@
-﻿
-    ﻿
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-@Styles.Render("~/Content/theme-bootstrap")
-@Scripts.Render("~/bundles/modernizr")
-    <div class="section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 class="text-info">
-                        <i class="fa fa-fw fa-cog"></i>Administration
-                    </h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <p>
-                        <br>
-                        <br>
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3 text-center">
-                    <a href="@Url.Action("Index","AirportAdmin")" ><i class="fa fa-5x fa-fw fa-send text-success"></i></a>
-                    <h3 class="text-center text-success">Airports</h3>
-                    <p></p>
-                    <p class="text-left">
-                        Airport administration for the API. Add/Remove/Delete/List operations
-                        are available in this section.
-                    </p>
-                </div>
-                <div class="col-md-3 text-center">
-                    <a href="@Url.Action("Index","CarparkAdmin")"><i class="fa fa-5x fa-fw text-success -o fa-automobile"></i></a>
-                    <h3 class="text-center text-success">Carparks</h3>
-                    <p></p>
-                    <p class="text-left">
-                        Airport administration for the API. Add/Remove/Delete/List operations
-                        are available in this section.
-                    </p>
-                </div>
-                <div class="col-md-3 text-center">
-                    <a href="@Url.Action("Index","BookingAdmin")"><i class="fa fa-5x fa-fw text-success -o fa-barcode"></i></a>
-                    <h3 class="text-center text-success">Bookings</h3>
-                    <p></p>
-                    <p class="text-left">
-                        Booking administration for the API. Add/Remove/Delete/List as well as
-                        booking refence operations are available in this section.
-                    </p>
-                </div>
-                <div class="col-md-3 text-center">
-                    <a href="#"><i class="fa fa-5x fa-fw text-success -o fa-calendar"></i></a>
-                    <h3 class="text-center text-success">Availability</h3>
-                    <p></p>
-                    <p class="text-left">
-                        Availability administration for the API. Add/Remove/Delete/List as well
-                        as availabily with price operations are available in this section.
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3 text-center">
-                    <a href="@Url.Action("Index","PricingAdmin")"><i class="fa fa-5x fa-fw fa-table text-success"></i></a>
-                    <h3 class="text-center text-success">Pricing Tables</h3>
-                    <p></p>
-                    <p class="text-left">
-                        Pricing administration for the API. Add/Remove/Delete/List prices
-                        operations based on tables for Carparks.
-                    </p>
-                </div>
-                <div class="col-md-3 text-center">
-                    <a href="@Url.Action("Index","CarparkAdmin")"><i class="fa fa-5x fa-fw text-success -o fa-automobile"></i></a>
-                    <h3 class="text-center text-success">Carparks</h3>
-                    <p></p>
-                    <p class="text-left">
-                        Airport administration for the API. Add/Remove/Delete/List operations
-                        are available in this section.
-                    </p>
-                </div>
-                <div class="col-md-3 text-center">
-                    <a href="@Url.Action("Index","BookingAdmin")"><i class="fa fa-5x fa-fw text-success -o fa-barcode"></i></a>
-                    <h3 class="text-center text-success">Bookings</h3>
-                    <p></p>
-                    <p class="text-left">
-                        Booking administration for the API. Add/Remove/Delete/List as well as
-                        booking refence operations are available in this section.
-                    </p>
-                </div>
-                <div class="col-md-3 text-center">
-                    <a href="#"><i class="fa fa-5x fa-fw text-success -o fa-calendar"></i></a>
-                    <h3 class="text-center text-success">Availability</h3>
-                    <p></p>
-                    <p class="text-left">
-                        Availability administration for the API. Add/Remove/Delete/List as well
-                        as availabily with price operations are available in this section.
-                    </p>
-                </div>
+﻿    ﻿
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
+      rel="stylesheet" type="text/css">
+<link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
+      rel="stylesheet" type="text/css">
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="text-info">
+                    <i class="fa fa-fw fa-cog"></i>Administration
+                </h3>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    <br>
+                    <br>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-center">
+                <a href="@Url.Action("Index","AirportAdmin")"><i class="fa fa-5x fa-fw fa-send text-success"></i></a>
+                <h3 class="text-center text-success">Airports</h3>
+                <p></p>
+                <p class="text-left">
+                    Airport administration for the API. Add/Remove/Delete/List operations
+                    are available in this section.
+                </p>
+            </div>
+            <div class="col-md-3 text-center">
+                <a href="@Url.Action("Index","CarparkAdmin")"><i class="fa fa-5x fa-fw text-success -o fa-automobile"></i></a>
+                <h3 class="text-center text-success">Carparks</h3>
+                <p></p>
+                <p class="text-left">
+                    Airport administration for the API. Add/Remove/Delete/List operations
+                    are available in this section.
+                </p>
+            </div>
+            <div class="col-md-3 text-center">
+                <a href="@Url.Action("Index","BookingAdmin")"><i class="fa fa-5x fa-fw text-success -o fa-barcode"></i></a>
+                <h3 class="text-center text-success">Bookings</h3>
+                <p></p>
+                <p class="text-left">
+                    Booking administration for the API. Add/Remove/Delete/List as well as
+                    booking refence operations are available in this section.
+                </p>
+            </div>
+            <div class="col-md-3 text-center">
+                <a href="@Url.Action("Index","SlotAdmin")"><i class="fa fa-5x fa-fw text-success -o fa-calendar"></i></a>
+                <h3 class="text-center text-success">Slot/Availability</h3>
+                <p></p>
+                <p class="text-left">
+                    Availability administration for the API. Add/Remove/Delete/List as well
+                    as availabily with price operations are available in this section.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-center">
+                <a href="@Url.Action("Index","PricingAdmin")"><i class="fa fa-5x fa-fw fa-table text-success"></i></a>
+                <h3 class="text-center text-success">Pricing Tables</h3>
+                <p></p>
+                <p class="text-left">
+                    Pricing administration for the API. Add/Remove/Delete/List prices
+                    operations based on tables for Carparks.
+                </p>
+            </div>
+            <div class="col-md-3 text-center">
+                <a href="@Url.Action("Index","UserAdmin")"><i class="fa fa-5x fa-fw text-success -o fa-User"></i></a>
+                <h3 class="text-center text-success">Users</h3>
+                <p></p>
+                <p class="text-left">
+                    User administration for the portal as well as the API.
+                </p>
+            </div>
+            <div class="col-md-3 text-center">
+                <a href="@Url.Action("Index","LocationAdmin")"><i class="fa fa-5x fa-fw text-success -o fa-Place"></i></a>
+                <h3 class="text-center text-success">Locations</h3>
+                <p></p>
+                <p class="text-left">
+                    Locations of
+                </p>
+            </div>
+
+        </div>
     </div>
+</div>

@@ -130,35 +130,36 @@ namespace ACP.DataAccess.Migrations
                         Slot = new Collection<Slot>
                         {
                             new Slot {  Number=13, IsOccupied=false},
-                             new Slot {  IsOccupied = false,
+                            new Slot {  IsOccupied = false,
                                         Number = 12,
-                                                        Created = DateTime.Now,
-                                                                    CreatedBy = "localuser",
-                                                                    Modified = DateTime.Now,
-                                                                    ModifiedBy = "localuser",
+                                        Created = DateTime.Now,
+                                        CreatedBy = "localuser",
+                                        Modified = DateTime.Now,
+                                        ModifiedBy = "localuser",
 
-                                        Availability = new Collection<Availability> {
-                                                            new Availability {
+                                        Availability = new Collection<Availability>
+                                        {
+                                            new Availability    {
+                                                                   Created = DateTime.Now,
+                                                                   CreatedBy = "localuser",
+                                                                   Modified = DateTime.Now,
+                                                                   ModifiedBy = "localuser",
+                                                                   StartDate = new DateTime(2015,10,2,0,0,0),
+                                                                   EndDate = new DateTime(2015,10,8,0,0,0),
+                                                                   Status =  AvailabilityStatus.Free
+                                                                },
+                                            new Availability    {
                                                                     Created = DateTime.Now,
                                                                     CreatedBy = "localuser",
                                                                     Modified = DateTime.Now,
                                                                     ModifiedBy = "localuser",
-                                                                    StartDate = new DateTime(2015,10,2),
-                                                                    EndDate = new DateTime(2015,10,8),
-                                                                    Status =  AvailabilityStatus.Free
-                                                            },
-                                                                 new Availability {
-                                                                    Created = DateTime.Now,
-                                                                    CreatedBy = "localuser",
-                                                                    Modified = DateTime.Now,
-                                                                    ModifiedBy = "localuser",
-                                                                    StartDate = new DateTime(2015,10,3),
-                                                                    EndDate = new DateTime(2015,10,7),
+                                                                    StartDate = new DateTime(2015,10,3,0,0,0),
+                                                                    EndDate = new DateTime(2015,10,7,0,0,0),
                                                                     Status =  AvailabilityStatus.Occupied
-                                                            }
-                          }
+                                                                }
+                                        }
 
-                        }
+                            }
                           }
                     },
                     new BookingEntity
@@ -182,41 +183,41 @@ namespace ACP.DataAccess.Migrations
                        Slot = new Collection<Slot>
                        {
                         new Slot {
-                                        Created = DateTime.Now,
-                                            CreatedBy = "localuser",
-                                            Modified = DateTime.Now,
-                                            ModifiedBy = "localuser",
-                                IsOccupied = false,
-                                Number= 3,
-                                Availability = new Collection<Availability> {
-                                    new Availability {
                                             Created = DateTime.Now,
                                             CreatedBy = "localuser",
                                             Modified = DateTime.Now,
                                             ModifiedBy = "localuser",
-                                            StartDate = new DateTime(2015,10,2),
-                                            EndDate = new DateTime(2015,10,15),
-                                            Status =  AvailabilityStatus.Free
-                                    },
-                                       new Availability {
-                                            Created = DateTime.Now,
-                                            CreatedBy = "localuser",
-                                            Modified = DateTime.Now,
-                                            ModifiedBy = "localuser",
-                                            StartDate = new DateTime(2015,10,4),
-                                            EndDate = new DateTime(2015,10,18),
-                                            Status =  AvailabilityStatus.Free
-                                    },
-                                         new Availability {
-                                            Created = DateTime.Now,
-                                            CreatedBy = "localuser",
-                                            Modified = DateTime.Now,
-                                            ModifiedBy = "localuser",
-                                            StartDate = new DateTime(2015,10,5),
-                                            EndDate = new DateTime(2015,10,19),
-                                            Status =  AvailabilityStatus.Free
-                                    }
-                        }
+                                            IsOccupied = false,
+                                            Number= 3,
+                                            Availability = new Collection<Availability> {
+                                                new Availability {
+                                                                    Created = DateTime.Now,
+                                                                    CreatedBy = "localuser",
+                                                                    Modified = DateTime.Now,
+                                                                    ModifiedBy = "localuser",
+                                                                    StartDate = new DateTime(2015,10,2,0,0,0),
+                                                                    EndDate = new DateTime(2015,10,15,0,0,0),
+                                                                    Status =  AvailabilityStatus.Free
+                                                                },
+                                               new Availability {
+                                                                    Created = DateTime.Now,
+                                                                    CreatedBy = "localuser",
+                                                                    Modified = DateTime.Now,
+                                                                    ModifiedBy = "localuser",
+                                                                    StartDate = new DateTime(2015,10,4,0,0,0),
+                                                                    EndDate = new DateTime(2015,10,18,0,0,0),
+                                                                    Status =  AvailabilityStatus.Free
+                                                                },
+                                             new Availability   {
+                                                                    Created = DateTime.Now,
+                                                                    CreatedBy = "localuser",
+                                                                    Modified = DateTime.Now,
+                                                                    ModifiedBy = "localuser",
+                                                                    StartDate = new DateTime(2015,10,5,0,0,0),
+                                                                    EndDate = new DateTime(2015,10,19,0,0,0),
+                                                                    Status =  AvailabilityStatus.Free,
+                                                                }
+                                            }
                         }
                        }
                     }
@@ -226,7 +227,7 @@ namespace ACP.DataAccess.Migrations
 
             context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
             {
-                Id = 1+ testid,
+                Id = 1 + testid,
                 Telephone = "+441415856000",
                 Name = "Aberdeen Airport",
                 Code = "ABZ",
@@ -249,7 +250,7 @@ namespace ACP.DataAccess.Migrations
             });
             context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
             {
-                Id = 2+ testid,
+                Id = 2 + testid,
                 Telephone = "+441667464000",
                 Name = "Inverness Airport",
                 Website = "www.hial.co.uk",
@@ -272,10 +273,10 @@ namespace ACP.DataAccess.Migrations
                 ModifiedBy = "localuser",
                 Created = DateTime.Now,
             });
-          
+
             context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
             {
-                Id = 3+ testid,
+                Id = 3 + testid,
                 Telephone = "+442890939093",
                 Name = "Belfast City Airport",
                 Code = "BHD",
@@ -299,7 +300,7 @@ namespace ACP.DataAccess.Migrations
 
             context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
             {
-                Id = 4+ testid,
+                Id = 4 + testid,
                 Telephone = "+442890939093",
                 Name = "Belfast International Airport",
                 Code = "BFS",
@@ -325,7 +326,7 @@ namespace ACP.DataAccess.Migrations
 
             context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
             {
-                Id = 5+ testid,
+                Id = 5 + testid,
                 Telephone = "+441212542600",
                 Name = "Birmingham International Airport",
                 Code = "BHX",
@@ -351,13 +352,13 @@ namespace ACP.DataAccess.Migrations
                 Id = 6 + testid,
                 Telephone = "+441212542600",
                 Name = "Coventry Airport",
-                Code = "CVT",                
+                Code = "CVT",
                 Website = "www.coventryairport.co.uk",
                 StatusId = 1,
                 Address = new Address
                 {
-                    Address1= "Passenger Terminal",
-                    Address2= "Siskin Parkway West",
+                    Address1 = "Passenger Terminal",
+                    Address2 = "Siskin Parkway West",
                     City = "Coventry",
                     Postcode = "CV3 4PB",
                     Country = "England",
@@ -459,7 +460,7 @@ namespace ACP.DataAccess.Migrations
                 StatusId = 1,
                 Address = new Address
                 {
-                    Postcode="",
+                    Postcode = "",
                     City = "Cambridge",
                     Country = "England",
                     CreatedBy = "localuser",
@@ -510,7 +511,7 @@ namespace ACP.DataAccess.Migrations
                 {
                     Address1 = "Amsterdam Way",
                     Postcode = "NR6 6JA",
-                    City= "Norwich",
+                    City = "Norwich",
                     Country = "England",
                     CreatedBy = "localuser",
                     Modified = DateTime.Now,
@@ -736,7 +737,7 @@ namespace ACP.DataAccess.Migrations
                 StatusId = 1,
                 Address = new Address
                 {
-                    Address1= "Manston",
+                    Address1 = "Manston",
                     Address2 = "Folkestone",
                     Postcode = "CT12 5BP",
                     City = "Kent",
@@ -813,7 +814,7 @@ namespace ACP.DataAccess.Migrations
                 Address = new Address
                 {
                     Address1 = "Bath Rd",
-                    Address2= "Middlesex",
+                    Address2 = "Middlesex",
                     Postcode = "TW4 7DE",
                     City = "Hounslow",
                     Country = "England",
@@ -891,7 +892,7 @@ namespace ACP.DataAccess.Migrations
                 Address = new Address
                 {
                     Address1 = "Bassingbourne Road",
-                    Address2= "Essex",
+                    Address2 = "Essex",
                     City = "Stansted",
                     Postcode = "CM24 1QW",
                     Country = "England",
@@ -942,7 +943,7 @@ namespace ACP.DataAccess.Migrations
                 Address = new Address
                 {
                     Address1 = "Highlands and Islands Airports Ltd",
-                    Address2 ="Benbecula Airport, Balivanich, Western Isles",
+                    Address2 = "Benbecula Airport, Balivanich, Western Isles",
                     City = "Benbecula",
                     Postcode = "HS7 5LW",
                     Country = "Scotland",
@@ -1071,7 +1072,7 @@ namespace ACP.DataAccess.Migrations
                 Address = new Address
                 {
                     Address1 = "BAA Glasgow",
-                    Address2= "Paisley",
+                    Address2 = "Paisley",
                     City = "Renfrewshire",
                     Postcode = "PA3 2SW",
                     Country = "Scotland",
@@ -1350,7 +1351,7 @@ namespace ACP.DataAccess.Migrations
                 Address = new Address
                 {
                     Address1 = "Carrickfinn",
-                    Address2= "Kincasslagh, Letterkenny, Co.",
+                    Address2 = "Kincasslagh, Letterkenny, Co.",
                     City = "Donegal",
                     Country = "Ireland",
                     CreatedBy = "localuser",
@@ -1458,7 +1459,7 @@ namespace ACP.DataAccess.Migrations
 
             context.RootBookingEntity.AddOrUpdate(x => x.Id, new RootBookingEntity
             {
-                Id = 45+ testid,
+                Id = 45 + testid,
                 Telephone = "+441446711111",
                 Name = "Cardiff International Airport",
                 Website = "www.cwlfly.com",
@@ -1466,9 +1467,9 @@ namespace ACP.DataAccess.Migrations
                 StatusId = 1,
                 Address = new Address
                 {
-                    Address1= "Vale of Glamorgan",
+                    Address1 = "Vale of Glamorgan",
                     City = "Cardiff",
-                    Postcode= "CF62 3BD",
+                    Postcode = "CF62 3BD",
                     Country = "UK",
                     CreatedBy = "localuser",
                     Modified = DateTime.Now,
@@ -1492,7 +1493,7 @@ namespace ACP.DataAccess.Migrations
                 Address = new Address
                 {
                     Address1 = "Swansea Airport",
-                    Address2= "Fairwood",
+                    Address2 = "Fairwood",
                     City = "Swansea",
                     Postcode = "SA2 7JU",
                     Country = "UK",
@@ -1641,7 +1642,7 @@ namespace ACP.DataAccess.Migrations
                 Address = new Address
                 {
 
-                    Address1= "Newcastle upon Tyne",
+                    Address1 = "Newcastle upon Tyne",
                     City = "Woolsington",
                     Postcode = "NE13 8BZ",
                     Country = "UK",
@@ -1718,7 +1719,7 @@ namespace ACP.DataAccess.Migrations
                 Address = new Address
                 {
                     Address1 = "Passenger Terminal",
-                    Address2= "Siskin Parkway West",
+                    Address2 = "Siskin Parkway West",
                     City = "Coventry",
                     Postcode = "CV3 4PB",
                     Country = "UK",
@@ -1786,10 +1787,10 @@ namespace ACP.DataAccess.Migrations
             });
             #endregion
 
-            #region [ CREDIT CARD TYPES ]
-            context.CreditCards.AddOrUpdate(x => x.Id, new CreditCard { Id = 1,});
-            context.Statuses.AddOrUpdate(x => x.Id, new Status { Id = 2, StatusType = StatusType.Inactive });
-            #endregion
+            //#region [ CREDIT CARD TYPES ]
+            //context.CreditCards.AddOrUpdate(x => x.Id, new CreditCard { Id = 1,});
+            //context.Statuses.AddOrUpdate(x => x.Id, new Status { Id = 2, StatusType = StatusType.Inactive });
+            //#endregion
             //##
             //  This method will be called after migrating to the latest version.
 

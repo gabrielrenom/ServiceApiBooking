@@ -253,6 +253,7 @@
     <Compile Include="Controllers\Administration\AdministrationController.cs" />
     <Compile Include="Controllers\Administration\AirportAdminController.cs" />
     <Compile Include="Controllers\Administration\SlotAdminController.cs" />
+    <Compile Include="Controllers\Administration\UserAdminController.cs" />
     <Compile Include="Controllers\AirportController.cs" />
     <Compile Include="Controllers\APIAdministrationController.cs" />
     <Compile Include="Controllers\AvailabilityController.cs" />
@@ -419,10 +420,12 @@
     <Content Include="Views\SlotAdmin\Edit.cshtml" />
     <Content Include="Views\SlotAdmin\_Delete.cshtml" />
     <Content Include="Views\SlotAdmin\Delete.cshtml" />
+    <Content Include="Views\SlotAdmin\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Administration\" />
     <Folder Include="Attributes\" />
+    <Folder Include="Views\UserAdmin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
