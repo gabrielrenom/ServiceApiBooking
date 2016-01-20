@@ -1,17 +1,72 @@
-﻿using System;
+﻿using ACP.Business;
+using ACP.Business.Exceptions;
+using ACP.Business.Models;
+using NSubstitute;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
+using System.Security;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
 namespace ServiceAPI.Controllers.Administration
-{
+{    
     public class UserAdminController : Controller
     {
-        // GET: UserAdmin
-        public ActionResult Index()
+        private UserController _userController;
+
+        public UserAdminController(UserController userController)
         {
-            return View();
+            _userController = userController;
+        }
+            // GET: UserAdmin
+        public async Task<ActionResult> Index()
+        {
+            List<UserModel> users = new List<UserModel>();
+
+            try
+            {
+                _userController.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                _userController.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+
+                var result = await _userController.GetAll();
+
+                result.TryGetContentValue(out users);
+            }
+            catch (HttpRequestException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return View(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+
+            return View(users);
         }
 
         // GET: UserAdmin/Details/5

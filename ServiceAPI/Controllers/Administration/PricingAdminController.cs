@@ -204,6 +204,7 @@ namespace ServiceAPI.Controllers
         // GET: PricingAdmin/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
+
             BookingPricingModel prices = new BookingPricingModel();
             string localuser = "";
             bool bresult = false;

@@ -421,11 +421,12 @@
     <Content Include="Views\SlotAdmin\_Delete.cshtml" />
     <Content Include="Views\SlotAdmin\Delete.cshtml" />
     <Content Include="Views\SlotAdmin\Details.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\UserAdmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Administration\" />
     <Folder Include="Attributes\" />
-    <Folder Include="Views\UserAdmin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
