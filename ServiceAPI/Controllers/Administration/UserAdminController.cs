@@ -83,44 +83,163 @@ namespace ServiceAPI.Controllers.Administration
 
         // POST: UserAdmin/Create
         [HttpPost]
-        public ActionResult Create(UserModel user)
+        public async Task<ActionResult> Create(UserModel user)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    _userController.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                    _userController.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
 
+                    var result = await _userController.Add(user);
+
+                    result.TryGetContentValue(out user);
+
+                    if (user != null) return RedirectToAction("Index");
+                    else
+                        return View();
                 }
                 // TODO: Add insert logic here
 
-                    return RedirectToAction("Index");
+                    
             }
             catch
             {
                 return View();
             }
+
+            return View();
         }
 
         // GET: UserAdmin/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+           UserModel user = new UserModel();
+
+            try
+            {
+                _userController.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                _userController.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                var result = await _userController.GetById(id);
+
+                result.TryGetContentValue(out user);
+
+               // await FillDropBoxes();
+
+            }
+            catch (HttpRequestException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return View(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+
+            return View(user);
+
         }
 
         // POST: UserAdmin/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public async Task<ActionResult> Edit(UserModel model)
         {
+            UserModel user = new UserModel();
+            bool updateresult = false;
+
             try
             {
-                // TODO: Add update logic here
+                _userController.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                _userController.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                var result = await _userController.GetById(model.Id);
 
-                return RedirectToAction("Index");
+                result.TryGetContentValue(out user);
+
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Modified = DateTime.Now;
+                user.Created = DateTime.Now;
+                user.ModifiedBy = model.Email;
+                user.DOB = model.DOB;
+                user.Email = model.Email;
+                user.Gender = model.Gender;
+                user.Password = model.Password;
+                user.PhoneNumber = model.PhoneNumber;
+                user.Address.Modified = DateTime.Now;
+                user.Address.Created = DateTime.Now;
+                user.Address.ModifiedBy = model.Email;
+                user.Address.Number = model.Address.Number;
+                user.Address.Postcode = model.Address.Postcode;
+                user.Address.Address1 = model.Address.Address1;
+                user.Address.Address2 = model.Address.Address2;
+                user.Address.City = model.Address.City;
+                user.Address.Country = model.Address.Country;
+                user.Address.County = model.Address.County;
+
+                var resultupdated = await _userController.Update(user);
+
+                resultupdated.TryGetContentValue(out updateresult);
+
+                if (updateresult)
+                {
+                    return RedirectToAction("Index");
+                }
+                // await FillDropBoxes();
+
             }
-            catch
+            catch (HttpRequestException ex)
             {
-                return View();
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
             }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return View(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+
+            return View();
         }
 
         // GET: UserAdmin/Delete/5
