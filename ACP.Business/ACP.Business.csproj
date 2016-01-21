@@ -71,6 +71,7 @@
     <Compile Include="APIs\PP\PurpleParking.cs" />
     <Compile Include="Enums\AvailabilityStatus.cs" />
     <Compile Include="Enums\CreditCardTypes.cs" />
+    <Compile Include="Enums\Gender.cs" />
     <Compile Include="Enums\PaymentMethod.cs" />
     <Compile Include="Enums\RootBookingPropertyType.cs" />
     <Compile Include="Enums\StatusType.cs" />

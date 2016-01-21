@@ -63,6 +63,7 @@
     <Compile Include="Classes\TravelDetails.cs" />
     <Compile Include="Enums\AvailabilityStatus.cs" />
     <Compile Include="Enums\CreditCardTypes.cs" />
+    <Compile Include="Enums\Gender.cs" />
     <Compile Include="Enums\PaymentMethod.cs" />
     <Compile Include="Enums\PropertyType.cs" />
     <Compile Include="Enums\RootBookingPropertyType.cs" />

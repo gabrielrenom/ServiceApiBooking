@@ -90,11 +90,12 @@ namespace ACP.DataAccess.Managers
             dataModel.LastName = domainModel.LastName;
             dataModel.Password = domainModel.Password;
             dataModel.PhoneNumber = domainModel.PhoneNumber;
-
+            dataModel.DOB = domainModel.DOB;
+            dataModel.Gender = (Data.Enums.Gender)domainModel.Gender;
             //## ENABLE THIS WHEN CARS AVAILABLE
             //if (dataModel.Cars.Count>0 )
             //{
-              
+
             //    var car = Repository.GetSingle<User>(a => a.Id == domainModel.Id, x => x.Bookings, x => x.Address, x => x.Cars);
             //    //var car = Repository.GetSingle<User>(a => a.Id == domainModel.Id, x => x.Address, x => x.Cars);
 
@@ -175,6 +176,8 @@ namespace ACP.DataAccess.Managers
             dataModel.Password = domainModel.Password;
             dataModel.PhoneNumber = domainModel.PhoneNumber;
             dataModel.AddressId = domainModel.AddressId;
+            dataModel.DOB = domainModel.DOB;
+            dataModel.Gender = (Data.Enums.Gender)domainModel.Gender;
             //dataModel.Cars=domainModel.Cars!=null?domainModel.Cars.Select(x=>new Car{
             //    Created = x.Created,
             //    CreatedBy = x.CreatedBy,
@@ -220,18 +223,20 @@ namespace ACP.DataAccess.Managers
                   LastName = dataModel.LastName,
                   Email = dataModel.Email,
                   Password = dataModel.Password,
-                  //Cars = dataModel.Cars!=null?dataModel.Cars.Select(x=>new CarModel{
-                  //       Created = x.Created,
-                  //       CreatedBy = x.CreatedBy,
-                  //       Id = x.Id,
-                  //       Modified = x.Modified,
-                  //       ModifiedBy = x.ModifiedBy,
-                  //       Colour = x.Colour,
-                  //       Make = x.Make,
-                  //       Model = x.Model,
-                  //       Registration = x.Registration                     
-                  //}).ToList():null                     
-            };
+                  DOB = dataModel.DOB,
+                  Gender = (Business.Enums.Gender)dataModel.Gender
+            //Cars = dataModel.Cars!=null?dataModel.Cars.Select(x=>new CarModel{
+            //       Created = x.Created,
+            //       CreatedBy = x.CreatedBy,
+            //       Id = x.Id,
+            //       Modified = x.Modified,
+            //       ModifiedBy = x.ModifiedBy,
+            //       Colour = x.Colour,
+            //       Make = x.Make,
+            //       Model = x.Model,
+            //       Registration = x.Registration                     
+            //}).ToList():null                     
+        };
 
             return model;
         }

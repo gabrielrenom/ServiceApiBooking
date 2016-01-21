@@ -423,6 +423,8 @@
     <Content Include="Views\SlotAdmin\Details.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
     <Content Include="Views\UserAdmin\Index.cshtml" />
+    <Content Include="Views\UserAdmin\Edit.cshtml" />
+    <Content Include="Views\UserAdmin\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Administration\" />
