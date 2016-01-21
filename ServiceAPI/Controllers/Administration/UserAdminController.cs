@@ -83,13 +83,17 @@ namespace ServiceAPI.Controllers.Administration
 
         // POST: UserAdmin/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(UserModel user)
         {
             try
             {
+                if (ModelState.IsValid)
+                {
+
+                }
                 // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
             }
             catch
             {
