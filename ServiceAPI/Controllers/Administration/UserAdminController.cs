@@ -70,9 +70,54 @@ namespace ServiceAPI.Controllers.Administration
         }
 
         // GET: UserAdmin/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            UserModel user = new UserModel();
+
+            try
+            {
+                _userController.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                _userController.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                var result = await _userController.GetById(id);
+
+                result.TryGetContentValue(out user);
+
+                // await FillDropBoxes();
+
+            }
+            catch (HttpRequestException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return View(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+
+            return View(user);
+
+
         }
 
         // GET: UserAdmin/Create

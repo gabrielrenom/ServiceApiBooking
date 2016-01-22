@@ -1,0 +1,119 @@
+﻿@model ACP.Business.Models.UserModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_ActionLayout.cshtml";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="form">
+            <div class="well">
+
+                <div class="row">
+                    <div class="col-md-6 ">
+                        <h2><span class="fa fa-1x fa-fw text-success -o fa-User"></span>User Registration</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="well">
+                <div class="row">
+                    <div class="col-md-4 ">
+                        <h3><span class="glyphicon glyphicon-user"></span>Personal Details:</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.HiddenFor(model => model.Id)
+                    <div class="col-md-6 ">
+                        @Html.Label("First Name", htmlAttributes: new { @class = "control-label" })
+                        <div class="form-group has-error">
+                            @Html.DisplayFor(model => model.FirstName)
+                        </div>
+
+                        @Html.Label("Date of Birth", htmlAttributes: new { @class = "control-label" })
+                        <div class="form-group">
+                            @Html.DisplayFor(model=>model.DOB)
+                            
+                            @*<input class="form-control text-box single-line" type="" name="DOB" id="DOB" value="@if (Model != null) {@(((DateTime)Model.DOB).ToString("yyyy-MM-dd")) }" />*@
+                        </div>
+                        @Html.Label("Phone Number has-error", htmlAttributes: new { @class = "control-label" })
+                        <div class="form-group">
+                            @Html.DisplayFor(model => model.PhoneNumber)
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.Label("Last Name", htmlAttributes: new { @class = "control-label" })
+                        <div class="form-group has-error">
+                            @Html.DisplayFor(model => model.LastName)
+                        </div>
+                        
+                        @Html.Label("Email", htmlAttributes: new { @class = "control-label" })
+                        <div class="form-group has-error">
+                            @Html.DisplayFor(model => model.Email)
+                        </div>
+                        @Html.Label("Gender", htmlAttributes: new { @class = "control-label" })
+                        <div class="form-group">
+                            @Html.Label("Male", htmlAttributes: new { @class = "" })
+                            @Html.RadioButtonFor(m => m.Gender, 0)
+                            @Html.Label("Female", htmlAttributes: new { @class = "" })
+                            @Html.RadioButtonFor(m => m.Gender, 1)
+                            <p class="help-block">Select the gender please.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 ">
+                        <h3><span class="glyphicon glyphicon-envelope"></span>Address:</h3>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-6 ">
+                        @Html.Label("Number", htmlAttributes: new { @class = "control-label" })
+                        <div class="form-group">
+                            @Html.DisplayFor(model => model.Address.Number)
+                        </div>
+                        @Html.Label("Address Line 1", htmlAttributes: new { @class = "control-label" })
+                        <div class="form-group">
+                            @Html.DisplayFor(model => model.Address.Address1)
+                        </div>
+                        @Html.Label("City", htmlAttributes: new { @class = "control-label" })
+                        <div class="form-group">
+                            @Html.DisplayFor(model => model.Address.City)
+                        </div>
+                        @Html.Label("Country", htmlAttributes: new { @class = "control-label" })
+                        <div class="form-group">
+                            @Html.DisplayFor(model => model.Address.Country)
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.Label("Address Line 2", htmlAttributes: new { @class = "control-label" })
+                        <div class="form-group">
+                            @Html.DisplayFor(model => model.Address.Address2)
+                        </div>
+                        @Html.Label("County", htmlAttributes: new { @class = "control-label" })
+                        <div class="form-group">
+                            @Html.DisplayFor(model => model.Address.County)
+                        </div>
+                        @Html.Label("Postcode", htmlAttributes: new { @class = "control-label" })
+                        <div class="form-group">
+                            @Html.DisplayFor(model => model.Address.Postcode)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })                        
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

@@ -425,6 +425,7 @@
     <Content Include="Views\UserAdmin\Index.cshtml" />
     <Content Include="Views\UserAdmin\Edit.cshtml" />
     <Content Include="Views\UserAdmin\Create.cshtml" />
+    <Content Include="Views\UserAdmin\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Administration\" />
