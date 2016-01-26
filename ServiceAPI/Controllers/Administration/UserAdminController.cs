@@ -288,25 +288,101 @@ namespace ServiceAPI.Controllers.Administration
         }
 
         // GET: UserAdmin/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            UserModel user = new UserModel();
+
+            try
+            {
+                _userController.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                _userController.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                var result = await _userController.GetById(id);
+
+                result.TryGetContentValue(out user);                
+
+            }
+            catch (HttpRequestException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return View(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+
+            return View(user);
+
+
         }
 
         // POST: UserAdmin/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public async Task<ActionResult> Delete(int id, FormCollection collection)
         {
+            bool resutdelete = false;
             try
             {
-                // TODO: Add delete logic here
+                _userController.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                _userController.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                var result = await _userController.Delete(id);
 
-                return RedirectToAction("Index");
+                result.TryGetContentValue(out resutdelete);
+
             }
-            catch
+            catch (HttpRequestException ex)
             {
-                return View();
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
             }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return View(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return View(ex.Message);
+            }
+
+            if (resutdelete) return RedirectToAction("Index");
+            else return View();
+
         }
     }
 }
