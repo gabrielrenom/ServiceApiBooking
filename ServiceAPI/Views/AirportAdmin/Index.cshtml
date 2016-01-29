@@ -1,0 +1,116 @@
+﻿@model IEnumerable<ACP.Business.Models.RootBookingEntityModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
+      rel="stylesheet" type="text/css">
+
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="text-info">
+                    <i class="fa fa-1x fa-fw fa-send text-success"></i>Airports
+                </h3>
+            </div>
+        </div>
+        
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ModifiedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Created)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Modified)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Telephone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Code)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Website)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AddressId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StatusId)
+                </th>
+                <th>
+
+                </th>
+                <th>
+
+                </th>
+                <th>
+                    <a href="@Url.Action("Create","AirportAdmin")"><i class="fa fa-2x fa-fw fa-plus text-success"></i></a>
+                </th>                
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModifiedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Created)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Modified)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telephone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Website)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AddressId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StatusId)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Details", "AirportAdmin", new { id=item.Id })" class="btn">
+                            <i class="fa fa-2x fa-fw fa-th-large text-primary"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", "AirportAdmin", new { id=item.Id })" class="btn">
+                            <i class="fa fa-2x fa-edit fa-fw text-success"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Delete", "AirportAdmin", new { id=item.Id })" class="btn">
+                            <i class="fa fa-2x fa-fw fa-close text-danger"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+        </div>
+</div>

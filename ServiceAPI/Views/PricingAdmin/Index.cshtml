@@ -1,0 +1,101 @@
+﻿@model IEnumerable<ACP.Business.Models.BookingPricingModel>
+
+@{
+    //## Change it in the view
+    ViewBag.actionIcon = "fa-table";
+
+    //## Action, change it in the view
+    ViewBag.actionLabel = "Index";
+
+    Layout = "~/Views/Shared/_ActionLayout.cshtml";
+
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Start)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.End)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Created)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modified)
+        </th>        
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </th>                
+        <th>
+            @Html.DisplayNameFor(model => model.BookingEntity.Name)
+        </th>
+        <th>
+
+        </th>
+        <th>
+
+        </th>
+        <th>
+            <a href="@Url.Action("Create","PricingAdmin")"><i class="fa fa-2x fa-fw fa-plus text-success"></i></a>
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Start)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.End)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Created)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Modified)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookingEntity.Name)
+        </td>
+        <td>
+            <a href="@Url.Action("Details", "PricingAdmin", new { id=item.Id })" class="btn">
+                <span class="fa fa-2x fa-fw fa-th-large text-primary"></span>
+            </a>
+        </td>
+        <td>
+            <a href="@Url.Action("Edit", "PricingAdmin", new { id=item.Id })" class="btn">
+                <span class="fa fa-2x fa-edit fa-fw text-success"></span>
+            </a>
+        </td>
+        <td>
+            <a href="@Url.Action("Delete", "PricingAdmin", new { id=item.Id })" class="btn">
+                <span class="fa fa-2x fa-fw fa-close text-danger"></span>
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

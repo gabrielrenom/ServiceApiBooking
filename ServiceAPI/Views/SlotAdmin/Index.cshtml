@@ -1,0 +1,233 @@
+﻿@model IEnumerable<ACP.Business.Models.SlotModel>
+
+@{
+    //## Change it in the view
+    ViewBag.actionIcon = "fa-circle";
+
+    //## Action, change it in the view
+    ViewBag.actionLabel = "Slots Index";
+
+    Layout = "~/Views/Shared/_ActionLayout.cshtml";
+
+}
+<style>
+.top-buffer { margin-top:20px; }
+.bottom-buffer { margin-bottom:20px; }
+</style>
+
+<br />
+<div class="container">
+    <div class="panel-body">
+        <select class="form-control" id="carpark" name="carpark">
+            <option value="">-- Select Carpark --</option>
+            @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.carparkslist)
+            {
+                <option value=@item.Value>@item.Text</option>
+            }
+        </select>
+
+    </div>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#listview">List View</a></li>
+        <li><a data-toggle="tab" href="#carparkview">Carpark View</a></li>        
+    </ul>
+
+    <div class="tab-content">
+        <div id="listview" class="tab-pane fade in active">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+
+                </div>             
+                <table class="table" id="indextable">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Number)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Identifier)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsOccupied)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CreatedBy)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ModifiedBy)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Created)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Modified)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.BookingEntityId)
+                        </th>
+                        <th>
+
+                        </th>
+                        <th>
+
+                        </th>
+                        <th>
+                            <a href="@Url.Action("Create", "SlotAdmin")"><i class="fa fa-2x fa-fw fa-plus text-success"></i></a>
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Number)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Identifier)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsOccupied)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreatedBy)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ModifiedBy)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Created)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Modified)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookingEntityId)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Details", "SlotAdmin", new { id = item.Id })" class="btn">
+                                    <span class="fa fa-2x fa-fw fa-th-large text-primary"></span>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit", "SlotAdmin", new { id = item.Id })" class="btn">
+                                    <span class="fa fa-2x fa-edit fa-fw text-success"></span>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Delete", "SlotAdmin", new { id = item.Id })" class="btn">
+                                    <span class="fa fa-2x fa-fw fa-close text-danger"></span>
+                                </a>
+                                </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>            
+        </div>
+        <div id="carparkview" class="tab-pane fade">                
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <a href="@Url.Action("Create", "SlotAdmin")"><i class="fa fa-2x fa-fw fa-plus text-info "></i></a>
+                    
+                </div>
+                <div id="carparkviewcontainer" class="container bottom-buffer">
+                    @{
+                    var counter = 0;
+                    var rowcounter = 0;
+                    foreach (var slottobefiltered in Model)
+                    {
+
+                        if (counter % 6 == 0 || counter == 0)
+                        {
+                                @Html.Raw("<div class='row top-buffer'>");
+                        }
+
+                        var slot = "btn btn-" + (slottobefiltered.IsOccupied ? "danger" : "success");
+                            @Html.Raw("<div class='col-sm-2'>")
+                            @Html.Raw("<a href='/SlotAdmin/Availability/"+ slottobefiltered.Id+"' class='" + slot+"'>Slot "+ slottobefiltered.Number+"<br /> ["+ slottobefiltered.Identifier+"]</a>");
+
+                            @Html.Raw("</div>");
+
+                        if (rowcounter == 5)
+                        {
+                                @Html.Raw("</div>");
+                            rowcounter = 0;
+                        }
+                        counter++;
+                        rowcounter++;
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#carpark").change(function () {
+
+        var carparkid = $(this).val();
+
+        $('#indextable tr').each(function (i, row) {
+            var rowid = $(row).find("td:eq(8)").html();
+            rowid = $.trim(rowid);
+            if (rowid !== carparkid && $(row).context.rowIndex > 0) {
+                $(row).hide();
+            }
+            else { $(row).show(); }
+
+        });
+
+
+        var slots = @Html.Raw(Json.Encode(Model));
+        var slotstobefiltered = [];
+        for (var i = 0; i < slots.length; i++) {
+            var slot = slots[i];
+            if (slot.BookingEntityId.toString() === carparkid)
+            {
+                slotstobefiltered.push(slot);
+                //alert(slot.Id);
+            }
+        }
+
+        var counter = 0;
+        var rowcounter = 0;
+        var grid="";
+        for (var i = 0; i < slotstobefiltered.length; i++)
+        {
+            //## This is where we are going to insert the stuff.
+            //carparkviewcontainer
+            var slottobefiltered = slotstobefiltered[i];
+
+            if (counter % 6 == 0 || counter == 0)
+            {
+                grid+="<div class='row top-buffer'>";
+            }
+
+            var slotbutton = "btn btn-" + (slottobefiltered.IsOccupied ? "danger" : "success");
+            var identifier = slottobefiltered.Identifier===null?"":"["+slottobefiltered.Identifier+"]";
+
+            grid+="<div class='col-sm-2'>";
+            grid+="<a href='/SlotAdmin/Availability/"+slottobefiltered.Id+"' class='"+slotbutton+"'>Slot "+slottobefiltered.Number+"<br /> "+identifier+"</button>";
+            grid+="</div>";
+
+            if (rowcounter == 5)
+            {
+                grid+="</div>";
+                rowcounter = 0;
+            }
+            counter++;
+            rowcounter++;
+        }
+
+        $("#carparkviewcontainer").html(grid);
+});
+
+</script>
+
