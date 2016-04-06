@@ -26,6 +26,7 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
     "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-rc1-final"
+     
   },
 
   "commands": {
@@ -34,9 +35,8 @@
   },
 
   "frameworks": {
-    "dnx461": {
+    "dnx46": {
       "dependencies": {
-        "ACP.Business": "1.0.0-*",
         "ACP.Data": "1.0.0-*"
       }
     },

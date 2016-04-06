@@ -1,0 +1,907 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/* a,img {-webkit-transition: all 0.7s ease; -moz-transition: all 0.3s ease; -o-transition: all 0.7s ease; -ms-transition: all 0.7s ease; transition: all 0.7s ease;}
+ h2 { color:#647994!important; font-size:25px!important; font-weight: 200!important;} */
+a,button {-webkit-transition: all 0.7s ease; -moz-transition: all 0.3s ease; -o-transition: all 0.7s ease; -ms-transition: all 0.7s ease; transition: all 0.7s ease;}
+a:active, a:focus, a:visited {outline:none!important;}
+ 
+::-moz-selection {color:#fff; background:#cf631b; } 
+::selection {color:#fff; background:#cf631b; } 
+ 
+body {background-color:transparent; background:url(../img/mainbg.jpg) no-repeat top center; }
+ 
+ 
+ 
+.liOrange { border-left:2px solid orange; padding-left:10px;}
+.back0 { background-color:#fff!important;}
+.back1 { background-color:#647994!important;}
+.color1 {color:#e16f2a; font-weight: 500;}
+.color2 {color:#3182bc;}
+.color3 {color:#666;}
+.color4 {color:#fff!important;}
+.color5 {color:#acbacc!important;}
+
+
+/* .sombra{ box-shadow:0px 0px 16px 1px #ccc; border:1px solid #f1f1f1;}
+   .sombra .jumbotron .container { padding-left:22px!important;padding-right:22px!important;} */
+.jumbotron { background-color:transparent!important;}
+.jumbotron { padding-bottom:0px!important; margin-bottom:0px!important;}
+
+.navbar-brand {width:237px; height:70px; background:url(../img/national-parking-services.jpg) no-repeat center; text-indent:-9999px; padding:0px 0px!important;
+-webkit-transition: all 0.7s ease; -moz-transition: all 0.3s ease; -o-transition: all 0.7s ease; -ms-transition: all 0.7s ease; transition: all 0.7s ease;
+}
+.navbar-brand:hover {-webkit-filter: invert(100%); filter: invert(100%);}
+.navbar { height:70px!important;}
+
+/* .navbar span, .navbar-header span { float:right;}
+.navbar span a, .navbar span, .navbar-header span a {color:#fff!important;} */
+.navbar span a:hover { color:#ccc!important;}
+
+.banner-img { background:url(../img/fondo-header.jpg)no-repeat; margin-top:21px; background-color:#fff; padding:20px 21px 50px 21px; }
+.for-offers-and-rating {padding-left:21px; padding-right:21px; background-color:#fff;}
+.banner1 { background:url(../img/banner-1.png)no-repeat; /*width:770px;*/ height:490px; max-height:490px;  }
+.mensaje { float:left; font-size:30px; color:#fff; margin: 30px 156px; line-height: 1.7em; 
+ }
+.mensaje span {display:block; line-height:35px; padding:20px 0 20px 0;}
+.mensaje .btn-primary { background-image: none!important; color: #fff; border: 3px solid #fff; background-color: rgba(48, 53, 42, 0.45); background-color: rgba(35, 6, 0, 0.58); -webkit-transition: all 0.7s ease; -moz-transition: all 0.3s ease; -o-transition: all 0.7s ease; -ms-transition: all 0.7s ease; transition: all 0.7s ease;}
+.mensaje .btn-primary:hover { border:3px solid #ccc;}
+
+
+/* .menu-home { float:left; margin-top: 17px; font-size:18px; padding-left:20px;} 
+.menu-home a { color:#fff;}
+.menu-home a:hove {color:#ccc!important;}
+.menu-home span { margin-right:30px;}
+*/
+
+
+
+/*formulario home*/
+.formulario-home {border-radius:10px; background-color:#fff; margin-top: 19px; padding:21px; box-shadow: 2px 2px 14px #ccc; border: 1px solid #ccc; /*width: 32%;*/ }
+.formulario-home form {padding:0 7px; position:relative; } 
+.formulario-home label { color:#647994; font-weight:400; text-transform:uppercase; font-size: 12.5px; letter-spacing:1px; display:block;}
+.formulario-home label:before {content:''; display:block; float:left; margin:0 7px 0 2px; position:relative; top:2px; background:#FFA500; height:13px; width:2px; }
+.formulario-home .form-group { background-image: linear-gradient(to right, #DEDEDE 33%, rgba(255,255,255,0) 0%); background-position: bottom; background-size: 7px 2px; background-repeat: repeat-x; padding: 0 0 14px 0; margin: 0 0 7px 0; float:left; width:100%;}
+.formulario-home .form-group select {text-transform:uppercase; }
+.formulario-home .form-group select option {font-size:14px; text-transform:none; }
+.formulario-home .form-group input {border-color:#647994; height:30px; margin:2px 0 0 0;
+-webkit-transition: all 0.7s ease; -moz-transition: all 0.3s ease; -o-transition: all 0.7s ease; -ms-transition: all 0.7s ease; transition: all 0.7s ease;
+}
+.formulario-home .form-group img,
+.results-quote-form .input-icon {float:right; margin:2px 0 0 0; border-radius:3px;}
+.formulario-home .btn {position:relative; bottom:-80px; width:100%; background:#a0b751; color:#fff; text-transform:uppercase; font-size:12px; padding:7px 0;
+-webkit-transition: all 0.7s ease; -moz-transition: all 0.3s ease; -o-transition: all 0.7s ease; -ms-transition: all 0.7s ease; transition: all 0.7s ease;
+ }
+.formulario-home .btn:hover {background:#fff; color:#777;}
+#datetimepicker12, #datetimepicker13, #discount-code {text-transform:uppercase; font-size:12px; }
+
+
+
+.custom-date-style {background-color: red !important;}
+.input-wide{width: 500px;}
+
+
+/* Home logos */
+.for-logos {background:#f2f2f2; }
+.for-logos .list-inline {text-align:center; padding:16px 0;}
+.for-logos .list-inline li {padding:0 10px;}
+
+
+/* Footer */
+.for-footer { background-color:#344e5c; color:#87969e; padding:24px 42px 23px 24px; margin-bottom:-1px; }
+.for-footer a {color:#87969e;}
+.for-footer a:hover {color:#fff;}
+.for-footer button, #navbar button { background-color:#768998; color:#fff; text-transform:uppercase;}
+.for-footer button:hover, #navbar button:hover { background-color:#ccc!important; color:#333!important;}
+.for-footer li {list-style:none; padding:0;}
+.for-footer ul {margin:0; padding:0;}
+.for-footer input { width:100%!important;}
+.tarjetas { margin-top: 49px;}
+	/******/
+strong.nps {color:#E48244; font-weight:normal; margin:0 0 11px 0; display:inline-block; }
+strong.nps span {display:block;}
+.nps-info, .nps-local {padding-top:51px; }
+.nps-local dt {font-weight:normal;}
+.nps-local img {margin:0 5px 0 0;}
+.nps-local img:hover {opacity:0.7;}
+.nps-newsletter .your-email {min-width:263px; padding-right:11px; text-transform:uppercase; }
+.we-accept {clear:both; padding:71px 0 0 0!important; }
+.we-accept li:first-child {margin-right:11px; }
+
+/*rating*/
+.fa {color:#647994;}
+#formulario-rate {border-radius: 10px; background-color: #fff; margin-top: 4px; padding-top: 9px; padding-bottom: 20px; box-shadow: 2px 2px 14px #ccc; border: 1px solid #ccc; width: 100%; padding-left: 12px; /*height: 234px;*/ overflow: auto;}
+#formulario-rate b {margin:0 0 9px 0;}
+#formulario-rate label, #formulario-rate .rate-date {font-weight:normal; color:#6F6F6F; margin:0; }
+
+#formulario-rate hr {margin-top: 10px; margin-bottom: 10px;}
+#formulario-rate hr:last-child {display:none;}
+
+
+
+
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+/* .navbar .container {padding:0;} */
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {background-color:transparent;  }
+
+
+	.navbar-nav>li>a {font-size:15.5px; text-transform:uppercase;
+-webkit-transition: all 0.7s ease; -moz-transition: all 0.3s ease; -o-transition: all 0.7s ease; -ms-transition: all 0.7s ease; transition: all 0.7s ease;
+	}
+	.navbar-nav>li>a:hover {color:#ccc;}
+
+
+.client-login {padding: 9px 0 0 0; }
+.client-login input { max-width:148px!important; height:32px!important;  }
+/*+*/
+.client-login .btn {height:32px!important; background:#768998; color:#fff; font-size:12px;}
+.client-login .btn:hover {background:#fff; color:#768998;}
+.login-actions {float:right; margin:-5px 24px 0 0;}
+.login-actions li {border-right:1px solid #fff; height:14px; padding-right:8px;}
+.login-actions li:last-child {border:none;}
+.login-actions a {color:#fff; padding:0 0 0 0; font-size:11px; vertical-align:top; text-transform:uppercase; }
+
+
+.mensaje .btn:hover {background:#fff; color:#dd6a0e;}
+
+h2 {color:#647994; font-size:25px; font-weight:500; text-transform:uppercase; padding:0 0 10px 0; }
+h2:before {content:''; margin:0 12px 0 2px; height:25px; float:left; border-left: 2px solid #DB5A08; position:relative; top:3px;}
+
+
+.for-offers-and-rating {padding:0 31px 61px 31px; }
+.offer {position:relative; }
+.offer * {-webkit-transition: all 0.7s ease; -moz-transition: all 0.3s ease; -o-transition: all 0.7s ease; -ms-transition: all 0.7s ease; transition: all 0.7s ease;}
+.offer a:hover {text-decoration:none; color:#000; opacity:0.9; -webkit-transition: all 0.7s ease; -moz-transition: all 0.3s ease; -o-transition: all 0.7s ease; -ms-transition: all 0.7s ease; transition: all 0.7s ease;}
+.offer a:hover dt h3, .offer a:hover dd {color:#777;} 
+.offer a:hover .price {-webkit-filter:invert(100%); filter:invert(100%);}
+.price {display: block; position: relative; width: 131px; height: 125px; float: left; background-size: contain; background-repeat: no-repeat; color: #fff; font-size:39px; padding:35px 0 0 20px; margin:0 7px 0 0;}
+.offer:nth-child(1) .price {background-image:url(../img/price-bg1.png);}
+.offer:nth-child(2) .price {background-image:url(../img/price-bg2.png);}
+.offer:nth-child(3),.offer:nth-child(4){margin-top:21px; }
+.offer:nth-child(3) .price {background-image:url(../img/price-bg3.png);}
+.offer:nth-child(4) .price {background-image:url(../img/price-bg4.png);}
+.offer dl dt {border-bottom:1px solid #ABA5A5; padding:0 0 2px 0; }
+.offer dl h3 {text-transform: uppercase; color: #DB5A08; font-size: 24px; letter-spacing:1px; margin:10px 0;}
+.offer dl h3 span {display: block; text-transform: none; color: #647994; font-size: 22px; letter-spacing: 1.2px; padding: 0 0 0 10px; margin: 4px 0 0 2px; }
+.offer dl h3 span:before {content: ''; color:#DB5A08; margin:0 12px 0 2px; height:21px; float:left; border-left: 2px solid #DB5A08; position:relative; top:3px;}
+
+.offer dl dd {color:#647994; font-size:18px; padding:10px 0 0 0; line-height:18px; }
+.offer dl dd span {display:block; font-size:13.7px; }
+
+
+.navbar-toggle {padding:9px 0; margin:17px 0 0 0; }
+.for-brand {z-index: 1;}
+.navbar-collapse, , .for-navs {-webkit-transition:none!important; -moz-transition:none!important; -o-transition:none!important; -ms-transition:none!important; transition:none!important;}
+.collapse.in, .collapsing  {background-color:#000; overflow:hidden;}
+.collapse.in .menu-home, .collapsing .menu-home  {text-align:right; padding-top:61px; }
+.collapse.in .navbar-nav>li>a, .collapsing .navbar-nav>li>a {padding:12px 27px 0 7px;}
+.collapse.in .client-login, .collapsing .client-login {display:block; margin:0 auto; text-align:right; }
+.collapse.in .client-login .form-group, .collapsing .client-login .form-group {display:inline-block; margin-bottom:11px;}
+.collapse.in .client-login .form-group:last-child, .collapsing .client-login .form-group:last-child {margin-right:0; }
+.collapse.in .login-actions, .collapsing .login-actions {margin:0 0 10px 0;}
+.collapse.in .client-login input, .collapsing .client-login input {max-width:110px!important; height:26px!important; }
+.collapse.in .client-login .btn, .collapsing .client-login .btn {font-size:12px; padding:0 10px; top:-1px; position:relative; height:26px!important;}
+/* +: */
+@media screen and (max-width:390px) {
+	.collapse.in .menu-home, .collapsing .menu-home {padding-top:71px;}
+	.collapse.in .client-login input, .collapsing .client-login input, .collapse.in .client-login .btn, .collapsing .client-login .btn, .collapse.in .client-login .form-group, .collapsing .client-login .form-group{width:100%; max-width:initial!important; text-align:center;}  
+	.collapse.in .navbar-nav>li>a, .collapsing .navbar-nav>li>a {text-align:center; padding:12px 0 3px 0;}
+	.collapse.in .login-actions, .collapsing .login-actions {margin:10px 0; text-align:center; }
+	.navbar-fixed-bottom .navbar-collapse, .navbar-fixed-top .navbar-collapse {max-height:initial!important;}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+@media screen and (max-width: 768px) {
+	.sombra {border:none;}
+	.banner1 {overflow:auto; background-size:contain; height:auto; margin-top:21px; background:none; padding:21px;  }
+	#datetimepicker12, #datetimepicker13, #discount-code {width:90%; float:left; }
+	.mensaje {font-size:31px; margin:30px 15px 0 25px;}
+	.mensaje span {padding:0 0 21px 51px; text-shadow:0px 5px 30px rgba(0, 0, 0, 1); }
+	.mensaje .btn-primary {margin:0 0 20px 50px;}
+	.formulario-home {clear:both; max-width:460px; margin:0 auto; }
+	.formulario-home .btn {position:static; margin:11px 0 0 0; }
+	.offer dl h3 {font-size:17px; }
+	.offer dl h3 span {font-size:15px;}
+	.offer dl dd {font-size:16px;}
+	.offer dl h3 span:before {height:13px; margin:0 4px 0 2px; }
+	.price {width:100px; font-size:31px; padding:30px 0 0 16px; margin:0 7px 0 0;}
+	.for-logos img {max-width:150px; height:auto;  }
+	.nps-local {clear:left;}
+	.navbar-form {border:none; -webkit-box-shadow:none; box-shadow:none; }
+	.for-footer button, .nps-newsletter .your-email {width:100%!important; max-width:initial; min-width:initial; text-align:center;}
+	.for-newsletter-and-cards {padding-top:40px; }
+	.we-accept {padding:0!important; text-align:center; }
+	.we-accept li:first-child {display:block; padding:0 0 5px 0; text-align:center; }
+	.we-accept img {max-width:41px; height:auto; }
+	
+}
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+@media (min-width: 500px) and (max-width: 600px){ .banner1 {margin-bottom:0; } }
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+@media screen and (max-width: 390px){ 	/*DATEPICKER CENTERING*/   .xdsoft_datetimepicker {left:0!important; right:0; margin-left:auto; margin-right:auto; padding:21px;} }
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+
+@media screen and (max-width: 500px) {
+	.sombra {border:none;}
+	.banner1 {background-size:contain; height:260px; margin-top:21px; margin-bottom:0; }
+	#datetimepicker12, #datetimepicker13, #discount-code {width:83%; float:left; }
+	.mensaje {/*font-size:21px;*/ margin:20px 15px 0 15px;}
+	.mensaje span {line-height:25px; padding:11px 0 20px 30px; }
+	.mensaje .btn-primary {margin:0 0 20px 30px; }
+	.nps-local, .for-newsletter-and-cards, .nps-info, .nps-about {width:100%; text-align:center; padding:11px; }	
+	.nps-newsletter .your-email {text-align:center; }
+}
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+@media screen and (max-width: 580px) { 
+	.offer {width:100%;}  
+	.offer dl h3 {font-size:17px; letter-spacing:0px; }
+	.offer dl h3 span {font-size:17px;}
+	.offer dl dd {font-size:16px;}
+	.offer dl h3 span:before {height:17px; margin:0 8px 0 2px; }
+	.price {width:114px; font-size:37px; padding:30px 0 0 15px; margin:0 7px 0 0;}
+	.we-accept {text-align:center; }
+	.we-accept li:first-child {display:block; padding:0 0 14px 0; text-align:center; }
+	
+}
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+@media (min-width: 768px) and (max-width: 992px){ 
+	
+	
+	/**/
+	.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {margin-left:-15px; }
+	.for-client-login {top:-65px; right:5px; width:335px; float:right; }
+	.client-login { }
+	.client-login input {max-width:105px!important; height:25px!important; float:left; }
+	.login-actions {float:right; margin:0; right:-23px; position:relative; }
+	.login-actions a {text-transform:none;}
+	.client-login .btn {height:25px!important; padding:4px 8px; }
+	.navbar-nav>li>a {font-size:16px!important; padding-left:6px; padding-right:6px; text-transform:none!important;}
+	
+	/**/
+	
+	.menu-home {z-index:1; position:relative; padding:10px 0 0 5px; left:42px;}
+	.jumbotron {padding-top:47px;} 
+	.banner {height:490px; margin-right:-15px; margin-left:15px; }
+	.banner-img {padding-right:15px; padding-left:0; }
+	.for-offers-and-rating {padding-left:41px; padding-right:41px; }	
+	.formulario-home {height:470px; border-top-left-radius:0; border-bottom-left-radius:0;}
+	#datetimepicker12:before, #datetimepicker13:before, #discount-code:before {content:''; width:30px; height:30px; float:left; display:block; }
+	#datetimepicker12:before  {background:url(../img/ico-calendar-h.png)no-repeat;}
+	#datetimepicker13:before  {background:url(../img/ico-calendar-h.png)no-repeat;}
+	#discount-code:before {background:url(../img/icon-codigo.png)no-repeat;}
+	#datetimepicker12, #datetimepicker13, #discount-code { width:89%; float:left; }
+	.mensaje {margin:240px 0 0 35px;}
+	.mensaje span {line-height:33px; padding:0 0 30px 0; font-size:31px; }
+	.nps-info, .nps-local {padding-top:71px; }
+	.for-footer button, #navbar button, .nps-newsletter .your-email {font-size:12px; }
+	.for-footer button {padding:7.4px 8px;}
+	.nps-newsletter .your-email {min-width:initial; max-width:initial; width:145px!important; }
+	.we-accept li:first-child {width:100%; margin:0 0 10px 30px; text-align:left; }
+	
+}
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+@media (min-width: 992px) and (max-width: 1200px) {
+	.menu-home {padding:10px 0 0 0;}	
+	#datetimepicker12, #datetimepicker13, #discount-code {width:83.5%; float:left; }
+	.mensaje span {}
+	.banner-img {padding-bottom:21px;}
+	.banner1 {background-size:contain; height:410px;  }
+	.for-offers-and-rating {padding-bottom:41px; }
+	.formulario-home {height:initial; margin-top:14px;}
+	.formulario-home .btn {position:static; margin:9px 0 0 0;}
+	#formulario-rate {padding-bottom:10px;}
+	.formulario-home .form-group {margin:0 0 4.5px 0;}
+	.price {width:114px; height:110px; font-size:37px; padding:25px 0 0 9px; }
+	.offer dl h3 {font-size:19px; } .offer dl h3 span {font-size:17px; letter-spacing:initial; } .offer dl h3 span:before {margin:0 7px 0 2px; height:15px; }
+	.offer dl dd {font-size:16px;} .offer dl dd span {font-size:11.7px;}
+	.for-logos img {max-width:160px; height:auto;  }
+	strong.nps {line-height:17px;} 
+	.nps-newsletter .your-email {min-width:210px;}
+	.nps-info, .nps-local {padding-top:62px; }
+	
+}
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+
+@media screen and (min-width: 1200px) {
+	.container {width:1200px; }
+	.menu-home {padding:10px 0 0 60px; }
+	#datetimepicker12, #datetimepicker13, #discount-code {width:262px; float:left;}
+	.formulario-home form {height:428px; }
+}
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+.preview-img {display:block; margin:0 auto; width:100%; height:auto;  border-radius:15px; box-shadow:2px 2px 14px #ccc;  }
+.preview-popup-img {display:block; margin:0 auto; width:100%; height:auto; box-shadow:2px 2px 14px #7D7D7D;}
+
+body.booking .preview-img {cursor:pointer;}
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+	@media (min-width: 768px) { .modal-dialog {width:820px; margin:30px auto; } }
+	@media (min-width: 992px) { .modal-dialog {width:950px; margin:30px auto; } }	
+	
+	
+	
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/*  BOOKING  */
+
+/*Preview*/
+body.booking .banner-img {background:url(../img/bookingbg.jpg) no-repeat top center; background-color:#fff; padding:21px;}
+.for-booking .booking {padding:21px; }
+/*Common: no boddy class >*/ .modal-dialog {top:120px; }
+/*Common: no boddy class >*/ .modal-body {padding:0; margin:0 0 -5px 0; min-height:290px; }
+/*Preview*/
+
+
+body.booking-in-progress .booking, body.booking .booking  {background:#fff; border-radius:15px; box-shadow:2px 2px 14px #ccc; padding:0;}
+body.booking-in-progress .banner-img,body.booking .banner-img  {padding:51px;}
+
+.booking .filter-results {border-left:1px solid #939bab; padding:0; }
+.by-parking-type {padding-top:21px;}
+.by-parking-type h2 {font-size:14px; text-transform:none; margin:0 0 5px 0; font-weight:700; }
+.by-parking-type h2:before {height:15px; border-left:1.5px solid #DB5A08; top:2px; margin-right:8px; }
+.by-parking-type .types {padding:4px; margin:0 0 11px 0; }
+.by-parking-type .types span {display:block; font-size:12px; }
+.by-parking-type .types span input {position:relative; top:2px; }
+.by-parking-type .types .counter {display:inline; }
+.by-parking-type .types img.type-icon {float:right; width:17px; height:17px; margin:2px 0 0 0; border-radius:3px;}
+.by-parking-type .terminals {text-transform:uppercase; }
+
+.results-quote-form {padding:18px 15px; border-bottom:1px solid #ddd;  }
+.results-quote-form .form-group {padding:0 4px;}
+.results-quote-form label {display:block; font-weight:400; margin:0 0 10px 0; text-transform:uppercase; }
+.results-quote-form label:before {content:''; margin:0 8px 0 2px; height:15px; float:left; border-left:1.5px solid #DB5A08; position:relative; top:5px; }
+.results-quote-form select {height:31px; } /* + */ @media screen and (min-width:1200px) {.results-quote-form select {width:130px!important; }   }
+.results-quote-form #datetimepicker12, .results-quote-form #datetimepicker13, .results-quote-form #discount-code {max-width:128px; margin:2px 5px 0 0; border-color:#5A7A96; height:30px; }
+.results-quote-form .get-quote {color:#fff; background:#cf631b; padding:8px 11px; float:right; margin:31px 0 0 0; text-transform:uppercase; font-size:11px; border:1px solid transparent; }
+.results-quote-form .get-quote:hover {color:#cf631b; background:#fff; border:1px solid #cf631b;}
+
+.booking .result-row {margin:0; padding:0; border-bottom:3px solid #8e97a8;}
+	
+.booking .airport {background-color:transparent; background-repeat:no-repeat; background-position:left top; min-height:206px; border-right:1px solid #ddd; }
+.booking .airport:last-child {border-bottom-left-radius:15px; }
+.booking .airport.manchester-airport {background-image:url(../img/manchester-airport-result.jpg);}
+.booking .airport h3 {text-transform:none; color:#647994; font-size:22px; letter-spacing:0.2px; padding:10px 0 0 10px; margin:4px 0 0 2px; text-transform:capitalize; }
+.booking .airport h3:before {content:''; color:#DB5A08; margin:0 12px 0 2px; height:21px; float:left; border-left:2px solid #DB5A08; position:relative; top:3px;}
+
+.result-options {padding:21px 31px 11px 31px; background:#f5f6f8; margin-bottom:0; }
+.for-time-and-distance {padding:0 0 14px 0; border-bottom:1px solid #ddd; text-align:center; }
+.result-options .options input {position:relative; top:2px;}
+.result-options .time, .result-options .map {font-size:11px; color:#647994; padding:0 20px 0 10px;}
+.result-options .time i, .result-options .map i {margin-right:6px; position:relative; top:2px; }
+.result-options .result-data {font-size:12px; padding:0 25px 15px 25px; position:relative; border-bottom:1px solid #ddd;}
+.result-options .result-data:before {content:'•'; color:#cf631b; position:absolute; left:0; font-size:21px; top:-7px;}
+.result-options .options span {width:50%; float:left; color:#cf631b; font-size:12px; }
+
+
+.result-actions span.result-price {font-size:33px; display:block; text-align:center; padding:35px 0 15px 0; }
+.result-actions span.result-price .currency {font-size:25px; margin:0 -5px 0 0; font-variant:normal;  }
+.result-actions .btn {color:#fff; background:#a1b752; width:100%; padding:8px 11px; margin:0 0 31px 0; text-transform:uppercase; font-size:11px; border:1px solid transparent;}
+.result-actions .btn:hover {color:#a1b752; background:#fff; border:1px solid #a1b752; }
+.result-actions .for-info-and-map {text-align:center; margin:0;  }
+.result-actions .for-info-and-map li {padding: 0 17px 0 0;}
+.result-actions .moreinfo {margin-left:14px;} 
+.result-actions .for-info-and-map li a:hover,.result-actions .for-info-and-map li a:hover .fa  {text-decoration:none; color:#000; -webkit-transition: all 0.7s ease; -moz-transition: all 0.3s ease; -o-transition: all 0.7s ease; -ms-transition: all 0.7s ease; transition: all 0.7s ease; }
+.result-actions .for-info-and-map i {font-size:15px; color:#CF631B; position:relative; top:-2px;}
+
+
+@media (min-width:992px) and (max-width:1200px) {
+	
+	.by-parking-type h2 {padding-left:5px; } .by-parking-type h2:before {height:30px; }
+	.booking .airport h3 {padding:30px 0 0 10px;} .booking .airport h3:before {height:44px; }
+	.results-quote-form .form-group {width:235px; padding-bottom:10px; padding-right:6px; }
+	.results-quote-form select,.results-quote-form #datetimepicker12, .results-quote-form #datetimepicker13, .results-quote-form #discount-code {width:190px!important; max-width:initial;  }
+	.booking .airport {min-height:263px; background-position:left bottom; background-color:#F5F6F8;}
+	.for-time-and-distance {margin-left:-8px; }
+	.result-options {padding:35px 22px 11px 22px; min-height:263px; }
+	.result-options .time, .result-options .map {padding:0 4px; margin:0 0 0 -1px; }
+	.result-options .time i, .result-options .map i {margin-right:0; }
+	.result-actions .moreinfo {margin-left:0; }
+	.result-actions .for-info-and-map li {padding:0 5px; }
+
+}
+
+@media (min-width:768px) and (max-width:992px) {
+	
+	.booking .filter-results {margin-top:21px; border-left:none; border-top:1px solid #8e97a8;}
+	.results-quote-form .form-group {width:235px; padding-bottom:10px; padding-right:6px; }
+	.results-quote-form select,.results-quote-form #datetimepicker12, .results-quote-form #datetimepicker13, .results-quote-form #discount-code {width:190px!important; max-width:initial;  }
+	.booking .airport {min-height:380px; background-color:#F5F6F8; background-position:left bottom; }
+	.booking .result-row:last-child .airport {border-bottom-left-radius:15px; }
+	.booking .airport h3 {margin-top:45px; } .booking .airport h3:before {height:61px; }
+	.result-options {overflow:auto; padding-bottom:21px; }
+	.result-actions span.result-price {padding:17px 0 7px 0; }
+	.result-actions .btn {max-width:200px; margin:0 auto 20px auto; display:block; }
+	
+}
+
+@media screen and (max-width:768px) {
+	
+	.booking .filter-results {border:none; }
+	.results-quote-form {padding:18px 15px; border-top:1px solid #ddd; margin-top:51px; }
+	.results-quote-form .form-group {overflow:auto; padding:0; }
+	.results-quote-form #datetimepicker12, .results-quote-form #datetimepicker13, .results-quote-form #discount-code {max-width:initial; }
+	.results-quote-form {overflow:auto; }
+	.results-quote-form .get-quote {float:none; width:100%; margin:10px 0 41px 0;}
+	.booking .airport {min-height:382px; background-color:#F5F6F8; background-position:left bottom; }
+	.booking .result-row:last-child .airport {border-bottom-left-radius:15px; }
+	.booking .airport h3 {font-size:21px; padding:90px 0 0 0; margin:0; } .booking .airport h3:before {height:81px; }
+	.result-options .time, .result-options .map {padding:0 5px; }
+	.booking .result-options {overflow:auto; }
+	.result-actions span.result-price {padding:15px 0; }
+	.result-actions .btn {margin:0 0 23px 0; }
+}
+
+@media screen and (max-width:620px) {
+	
+	.booking .airport, .booking .result-info {width:100%; }	
+	.booking .airport {min-height:245px; background-size:cover; text-shadow:1px 1px 0 rgb(255, 255, 255); }
+	.booking .airport h3 {padding:21px 0 0 0; text-align:left; } .booking .airport h3:before {float:none; height:31px; top:13px; display:inline-block; margin:0 11px 0 21px; }
+	.booking .result-actions {padding-bottom:10px; }
+	
+}
+
+@media screen and (max-width:390px) {
+	
+	.result-options .options span {width:100%; padding:0 0 0 10%; }
+	.for-time-and-distance {text-align:left; }
+	.result-options .time, .result-options .map {padding:5px; }
+	.result-options .map i {margin:0 3px; }
+	
+}
+
+@media screen and (max-width:340px) {
+	
+	.booking .airport h3:before {float:left; height:71px; top:1px; margin-left:10px; }	
+	
+}
+
+
+
+
+
+/* CUSTOMER LOGIN AS A GUEST */
+
+.container.for-login {padding:51px 41px; }	
+.customer-login {background:#fff; padding:0; margin:0; border-radius:15px; box-shadow:2px 2px 14px #ccc; } 
+.returning-customer {padding:10px 0 5px 21px; margin:0; background:#f5f6f8; border-bottom:1px solid #dcdfe4;border-top-left-radius:15px; border-top-right-radius:15px;  }
+.returning-customer form label {display:inline-block; font-weight:400; margin:0 11px 10px 0; color:#647994; }
+.returning-customer form label:before {content:''; margin:0 8px 0 2px; height:15px; float:left; border-left:2px solid #DB5A08; position:relative; top:5px; }
+.returning-customer span {margin:0 21px 0 11px; font-size:12px; }
+.returning-customer span input {position:relative; top:4px; left:-2px; margin-right:5px; width:17px; height:17px; }
+.all-customer-details {margin:0; padding:0; }
+.detail-and-payment,.summary-sidebar {padding:0 0 0 21px; }
+.detail-and-payment {border-right:1px solid #dcdfe4; }
+.detail-and-payment h2 {text-transform:none; font-size:22px; }
+.detail-and-payment h2:before {margin:0 8px 0 2px; height:21px; }
+.detail-and-payment input,.detail-and-payment select  {margin:2px 5px 0 0; border-color:#5A7A96; height:33px; }
+.detail-and-payment select {background:#647994; height:33px; border-radius:4px; color:#fff; padding:6px 12px; font-size:11.7px; letter-spacing:0.3px; position:relative; top:2px; }
+.detail-and-payment select option {padding:7px 0; height:; }
+.detail-and-payment legend {color:#DA5500; font-size:15px; border:none; }
+.for-travel-details legend {color:#647994; }
+.detail-and-payment legend span {font-size:12px; }
+.guest-login ::-webkit-input-placeholder {font-size:12px; color:#b7c3d1; padding-top:3px; }
+.guest-login :-moz-placeholder {font-size:12px; color:#b7c3d1; padding-top:3px;}
+.guest-login ::-moz-placeholder {font-size:12px; color:#b7c3d1; padding-top:3px;}
+.guest-login :-ms-input-placeholder {font-size:12px; color:#b7c3d1; padding-top:3px;}
+.detail-and-payment .notice {font-size:11px; padding:8px 0 0 0; font-weight:700; margin:0; }
+.detail-and-payment .form-group {border-bottom:1px solid #dcdfe4; width:100%; padding:8px 0 11px 0; }
+.for-customer-email {padding-top:0!important; }
+.for-customer-email input {width:268px!important; }
+.for-customer-details input {width:195px!important;}
+.for-customer-details #last-name {width:270px!important;}
+.for-customer-details #mobile {width:156px!important;}
+.for-car-details #registration {width:155px!important; }
+.for-car-details #model {width:132px!important; }
+.for-car-details #make {width:127px!important; }
+.for-car-details #color,.for-travel-details #outbound-flight-number,.for-travel-details #inbound-flight-number  {width:155px!important; }
+.for-extras {border-bottom:none!important; }
+.guest-login .for-payment {border-bottom:none!important; }
+.for-payment legend {border-bottom:4px solid #CF631B; padding:0 0 4px 0; margin:20px 0 10px 0; }
+.for-payment legend span {background:#cf631b; color:#fff; padding:10px 20px; border-top-left-radius:6px; border-top-right-radius:6px; text-transform:uppercase; font-size:14px; letter-spacing:1.5px; }
+.for-payment legend span:before {content:''; position:absolute; width:21px; height:4px; border-bottom:4px solid #CF631B; left:0; margin:25px 0 0 0; }
+.for-payment .total-to-pay {color:#647994; font-size:18px; }
+.customer-login .total-to-pay .currency {margin-right:-4px; }
+.customer-login .payment-options .cover, .customer-login .payment-options .sms {max-width:250px;}
+.customer-login .payment-options .sms {float:left;}
+.customer-login .payment-options label {color:#657992; font-weight:700; font-size:10.5px; }
+.customer-login .payment-options p {font-size:10px; margin:0; padding:0 17px; clear:both; font-weight:700; line-height:10px;  }
+.customer-login .payment-options .cover img, .customer-login .payment-options .sms img {width:14px; height:14px; margin:0 0 0 17px; border-radius:3px;  }
+.customer-login .payment-options span,.customer-login .secure-payments {float:left; }
+.customer-login .secure-payments {margin:0 60px 0 0; }
+.customer-login .make-payment {padding:14px 0 0 0; }
+.customer-login .make-payment .pay-button {margin-right:21px; }
+.customer-login .make-payment .btn {color:#fff; background:#a1b752; width:100%; padding:8px 21px; margin:2px 0 0 0; text-transform:uppercase; font-size:11.5px;  letter-spacing:1px; }
+.customer-login .make-payment .btn:hover {color:#a1b752; background:#fff; border:1px solid #a1b752;}
+#sms-confirmation, #cancellation-cover {margin:0; height:auto; position:relative; top:3px; left:1px;  }
+
+.customer-login .summary-sidebar ul {padding:31px 15px 0 0; }
+
+.customer-login .summary-sidebar ul li {list-style-type:none; border-bottom:1px solid #ddd; padding:13px 0;  }
+.customer-login .summary-sidebar ul li.totals {font-size:12px; overflow:auto; }
+.customer-login .summary-sidebar ul li.totals span {color:#cf631b; float:right; display:inline-block; font-size:19px; margin:-8px 0 0 0;}
+.customer-login .summary-sidebar .where-and-when strong {display:block; font-weight:400; margin:0 11px 6px 0; color:#647994; font-size:12px; text-transform:capitalize; }
+.customer-login .summary-sidebar .where-and-when strong:before {content:''; margin:0 5px 0 2px; height:14px; float:left; border-left:1px solid #DB5A08; position:relative; top:3px; }
+.customer-login .summary-sidebar .where-and-when p {font-size:12px; line-height:15px; padding:0 21px 0 1px; font-weight:700; }
+.customer-login .summary-sidebar .where-and-when .fa {font-size:15px; color:#CF631B; position:relative; top:-2px; }
+.customer-login .summary-sidebar .where-and-when a:hover, .customer-login .summary-sidebar .where-and-when a:hover .fa {text-decoration:none; color:#000; -webkit-transition:all 0.7s ease; -moz-transition:all 0.3s ease; -o-transition:all 0.7s ease; -ms-transition:all 0.7s ease; transition:all 0.7s ease; }
+.customer-login .summary-sidebar .subtotal {float:right; font-style:normal; }
+.customer-login .summary-sidebar .booking-fee p, .customer-login .summary-sidebar .totals p {font-size:10px; margin:0; padding:14px 17px 0 0; clear:both; font-weight:700; line-height:10px; color:#657992; }
+.customer-login .summary-sidebar .booking-fee b {font-weight:400; font-size:12px; }
+.customer-login .summary-sidebar .booking-fee span {float:right; font-style:normal; font-size:11px; margin:2px 0 0 0; }
+.customer-login .summary-sidebar .booking-fee p a {display:block; }
+.customer-login .summary-sidebar .booking-fee p a, .customer-login .summary-sidebar .totals p a {text-decoration:underline; }
+.customer-login .summary-sidebar .totals:last-child {border:none; }
+.customer-login .summary-sidebar .totals p a:hover {text-decoration:none; }
+
+
+/* New extra options */
+#coupon-worth {border-radius:4px; margin:2px 5px 0 0; border:1px solid #5A7A96; height:33px; padding-left:11px; }
+#car-wash {margin:0; height:auto; position:relative; top:3px; left:1px; }
+.extra-options label {color:#657992; font-weight:700; font-size:10.5px;}
+.login .returning-customer-login {border-bottom:1px solid #dcdfe4; padding-bottom:7px; } 
+
+	@media screen and (max-width:768px) {
+
+		.extra-options li {display:block; }
+		.extra-options li:last-child {padding-top:21px; } 
+		#car-wash,.extra-options li label  {float:left; width:auto!important; padding: 2px 0 0 5px;  }
+	}
+
+
+
+
+
+@media (min-width:992px) and (max-width:1200px) {
+	
+	.for-customer-details #first-name,.for-customer-details #last-name  {width:170px!important; }
+	.for-car-details #registration {width:130px!important; }
+	.for-car-details #make,.for-car-details #model {width:120px!important; }
+	.for-car-details #color {width:90px!important;}
+	.customer-login .secure-payments {margin:0 15px 0 0; }
+	.customer-login .payment-options .cover, .customer-login .payment-options .sms {max-width:180px; }
+	
+}
+
+@media (min-width:768px) and (max-width:992px) {
+	
+	.detail-and-payment {border-right:none; border-bottom:1px solid #dcdfe4; padding-right:21px; border-bottom:4px solid #dcdfe4; padding-bottom:11px; }
+	.returning-customer {padding:10px 0 15px 21px;}
+	.returning-customer form label {width:100%; margin:10px 11px 10px 10px; }
+	.for-customer-details input {width:155px!important; }
+	.for-customer-details #last-name {width:180px!important; }
+	.for-car-details #registration {width:115px!important; }
+	.for-car-details #make,.for-car-details #model,.for-car-details #color {width:110px!important; }
+	.customer-login .secure-payments {margin:0 15px 0 0; }
+	.customer-login .payment-options .cover, .customer-login .payment-options .sms {max-width:182px; }
+	.guest-login .for-payment legend span:after {content:''; position:absolute; width:21px; height:4px; border-bottom:4px solid #CF631B; right:0; margin:25px 0 0 0; }
+
+}
+
+@media screen and (max-width:768px) {
+	
+	.detail-and-payment {border-right:none; border-bottom:1px solid #dcdfe4; padding-right:21px; border-bottom:4px solid #dcdfe4; padding-bottom:11px; }
+	.returning-customer {padding:10px 0 5px 21px;}
+	.returning-customer form label {width:100%; margin:10px 11px 10px 10px; }
+	.all-customer-details input, .detail-and-payment select {width:100%!important; float:none; margin-bottom:10px; }	
+	.guest-login .for-payment legend span:after {content:''; position:absolute; width:21px; height:4px; border-bottom:4px solid #CF631B; right:0; margin:25px 0 0 0; }
+	.for-customer-details #last-name,.for-customer-details #mobile, .for-car-details #registration, .for-car-details #make, .for-car-details #model, .for-car-details #color,.for-car-details #color, .for-travel-details #outbound-flight-number, .for-travel-details #inbound-flight-number {width:100%!important;}
+	#sms-confirmation, #cancellation-cover {width:initial!important; }
+	.customer-login .payment-options li, .make-payment li  {width:100%; max-width:initial!important; margin:0 0 20px 0;  }
+	.customer-login .make-payment li  {text-align:center; }
+	.customer-login .secured-by,.customer-login .make-payment {margin-bottom:0; padding-bottom:0; }
+	.summary-sidebar {padding-bottom:21px;}
+	.customer-login .for-payment .total-to-pay {padding-top:21px; }
+	
+	
+}
+
+
+@media screen and (max-width:605px) {.returning-customer span {display:block; } }
+
+
+@media screen and (max-width:435px) {
+	
+	.container.for-login {padding:51px 31px; }
+	.customer-login .returning-customer {padding-left:10px;  }
+	.customer-login .returning-customer form label {font-size:12px; margin:0 0 10px 3px;  }
+	.customer-login .returning-customer form label:before {top:3px; }
+	.customer-login .returning-customer span {font-size:11px; } 
+	.customer-login .returning-customer span input {width:initial; height:initial;}
+	.customer-login .detail-and-payment h2 {font-size:19px; }
+	.customer-login .secure-payments img {max-width:100%; height:auto; }
+	.customer-login .payment-options {margin-bottom:0; }
+		
+}
+
+
+
+/* RETURNING CUSTOMER LOGIN */
+
+.login .detail-and-payment .form-group {border:none!important; }
+.returning-customer-login #login,.returning-customer-login #password {width:268px!important; }
+.returning-customer-login .btn {position:relative; top:1px; background:#a0b651; color:#fff; border:1px solid transparent; height:33px;  }
+.returning-customer-login .btn:hover {background:#fff; color:#a0b651; border:1px solid #a0b651; }
+
+
+@media screen and (max-width:992px) {
+	
+	.login .for-payment legend span:after {content:''; position:absolute; width:21px; height:4px; border-bottom:4px solid #CF631B; right:0; margin:25px 0 0 0; }
+	
+}
+
+@media screen and (max-width:768px) {
+	
+	.returning-customer-login #login,.returning-customer-login #password {width:100%!important; }
+	.returning-customer-login .btn {width:100%; top:2px; }
+
+}
+
+
+
+
+/* THANK YOU SCREEN */
+
+.thank-you {padding:51px 41px; }
+.thank-you h2 {text-transform:none; font-size:22px; margin-bottom:21px; }
+label.paid {display:inline-block; font-weight:400; margin:5px 11px 10px 0; color:#647994; }
+label.paid:before {content:''; margin:0 8px 0 2px; height:15px; float:left; border-left:2px solid #DB5A08; position:relative; top:5px;}
+.payment-received {padding:0 21px;} 
+.payment-received p {font-size:12px; }
+.payment-received p strong {display:block; color:#cf631b; text-transform:uppercase;  }
+.payment-received p:first-child,.payment-received p:nth-child(2) {font-weight:700; }
+.even-more {padding:10px 10px 20px 0; }
+.even-more .banner1 {max-height:360px; width:100%; background-size:contain; background-position:right top; }
+.even-more .mensaje {font-size:21px; margin:0 0 0 140px; }
+.mensaje span {padding:20px 0 0 0; }
+
+
+@media (min-width:992px) and (max-width:1200px) {
+
+	.thank-you h2 {font-size:20px; }
+	.even-more .banner1 {max-height:340px; }
+
+}
+
+
+@media screen and (max-width:992px) {
+
+	.even-more .banner1 {max-height:initial; margin:0; }
+	.even-more .mensaje span {padding:32px 0 0 0; }
+	.even-more .mensaje .btn {margin:13px 0 0 0; } 
+
+}
+
+@media screen and (max-width:768px) {
+
+	.even-more .banner1 {background:url(../img/banner-1.png)no-repeat; background-size:cover; min-height:300px; margin:0 0 11px 0; text-align:center; } 
+	.even-more .mensaje {width:100%; margin:40px 0 0 0; text-align:center; }
+
+}
+
+@media screen and (max-width:517px) { .even-more .banner1 {margin:0 0 -11px 0; padding:0; background-position:center; } }
+
+@media screen and (max-width:380px) { 
+
+	.thank-you h2:before {height:50px; }
+	.even-more, .even-more .banner1 {margin:0 0 -11px 0; padding:0; background-position:center; }
+
+ }
+ 
+@media screen and (max-width:300px) { .thank-you h2:before {height:80px; } }
+
+
+/* SINGLE AIRPORT */
+
+
+.single .banner-img {padding-bottom:0; }
+.single .mensaje h1 {font-size:30px; line-height:31px; text-transform:uppercase; margin:24px 0 0 0;}
+.single .mensaje p {font-size:21px; line-height:21px; bottom:50px; position:absolute; width:50%; }
+.single .facts {padding:; background:rgba(255, 255, 255, 0.94); border-radius:15px; padding:31px 21px 21px 21px; margin-top:19px; }
+.single .facts img {width:100%; height:auto; margin:0; padding:8px 4px 14px 4px; }
+.for-single-info h2,.for-single-info h3 {margin:0; padding:0 0 11px 16px; text-transform:uppercase; font-size:19px; color:#647994;  }
+.for-single-info h2:before,.for-single-info h3:before {content: ''; margin:0 12px 0 2px; float:left; border-left:2px solid #DB5A08; position:relative; top:3px; height:41px; }
+.for-single-info p {padding:5px 0 5px 18px; font-size:14px; }
+.for-single-info img {width:100%; height:auto; padding:0 19px; }
+.for-single-info .facts ul {padding:0; }
+.for-single-info .facts ul li {list-style-type:none; line-height:25px; }
+.for-single-info .facts ul li .fa {color:#A1B752; padding:0 10px 0 0; font-size:21px; position:relative; top:2px; }
+
+
+.single .about h3 {color:#647994; font-weight:500; text-transform:uppercase; padding:0 0 10px 0;}
+.single .about h3:before {content: ''; margin:0 12px 0 2px; float:left; border-left:2px solid #DB5A08; position:relative; top:3px;}
+.single .getting iframe {border:11px solid #fff; border-radius:15px; max-width:100%; }
+.single .about p {font-size:13.4px; padding:3px 5px 15px 4px; } 
+.single .for-getting-and-rating {background:#fff; padding:0 31px 21px 31px;  }
+.single .getting, .single .rating {padding:0 21px;}
+
+.for-single-info {padding:71px 41px 21px 41px; background:#fff; }
+
+.single .get-quote h2 {font-size:19px; margin:0 0 21px 7px; }
+.single .get-quote h2:before {height:42px; border-color:#FFA500; }
+
+
+@media screen and (min-width: 1200px) {
+	
+	.single .formulario-home form { height:355px; }
+
+}
+
+@media screen and (max-width: 1200px) {
+	
+	.single .get-quote h2 { font-size:16px; margin:0 0 31px 7px; }
+	.for-single-info p {min-height:90px; }
+	.for-getting-and-rating {padding:0 41px 21px 41px; }
+	.for-getting-and-rating h2 {font-size:19px; } 
+
+}
+
+@media screen and (max-width: 992px) {
+	
+	.single .mensaje {margin-top:150px; }
+	.single .mensaje h1 {font-size:21px; line-height:21px; text-shadow:0px 5px 30px rgba(0, 0, 0, 1); }
+	.single .mensaje p {width:70%; text-shadow:0px 5px 30px rgba(0, 0, 0, 1); }
+	.for-single-info p {min-height:initial; }
+	.for-single-info img {padding-bottom:60px; }
+	.single .facts {padding-top:0; margin-top:0; }
+	.single .get-quote h2:before {height:22px; }
+	.formulario-home form {padding:20px 7px 0 7px; }
+	.single .for-getting-and-rating {padding-bottom:41px; }
+
+}
+
+@media screen and (max-width: 768px) {
+	
+	.banner1 {height:initial; max-height:initial; }
+	.single .mensaje {margin-top:0; }
+	.single .mensaje h1 {font-size:36px; line-height:36px; margin-bottom:21px; }
+	.single .mensaje p {position:static; width:100%; }
+
+}
+
+@media screen and (max-width: 440px) {
+	
+	.banner1 {padding:0 0 20px 0; }
+	.single .mensaje h1 {font-size:29px; line-height:28px; }
+
+}
+
+
+/* NPS Modals */
+
+.nav-tabs {padding:0 0 0 8px; }
+.nav-tabs>li>a {border:1px solid #5A7A96; border-bottom-color:transparent; padding:6px 53px 4px 53px; margin:0 6px; border-radius:4px; border-bottom-left-radius:initial; border-bottom-right-radius:initial; color:#647994; }
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {background-color:#647994; color:#fff; }
+.tab-content {border-top:4px solid #647994; }
+.modal-content {border-radius:initial; border:14px solid #fff; border-top:0; }
+.modal-header {padding:40px 15px 15px; border-bottom:none; }
+.modal-header .close {position:absolute; top:10px; right:0; width:40px; height:40px; font-size:40px; }
+h4.tabs-heading {text-transform:none; color:#647994; font-size:22px; letter-spacing:0.2px; padding:10px 0 0 0; margin:4px 0 0 0; text-transform:capitalize; float:left; }
+h4.tabs-heading:before {content:''; color:#DB5A08; margin:0 8px 0 -2px; height:24px; float:left; border-left:2px solid #DB5A08; position:relative; top:7px;}
+
+.tab-pane {overflow:auto; }
+.tab-booking {}
+.tab-booking .btn {float:right; background:#A1B752; color:#fff; position:relative; top:0;}
+.tab-booking .btn:hover {background:#fff; color:#A1B752; border:1px solid #A1B752;  }
+.modal-header .lead {float:left; width:70%; font-size:12px; clear:both; padding:8px 8px 0 0; }
+.tab-book .btn {float:right; background:#A1B752; color:#fff; }
+.tab-content iframe {width:100%; height:auto; min-height:422px;  }
+.info-tabs h2 {padding:21px 0 21px 40px; font-size:16px; text-transform:none; }
+.info-tabs h2:before {content:''; margin:0 12px 0 2px; height:25px; float:left; border-left:2px solid #DB5A08; position:relative; top:0;}
+.tab-summary-list {padding:0 0 0 40px; overflow:auto; }
+.tab-summary-list li {float:left; width:50%; list-style-type:none; padding:8px; color:#647994; }
+.tab-summary-list li span {color:#A1B752; }
+.tab-summary-list .fa {color:#A1B752; padding:0 10px 0 0; font-size:21px; position:relative; top:2px;  -webkit-transition: all 0.7s ease; -moz-transition: all 0.3s ease; -o-transition: all 0.7s ease; -ms-transition: all 0.7s ease; transition: all 0.7s ease; }
+.tab-summary-list li:hover .fa {padding-left:5px; }
+#full-info .text {padding:10px 40px; }
+#full-info p {font-size:12px; padding:0 25px 15px 25px; position:relative; border-bottom:1px solid #ddd;}
+#full-info p:last-child {border:none; }
+#full-info p:before {content:'•'; color:#cf631b; position:absolute; left:0; font-size:21px; top:-7px; }
+#full-info p strong {display:block; color:#647994; }
+.tab-rate-form {width:90%!important; padding:14px; margin:0 40px; box-shadow:none!important; border:none!important; }
+.tab-important {padding:0 40px 21px 40px; }
+.tab-important .table>thead>tr>th {border-bottom-color:#647994; }
+
+
+
+
+
+/**//* NPS MQ´s Modals *//**/
+
+	@media (min-width:768px) and (max-width:992px) {
+		
+		.nav-tabs>li>a {padding:6px 40px 4px 40px; }
+		
+	}
+	
+	
+	@media (min-width:605px) and (max-width:768px) { 
+		
+		.nav-tabs>li>a {padding:6px 16px 4px 16px; margin:0 1px; } 
+		.tab-summary-list {padding:0 0 0 11px; }
+		.tab-summary-list .fa {padding:0 5px 0 0; font-size:17px; }
+
+	}
+	
+	@media screen and (max-width:605px) {
+		
+		.nav-tabs>li>a {padding:6px 16px 4px 16px; margin:0 1px; }
+		.tab-booking .btn {top:4px; }
+		.tab-summary-list {padding:0 0 0 21px; }
+		.tab-summary-list li {width:100%;}
+		
+	}
+	
+	@media screen and (max-width:562px) {
+		
+		.nav-tabs {padding:0; }
+		.nav-tabs>li, .modal-header .lead {width:100%; }
+		.tab-booking .btn {width:100%; float:none; clear:both; top:-1px; }
+		.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {border-color:#647994; }
+		.tab-content {background:#F7F4F4; padding:0 0 20px 0; }
+		.info-tabs h2 {padding:21px 0 21px 21px; }
+		.tab-summary-list {padding:0 0 0 21px; }
+		.tab-summary-list li {width:100%;}
+		.tab-important {padding:0 19px; }
+		.tab-important .table {font-size:10px; line-height:11px; }
+		.tab-important .table * {padding:6px 3px; line-height:11px;}
+		.tab-rate-form {margin:0 17px;}
+		#full-info .text {padding:10px 21px; }
+		.tab-summary-list {padding:0 0 0 11px; }
+		.tab-summary-list .fa {padding:0 5px 0 0; font-size:17px; }		
+		
+	}	
+	
+
+/**//* NPS MQ´s Modals *//**/
+
+
+/* NPS Modals */
+
+
+
+

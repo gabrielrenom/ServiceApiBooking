@@ -20,7 +20,6 @@
     <DnxInvisibleContent Include="package.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ACP.Business\ACP.Business.csproj" />
     <ProjectReference Include="..\ACP.Data\ACP.Data.csproj" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.targets" Condition="'$(VSToolsPath)' != ''" />

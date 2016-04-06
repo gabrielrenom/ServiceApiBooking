@@ -2,28 +2,10 @@
   "locked": false,
   "version": 2,
   "targets": {
-    "DNX,Version=v4.6.1": {
-      "ACP.Business/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.6.1",
-        "dependencies": {
-          "ACP.Data": "1.0.0",
-          "ACP.HMAC": "1.0.0",
-          "Microsoft.AspNet.WebApi.Client": "5.2.3",
-          "Newtonsoft.Json": "6.0.4"
-        }
-      },
+    "DNX,Version=v4.6": {
       "ACP.Data/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.6.1"
-      },
-      "ACP.HMAC/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.6.1",
-        "dependencies": {
-          "Microsoft.VisualStudio.QualityTools.UnitTestFramework": "1.0.0",
-          "System.Net.Http.Formatting": "1.0.0"
-        }
+        "framework": ".NETFramework,Version=v4.6"
       },
       "EntityFramework.Commands/7.0.0-rc1-final": {
         "type": "package",
@@ -1154,21 +1136,6 @@
           "lib/net451/Microsoft.AspNet.Tooling.Razor.dll": {}
         }
       },
-      "Microsoft.AspNet.WebApi.Client/5.2.3": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "6.0.4"
-        },
-        "frameworkAssemblies": [
-          "System.Net.Http"
-        ],
-        "compile": {
-          "lib/net45/System.Net.Http.Formatting.dll": {}
-        },
-        "runtime": {
-          "lib/net45/System.Net.Http.Formatting.dll": {}
-        }
-      },
       "Microsoft.AspNet.WebUtilities/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -1900,10 +1867,6 @@
           "lib/net451/Microsoft.Net.Http.Headers.dll": {}
         }
       },
-      "Microsoft.VisualStudio.QualityTools.UnitTestFramework/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.6.1"
-      },
       "Microsoft.VisualStudio.Web.BrowserLink.Loader/14.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -2029,10 +1992,6 @@
         "runtime": {
           "lib/net45/_._": {}
         }
-      },
-      "System.Net.Http.Formatting/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.6.1"
       },
       "System.Numerics.Vectors/4.1.1-beta-23516": {
         "type": "package",
@@ -5003,28 +4962,10 @@
         }
       }
     },
-    "DNX,Version=v4.6.1/win7-x86": {
-      "ACP.Business/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.6.1",
-        "dependencies": {
-          "ACP.Data": "1.0.0",
-          "ACP.HMAC": "1.0.0",
-          "Microsoft.AspNet.WebApi.Client": "5.2.3",
-          "Newtonsoft.Json": "6.0.4"
-        }
-      },
+    "DNX,Version=v4.6/win7-x86": {
       "ACP.Data/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.6.1"
-      },
-      "ACP.HMAC/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.6.1",
-        "dependencies": {
-          "Microsoft.VisualStudio.QualityTools.UnitTestFramework": "1.0.0",
-          "System.Net.Http.Formatting": "1.0.0"
-        }
+        "framework": ".NETFramework,Version=v4.6"
       },
       "EntityFramework.Commands/7.0.0-rc1-final": {
         "type": "package",
@@ -6158,21 +6099,6 @@
           "lib/net451/Microsoft.AspNet.Tooling.Razor.dll": {}
         }
       },
-      "Microsoft.AspNet.WebApi.Client/5.2.3": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "6.0.4"
-        },
-        "frameworkAssemblies": [
-          "System.Net.Http"
-        ],
-        "compile": {
-          "lib/net45/System.Net.Http.Formatting.dll": {}
-        },
-        "runtime": {
-          "lib/net45/System.Net.Http.Formatting.dll": {}
-        }
-      },
       "Microsoft.AspNet.WebUtilities/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -6904,10 +6830,6 @@
           "lib/net451/Microsoft.Net.Http.Headers.dll": {}
         }
       },
-      "Microsoft.VisualStudio.QualityTools.UnitTestFramework/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.6.1"
-      },
       "Microsoft.VisualStudio.Web.BrowserLink.Loader/14.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -7033,10 +6955,6 @@
         "runtime": {
           "lib/net45/_._": {}
         }
-      },
-      "System.Net.Http.Formatting/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.6.1"
       },
       "System.Numerics.Vectors/4.1.1-beta-23516": {
         "type": "package",
@@ -7169,28 +7087,10 @@
         }
       }
     },
-    "DNX,Version=v4.6.1/win7-x64": {
-      "ACP.Business/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.6.1",
-        "dependencies": {
-          "ACP.Data": "1.0.0",
-          "ACP.HMAC": "1.0.0",
-          "Microsoft.AspNet.WebApi.Client": "5.2.3",
-          "Newtonsoft.Json": "6.0.4"
-        }
-      },
+    "DNX,Version=v4.6/win7-x64": {
       "ACP.Data/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.6.1"
-      },
-      "ACP.HMAC/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.6.1",
-        "dependencies": {
-          "Microsoft.VisualStudio.QualityTools.UnitTestFramework": "1.0.0",
-          "System.Net.Http.Formatting": "1.0.0"
-        }
+        "framework": ".NETFramework,Version=v4.6"
       },
       "EntityFramework.Commands/7.0.0-rc1-final": {
         "type": "package",
@@ -8324,21 +8224,6 @@
           "lib/net451/Microsoft.AspNet.Tooling.Razor.dll": {}
         }
       },
-      "Microsoft.AspNet.WebApi.Client/5.2.3": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "6.0.4"
-        },
-        "frameworkAssemblies": [
-          "System.Net.Http"
-        ],
-        "compile": {
-          "lib/net45/System.Net.Http.Formatting.dll": {}
-        },
-        "runtime": {
-          "lib/net45/System.Net.Http.Formatting.dll": {}
-        }
-      },
       "Microsoft.AspNet.WebUtilities/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -9070,10 +8955,6 @@
           "lib/net451/Microsoft.Net.Http.Headers.dll": {}
         }
       },
-      "Microsoft.VisualStudio.QualityTools.UnitTestFramework/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.6.1"
-      },
       "Microsoft.VisualStudio.Web.BrowserLink.Loader/14.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -9199,10 +9080,6 @@
         "runtime": {
           "lib/net45/_._": {}
         }
-      },
-      "System.Net.Http.Formatting/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.6.1"
       },
       "System.Numerics.Vectors/4.1.1-beta-23516": {
         "type": "package",
@@ -15971,25 +15848,9 @@
     }
   },
   "libraries": {
-    "ACP.Business/1.0.0": {
-      "type": "project",
-      "path": "../wrap/ACP.Business/project.json"
-    },
     "ACP.Data/1.0.0": {
       "type": "project",
       "path": "../wrap/ACP.Data/project.json"
-    },
-    "ACP.HMAC/1.0.0": {
-      "type": "project",
-      "path": "../wrap/ACP.HMAC/project.json"
-    },
-    "Microsoft.VisualStudio.QualityTools.UnitTestFramework/1.0.0": {
-      "type": "project",
-      "path": "../wrap/Microsoft.VisualStudio.QualityTools.UnitTestFramework/project.json"
-    },
-    "System.Net.Http.Formatting/1.0.0": {
-      "type": "project",
-      "path": "../wrap/System.Net.Http.Formatting/project.json"
     },
     "EntityFramework.Commands/7.0.0-rc1-final": {
       "type": "package",
@@ -16804,20 +16665,6 @@
         "Microsoft.AspNet.Tooling.Razor.1.0.0-rc1-final.nupkg",
         "Microsoft.AspNet.Tooling.Razor.1.0.0-rc1-final.nupkg.sha512",
         "Microsoft.AspNet.Tooling.Razor.nuspec"
-      ]
-    },
-    "Microsoft.AspNet.WebApi.Client/5.2.3": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "3kiI8peSXbXHDDrRuo+QaX0iCEVRe0nvn2dBDRw656uPX32UalbBlSIDUDlJxu05eau4tnuhsikiUuugvvoUoQ==",
-      "files": [
-        "lib/net45/System.Net.Http.Formatting.dll",
-        "lib/net45/System.Net.Http.Formatting.xml",
-        "lib/portable-wp8+netcore45+net45+wp81+wpa81/System.Net.Http.Formatting.dll",
-        "lib/portable-wp8+netcore45+net45+wp81+wpa81/System.Net.Http.Formatting.xml",
-        "Microsoft.AspNet.WebApi.Client.5.2.3.nupkg",
-        "Microsoft.AspNet.WebApi.Client.5.2.3.nupkg.sha512",
-        "Microsoft.AspNet.WebApi.Client.nuspec"
       ]
     },
     "Microsoft.AspNet.WebUtilities/1.0.0-rc1-final": {
@@ -21923,8 +21770,7 @@
       "Microsoft.Extensions.Logging.Debug >= 1.0.0-rc1-final",
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0-rc1-final"
     ],
-    "DNX,Version=v4.6.1": [
-      "ACP.Business >= 1.0.0-*",
+    "DNX,Version=v4.6": [
       "ACP.Data >= 1.0.0-*"
     ],
     "DNXCore,Version=v5.0": []
