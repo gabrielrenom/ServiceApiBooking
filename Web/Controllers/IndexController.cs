@@ -1,10 +1,12 @@
-﻿using ACP.Business.Services.Interfaces;
+﻿
+using ACP.Business.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Web.Models;
 
 namespace Web.Controllers
 {
@@ -32,13 +34,24 @@ namespace Web.Controllers
                
             }
 
-            return View();
+            return View(new QuoteModelView { Airport="", Discount="", ReturnDate="", DropOffDate="" });
         }
 
         [HttpPost]
-        public async Task<ActionResult> GetQuote()
+        public async Task<ActionResult> Index(QuoteModelView model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                return this.RedirectToAction("Index");
+            }
+            else
+            {
+                //## IT Gets all the airports
+                var airports = await _airportservice.GetAll();
+                ViewBag.airports = airports != null ? airports.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList() : null;
+                return View(model);
+            }
+                
         }
     }
 }

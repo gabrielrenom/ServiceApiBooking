@@ -1,4 +1,5 @@
-﻿
+﻿@model Web.Models.QuoteModelView
+
 <div class="container">
     <div class="col-lg-8 col-md-8 col-sm-5 banner banner1">
         <div class="mensaje">
@@ -9,32 +10,36 @@
     <div class="col-lg-4 col-md-4 col-sm-7 get-quote">
 
         <div class="formulario-home">
-                <form method="post" action="@Url.Action("GetQuote", "Index")">
-                    
+                <form method="post" action="@Url.Action("Index", "Index")">
+                    @Html.AntiForgeryToken()
+
                     <div class="form-group">
                         <label for="date">AIRPORT</label>
-                        <select class="form-control back1 color4" id="airport" name="airport">
+                        <select class="form-control back1 color4" id="Airport" name="Airport">
                             <option value="">-- Select Airport --</option>
                             @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.airports)
                             {
                                 <option value=@item.Value>@item.Text</option>
                             }
                         </select>
+                    
                     </div>
 
                     <div class="form-group">
                         <label for="date">Drop-off date/time</label>
-                        <input type="text" id="datetimepicker12" class="form-control color5" placeholder="02/03/2016 03:45" />
+                        <input type="text" id="DropOffDate" name="DropOffDate" class="form-control color5" placeholder="02/03/2016 03:45"/>
+                        @Html.ValidationMessageFor(model => model.DropOffDate)
                     </div>
-
+                    
                     <div class="form-group">
                         <label for="date">Return date/time</label>
-                        <input type="text" id="datetimepicker13" class="form-control color5" placeholder="MM/DD/YYYY" />
+                        <input type="text" id="ReturnDate" name="ReturnDate" class="form-control color5" placeholder="MM/DD/YYYY" value="@Model.ReturnDate" />
+                        @Html.ValidationMessageFor(model => model.ReturnDate)
                     </div>
 
                     <div class="form-group">
                         <label for="input">Discount</label>
-                        <input type="input" class="form-control" id="discount-code" placeholder="Insert discount code here" />
+                        <input type="text" class="form-control" id="Discount" name="Discount" placeholder="Insert discount code here"  />
                     </div>
 
                     <button type="submit" class="btn btn-default">Get quote</button>
@@ -218,16 +223,8 @@ var logic = function( currentDateTime ){
 };
 var dateToDisable = new Date();
 	dateToDisable.setDate(dateToDisable.getDate() + 2);
-$('#datetimepicker11').datetimepicker({
-	beforeShowDay: function(date) {
-		if (date.getMonth() == dateToDisable.getMonth() && date.getDate() == dateToDisable.getDate()) {
-			return [false, ""]
-		}
 
-		return [true, ""];
-	}
-});
-$('#datetimepicker12').datetimepicker({
+$('#DropOffDate').datetimepicker({
 	beforeShowDay: function(date) {
 		if (date.getMonth() == dateToDisable.getMonth() && date.getDate() == dateToDisable.getDate()) {
 			return [true, "custom-date-style"];
@@ -237,7 +234,7 @@ $('#datetimepicker12').datetimepicker({
 	}
 });
 
-$('#datetimepicker13').datetimepicker({
+$('#ReturnDate').datetimepicker({
 	beforeShowDay: function(date) {
 		if (date.getMonth() == dateToDisable.getMonth() && date.getDate() == dateToDisable.getDate()) {
 			return [true, "custom-date-style"];
