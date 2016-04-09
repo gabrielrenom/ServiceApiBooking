@@ -6,20 +6,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Web.Models;
 
 namespace Web.Controllers
 {
-    public class IndexController : Controller
+    [RoutePrefix("")]
+    public class CarparksController : Controller
     {
         private IRootBookingEntityService _airportservice;
 
-        public IndexController(IRootBookingEntityService airportservice)
+        public CarparksController(IRootBookingEntityService airportservice)
         {
             _airportservice = airportservice;
         }
         
         [HttpGet]
+        [Route("")]
         public async Task<ActionResult> Index()
         {            
             try
@@ -33,16 +36,23 @@ namespace Web.Controllers
             {
                
             }
+            return View(new QuoteModelView { Airport="", Discount="", ReturnDate="", DropOffDate= "" });            
+        }
 
-            return View(new QuoteModelView { Airport="", Discount="", ReturnDate="", DropOffDate="" });
+        [HttpGet]
+        [Route("results")]
+        public async Task<ActionResult> Results(QuoteModelView model)
+        {
+            return View();
         }
 
         [HttpPost]
+        [Route("index")]
         public async Task<ActionResult> Index(QuoteModelView model)
         {
             if (ModelState.IsValid)
             {
-                return this.RedirectToAction("Index");
+                return this.RedirectToAction("results", new RouteValueDictionary(model));
             }
             else
             {

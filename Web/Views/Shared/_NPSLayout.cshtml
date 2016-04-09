@@ -4,13 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>National Parking Services</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
     <link href='https://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="~/Content/jquery.datetimepicker.css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />    
+    
     <link rel="stylesheet" href="~/Content/font-awesome.min.css">
     <link href="~/Content/style.css" rel="stylesheet" type="text/css" />
+
 </head>
-<body class="home">
+<body class="">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="row">
@@ -65,14 +68,10 @@
 
     </nav>
 
-    <div class="jumbotron">        
-        <div class="container banner-img">
-         @*ADD THE PAGE STUFF HERE*@
-         @*@RENDER*@
-            <div>
-                @RenderBody()
-            </div>
-        </div>   
+    <div class="">        
+
+         @RenderBody()
+          
 
         <div class="container for-logos">
             <ul class="list-inline">

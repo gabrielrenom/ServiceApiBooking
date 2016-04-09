@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 
 
@@ -70,7 +70,7 @@ body {background-color:transparent; background:url(../img/mainbg.jpg) no-repeat 
 }
 .formulario-home .form-group img,
 .results-quote-form .input-icon {float:right; margin:2px 0 0 0; border-radius:3px;}
-.formulario-home .btn {position:relative; bottom:-80px; width:100%; background:#a0b751; color:#fff; text-transform:uppercase; font-size:12px; padding:7px 0;
+.formulario-home .btn { bottom:-80px; width:100%; background:#a0b751; color:#fff; text-transform:uppercase; font-size:12px; padding:7px 0;
 -webkit-transition: all 0.7s ease; -moz-transition: all 0.3s ease; -o-transition: all 0.7s ease; -ms-transition: all 0.7s ease; transition: all 0.7s ease;
  }
 .formulario-home .btn:hover {background:#fff; color:#777;}
@@ -355,7 +355,7 @@ h2:before {content:''; margin:0 12px 0 2px; height:25px; float:left; border-left
 .preview-img {display:block; margin:0 auto; width:100%; height:auto;  border-radius:15px; box-shadow:2px 2px 14px #ccc;  }
 .preview-popup-img {display:block; margin:0 auto; width:100%; height:auto; box-shadow:2px 2px 14px #7D7D7D;}
 
-body.booking .preview-img {cursor:pointer;}
+.Results .booking .preview-img {cursor:pointer;}
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
@@ -370,15 +370,17 @@ body.booking .preview-img {cursor:pointer;}
 /*  BOOKING  */
 
 /*Preview*/
-body.booking .banner-img {background:url(../img/bookingbg.jpg) no-repeat top center; background-color:#fff; padding:21px;}
+.booking .banner-img {background:url(../img/bookingbg.jpg) no-repeat top center; background-color:#fff; padding:21px;}
 .for-booking .booking {padding:21px; }
+.Results {background-color:#fff;border-radius:15px;box-shadow:2px 2px 14px #ccc; padding:0px;
+}
 /*Common: no boddy class >*/ .modal-dialog {top:120px; }
 /*Common: no boddy class >*/ .modal-body {padding:0; margin:0 0 -5px 0; min-height:290px; }
 /*Preview*/
 
 
-body.booking-in-progress .booking, body.booking .booking  {background:#fff; border-radius:15px; box-shadow:2px 2px 14px #ccc; padding:0;}
-body.booking-in-progress .banner-img,body.booking .banner-img  {padding:51px;}
+.booking-in-progress .booking,  .Results .booking .booking  {background:#fff; border-radius:15px; box-shadow:2px 2px 14px #ccc; padding:0;}
+.booking-in-progress .banner-img,.Results .booking .banner-img  {padding:51px;}
 
 .booking .filter-results {border-left:1px solid #939bab; padding:0; }
 .by-parking-type {padding-top:21px;}

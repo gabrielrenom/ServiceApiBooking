@@ -1,0 +1,17 @@
+﻿/* Small hack to hide the validation */
+.field-validation-valid
+{
+    display: none;
+}
+.validation-summary-valid
+{
+    display: none;
+}
+.field-validation-error
+{
+    font-size:12px;
+}
+.jumbotron 
+{
+    line-height:1.5; 
+}
