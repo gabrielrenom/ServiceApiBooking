@@ -11,7 +11,7 @@ namespace ACP.Business.Models
         public QuoteModel()
         {
             BookingServices = new List<BookingServiceModel>();
-            BookingPricingItems = new List<BookingPricingModel>();
+            Pricing = new List<ItemPriceModel>();
         }
 
         public DateTime Dropoff { get; set; }
@@ -20,7 +20,13 @@ namespace ACP.Business.Models
         public LocationModel DropoffLocation { get; set; }
         public List<BookingServiceModel> BookingServices;
         public List<BookingItemModel> BookingItems;
-        public List<BookingPricingModel> BookingPricingItems;
+        public List<ItemPriceModel> Pricing;
+        public decimal Price;
+    }
+
+    public class ItemPriceModel 
+    {
+        public BookingPricingModel PriceModel {get;set;}
         public decimal Price { get; set; }
     }
 }

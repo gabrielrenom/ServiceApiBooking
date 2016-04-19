@@ -33,7 +33,10 @@ namespace ACP.Business.Services
 
             foreach (var item in list)
             {
-                quote.BookingPricingItems.Add(item);
+                quote.Pricing.Add(new ItemPriceModel
+                {
+                    PriceModel = item
+                });
             }
 
             return quoteresult;
@@ -47,8 +50,12 @@ namespace ACP.Business.Services
 
             foreach (var item in list)
             {
-                quote.Price = item.DayPrices.Where(x => x.Day == (quote.Pickup - quote.Dropoff).TotalDays).FirstOrDefault().Dayprice;
-                quote.BookingPricingItems.Add(item);
+                double days = Math.Round((quote.Dropoff - quote.Pickup).TotalDays);               
+                quote.Pricing.Add(new ItemPriceModel
+                {
+                    Price = item.DayPrices.Where(x => x.Day == days).FirstOrDefault().Dayprice,
+                    PriceModel = item
+                });             
             }
 
             return quoteresult;
@@ -58,14 +65,28 @@ namespace ACP.Business.Services
         {
             QuoteModel quoteresult = quote;
 
-            var list = _bookingPricingManager.GetAllPricesByBookEntity(Id, quote.Pickup, quote.Dropoff);//_bookingPricingManager.GetAllPrices().Where(x => quote.Pickup>x.Start  && quote.Dropoff<x.End ).ToList();
-
-            foreach (var item in list)
+            if (quote.Pickup < quote.Dropoff)
             {
-                quote.Price = item.DayPrices.Where(x => x.Day == Math.Round((quote.Pickup - quote.Dropoff).TotalDays)).FirstOrDefault().Dayprice;
-                quote.BookingPricingItems.Add(item);
-            }
+                try
+                {
+                    var list = _bookingPricingManager.GetAllPricesByBookEntity(Id, quote.Pickup, quote.Dropoff);//_bookingPricingManager.GetAllPrices().Where(x => quote.Pickup>x.Start  && quote.Dropoff<x.End ).ToList();
 
+                    foreach (var item in list)
+                    {
+                        double days = Math.Round((quote.Dropoff - quote.Pickup).TotalDays);
+                        quote.Pricing.Add(new ItemPriceModel
+                        {
+                            Price = item.DayPrices.Where(x => x.Day == days).FirstOrDefault().Dayprice,
+                            PriceModel = item
+                        });
+                        quote.Price = item.DayPrices.Where(x => x.Day == days).FirstOrDefault().Dayprice;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string e = ex.ToString();
+                }
+            }
             return quoteresult;
         }
     }

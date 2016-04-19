@@ -44,14 +44,19 @@ namespace ACP.Business.Test
         public async Task GivenADateAndPlace_WhenUserGetQuote_ThenEnsureAllResultsAreReturned()
         {
             //Arrange            
+            //QuoteModel quote = new QuoteModel();
+            //quote.Pickup = new DateTime(2016, 12, 22, 18, 40, 00);
+            //quote.Dropoff = new DateTime(2016, 12, 28, 16, 30, 00);
+            //quote.PickupLocation = new LocationModel() { Id = 1, Name = "Man" };
+            //quote.DropoffLocation = new LocationModel() { Id = 1, Name = "Man" };
+            //quote.BookingServices.Add(new BookingServiceModel() { Name = "Carpark" });
+
             QuoteModel quote = new QuoteModel();
-            quote.Pickup = new DateTime(2016, 07, 16, 18, 40, 00);
-            quote.Dropoff = new DateTime(2016, 07, 14, 16, 30, 00);
-            quote.PickupLocation = new LocationModel() { Id = 1, Name = "Manchester" };
-            quote.DropoffLocation = new LocationModel() { Id = 1, Name = "Manchester" };
+            quote.Pickup = new DateTime(2016, 12, 23, 16, 30, 00);
+            quote.Dropoff = new DateTime(2016, 12, 28, 18, 40, 00);
+            quote.PickupLocation = new LocationModel() { Id = 1, Name = "Man" };
+            quote.DropoffLocation = new LocationModel() { Id = 1, Name = "Man" };
             quote.BookingServices.Add(new BookingServiceModel() { Name = "Carpark" });
-
-
 
             //$datediff = $edate - $sdate;
             //$days = (floor($datediff/(60*60*24))+1);
@@ -71,14 +76,50 @@ namespace ACP.Business.Test
         }
 
         [TestMethod]
+        public async Task GivenADateAndPlace_WhenUserGetQuoteWithPriceAnNotId_ThenEnsureAllResultsAreReturned()
+        {
+            //Arrange            
+            //QuoteModel quote = new QuoteModel();
+            //quote.Pickup = new DateTime(2016, 12, 22, 18, 40, 00);
+            //quote.Dropoff = new DateTime(2016, 12, 28, 16, 30, 00);
+            //quote.PickupLocation = new LocationModel() { Id = 1, Name = "Man" };
+            //quote.DropoffLocation = new LocationModel() { Id = 1, Name = "Man" };
+            //quote.BookingServices.Add(new BookingServiceModel() { Name = "Carpark" });
+
+            QuoteModel quote = new QuoteModel();
+            quote.Pickup = new DateTime(2016, 12, 23, 16, 30, 00);
+            quote.Dropoff = new DateTime(2016, 12, 28, 18, 40, 00);
+            quote.PickupLocation = new LocationModel() { Id = 1, Name = "Man" };
+            quote.DropoffLocation = new LocationModel() { Id = 1, Name = "Man" };
+            quote.BookingServices.Add(new BookingServiceModel() { Name = "Carpark" });
+
+            //$datediff = $edate - $sdate;
+            //$days = (floor($datediff/(60*60*24))+1);
+            //SELECT * FROM `carparks_pricing` WHERE `cpid`='".$row1['id']."' AND (`sdate` <= '".$sdate."' AND `edate` >= '".$sdate."') AND `price`<>'' LIMIT 1"
+            //SELECT * FROM `carparks_pricing` WHERE `cpid`='8' AND (`sdate` <= '1431692800' AND `edate` >= '1441692800') AND `price`<>'' LIMIT 1"
+            //SELECT * FROM `carparks_content` WHERE `cpid` = '8'
+            //SELECT * FROM `carparks_availability` WHERE `cpid`='1'")
+
+            //Act
+            var result = await service.GetQuoteWithPrice(quote);
+
+
+            //Assert
+            Assert.IsNotNull(result);
+            // Assert.AreEqual(result.BookingPricingItems.FirstOrDefault().Name, "Summer");
+
+        }
+
+
+        [TestMethod]
         public async Task GivenADateAndPlace_WhenUserGetQuoteWithPrice_ThenEnsureAllResultsAreReturned()
         {
             //Arrange            
             QuoteModel quote = new QuoteModel();
-            quote.Pickup = new DateTime(2016, 07, 16, 18, 40, 00);
-            quote.Dropoff = new DateTime(2016, 07, 14, 16, 30, 00);
-            quote.PickupLocation = new LocationModel() { Id = 1, Name = "Manchester" };
-            quote.DropoffLocation = new LocationModel() { Id = 1, Name = "Manchester" };
+            quote.Pickup = new DateTime(2016, 12, 23, 16, 30, 00);
+            quote.Dropoff = new DateTime(2016, 12, 28, 18, 40, 00); 
+            quote.PickupLocation = new LocationModel() { Id = 1, Name = "Man" };
+            quote.DropoffLocation = new LocationModel() { Id = 1, Name = "Man" };
             quote.BookingServices.Add(new BookingServiceModel() { Name = "Carpark" });
             
             //Act

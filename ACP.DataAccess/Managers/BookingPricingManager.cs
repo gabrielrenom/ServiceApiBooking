@@ -53,15 +53,22 @@ namespace ACP.DataAccess.Managers
                 x => x.BookingEntity,
                 x => x.BookingEntity.Prices,
                 x => x.BookingEntity.Prices.Select(y => x.DayPrices))
-                .OrderBy(a => a.Name).ToList();
+                .OrderBy(a => a.Name).ToList(); 
 
         }
 
         public IList<BookingPricingModel> GetAllPricesByPickLocationAndDropLocation(string pickuplocation, string droplocation, DateTime pickup, DateTime dropoff)
         {
 
-            return GetListIncluding(x => x.BookingEntity.Name.ToLower().Contains(droplocation.ToLower()) == true && pickup > x.Start && dropoff < x.End,
+            //return GetListIncluding(x => x.BookingEntity.Name.ToLower().Contains(droplocation.ToLower()) == true && pickup > x.Start && dropoff < x.End,
+            //    x => x.BookingEntity,
+            //    x => x.BookingEntity.Prices,
+            //    x => x.BookingEntity.Prices.Select(y => x.DayPrices))
+            //    .OrderBy(a => a.Name).ToList();
+
+            return GetListIncluding(x => (pickup > x.Start && dropoff < x.End) && (x.BookingEntity.RootBookingEntity.Name.ToLower().Contains(droplocation.ToLower()) == true),
                 x => x.BookingEntity,
+                x => x.BookingEntity.RootBookingEntity,
                 x => x.BookingEntity.Prices,
                 x => x.BookingEntity.Prices.Select(y => x.DayPrices))
                 .OrderBy(a => a.Name).ToList();

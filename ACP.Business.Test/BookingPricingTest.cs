@@ -44,10 +44,10 @@ namespace ACP.Business.Test
             model.Created = DateTime.Now;
             model.CreatedBy = localuser;
             model.Modified = DateTime.Now;
-            model.Name = "Summer";
+            model.Name = "Winter";
             model.DayPrices = new Collection<DayPriceModel>();
-            model.Start =DateTime.Now.AddMonths(7);
-            model.End = DateTime.Now.AddMonths(11);
+            model.Start = new DateTime(DateTime.Now.Year, 12, 21);
+            model.End = new DateTime(DateTime.Now.Year+1, 3, 19);
             model.DayPrices= new List<DayPriceModel>{
                 new DayPriceModel { Day = 1, Dayprice = 10, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser },
                 new DayPriceModel { Day = 2, Dayprice = 20, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser },
@@ -88,8 +88,8 @@ namespace ACP.Business.Test
             model.Modified = DateTime.Now;
             model.Name = "Winter";
             model.DayPrices = new Collection<DayPriceModel>();
-            model.Start = DateTime.Now;
-            model.End = DateTime.Now;
+            model.Start =new DateTime(DateTime.Now.Year+1,1,1);
+            model.End = new DateTime(DateTime.Now.Year + 1,1, 6);
             model.DayPrices.Add(new DayPriceModel
             {
                 Created = DateTime.Now,
@@ -182,8 +182,8 @@ namespace ACP.Business.Test
             model.Modified = DateTime.Now;
             model.Name = "Winter";
             model.DayPrices = new Collection<DayPriceModel>();
-            model.Start = DateTime.Now;
-            model.End = DateTime.Now;
+            model.Start = new DateTime(DateTime.Now.Year + 1, 1, 1);
+            model.End = new DateTime(DateTime.Now.Year + 1, 1, 6);
             model.DayPrices.Add(new DayPriceModel
             {
                 Created = DateTime.Now,

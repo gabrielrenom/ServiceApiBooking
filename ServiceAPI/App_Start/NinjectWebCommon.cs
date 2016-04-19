@@ -74,7 +74,8 @@ namespace ServiceAPI.App_Start
                  "ACP.Data.*",
                  "ACP.DataAccess.*",
                  "ACP.Business.*",
-                 "ServiceAPI.*")
+                 "ServiceAPI.*",
+                 "Web.*")
                          .SelectAllClasses()
                          .BindDefaultInterface());
         }        
