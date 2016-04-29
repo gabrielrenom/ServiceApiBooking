@@ -1,4 +1,5 @@
 ﻿using ACP.Data;
+using ACP.Data.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,7 @@ namespace ACP.Data
         public virtual Address Address { get; set; }
         public virtual ICollection<BookingService> Service { get; set; }
         public virtual ICollection<Slot> Slot { get; set; }
+        public virtual ICollection<Review> Reviews { get; set; }
         
     }
 }

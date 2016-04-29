@@ -26,5 +26,7 @@ namespace ACP.Business.Managers
         IList<BookingPricingModel> GetAllPricesByBookEntity(int bookingentityid, DateTime pickup, DateTime dropoff);
 
         IList<BookingPricingModel> GetAllPricesByPickLocationAndDropLocation(string pickuplocation, string droplocation, DateTime pickup, DateTime dropoff);
+
+        IList<BookingPricingModel> GetAllPricesAndReviewsByPickLocationAndDropLocation(string pickuplocation, string droplocation, DateTime pickup, DateTime dropoff);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ACP.Data;
+using ACP.Data.Classes;
 using ACP.DataAccess.Config;
 using System;
 using System.Collections.Generic;
@@ -46,6 +47,7 @@ namespace ACP.DataAccess
             modelBuilder.Configurations.Add(new CreditCardConfig());
             modelBuilder.Configurations.Add(new BankAccountConfig());
             modelBuilder.Configurations.Add(new CurrencyConfig());
+            modelBuilder.Configurations.Add(new ReviewConfig());
 
         }
 
@@ -70,5 +72,6 @@ namespace ACP.DataAccess
         public DbSet<CreditCard> CreditCards { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<Currency> Currencies { get; set; }
+        public DbSet<Review> Reviews { get; set; }
     }
 }

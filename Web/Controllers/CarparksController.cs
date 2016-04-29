@@ -61,7 +61,7 @@ namespace Web.Controllers
             {
                 if (model != null)
                 {
-                    var results = await _quoteservice.GetQuoteWithPrice(quote);
+                    var results = await _quoteservice.GetQuoteWithPriceAndReviews(quote);
 
                     var resultsview = ToResultsView(results);
                 }
@@ -77,9 +77,27 @@ namespace Web.Controllers
         {
             List<ResultsView> domainModel = new List<ResultsView>();
 
-            domainModel = model.BookingItems != null ? model.BookingItems.Select(x => new ResultsView
+            domainModel = model.Pricing != null ? model.Pricing.Select(x => new ResultsView
             {
-                IsRegularTransfers = x.Transfers != null ? true : false
+                Address = x.PriceModel.BookingEntity.Address != null ? new AddressView {
+                    Address1 = x.PriceModel.BookingEntity.Address.Address1,
+                    Address2 = x.PriceModel.BookingEntity.Address.Address2,
+                    City = x.PriceModel.BookingEntity.Address.City,
+                    Country = x.PriceModel.BookingEntity.Address.Country,
+                    County = x.PriceModel.BookingEntity.Address.County,
+                    Number = x.PriceModel.BookingEntity.Address.Number,
+                    Postcode = x.PriceModel.BookingEntity.Address.Postcode
+                } : null,
+                Price = x.Price,
+                Company = x.PriceModel.BookingEntity.Name,
+                CompanyLogo = x.PriceModel.BookingEntity.Image,
+                Description = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "description").FirstOrDefault()!=null?x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "description").FirstOrDefault().Value:null,
+                DistanceFromAirport = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "airportdistance").FirstOrDefault() != null ? (decimal?)Convert.ToDecimal(x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "airportdistance").FirstOrDefault().Value):null,
+                TransferTime = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "transfer").FirstOrDefault() != null ? (decimal?)Convert.ToDecimal(x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "transfer").FirstOrDefault().Value) : null,
+                IsRegularTransfers = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "isregulartransfers").FirstOrDefault() != null ? (bool?)Convert.ToBoolean(x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "isregulartransfers").FirstOrDefault().Value):null,
+                IsFamilyFriendly = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "isfamilyfriendly").FirstOrDefault() != null ? (bool?)Convert.ToBoolean(x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "isfamilyfriendly").FirstOrDefault().Value):null,
+                IsRetainKeys = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "isretainkeys").FirstOrDefault() != null ?(bool?)Convert.ToBoolean(x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "isretainkeys").FirstOrDefault().Value):null,
+                Summary = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "summary").FirstOrDefault() != null ? x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "summary").FirstOrDefault().Value:null,
             }).ToList() : null;
 
             return domainModel;

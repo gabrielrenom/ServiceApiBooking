@@ -113,6 +113,7 @@
     <Compile Include="Models\PriceQuoteModel.cs" />
     <Compile Include="Models\PropertyModel.cs" />
     <Compile Include="Models\QuoteModel.cs" />
+    <Compile Include="Models\ReviewModel.cs" />
     <Compile Include="Models\RootBookingEntityModel.cs" />
     <Compile Include="Models\RootBookingPropertyModel.cs" />
     <Compile Include="Models\StatusModel.cs" />

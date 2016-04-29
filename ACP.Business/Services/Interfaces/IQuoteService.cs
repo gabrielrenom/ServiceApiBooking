@@ -16,5 +16,7 @@ namespace ACP.Business.Services.Interfaces
         Task<QuoteModel> GetQuoteWithPrice(Models.QuoteModel quote);
 
         Task<QuoteModel> GetQuoteWithPriceByBookingEntityId(int Id, Models.QuoteModel quote);
+
+        Task<QuoteModel> GetQuoteWithPriceAndReviews(Models.QuoteModel quote);
     }
 }

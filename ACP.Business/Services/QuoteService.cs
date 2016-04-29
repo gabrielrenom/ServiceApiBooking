@@ -61,6 +61,26 @@ namespace ACP.Business.Services
             return quoteresult;
         }
 
+        public async Task<QuoteModel> GetQuoteWithPriceAndReviews(Models.QuoteModel quote)
+        {
+            QuoteModel quoteresult = quote;
+
+            var list = _bookingPricingManager.GetAllPricesAndReviewsByPickLocationAndDropLocation(quote.PickupLocation.Name, quote.DropoffLocation.Name, quote.Pickup, quote.Dropoff);//_bookingPricingManager.GetAllPrices().Where(x => quote.Pickup>x.Start  && quote.Dropoff<x.End ).ToList();
+
+            foreach (var item in list)
+            {
+                double days = Math.Round((quote.Dropoff - quote.Pickup).TotalDays);
+                quote.Pricing.Add(new ItemPriceModel
+                {
+                    Price = item.DayPrices.Where(x => x.Day == days).FirstOrDefault().Dayprice,
+                    PriceModel = item
+                });
+            }
+
+            return quoteresult;
+        }
+
+
         public async Task<QuoteModel> GetQuoteWithPriceByBookingEntityId(int Id, Models.QuoteModel quote)
         {
             QuoteModel quoteresult = quote;

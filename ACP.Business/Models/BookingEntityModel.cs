@@ -27,5 +27,6 @@ namespace ACP.Business.Models
         public virtual AddressModel Address { get; set; }
         public virtual ICollection<BookingServiceModel> Service { get; set; }
         public virtual ICollection<SlotModel> Slot { get; set; }
+        public virtual ICollection<ReviewModel> Reviews { get; set; }
     }
 }

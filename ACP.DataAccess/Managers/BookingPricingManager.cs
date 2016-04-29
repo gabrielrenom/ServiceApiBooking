@@ -70,10 +70,32 @@ namespace ACP.DataAccess.Managers
                 x => x.BookingEntity,
                 x => x.BookingEntity.RootBookingEntity,
                 x => x.BookingEntity.Prices,
+                x=>x.BookingEntity.Properties,
                 x => x.BookingEntity.Prices.Select(y => x.DayPrices))
                 .OrderBy(a => a.Name).ToList();
 
         }
+
+        public IList<BookingPricingModel> GetAllPricesAndReviewsByPickLocationAndDropLocation(string pickuplocation, string droplocation, DateTime pickup, DateTime dropoff)
+        {
+
+            //return GetListIncluding(x => x.BookingEntity.Name.ToLower().Contains(droplocation.ToLower()) == true && pickup > x.Start && dropoff < x.End,
+            //    x => x.BookingEntity,
+            //    x => x.BookingEntity.Prices,
+            //    x => x.BookingEntity.Prices.Select(y => x.DayPrices))
+            //    .OrderBy(a => a.Name).ToList();
+
+            return GetListIncluding(x => (pickup > x.Start && dropoff < x.End) && (x.BookingEntity.RootBookingEntity.Name.ToLower().Contains(droplocation.ToLower()) == true),
+                x => x.BookingEntity,
+                x => x.BookingEntity.RootBookingEntity,
+                x => x.BookingEntity.Prices,
+                x => x.BookingEntity.Properties,
+                x=>x.BookingEntity.Reviews,
+                x => x.BookingEntity.Prices.Select(y => x.DayPrices))
+                .OrderBy(a => a.Name).ToList();
+
+        }
+
 
         public override BookingPricingModel ToDomainModelWithChildNodes(BookingPricing dataModel)
         {
@@ -141,11 +163,71 @@ namespace ACP.DataAccess.Managers
             domainModel.Modified = dataModel.Modified;
             domainModel.BookingEntity = dataModel.BookingEntity != null ? new BookingEntityModel
             {
-                Id = dataModel.BookingEntity.Id,
                 Comission = dataModel.BookingEntity.Comission,
+                Code = dataModel.BookingEntity.Code,
+                Created = dataModel.BookingEntity.Created,
+                Id = dataModel.BookingEntity.Id,
+                CreatedBy = dataModel.BookingEntity.CreatedBy,
+                Image = dataModel.BookingEntity.Image,
+                Logo = dataModel.BookingEntity.Logo,
+                Modified = dataModel.BookingEntity.Modified,
+                ModifiedBy = dataModel.BookingEntity.ModifiedBy,
                 Name = dataModel.BookingEntity.Name,
                 Price = dataModel.BookingEntity.Price,
-                Sameday = dataModel.BookingEntity.Sameday
+                Sameday = dataModel.BookingEntity.Sameday,
+                Properties = dataModel.BookingEntity.Properties != null ? dataModel.BookingEntity.Properties.Select(x => new PropertyModel
+                {
+                    Id = x.Id,
+                    Created = x.Created,
+                    CreatedBy = x.CreatedBy,
+                    Modified = x.Modified,
+                    ModifiedBy = x.ModifiedBy,
+                    Type = (PropertyType)x.Type,
+                    BookingEntityId = x.BookingEntityId,
+                    Key = x.Key,
+                    Value = x.Value
+                }).ToList() : null,
+                Address = dataModel.BookingEntity.Address != null ? new AddressModel
+                {
+
+                    Address1 = dataModel.BookingEntity.Address.Address1,
+                    Address2 = dataModel.BookingEntity.Address.Address2,
+                    Country = dataModel.BookingEntity.Address.Country,
+                    County = dataModel.BookingEntity.Address.County,
+                    Created = dataModel.BookingEntity.Address.Created,
+                    CreatedBy = dataModel.BookingEntity.Address.CreatedBy,
+                    Id = dataModel.BookingEntity.Address.Id,
+                    Modified = dataModel.BookingEntity.Address.Modified,
+                    ModifiedBy = dataModel.BookingEntity.Address.ModifiedBy,
+                    Number = dataModel.BookingEntity.Address.Number,
+                    Postcode = dataModel.BookingEntity.Address.Postcode,
+                    City = dataModel.BookingEntity.Address.City
+                } : null,
+                Extras = dataModel.BookingEntity.Extras != null ? dataModel.BookingEntity.Extras.Select(x => new ExtraModel
+                {
+                    Created = x.Created,
+                    CreatedBy = x.CreatedBy,
+                    Id = x.Id,
+                    Modified = x.Modified,
+                    ModifiedBy = x.ModifiedBy,
+                    BookingEntityId = x.BookingEntityId,
+                    Name = x.Name,
+                    Price = x.Price,
+                    Description = x.Description
+                }).ToList() : null,
+                Reviews = dataModel.BookingEntity.Reviews!=null?dataModel.BookingEntity.Reviews.Select(x=>new ReviewModel {
+                     Author= x.Author,
+                     Id = x.Id,
+                     Comments=x.Comments,
+                     Rating = x.Rating,
+                     Created=x.Created,
+                     Modified=x.Modified,
+                     Subject=x.Subject,
+                     ModifiedBy=x.ModifiedBy,
+                     CreatedBy=x.CreatedBy,
+                     BookingEntityId= x.BookingEntityId
+                }).ToList():null
+
             } : null;
 
             domainModel.DayPrices = dataModel.DayPrices != null ? dataModel.DayPrices.Select(r => new DayPriceModel
@@ -175,8 +257,6 @@ namespace ACP.DataAccess.Managers
             return domainModel;
 
         }
-
-
 
         public bool AddPricesWithDays(int bookingEntityId, IList<BookingPricingModel> prices)
         {
@@ -241,7 +321,6 @@ namespace ACP.DataAccess.Managers
             return model;
 
         }
-
 
         public IList<BookingPricingModel> GetAllPricesWithDays(int bookingEntityId)
         {
