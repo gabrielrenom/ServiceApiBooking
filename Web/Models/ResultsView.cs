@@ -16,9 +16,13 @@ namespace Web.Models
         public bool? IsFamilyFriendly { get; set; }
         public bool? IsRegularTransfers { get; set; }
         public bool? IsRetainKeys { get; set; }
+        public bool? Is24hSecurity { get; set; }
         public string Summary { get; set; }
         public string FullString { get; set; }
         public string Important { get; set; }
+        public bool? IsParkAndRide { get; set; }
+        public bool? IsMeetAndGreet { get; set; }
+        public bool? IsOnAirport { get; set; }
         public virtual List<ReviewView> Reviews {get;set;}
         public virtual AddressView Address { get; set; }
 

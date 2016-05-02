@@ -64,6 +64,8 @@ namespace Web.Controllers
                     var results = await _quoteservice.GetQuoteWithPriceAndReviews(quote);
 
                     var resultsview = ToResultsView(results);
+
+                    return View(resultsview);
                 }
             }
             catch (Exception ex)
@@ -97,7 +99,18 @@ namespace Web.Controllers
                 IsRegularTransfers = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "isregulartransfers").FirstOrDefault() != null ? (bool?)Convert.ToBoolean(x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "isregulartransfers").FirstOrDefault().Value):null,
                 IsFamilyFriendly = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "isfamilyfriendly").FirstOrDefault() != null ? (bool?)Convert.ToBoolean(x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "isfamilyfriendly").FirstOrDefault().Value):null,
                 IsRetainKeys = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "isretainkeys").FirstOrDefault() != null ?(bool?)Convert.ToBoolean(x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "isretainkeys").FirstOrDefault().Value):null,
+                Is24hSecurity = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "isretainkeys").FirstOrDefault() != null ? (bool?)Convert.ToBoolean(x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "is24security").FirstOrDefault().Value) : null,
+                IsParkAndRide = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "parkandride").FirstOrDefault() != null ? (bool?)Convert.ToBoolean(x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "parkandride").FirstOrDefault().Value) : null,
+                IsMeetAndGreet = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "meetandgreet").FirstOrDefault() != null ? (bool?)Convert.ToBoolean(x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "meetandgreet").FirstOrDefault().Value) : null,
+                IsOnAirport = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "onairport").FirstOrDefault() != null ? (bool?)Convert.ToBoolean(x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "onairport").FirstOrDefault().Value) : null,
                 Summary = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "summary").FirstOrDefault() != null ? x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "summary").FirstOrDefault().Value:null,
+                Reviews = x.PriceModel.BookingEntity.Reviews!=null? x.PriceModel.BookingEntity.Reviews.Select(u=>new ReviewView {
+                     ClientName = u.Author,
+                     Subject = u.Subject,
+                     PublicationDate= (DateTime)u.Created,
+                     Review = u.Comments,
+                     Rating = u.Rating
+                }).ToList():null
             }).ToList() : null;
 
             return domainModel;
