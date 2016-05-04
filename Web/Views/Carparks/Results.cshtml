@@ -3,68 +3,24 @@
     <div class="sombra">
         <div class="">
             <div class="container banner-img for-booking">
-
                 <div class="Results row booking">
-
                     <!-- This is a preview:
                     <img src="img/booking-preview.jpg" width="1096" height="712" class="preview-img" title="Clicking on +info triggers the pop-up" data-toggle="modal" data-target="#plusInfo">
                      -->
-
+                   
                     <div class="col-md-3 by-parking-type">
-                        <h2>Filter results by parking type</h2>
-                        <div class="types">
-                            <span><input type="radio" value="All" name="checked" checked> All (<span class="counter">@Model.Count</span>) </span>
-                            <span><input type="radio" value="Park and Ride" name="checked"> Park and Ride (<span class="counter">@Model.Where(x=>x.IsParkAndRide== true).ToList().Count </span>)</span>
-                            <span><input type="radio" value="Meet and Greet" name="checked"> Meet and Greet (<span class="counter">@Model.Where(x => x.IsMeetAndGreet == true).ToList().Count</span>)</span>
-                            <span><input type="radio" value="On-Airport" name="checked"> On-Airport (<span class="counter">@Model.Where(x => x.IsOnAirport == true).ToList().Count</span>)</span>
-                        </div>
-                        <select name="TERMINALS" class="form-control terminals back1 color4">
-                            <option selected>Terminals</option>
-                            <option>North</option>
-                            <option>East</option>
-                            <option>South</option>
-                            <option>West</option>
-                        </select>
+                        @*FILTERS FOR PARKING*@
+                        @*START*@
+                        @Html.Partial("FilterPartialView", Model)
+                        @*END*@
                     </div>
-
                     <div class="col-md-9 filter-results">
-
-                        <div class="results-quote-form">
-                            <form class="form-inline">
-
-                                <div class="form-group">
-                                    <label for="date">AIRPORT</label>
-                                    <select name="AIRPORT" class="form-control back1 color4">
-                                        <option selected>Manchester</option>
-                                        <option>North</option>
-                                        <option>East</option>
-                                        <option>South</option>
-                                        <option>West</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="date">Drop-off date/time</label>
-                                    <input type="text" id="datetimepicker12" class="form-control color5" placeholder="02/03/2016 03:45" />
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="date">Return date/time</label>
-                                    <input type="text" id="datetimepicker13" class="form-control color5" placeholder="MM/DD/YYYY" />
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="input">Discount code</label>
-                                    <input type="input" class="form-control" id="discount-code" />
-                                </div>
-
-                                <button type="submit" class="btn btn-default get-quote">Get quote again</button>
-
-                            </form>
+                        <div class="results-quote-form">                         
+                           @*FORM TO BOOK THE PARKING*@
+                            @*START*@
+                                 @Html.Partial("BookingPartialView")
+                            @*END*@
                         </div>
-
-
-
 
                         @foreach (var result in Model)
                         {

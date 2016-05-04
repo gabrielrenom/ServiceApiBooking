@@ -33,10 +33,7 @@ namespace Web.Controllers
         {            
             try
             {
-                //## IT Gets all the airports
-                var airports = await _airportservice.GetAll();
-
-                ViewBag.airports = airports != null ? airports.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList() : null;                
+                FillAirports();
             }
             catch (Exception ex)
             {
@@ -49,6 +46,8 @@ namespace Web.Controllers
         [Route("results")]
         public async Task<ActionResult> Results(QuoteModelView model)
         {
+            FillAirports();
+
             QuoteModel quote = new QuoteModel();
             quote.Pickup = new DateTime(2016, 12, 23, 16, 30, 00);
             quote.Dropoff = new DateTime(2016, 12, 28, 18, 40, 00);
@@ -114,6 +113,14 @@ namespace Web.Controllers
             }).ToList() : null;
 
             return domainModel;
+        }
+
+        private async void FillAirports()
+        {
+            //## IT Gets all the airports
+            var airports = await _airportservice.GetAll();
+
+            ViewBag.airports = airports != null ? airports.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList() : null;
         }
 
         [HttpPost]

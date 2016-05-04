@@ -1,0 +1,25 @@
+﻿<form class="form-inline">
+    <div class="form-group">
+        <label for="date">AIRPORT</label>
+        <select class="form-control back1 color4" id="Airport" name="Airport">
+            <option value="">-- Select Airport --</option>
+            @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.airports)
+            {
+                <option value=@item.Value>@item.Text</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="date">Drop-off date/time</label>
+        <input type="text" id="datetimepicker12" class="form-control color5" placeholder="02/03/2016 03:45" />
+    </div>
+    <div class="form-group">
+        <label for="date">Return date/time</label>
+        <input type="text" id="datetimepicker13" class="form-control color5" placeholder="MM/DD/YYYY" />
+    </div>
+    <div class="form-group">
+        <label for="input">Discount code</label>
+        <input type="input" class="form-control" id="discount-code" />
+    </div>
+    <button type="submit" class="btn btn-default get-quote">Get quote again</button>
+</form>

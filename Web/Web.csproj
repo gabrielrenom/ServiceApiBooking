@@ -360,6 +360,8 @@
     <Content Include="Scripts\package.json" />
     <Content Include="Views\Shared\_NPSLayout.cshtml" />
     <Content Include="Views\Carparks\Results.cshtml" />
+    <Content Include="Views\Carparks\BookingPartialView.cshtml" />
+    <Content Include="Views\Carparks\FilterPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
