@@ -39,7 +39,7 @@ body {background-color:transparent; background:url(../img/mainbg.jpg) no-repeat 
 .navbar span a, .navbar span, .navbar-header span a {color:#fff!important;} */
 .navbar span a:hover { color:#ccc!important;}
 
-.banner-img { background:url(../img/fondo-header.jpg)no-repeat; margin-top:21px; background-color:#fff; padding:20px 21px 50px 21px; }
+.banner-img { background:url(../img/fondo-header.jpg)no-repeat; margin-top:21px; background-color:#fff; padding:20px 21px 50px 21px; background-size:contain; }
 .for-offers-and-rating {padding-left:21px; padding-right:21px; background-color:#fff;}
 .banner1 { background:url(../img/banner-1.png)no-repeat; /*width:770px;*/ height:490px; max-height:490px;  }
 .mensaje { float:left; font-size:30px; color:#fff; margin: 30px 156px; line-height: 1.7em; 
@@ -58,8 +58,8 @@ body {background-color:transparent; background:url(../img/mainbg.jpg) no-repeat 
 
 
 /*formulario home*/
-.formulario-home {border-radius:10px; background-color:#fff; margin-top: 19px; padding:21px; box-shadow: 2px 2px 14px #ccc; border: 1px solid #ccc; /*width: 32%;*/ }
-.formulario-home form {padding:0 7px; position:relative; } 
+.formulario-home {border-radius:10px; background-color:#fff; margin-top: 35px; padding:21px; box-shadow: 2px 2px 14px #ccc; border: 1px solid #ccc; /*width: 32%;*/ }
+.formulario-home form {padding:0 7px; position:relative; }  .single .formulario-home form {padding: 9px 7px; }  
 .formulario-home label { color:#647994; font-weight:400; text-transform:uppercase; font-size: 12.5px; letter-spacing:1px; display:block;}
 .formulario-home label:before {content:''; display:block; float:left; margin:0 7px 0 2px; position:relative; top:2px; background:#FFA500; height:13px; width:2px; }
 .formulario-home .form-group { background-image: linear-gradient(to right, #DEDEDE 33%, rgba(255,255,255,0) 0%); background-position: bottom; background-size: 7px 2px; background-repeat: repeat-x; padding: 0 0 14px 0; margin: 0 0 7px 0; float:left; width:100%;}
@@ -70,11 +70,11 @@ body {background-color:transparent; background:url(../img/mainbg.jpg) no-repeat 
 }
 .formulario-home .form-group img,
 .results-quote-form .input-icon {float:right; margin:2px 0 0 0; border-radius:3px;}
-.formulario-home .btn { bottom:-80px; width:100%; background:#a0b751; color:#fff; text-transform:uppercase; font-size:12px; padding:7px 0;
+.formulario-home .btn {position:relative; bottom:-40px; width:100%; background:#a0b751; color:#fff; text-transform:uppercase; font-size:12px; padding:13.5px 0;
 -webkit-transition: all 0.7s ease; -moz-transition: all 0.3s ease; -o-transition: all 0.7s ease; -ms-transition: all 0.7s ease; transition: all 0.7s ease;
  }
 .formulario-home .btn:hover {background:#fff; color:#777;}
-#datetimepicker12, #datetimepicker13, #discount-code {text-transform:uppercase; font-size:12px; }
+#DropOff, #ReturnDate, #discount-code {text-transform:uppercase; font-size:12px; }
 
 
 
@@ -136,7 +136,7 @@ strong.nps span {display:block;}
 	.navbar-nav>li>a:hover {color:#ccc;}
 
 
-.client-login {padding: 9px 0 0 0; }
+.client-login {padding:9px 40px 0 0; }
 .client-login input { max-width:148px!important; height:32px!important;  }
 /*+*/
 .client-login .btn {height:32px!important; background:#768998; color:#fff; font-size:12px;}
@@ -213,12 +213,12 @@ h2:before {content:''; margin:0 12px 0 2px; height:25px; float:left; border-left
 @media screen and (max-width: 768px) {
 	.sombra {border:none;}
 	.banner1 {overflow:auto; background-size:contain; height:auto; margin-top:21px; background:none; padding:21px;  }
-	#datetimepicker12, #datetimepicker13, #discount-code {width:90%; float:left; }
+	#DropOff, #ReturnDate, #discount-code {width:90%; float:left; }
 	.mensaje {font-size:31px; margin:30px 15px 0 25px;}
 	.mensaje span {padding:0 0 21px 51px; text-shadow:0px 5px 30px rgba(0, 0, 0, 1); }
 	.mensaje .btn-primary {margin:0 0 20px 50px;}
 	.formulario-home {clear:both; max-width:460px; margin:0 auto; }
-	.formulario-home .btn {position:static; margin:11px 0 0 0; }
+	.formulario-home .btn {position:static; margin:11px 0 0 0; padding: 19px 0; }
 	.offer dl h3 {font-size:17px; }
 	.offer dl h3 span {font-size:15px;}
 	.offer dl dd {font-size:16px;}
@@ -249,7 +249,7 @@ h2:before {content:''; margin:0 12px 0 2px; height:25px; float:left; border-left
 @media screen and (max-width: 500px) {
 	.sombra {border:none;}
 	.banner1 {background-size:contain; height:260px; margin-top:21px; margin-bottom:0; }
-	#datetimepicker12, #datetimepicker13, #discount-code {width:83%; float:left; }
+	#DropOff, #ReturnDate, #discount-code {width:83%; float:left; }
 	.mensaje {/*font-size:21px;*/ margin:20px 15px 0 15px;}
 	.mensaje span {line-height:25px; padding:11px 0 20px 30px; }
 	.mensaje .btn-primary {margin:0 0 20px 30px; }
@@ -289,15 +289,15 @@ h2:before {content:''; margin:0 12px 0 2px; height:25px; float:left; border-left
 	
 	.menu-home {z-index:1; position:relative; padding:10px 0 0 5px; left:42px;}
 	.jumbotron {padding-top:47px;} 
-	.banner {height:490px; margin-right:-15px; margin-left:15px; }
+	.banner {height:490px; margin-right:-15px; margin-left:15px; margin-top:17px; }
 	.banner-img {padding-right:15px; padding-left:0; }
 	.for-offers-and-rating {padding-left:41px; padding-right:41px; }	
 	.formulario-home {height:470px; border-top-left-radius:0; border-bottom-left-radius:0;}
-	#datetimepicker12:before, #datetimepicker13:before, #discount-code:before {content:''; width:30px; height:30px; float:left; display:block; }
-	#datetimepicker12:before  {background:url(../img/ico-calendar-h.png)no-repeat;}
-	#datetimepicker13:before  {background:url(../img/ico-calendar-h.png)no-repeat;}
+	#DropOff:before, #ReturnDate:before, #discount-code:before {content:''; width:30px; height:30px; float:left; display:block; }
+	#DropOff:before  {background:url(../img/ico-calendar-h.png)no-repeat;}
+	#ReturnDate:before  {background:url(../img/ico-calendar-h.png)no-repeat;}
 	#discount-code:before {background:url(../img/icon-codigo.png)no-repeat;}
-	#datetimepicker12, #datetimepicker13, #discount-code { width:89%; float:left; }
+	#DropOff, #ReturnDate, #discount-code { width:89%; float:left; }
 	.mensaje {margin:240px 0 0 35px;}
 	.mensaje span {line-height:33px; padding:0 0 30px 0; font-size:31px; }
 	.nps-info, .nps-local {padding-top:71px; }
@@ -314,10 +314,10 @@ h2:before {content:''; margin:0 12px 0 2px; height:25px; float:left; border-left
 
 @media (min-width: 992px) and (max-width: 1200px) {
 	.menu-home {padding:10px 0 0 0;}	
-	#datetimepicker12, #datetimepicker13, #discount-code {width:83.5%; float:left; }
+	#DropOff, #ReturnDate, #discount-code {width:83.5%; float:left; }
 	.mensaje span {}
 	.banner-img {padding-bottom:21px;}
-	.banner1 {background-size:contain; height:410px;  }
+	.banner1 {background-size:contain; height:420px;  }
 	.for-offers-and-rating {padding-bottom:41px; }
 	.formulario-home {height:initial; margin-top:14px;}
 	.formulario-home .btn {position:static; margin:9px 0 0 0;}
@@ -338,11 +338,24 @@ h2:before {content:''; margin:0 12px 0 2px; height:25px; float:left; border-left
 
 
 @media screen and (min-width: 1200px) {
-	.container {width:1200px; }
-	.menu-home {padding:10px 0 0 60px; }
-	#datetimepicker12, #datetimepicker13, #discount-code {width:262px; float:left;}
-	.formulario-home form {height:428px; }
+	
+	
+	.menu-home {padding:10px 0 0 29px; }
+	#DropOff, #ReturnDate, #discount-code {width:250px; float:left;}
+	.formulario-home form {height:402px; }
+
 }
+
+@media (min-width:1200px) and (max-width:1310px) {
+	.formulario-home {margin-top:19px; } .single .formulario-home {padding-bottom: 88px; } 
+	.formulario-home form {height:425px; }
+	.formulario-home .btn {bottom:-60px!important;}
+	
+}
+
+
+
+@media screen and (min-width: 1300px) { .container {width:1300px; }   }
 
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
@@ -355,7 +368,7 @@ h2:before {content:''; margin:0 12px 0 2px; height:25px; float:left; border-left
 .preview-img {display:block; margin:0 auto; width:100%; height:auto;  border-radius:15px; box-shadow:2px 2px 14px #ccc;  }
 .preview-popup-img {display:block; margin:0 auto; width:100%; height:auto; box-shadow:2px 2px 14px #7D7D7D;}
 
-.Results .booking .preview-img {cursor:pointer;}
+body.booking .preview-img {cursor:pointer;}
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
@@ -370,17 +383,15 @@ h2:before {content:''; margin:0 12px 0 2px; height:25px; float:left; border-left
 /*  BOOKING  */
 
 /*Preview*/
-.booking .banner-img {background:url(../img/bookingbg.jpg) no-repeat top center; background-color:#fff; padding:21px;}
+body.booking .banner-img {background:url(../img/bookingbg.jpg) no-repeat top center; background-color:#fff; padding:21px;}
 .for-booking .booking {padding:21px; }
-.Results {background-color:#fff;border-radius:15px;box-shadow:2px 2px 14px #ccc; padding:0px;
-}
 /*Common: no boddy class >*/ .modal-dialog {top:120px; }
 /*Common: no boddy class >*/ .modal-body {padding:0; margin:0 0 -5px 0; min-height:290px; }
 /*Preview*/
 
 
-.booking-in-progress .booking,  .Results .booking .booking  {background:#fff; border-radius:15px; box-shadow:2px 2px 14px #ccc; padding:0;}
-.booking-in-progress .banner-img,.Results .booking .banner-img  {padding:51px;}
+body.booking-in-progress .booking, body.booking .booking  {background:#fff; border-radius:15px; box-shadow:2px 2px 14px #ccc; padding:0;}
+body.booking-in-progress .banner-img,body.booking .banner-img  {padding:51px 65px;}
 
 .booking .filter-results {border-left:1px solid #939bab; padding:0; }
 .by-parking-type {padding-top:21px;}
@@ -398,8 +409,8 @@ h2:before {content:''; margin:0 12px 0 2px; height:25px; float:left; border-left
 .results-quote-form label {display:block; font-weight:400; margin:0 0 10px 0; text-transform:uppercase; }
 .results-quote-form label:before {content:''; margin:0 8px 0 2px; height:15px; float:left; border-left:1.5px solid #DB5A08; position:relative; top:5px; }
 .results-quote-form select {height:31px; } /* + */ @media screen and (min-width:1200px) {.results-quote-form select {width:130px!important; }   }
-.results-quote-form #datetimepicker12, .results-quote-form #datetimepicker13, .results-quote-form #discount-code {max-width:128px; margin:2px 5px 0 0; border-color:#5A7A96; height:30px; }
-.results-quote-form .get-quote {color:#fff; background:#cf631b; padding:8px 11px; float:right; margin:31px 0 0 0; text-transform:uppercase; font-size:11px; border:1px solid transparent; }
+.results-quote-form #DropOff, .results-quote-form #ReturnDate, .results-quote-form #discount-code {max-width:128px; margin:2px 5px 0 0; border-color:#5A7A96; height:30px; }
+.results-quote-form .get-quote {color:#fff; background:#cf631b; padding:22px 11px; float:right; margin:0; text-transform:uppercase; font-size:11px; border:1px solid transparent; }
 .results-quote-form .get-quote:hover {color:#cf631b; background:#fff; border:1px solid #cf631b;}
 
 .booking .result-row {margin:0; padding:0; border-bottom:3px solid #8e97a8;}
@@ -435,8 +446,8 @@ h2:before {content:''; margin:0 12px 0 2px; height:25px; float:left; border-left
 	
 	.by-parking-type h2 {padding-left:5px; } .by-parking-type h2:before {height:30px; }
 	.booking .airport h3 {padding:30px 0 0 10px;} .booking .airport h3:before {height:44px; }
-	.results-quote-form .form-group {width:235px; padding-bottom:10px; padding-right:6px; }
-	.results-quote-form select,.results-quote-form #datetimepicker12, .results-quote-form #datetimepicker13, .results-quote-form #discount-code {width:190px!important; max-width:initial;  }
+	.results-quote-form .form-group {width:240px; padding-bottom:10px; padding-right:6px; } /*+*/ .results-quote-form .input-icon {float:none;}
+	.results-quote-form select,.results-quote-form #DropOff, .results-quote-form #ReturnDate, .results-quote-form #discount-code {width:190px!important; max-width:initial;  }
 	.booking .airport {min-height:263px; background-position:left bottom; background-color:#F5F6F8;}
 	.for-time-and-distance {margin-left:-8px; }
 	.result-options {padding:35px 22px 11px 22px; min-height:263px; }
@@ -451,7 +462,7 @@ h2:before {content:''; margin:0 12px 0 2px; height:25px; float:left; border-left
 	
 	.booking .filter-results {margin-top:21px; border-left:none; border-top:1px solid #8e97a8;}
 	.results-quote-form .form-group {width:235px; padding-bottom:10px; padding-right:6px; }
-	.results-quote-form select,.results-quote-form #datetimepicker12, .results-quote-form #datetimepicker13, .results-quote-form #discount-code {width:190px!important; max-width:initial;  }
+	.results-quote-form select,.results-quote-form #DropOff, .results-quote-form #ReturnDate, .results-quote-form #discount-code {width:190px!important; max-width:initial;  }
 	.booking .airport {min-height:380px; background-color:#F5F6F8; background-position:left bottom; }
 	.booking .result-row:last-child .airport {border-bottom-left-radius:15px; }
 	.booking .airport h3 {margin-top:45px; } .booking .airport h3:before {height:61px; }
@@ -466,7 +477,7 @@ h2:before {content:''; margin:0 12px 0 2px; height:25px; float:left; border-left
 	.booking .filter-results {border:none; }
 	.results-quote-form {padding:18px 15px; border-top:1px solid #ddd; margin-top:51px; }
 	.results-quote-form .form-group {overflow:auto; padding:0; }
-	.results-quote-form #datetimepicker12, .results-quote-form #datetimepicker13, .results-quote-form #discount-code {max-width:initial; }
+	.results-quote-form #DropOff, .results-quote-form #ReturnDate, .results-quote-form #discount-code {max-width:initial; }
 	.results-quote-form {overflow:auto; }
 	.results-quote-form .get-quote {float:none; width:100%; margin:10px 0 41px 0;}
 	.booking .airport {min-height:382px; background-color:#F5F6F8; background-position:left bottom; }
@@ -740,7 +751,7 @@ label.paid:before {content:''; margin:0 8px 0 2px; height:15px; float:left; bord
 /* SINGLE AIRPORT */
 
 
-.single .banner-img {padding-bottom:0; }
+.single .banner-img { /* padding-bottom:0; */ }
 .single .mensaje h1 {font-size:30px; line-height:31px; text-transform:uppercase; margin:24px 0 0 0;}
 .single .mensaje p {font-size:21px; line-height:21px; bottom:50px; position:absolute; width:50%; }
 .single .facts {padding:; background:rgba(255, 255, 255, 0.94); border-radius:15px; padding:31px 21px 21px 21px; margin-top:19px; }
@@ -758,10 +769,10 @@ label.paid:before {content:''; margin:0 8px 0 2px; height:15px; float:left; bord
 .single .about h3:before {content: ''; margin:0 12px 0 2px; float:left; border-left:2px solid #DB5A08; position:relative; top:3px;}
 .single .getting iframe {border:11px solid #fff; border-radius:15px; max-width:100%; }
 .single .about p {font-size:13.4px; padding:3px 5px 15px 4px; } 
-.single .for-getting-and-rating {background:#fff; padding:0 31px 21px 31px;  }
+.single .for-getting-and-rating {background:#fff; padding-bottom:41px;  }
 .single .getting, .single .rating {padding:0 21px;}
 
-.for-single-info {padding:71px 41px 21px 41px; background:#fff; }
+.for-single-info {padding:60px 41px 21px 41px; background:#fff; }
 
 .single .get-quote h2 {font-size:19px; margin:0 0 21px 7px; }
 .single .get-quote h2:before {height:42px; border-color:#FFA500; }
@@ -769,7 +780,7 @@ label.paid:before {content:''; margin:0 8px 0 2px; height:15px; float:left; bord
 
 @media screen and (min-width: 1200px) {
 	
-	.single .formulario-home form { height:355px; }
+	.single .formulario-home form { height:auto!important; }
 
 }
 
@@ -907,3 +918,113 @@ h4.tabs-heading:before {content:''; color:#DB5A08; margin:0 8px 0 -2px; height:2
 
 
 
+
+
+
+
+/********************************************************************************************************************************************************************/
+/********************************************************************************************************************************************************************/
+/********************************************************************************************************************************************************************/
+/********************************************************************************************************************************************************************/
+
+/* NEW FULL WIDTH LAYOUT */
+	
+
+@media (min-width:830px) and (max-width:992px) { .results-quote-form .form-group:nth-child(2) {margin-right:170px; }  }	
+/*	@media (min-width:992px) and (max-width:1200px) { .results-quote-form .get-quote{padding:21px; }  }
+@media (min-width:992px) and (max-width:1013px) { .results-quote-form .form-group {width:250px; } }	
+*/
+
+@media (min-width:1085px) and (max-width:1201px) { .results-quote-form .form-group:nth-child(2) {margin-right:170px; }  }
+
+@media (min-width:1199px) and (max-width:1300px) { .results-quote-form .input-icon {display:none;}  }
+
+
+
+@media screen and (min-width:1200px){ 
+
+		.formulario-home .btn {bottom:-15px; padding:22px 0; }	
+		.home .formulario-home .btn {bottom:-35px; padding:22px 0; }
+		/*.results-quote-form .get-quote {padding:21px 25px; margin:0; }*/
+		
+		
+		
+		
+}
+
+
+@media (min-width:1255px) and (max-width:1330px) { .booking .airport {background-size:cover; background-position:0; } }	
+
+@media screen and (width:1201px) {.results-quote-form .form-group:nth-child(2){ margin-right:0; }  }
+
+
+
+/* @media (min-width:1200px) and (max-width:1250px) { .results-quote-form #DropOff, .results-quote-form #ReturnDate, .results-quote-form #discount-code {max-width:114px; }  } */
+
+	
+@media screen and (min-width:1310px){
+	
+		.menu-home {padding-left:0; left:15px; position:relative; }
+		.client-login {margin-right:0; padding:9px 22px 0 0; }
+		.login-actions{margin:27px 20px 0 0;}
+		#DropOff, #ReturnDate, #discount-code {width:87%; }
+		.for-logos  li {padding:0 21px; }
+		.banner-img,.banner1 {background-size:cover; background-position:0px -7px;}
+		.mensaje {margin-left:23%; margin-top:3.5%; }
+		.offers {padding:0 35px;} .rating {padding-right:30px; }
+		/* .formulario-home { border-bottom-right-radius: 0; border-bottom-left-radius: 0;} */
+		/*************************************************/
+		body.booking .banner-img {background-size:cover; background-position:0;}
+		.results-quote-form .form-group {padding:0 1%; }
+		/*.results-quote-form #DropOff, .results-quote-form #ReturnDate, .results-quote-form #discount-code {max-width:80%; }*/
+		.booking .airport {background-size:cover; background-position:0 bottom;}
+		.result-options {min-height:206px; }
+		/*************************************************/
+		body.login .for-login, body.guest-login .for-login {padding:51px; }
+		/*************************************************/
+		.for-single-info h3 {min-height:60px; }
+		.for-single-info p {min-height:70px;}
+		/*************************************************/
+		.single .getting iframe {width:100%;}
+		.single .formulario-home {padding-top:22px; padding-bottom:40px; } .single .get-quote h2 {margin-bottom:41px; }
+		/*************************************************/
+		.even-more .banner1 {background-size:cover;} .even-more .mensaje {margin:3% 0 0 23%; } 
+		.banner1 { background-size: 84% 98%; background-position: 10px 17px; }
+		.offers { padding:0 105px 0 35px; }
+		
+		
+}
+
+@media screen and (min-width:1530px){	
+
+	.results-quote-form .get-quote { /* padding:22px 36px;  margin: 5px 3px 0 0; */ }
+	
+}
+
+@media screen and (min-width:1530px){	
+
+	.menu-home {left:-5%; }
+	.for-logos li { padding:0 1.7%; }
+	.results-quote-form select,.results-quote-form #DropOff, .results-quote-form #ReturnDate, .results-quote-form #discount-code {width:123px!important; max-width:initial; }
+	
+	/*22/04/2016*/
+	.container-fluid {padding-left:100px; padding-right:100px;}
+
+	
+}
+
+
+
+@media screen and (min-width:1800px) { 	/* .results-quote-form .get-quote { padding:20px 38px; margin: 5px 3px 0 0;} */ }	
+
+
+
+/********************************************************************************************************************************************************************/
+/********************************************************************************************************************************************************************/
+/********************************************************************************************************************************************************************/
+/********************************************************************************************************************************************************************/
+
+
+@media screen and (max-width:768px) { .single .banner-img {background-size:cover; } }
+
+/* .container-fluid { max-width:1600px; } */

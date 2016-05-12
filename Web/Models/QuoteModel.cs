@@ -11,7 +11,7 @@ namespace Web.Models
         [Required]
         public String Airport { get; set; }
         [Required]
-        public String Pickup { get; set; }
+        public String DropOffDate { get; set; }
         [Required]
         public String ReturnDate { get; set; }
         public String Discount { get; set; }

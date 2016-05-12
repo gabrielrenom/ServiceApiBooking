@@ -13,9 +13,12 @@
     <link href="~/Content/style.css" rel="stylesheet" type="text/css" />
 
 </head>
-<body class="">
+@ViewBag.BodyType
+<body class="@ViewBag.BodyType">
     <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+
+
+        <div class="container-fluid">
             <div class="row">
 
                 <div class="navbar-header col-lg-2 col-md-3 col-sm-3 col-xs-2 for-brand">
@@ -33,7 +36,7 @@
 
                     <div class="collapse navbar-collapse" id="main-nav">
                         <div class="row">
-                            <div class="col-md-6 col-sm-7 for-menu-home">
+                            <div class="col-lg-4 col-md-5 col-sm-7 for-menu-home">
                                 <ul class="nav navbar-nav menu-home">
                                     <li class="active">@Html.ActionLink("About us", "About", "Home", new { title = "About National Parking Services" })</li>
                                     <li>@Html.ActionLink("FAQ", "Faq", "Home", new { title = "FAQ" })</li>
@@ -41,7 +44,7 @@
                                 </ul>
                             </div>
 
-                            <div class="col-md-6 col-sm-5 for-client-login">
+                            <div class="col-lg-8 col-md-7 col-sm-5 for-client-login">
                                 <form class="navbar-form navbar-right form-inline client-login" role="search">
                                     <div class="form-group">
                                         <label class="sr-only" for="login">Login</label>
@@ -66,115 +69,125 @@
             </div>
         </div>
 
+
     </nav>
 
-    <div class="">        
+    <div class="sombra">
 
-         @RenderBody()
-          
+        <div class="">
 
-        <div class="container for-logos">
-            <ul class="list-inline">
-                <li>
-                    <img src="~/img/manchester-airport.png" alt="Manchester airport" width="180" height="95">
-                </li>
-                <li>
-                    <img src="~/img/liverpooljohn-airport.png" alt="Liverpool John Lennon airport" width="210" height="95">
-                </li>
-                <li>
-                    <img src="~/img/birmingham-airport.png" alt="Birmingham airport" width="210" height="95">
-                </li>
-                <li>
-                    <img src="~/img/bristol-airport.png" alt="Bristol airport" width="210" height="95">
-                </li>
-                <li>
-                    <img src="~/img/london-airport.png" alt="London Stansted airport" width="210" height="95">
-                </li>
-            </ul>
-        </div>
+            @RenderBody()
 
 
-        <div class="container for-footer">
-            <footer>
-                <div class="col-md-2 col-sm-2 col-xs-6 nps-about">
-                    <strong class="nps"><span>NATIONAL</span> PARKING SERVICES</strong>
-                    <ul>
-                        <li>
-                            <a href="#">About Us</a>
-                        </li>
-                        <li>
-                            <a href="#">Contact Us</a>
-                        </li>
-                        <li>
-                            <a href="#">Terms and Conditions</a>
-                        </li>
-                        <li>
-                            <a href="#">Privacy Policy</a>
-                        </li>
-                        <li>
-                            <a href="#">Price Check</a>
-                        </li>
-                    </ul>
-                </div>
+            <div class="container-fluid for-logos">
 
-                <div class="col-md-2 col-sm-2 col-xs-6 nps-info">
-                    <ul>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Business</a></li>
-                        <li><a href="#">Affiliates</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-md-3 col-sm-3 col-xs-6 nps-local">
-                    <dl>
-                        <dt>Address 1224 Avenue</dt>
-                        <dd>+555 8494 531 2</dd>
-                        <dd>Manchester, UK</dd>
-                    </dl>
-
+                <div class="container">
                     <ul class="list-inline">
                         <li>
-                            <a href="#" target="_blank">
-                                <img src="~/img/icon-facebook.png" width="24" height="24" alt="National Parking Services in Facebook">
-                            </a>
+                            <img src="img/manchester-airport.png" alt="Manchester airport" width="180" height="95">
                         </li>
                         <li>
-                            <a href="#" target="_blank">
-                                <img src="~/img/icon-twitter.png" width="24" height="24" alt="National Parking Services in Twitter">
-                            </a>
+                            <img src="img/liverpooljohn-airport.png" alt="Liverpool John Lennon airport" width="210" height="95">
                         </li>
                         <li>
-                            <a href="#" target="_blank">
-                                <img src="~/img/icon-google.png" width="24" height="24" alt="National Parking Services in Google+">
-                            </a>
+                            <img src="img/birmingham-airport.png" alt="Birmingham airport" width="210" height="95">
+                        </li>
+                        <li>
+                            <img src="img/bristol-airport.png" alt="Bristol airport" width="210" height="95">
+                        </li>
+                        <li>
+                            <img src="img/london-airport.png" alt="London Stansted airport" width="210" height="95">
                         </li>
                     </ul>
                 </div>
+            </div>
 
-                <div class="col-md-5 col-sm-5 col-xs-6 for-newsletter-and-cards">
 
-                    <form class="navbar-form navbar-right nps-newsletter">
-                        <div class="form-group">
-                            <input placeholder="Newsletter" class="form-control your-email" type="email">
+
+
+            @*<div class="container-fluid for-footer">
+                <div class="container">
+
+                    <footer>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6 nps-about">
+                            <strong class="nps"><span>NATIONAL</span> PARKING SERVICES</strong>
+                            <ul>
+                                <li>
+                                    <a href="#">About Us</a>
+                                </li>
+                                <li>
+                                    <a href="#">Contact Us</a>
+                                </li>
+                                <li>
+                                    <a href="#">Terms and Conditions</a>
+                                </li>
+                                <li>
+                                    <a href="#">Privacy Policy</a>
+                                </li>
+                                <li>
+                                    <a href="#">Price Check</a>
+                                </li>
+                            </ul>
                         </div>
-                        <button type="submit" class="btn">Subscribe</button>
-                    </form>
 
-                    <ul class="list-inline text-right we-accept">
-                        <li>We Accept </li>
-                        <li> <img src="~/img/visa.png" width="53" height="34" alt="We accept Visa"> </li>
-                        <li> <img src="~/img/master-card.png" width="53" height="34" alt="We accept MasterCard"> </li>
-                        <li> <img src="~/img/american-express.png" width="53" height="34" alt="We accept American Express"> </li>
-                        <li> <img src="~/img/paypal.png" width="53" height="34" alt="We accept PayPal"> </li>
-                    </ul>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6 nps-info">
+                            <ul>
+                                <li><a href="#">FAQ</a></li>
+                                <li><a href="#">Business</a></li>
+                                <li><a href="#">Affiliates</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 nps-local">
+                            <dl>
+                                <dt>Address 1224 Avenue</dt>
+                                <dd>+555 8494 531 2</dd>
+                                <dd>Manchester, UK</dd>
+                            </dl>
+
+                            <ul class="list-inline">
+                                <li>
+                                    <a href="#" target="_blank">
+                                        <img src="img/icon-facebook.png" width="24" height="24" alt="National Parking Services in Facebook">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank">
+                                        <img src="img/icon-twitter.png" width="24" height="24" alt="National Parking Services in Twitter">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank">
+                                        <img src="img/icon-google.png" width="24" height="24" alt="National Parking Services in Google+">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-6 for-newsletter-and-cards">
+
+                            <form class="navbar-form navbar-right nps-newsletter">
+                                <div class="form-group">
+                                    <input placeholder="Newsletter" class="form-control your-email" type="email">
+                                </div>
+                                <button type="submit" class="btn">Subscribe</button>
+                            </form>
+
+                            <ul class="list-inline text-right we-accept">
+                                <li>We Accept </li>
+                                <li> <img src="img/visa.png" width="53" height="34" alt="We accept Visa"> </li>
+                                <li> <img src="img/master-card.png" width="53" height="34" alt="We accept MasterCard"> </li>
+                                <li> <img src="img/american-express.png" width="53" height="34" alt="We accept American Express"> </li>
+                                <li> <img src="img/paypal.png" width="53" height="34" alt="We accept PayPal"> </li>
+                            </ul>
+                        </div>
+                    </footer>
+
                 </div>
-
-            </footer>
-
+            </div>*@
 
         </div>
-
     </div>
-    
 </body>
 </html>

@@ -1,909 +1,135 @@
-﻿@model List<Web.Models.ResultsView>
-<div >
-    <div class="sombra">
-        <div class="">
-            <div class="container banner-img for-booking">
-                <div class="Results row booking">
-                    <!-- This is a preview:
-                    <img src="img/booking-preview.jpg" width="1096" height="712" class="preview-img" title="Clicking on +info triggers the pop-up" data-toggle="modal" data-target="#plusInfo">
-                     -->
-                   
-                    <div class="col-md-3 by-parking-type">
-                        @*FILTERS FOR PARKING*@
-                        @*START*@
-                        @Html.Partial("FilterPartialView", Model)
-                        @*END*@
-                    </div>
-                    <div class="col-md-9 filter-results">
-                        <div class="results-quote-form">                         
-                           @*FORM TO BOOK THE PARKING*@
-                            @*START*@
-                                 @Html.Partial("BookingPartialView")
-                            @*END*@
-                        </div>
-
-                        @foreach (var result in Model)
-                        {
-                        <!-- Results loop begins  -----------------------------------------------------      -->
-                        <!-- Result row begins -->
-
-                            <div class="row result-row">
-                                <div class="col-md-4 col-sm-4 col-xs-4 airport manchester-airport">
-                                    <h3>@result.Company</h3>
-                                </div>
-                                <div class="col-md-8 col-sm-8 col-xs-8 result-info">
-                                    <div class="result-form">
-                                        <form role="form" class="row">
-                                            <div class="form-group col-md-8 result-options">
-                                                <ul class="list-inline for-time-and-distance">
-                                                    <li class="time">
-                                                        <i class="fa fa-bus fa-2x"></i>
-                                                        @result.TransferTime minutes transfer                                                        
-                                                    </li>
-                                                    <li class="map">
-                                                        <i class="fa fa-map-marker fa-2x"></i>
-                                                        @result.DistanceFromAirport 
-                                                        @if (@result.DistanceFromAirport == 1) {
-                                                        @Html.Raw("mile")
-                                                        }
-                                                        else { @Html.Raw("miles")
-                                                        } from the airport
-                                                    </li>
-                                                </ul>
-                                                <p class="result-data">
-                                                    @result.Description
-                                                </p>
-                                                <div class="options">
-                                                    <span><input type="checkbox" value="24 hours security"  name="checked" checked="@result.Is24hSecurity"> 24 hours security </span>
-                                                    <span><input type="checkbox" value="Family friendly" name="checked" checked="@result.IsFamilyFriendly"> Family friendly </span>
-                                                    <span><input type="checkbox" value="You retain keys" name="checked" checked="@result.IsRetainKeys"> You retain keys </span>
-                                                    <span><input type="checkbox" value="Regular transfers" name="checked" checked="@result.IsRegularTransfers"> Regular transfers</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-md-4 result-actions">
-                                                <span class="result-price"><i class="currency">&pound;</i> @result.Price</span>
-                                                <button type="submit" class="btn">Book now</button>
-                                                <ul class="list-inline for-info-and-map">
-                                                    <li class="moreinfo">
-                                                        <a data-toggle="modal" data-target="#plusInfo" href="#">
-                                                            <i class="fa fa-plus-circle fa-lg"></i>
-                                                            Info
-                                                        </a>
-                                                    </li>
-                                                    <li class="map">
-                                                        <a href="#">
-                                                            <i class="fa fa-map-marker fa-lg"></i>
-                                                            Map
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-
-                        <!-- + INFO Modal -->
-                            <div class="modal fade" id="plusInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#10005;</span></button>
-                                            <h4 class="modal-title tabs-heading" id="myModalLabel"><span class="subject">Manchester</span> Airport</h4>
-                                            <p class="lead">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incid ut labore et dolore magna aliqua. sequi nes.
-                                            </p>
-                                            <form role="form" class="tab-booking">
-                                                <button type="submit" class="btn">
-                                                    <span>
-                                                        <i class="currency">&pound;</i> 24.00
-                                                    </span>
-                                                    Book now
-                                                </button>
-                                            </form>
-
-                                        </div>
-                                        <div class="modal-body">
-
-                                            <div class="info-tabs">
-
-                                                <!-- Nav tabs -->
-                                                <ul class="nav nav-tabs" role="tablist">
-                                                    <li role="presentation"><a href="#summary" aria-controls="summary" role="tab" data-toggle="tab">Summary</a></li>
-                                                    <li role="presentation"><a href="#full-info" aria-controls="full-info" role="tab" data-toggle="tab">Full information</a></li>
-                                                    <li role="presentation"><a href="#important" aria-controls="important" role="tab" data-toggle="tab">Important</a></li>
-                                                    <li role="presentation" class="active"><a href="#map" aria-controls="map" role="tab" data-toggle="tab">Map</a></li>
-                                                    <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Reviews</a></li>
-                                                </ul>
-
-                                                <!-- Tab panes -->
-                                                <div class="tab-content">
-                                                    <div role="tabpanel" class="tab-pane" id="summary">
-
-                                                        <h2>Summary</h2>
-
-                                                        <ul class="tab-summary-list">
-                                                            <li><i class="fa fa-angle-double-right"></i>Hourly/Short-Duration Parking: <span>Yes</span></li>
-                                                            <li><i class="fa fa-angle-double-right"></i>Daily Parking: <span>Yes</span></li>
-                                                            <li><i class="fa fa-angle-double-right"></i>Free 30-Minute Parking: <span>No</span></li>
-                                                            <li><i class="fa fa-angle-double-right"></i>No Overnight Parking Zones: <span>Yes</span></li>
-                                                            <li><i class="fa fa-angle-double-right"></i>Holiday/Overflow Parking: <span>No</span></li>
-                                                            <li><i class="fa fa-angle-double-right"></i>Parking Condominiums: <span>No</span></li>
-                                                        </ul>
-
-                                                    </div>
-                                                    <div role="tabpanel" class="tab-pane" id="full-info">
-
-                                                        <h2>Full information</h2>
-
-                                                        <div class="text">
-
-                                                            <p>
-                                                                <strong>Architectural and Design Strategies </strong>
-                                                                For example, several passive design features such as visible stair or elevator cores, improved lighting, or improved visibility can improve the level of safety, and their use should be considered when planning and designing a parking facility. However, such features are not addressed in this guidebook.
-                                                            </p>
-
-                                                            <p>
-                                                                <strong>Environmental and Sustainability Strategies </strong>
-                                                                Although the guidebook does describe the use of strategies to reduce vehicle circulation, install solar panels, and install electric vehicle charging stations, these strategies represent just a few of the many available programs
-                                                                that can reduce environmental impacts.
-                                                            </p>
-
-                                                            <p>
-                                                                <strong>Parking Operations </strong>
-                                                                It does not address staff training, supervision, or responsibilities or other day-to-day operational tasks. It does not address maintenance procedures, the use of security patrols, or revenue control practices (e.g., cash handling, auditing, or accounting).
-                                                            </p>
-
-                                                            <p>
-                                                                <strong>Multi-Use Facilities </strong>
-                                                                In addition to airline passengers (i.e., "public" customers), some airport parking structures are used by rental car companies, ground transportation operators (e.g., the operators of taxicabs, limousines, courtesy vehicles serving hotels/motels), or employees of the airport operator, airlines, or other airport tenants. This guidebook is not intended to address the operation, design, or planning of such multi-use facilities.
-                                                            </p>
-
-                                                        </div>
-
-
-                                                    </div>
-                                                    <div role="tabpanel" class="tab-pane" id="important">
-
-                                                        <h2>Important for you to know</h2>
-
-                                                        <div class="tab-important">
-                                                            <table class="table table-striped">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>#</th>
-                                                                        <th>Vehicle Washing and Servicing</th>
-                                                                        <th>Baggage Check-In</th>
-                                                                        <th>Electric Charging Stations</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <th scope="row">1</th>
-                                                                        <td>A.3</td>
-                                                                        <td>B.5</td>
-                                                                        <td>C.10</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th scope="row">2</th>
-                                                                        <td>A.3</td>
-                                                                        <td>B.5</td>
-                                                                        <td>C.10</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th scope="row">3</th>
-                                                                        <td>A.3</td>
-                                                                        <td>B.5</td>
-                                                                        <td>C.10</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-
-                                                    </div>
-                                                    <div role="tabpanel" class="tab-pane active" id="map">
-
-                                                        <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d45309.4909839975!2d-2.2876589501606497!3d53.356022272999866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x487a52c0dfd893c5%3A0x8b0b8247e5e4a5e0!2sManchester+Airport%2C+Manchester+M90+1QX!3m2!1d53.3588026!2d-2.2727303!5e0!3m2!1ses!2sus!4v1458546021866" width="922" height="422" frameborder="0" style="border:0" allowfullscreen></iframe>
-
-                                                    </div>
-                                                    <div role="tabpanel" class="tab-pane" id="reviews">
-
-                                                        <h2>Check the users reviews</h2>
-
-                                                        <div class="tab-rate-form" id="formulario-rate">
-                                                            <span class="color2"><b>Customer 1:</b></span><br />
-                                                            <span class="color3"><label for="date" class="rate-date">January 12, 2016 at 12:26pm</label></span><br />
-                                                            <span><b>Perfect, thanks!</b></span>
-                                                            <input type="number" name="your_awesome_parameter" id="some_id" class="rating" data-clearable="remove" />
-                                                            <hr>
-                                                            <span class="color2"><b>Customer 2:</b></span><br />
-                                                            <span class="color3"><label for="date" class="rate-date">January 13, 2016 at 05:15pm</label></span><br />
-                                                            <span><b>Great service.</b></span>
-                                                            <input type="number" name="your_awesome_parameter" id="some_id" class="rating" data-clearable="remove" />
-                                                            <hr>
-                                                            <span class="color2"><b>Customer 3:</b></span><br />
-                                                            <span class="color3"><label for="date" class="rate-date">December 6, 2015 at 06:50pm</label></span><br />
-                                                            <span><b>Highly recommended!</b></span>
-                                                            <input type="number" name="your_awesome_parameter" id="some_id" class="rating" data-clearable="remove" />
-                                                            <hr>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        }
-
-                        <!-- Results loop begins  -----------------------------------------------------      -->
-                        <!-- Result row begins -->
-
-                        <div class="row result-row">
-                            <div class="col-md-4 col-sm-4 col-xs-4 airport manchester-airport">
-                                <h3>Manchester airport</h3>
-                            </div>
-                            <div class="col-md-8 col-sm-8 col-xs-8 result-info">
-                                <div class="result-form">
-                                    <form role="form" class="row">
-                                        <div class="form-group col-md-8 result-options">
-                                            <ul class="list-inline for-time-and-distance">
-                                                <li class="time">
-                                                    <i class="fa fa-bus fa-2x"></i>
-                                                    10 minutes transfer
-                                                </li>
-                                                <li class="map">
-                                                    <i class="fa fa-map-marker fa-2x"></i>
-                                                    1 mile from the airport
-                                                </li>
-                                            </ul>
-                                            <p class="result-data">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incid ut labore et dolore magna aliqua. sequi nes.
-                                            </p>
-                                            <div class="options">
-                                                <span><input type="checkbox" value="24 hours security" name="checked" checked> 24 hours security </span>
-                                                <span><input type="checkbox" value="Family friendly" name="checked" checked> Family friendly </span>
-                                                <span><input type="checkbox" value="You retain keys" name="checked" checked> You retain keys </span>
-                                                <span><input type="checkbox" value="Regular transfers" name="checked" checked> Regular transfers</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-4 result-actions">
-                                            <span class="result-price"><i class="currency">&pound;</i> 24.00</span>
-                                            <button type="submit" class="btn">Book now</button>
-                                            <ul class="list-inline for-info-and-map">
-                                                <li class="moreinfo">
-                                                    <a data-toggle="modal" data-target="#plusInfo" href="#">
-                                                        <i class="fa fa-plus-circle fa-lg"></i>
-                                                        Info
-                                                    </a>
-                                                </li>
-                                                <li class="map">
-                                                    <a href="#">
-                                                        <i class="fa fa-map-marker fa-lg"></i>
-                                                        Map
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- + INFO Modal -->
-                        <div class="modal fade" id="plusInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#10005;</span></button>
-                                        <h4 class="modal-title tabs-heading" id="myModalLabel"><span class="subject">Manchester</span> Airport</h4>
-                                        <p class="lead">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incid ut labore et dolore magna aliqua. sequi nes.
-                                        </p>
-                                        <form role="form" class="tab-booking">
-                                            <button type="submit" class="btn">
-                                                <span>
-                                                    <i class="currency">&pound;</i> 24.00
-                                                </span>
-                                                Book now
-                                            </button>
-                                        </form>
-
-                                    </div>
-                                    <div class="modal-body">
-
-                                        <div class="info-tabs">
-
-                                            <!-- Nav tabs -->
-                                            <ul class="nav nav-tabs" role="tablist">
-                                                <li role="presentation"><a href="#summary" aria-controls="summary" role="tab" data-toggle="tab">Summary</a></li>
-                                                <li role="presentation"><a href="#full-info" aria-controls="full-info" role="tab" data-toggle="tab">Full information</a></li>
-                                                <li role="presentation"><a href="#important" aria-controls="important" role="tab" data-toggle="tab">Important</a></li>
-                                                <li role="presentation" class="active"><a href="#map" aria-controls="map" role="tab" data-toggle="tab">Map</a></li>
-                                                <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Reviews</a></li>
-                                            </ul>
-
-                                            <!-- Tab panes -->
-                                            <div class="tab-content">
-                                                <div role="tabpanel" class="tab-pane" id="summary">
-
-                                                    <h2>Summary</h2>
-
-                                                    <ul class="tab-summary-list">
-                                                        <li><i class="fa fa-angle-double-right"></i>Hourly/Short-Duration Parking: <span>Yes</span></li>
-                                                        <li><i class="fa fa-angle-double-right"></i>Daily Parking: <span>Yes</span></li>
-                                                        <li><i class="fa fa-angle-double-right"></i>Free 30-Minute Parking: <span>No</span></li>
-                                                        <li><i class="fa fa-angle-double-right"></i>No Overnight Parking Zones: <span>Yes</span></li>
-                                                        <li><i class="fa fa-angle-double-right"></i>Holiday/Overflow Parking: <span>No</span></li>
-                                                        <li><i class="fa fa-angle-double-right"></i>Parking Condominiums: <span>No</span></li>
-                                                    </ul>
-
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane" id="full-info">
-
-                                                    <h2>Full information</h2>
-
-                                                    <div class="text">
-
-                                                        <p>
-                                                            <strong>Architectural and Design Strategies </strong>
-                                                            For example, several passive design features such as visible stair or elevator cores, improved lighting, or improved visibility can improve the level of safety, and their use should be considered when planning and designing a parking facility. However, such features are not addressed in this guidebook.
-                                                        </p>
-
-                                                        <p>
-                                                            <strong>Environmental and Sustainability Strategies </strong>
-                                                            Although the guidebook does describe the use of strategies to reduce vehicle circulation, install solar panels, and install electric vehicle charging stations, these strategies represent just a few of the many available programs
-                                                            that can reduce environmental impacts.
-                                                        </p>
-
-                                                        <p>
-                                                            <strong>Parking Operations </strong>
-                                                            It does not address staff training, supervision, or responsibilities or other day-to-day operational tasks. It does not address maintenance procedures, the use of security patrols, or revenue control practices (e.g., cash handling, auditing, or accounting).
-                                                        </p>
-
-                                                        <p>
-                                                            <strong>Multi-Use Facilities </strong>
-                                                            In addition to airline passengers (i.e., "public" customers), some airport parking structures are used by rental car companies, ground transportation operators (e.g., the operators of taxicabs, limousines, courtesy vehicles serving hotels/motels), or employees of the airport operator, airlines, or other airport tenants. This guidebook is not intended to address the operation, design, or planning of such multi-use facilities.
-                                                        </p>
-
-                                                    </div>
-
-
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane" id="important">
-
-                                                    <h2>Important for you to know</h2>
-
-                                                    <div class="tab-important">
-                                                        <table class="table table-striped">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>#</th>
-                                                                    <th>Vehicle Washing and Servicing</th>
-                                                                    <th>Baggage Check-In</th>
-                                                                    <th>Electric Charging Stations</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <th scope="row">1</th>
-                                                                    <td>A.3</td>
-                                                                    <td>B.5</td>
-                                                                    <td>C.10</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">2</th>
-                                                                    <td>A.3</td>
-                                                                    <td>B.5</td>
-                                                                    <td>C.10</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">3</th>
-                                                                    <td>A.3</td>
-                                                                    <td>B.5</td>
-                                                                    <td>C.10</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane active" id="map">
-
-                                                    <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d45309.4909839975!2d-2.2876589501606497!3d53.356022272999866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x487a52c0dfd893c5%3A0x8b0b8247e5e4a5e0!2sManchester+Airport%2C+Manchester+M90+1QX!3m2!1d53.3588026!2d-2.2727303!5e0!3m2!1ses!2sus!4v1458546021866" width="922" height="422" frameborder="0" style="border:0" allowfullscreen></iframe>
-
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane" id="reviews">
-
-                                                    <h2>Check the users reviews</h2>
-
-                                                    <div class="tab-rate-form" id="formulario-rate">
-                                                        <span class="color2"><b>Customer 1:</b></span><br />
-                                                        <span class="color3"><label for="date" class="rate-date">January 12, 2016 at 12:26pm</label></span><br />
-                                                        <span><b>Perfect, thanks!</b></span>
-                                                        <input type="number" name="your_awesome_parameter" id="some_id" class="rating" data-clearable="remove" />
-                                                        <hr>
-                                                        <span class="color2"><b>Customer 2:</b></span><br />
-                                                        <span class="color3"><label for="date" class="rate-date">January 13, 2016 at 05:15pm</label></span><br />
-                                                        <span><b>Great service.</b></span>
-                                                        <input type="number" name="your_awesome_parameter" id="some_id" class="rating" data-clearable="remove" />
-                                                        <hr>
-                                                        <span class="color2"><b>Customer 3:</b></span><br />
-                                                        <span class="color3"><label for="date" class="rate-date">December 6, 2015 at 06:50pm</label></span><br />
-                                                        <span><b>Highly recommended!</b></span>
-                                                        <input type="number" name="your_awesome_parameter" id="some_id" class="rating" data-clearable="remove" />
-                                                        <hr>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-                        <!-- Result row ends -->
-                        <!-- Result row begins -->
-
-                        <div class="row result-row">
-                            <div class="col-md-4 col-sm-4 col-xs-4 airport manchester-airport">
-                                <h3>Manchester airport</h3>
-                            </div>
-                            <div class="col-md-8 col-sm-8 col-xs-8 result-info">
-                                <div class="result-form">
-                                    <form role="form" class="row">
-                                        <div class="form-group col-md-8 result-options">
-                                            <ul class="list-inline for-time-and-distance">
-                                                <li class="time">
-                                                    <i class="fa fa-bus fa-2x"></i>
-                                                    10 minutes transfer
-                                                </li>
-                                                <li class="map">
-                                                    <i class="fa fa-map-marker fa-2x"></i>
-                                                    1 mile from the airport
-                                                </li>
-                                            </ul>
-                                            <p class="result-data">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incid ut labore et dolore magna aliqua. sequi nes.
-                                            </p>
-                                            <div class="options">
-                                                <span><input type="checkbox" value="24 hours security" name="checked" checked> 24 hours security </span>
-                                                <span><input type="checkbox" value="Family friendly" name="checked" checked> Family friendly </span>
-                                                <span><input type="checkbox" value="You retain keys" name="checked" checked> You retain keys </span>
-                                                <span><input type="checkbox" value="Regular transfers" name="checked" checked> Regular transfers</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-4 result-actions">
-                                            <span class="result-price"><i class="currency">&pound;</i> 24.00</span>
-                                            <button type="submit" class="btn">Book now</button>
-                                            <ul class="list-inline for-info-and-map">
-                                                <li class="moreinfo">
-                                                    <a data-toggle="modal" data-target="#plusInfo2" href="#">
-                                                        <i class="fa fa-plus-circle fa-lg"></i>
-                                                        Info
-                                                    </a>
-                                                </li>
-                                                <li class="map">
-                                                    <a href="#">
-                                                        <i class="fa fa-map-marker fa-lg"></i>
-                                                        Map
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- + INFO Modal -->
-                        <div class="modal fade" id="plusInfo2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#10005;</span></button>
-                                        <h4 class="modal-title tabs-heading" id="myModalLabel"><span class="subject">Manchester</span> Airport</h4>
-                                        <p class="lead">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incid ut labore et dolore magna aliqua. sequi nes.
-                                        </p>
-                                        <form role="form" class="tab-booking">
-                                            <button type="submit" class="btn">
-                                                <span>
-                                                    <i class="currency">&pound;</i> 24.00
-                                                </span>
-                                                Book now
-                                            </button>
-                                        </form>
-
-                                    </div>
-                                    <div class="modal-body">
-
-                                        <div class="info-tabs">
-
-                                            <!-- Nav tabs -->
-                                            <ul class="nav nav-tabs" role="tablist">
-                                                <li role="presentation"><a href="#summary" aria-controls="summary" role="tab" data-toggle="tab">Summary</a></li>
-                                                <li role="presentation"><a href="#full-info" aria-controls="full-info" role="tab" data-toggle="tab">Full information</a></li>
-                                                <li role="presentation"><a href="#important" aria-controls="important" role="tab" data-toggle="tab">Important</a></li>
-                                                <li role="presentation" class="active"><a href="#map" aria-controls="map" role="tab" data-toggle="tab">Map</a></li>
-                                                <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Reviews</a></li>
-                                            </ul>
-
-                                            <!-- Tab panes -->
-                                            <div class="tab-content">
-                                                <div role="tabpanel" class="tab-pane" id="summary">
-
-                                                    <h2>Summary</h2>
-
-                                                    <ul class="tab-summary-list">
-                                                        <li><i class="fa fa-angle-double-right"></i>Hourly/Short-Duration Parking: <span>Yes</span></li>
-                                                        <li><i class="fa fa-angle-double-right"></i>Daily Parking: <span>Yes</span></li>
-                                                        <li><i class="fa fa-angle-double-right"></i>Free 30-Minute Parking: <span>No</span></li>
-                                                        <li><i class="fa fa-angle-double-right"></i>No Overnight Parking Zones: <span>Yes</span></li>
-                                                        <li><i class="fa fa-angle-double-right"></i>Holiday/Overflow Parking: <span>No</span></li>
-                                                        <li><i class="fa fa-angle-double-right"></i>Parking Condominiums: <span>No</span></li>
-                                                    </ul>
-
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane" id="full-info">
-
-                                                    <h2>Full information</h2>
-
-                                                    <div class="text">
-
-                                                        <p>
-                                                            <strong>Architectural and Design Strategies </strong>
-                                                            For example, several passive design features such as visible stair or elevator cores, improved lighting, or improved visibility can improve the level of safety, and their use should be considered when planning and designing a parking facility. However, such features are not addressed in this guidebook.
-                                                        </p>
-
-                                                        <p>
-                                                            <strong>Environmental and Sustainability Strategies </strong>
-                                                            Although the guidebook does describe the use of strategies to reduce vehicle circulation, install solar panels, and install electric vehicle charging stations, these strategies represent just a few of the many available programs
-                                                            that can reduce environmental impacts.
-                                                        </p>
-
-                                                        <p>
-                                                            <strong>Parking Operations </strong>
-                                                            It does not address staff training, supervision, or responsibilities or other day-to-day operational tasks. It does not address maintenance procedures, the use of security patrols, or revenue control practices (e.g., cash handling, auditing, or accounting).
-                                                        </p>
-
-                                                        <p>
-                                                            <strong>Multi-Use Facilities </strong>
-                                                            In addition to airline passengers (i.e., "public" customers), some airport parking structures are used by rental car companies, ground transportation operators (e.g., the operators of taxicabs, limousines, courtesy vehicles serving hotels/motels), or employees of the airport operator, airlines, or other airport tenants. This guidebook is not intended to address the operation, design, or planning of such multi-use facilities.
-                                                        </p>
-
-                                                    </div>
-
-
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane" id="important">
-
-                                                    <h2>Important for you to know</h2>
-
-                                                    <div class="tab-important">
-                                                        <table class="table table-striped">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>#</th>
-                                                                    <th>Vehicle Washing and Servicing</th>
-                                                                    <th>Baggage Check-In</th>
-                                                                    <th>Electric Charging Stations</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <th scope="row">1</th>
-                                                                    <td>A.3</td>
-                                                                    <td>B.5</td>
-                                                                    <td>C.10</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">2</th>
-                                                                    <td>A.3</td>
-                                                                    <td>B.5</td>
-                                                                    <td>C.10</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">3</th>
-                                                                    <td>A.3</td>
-                                                                    <td>B.5</td>
-                                                                    <td>C.10</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane active" id="map">
-
-                                                    <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d45309.4909839975!2d-2.2876589501606497!3d53.356022272999866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x487a52c0dfd893c5%3A0x8b0b8247e5e4a5e0!2sManchester+Airport%2C+Manchester+M90+1QX!3m2!1d53.3588026!2d-2.2727303!5e0!3m2!1ses!2sus!4v1458546021866" width="922" height="422" frameborder="0" style="border:0" allowfullscreen></iframe>
-
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane" id="reviews">
-
-                                                    <h2>Check the users reviews</h2>
-
-                                                    <div class="tab-rate-form" id="formulario-rate">
-                                                        <span class="color2"><b>Customer 1:</b></span><br />
-                                                        <span class="color3"><label for="date" class="rate-date">January 12, 2016 at 12:26pm</label></span><br />
-                                                        <span><b>Perfect, thanks!</b></span>
-                                                        <input type="number" name="your_awesome_parameter" id="some_id" class="rating" data-clearable="remove" />
-                                                        <hr>
-                                                        <span class="color2"><b>Customer 2:</b></span><br />
-                                                        <span class="color3"><label for="date" class="rate-date">January 13, 2016 at 05:15pm</label></span><br />
-                                                        <span><b>Great service.</b></span>
-                                                        <input type="number" name="your_awesome_parameter" id="some_id" class="rating" data-clearable="remove" />
-                                                        <hr>
-                                                        <span class="color2"><b>Customer 3:</b></span><br />
-                                                        <span class="color3"><label for="date" class="rate-date">December 6, 2015 at 06:50pm</label></span><br />
-                                                        <span><b>Highly recommended!</b></span>
-                                                        <input type="number" name="your_awesome_parameter" id="some_id" class="rating" data-clearable="remove" />
-                                                        <hr>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!-- Result row ends -->
-                        <!-- Result row begins -->
-
-                        <div class="row result-row">
-                            <div class="col-md-4 col-sm-4 col-xs-4 airport manchester-airport">
-                                <h3>Manchester airport</h3>
-                            </div>
-                            <div class="col-md-8 col-sm-8 col-xs-8 result-info">
-                                <div class="result-form">
-                                    <form role="form" class="row">
-                                        <div class="form-group col-md-8 result-options">
-                                            <ul class="list-inline for-time-and-distance">
-                                                <li class="time">
-                                                    <i class="fa fa-bus fa-2x"></i>
-                                                    10 minutes transfer
-                                                </li>
-                                                <li class="map">
-                                                    <i class="fa fa-map-marker fa-2x"></i>
-                                                    1 mile from the airport
-                                                </li>
-                                            </ul>
-                                            <p class="result-data">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incid ut labore et dolore magna aliqua. sequi nes.
-                                            </p>
-                                            <div class="options">
-                                                <span><input type="checkbox" value="24 hours security" name="checked" checked> 24 hours security </span>
-                                                <span><input type="checkbox" value="Family friendly" name="checked" checked> Family friendly </span>
-                                                <span><input type="checkbox" value="You retain keys" name="checked" checked> You retain keys </span>
-                                                <span><input type="checkbox" value="Regular transfers" name="checked" checked> Regular transfers</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-4 result-actions">
-                                            <span class="result-price"><i class="currency">&pound;</i> 24.00</span>
-                                            <button type="submit" class="btn">Book now</button>
-                                            <ul class="list-inline for-info-and-map">
-                                                <li class="moreinfo">
-                                                    <a data-toggle="modal" data-target="#plusInfo3" href="#">
-                                                        <i class="fa fa-plus-circle fa-lg"></i>
-                                                        Info
-                                                    </a>
-                                                </li>
-                                                <li class="map">
-                                                    <a href="#">
-                                                        <i class="fa fa-map-marker fa-lg"></i>
-                                                        Map
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- + INFO Modal -->
-                        <div class="modal fade" id="plusInfo3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#10005;</span></button>
-                                        <h4 class="modal-title tabs-heading" id="myModalLabel"><span class="subject">Manchester</span> Airport</h4>
-                                        <p class="lead">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incid ut labore et dolore magna aliqua. sequi nes.
-                                        </p>
-                                        <form role="form" class="tab-booking">
-                                            <button type="submit" class="btn">
-                                                <span>
-                                                    <i class="currency">&pound;</i> 24.00
-                                                </span>
-                                                Book now
-                                            </button>
-                                        </form>
-
-                                    </div>
-                                    <div class="modal-body">
-
-                                        <div class="info-tabs">
-
-                                            <!-- Nav tabs -->
-                                            <ul class="nav nav-tabs" role="tablist">
-                                                <li role="presentation"><a href="#summary" aria-controls="summary" role="tab" data-toggle="tab">Summary</a></li>
-                                                <li role="presentation"><a href="#full-info" aria-controls="full-info" role="tab" data-toggle="tab">Full information</a></li>
-                                                <li role="presentation"><a href="#important" aria-controls="important" role="tab" data-toggle="tab">Important</a></li>
-                                                <li role="presentation" class="active"><a href="#map" aria-controls="map" role="tab" data-toggle="tab">Map</a></li>
-                                                <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Reviews</a></li>
-                                            </ul>
-
-                                            <!-- Tab panes -->
-                                            <div class="tab-content">
-                                                <div role="tabpanel" class="tab-pane" id="summary">
-
-                                                    <h2>Summary</h2>
-
-                                                    <ul class="tab-summary-list">
-                                                        <li><i class="fa fa-angle-double-right"></i>Hourly/Short-Duration Parking: <span>Yes</span></li>
-                                                        <li><i class="fa fa-angle-double-right"></i>Daily Parking: <span>Yes</span></li>
-                                                        <li><i class="fa fa-angle-double-right"></i>Free 30-Minute Parking: <span>No</span></li>
-                                                        <li><i class="fa fa-angle-double-right"></i>No Overnight Parking Zones: <span>Yes</span></li>
-                                                        <li><i class="fa fa-angle-double-right"></i>Holiday/Overflow Parking: <span>No</span></li>
-                                                        <li><i class="fa fa-angle-double-right"></i>Parking Condominiums: <span>No</span></li>
-                                                    </ul>
-
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane" id="full-info">
-
-                                                    <h2>Full information</h2>
-
-                                                    <div class="text">
-
-                                                        <p>
-                                                            <strong>Architectural and Design Strategies </strong>
-                                                            For example, several passive design features such as visible stair or elevator cores, improved lighting, or improved visibility can improve the level of safety, and their use should be considered when planning and designing a parking facility. However, such features are not addressed in this guidebook.
-                                                        </p>
-
-                                                        <p>
-                                                            <strong>Environmental and Sustainability Strategies </strong>
-                                                            Although the guidebook does describe the use of strategies to reduce vehicle circulation, install solar panels, and install electric vehicle charging stations, these strategies represent just a few of the many available programs
-                                                            that can reduce environmental impacts.
-                                                        </p>
-
-                                                        <p>
-                                                            <strong>Parking Operations </strong>
-                                                            It does not address staff training, supervision, or responsibilities or other day-to-day operational tasks. It does not address maintenance procedures, the use of security patrols, or revenue control practices (e.g., cash handling, auditing, or accounting).
-                                                        </p>
-
-                                                        <p>
-                                                            <strong>Multi-Use Facilities </strong>
-                                                            In addition to airline passengers (i.e., "public" customers), some airport parking structures are used by rental car companies, ground transportation operators (e.g., the operators of taxicabs, limousines, courtesy vehicles serving hotels/motels), or employees of the airport operator, airlines, or other airport tenants. This guidebook is not intended to address the operation, design, or planning of such multi-use facilities.
-                                                        </p>
-
-                                                    </div>
-
-
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane" id="important">
-
-                                                    <h2>Important for you to know</h2>
-
-                                                    <div class="tab-important">
-                                                        <table class="table table-striped">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>#</th>
-                                                                    <th>Vehicle Washing and Servicing</th>
-                                                                    <th>Baggage Check-In</th>
-                                                                    <th>Electric Charging Stations</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <th scope="row">1</th>
-                                                                    <td>A.3</td>
-                                                                    <td>B.5</td>
-                                                                    <td>C.10</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">2</th>
-                                                                    <td>A.3</td>
-                                                                    <td>B.5</td>
-                                                                    <td>C.10</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">3</th>
-                                                                    <td>A.3</td>
-                                                                    <td>B.5</td>
-                                                                    <td>C.10</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane active" id="map">
-
-                                                    <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d45309.4909839975!2d-2.2876589501606497!3d53.356022272999866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x487a52c0dfd893c5%3A0x8b0b8247e5e4a5e0!2sManchester+Airport%2C+Manchester+M90+1QX!3m2!1d53.3588026!2d-2.2727303!5e0!3m2!1ses!2sus!4v1458546021866" width="922" height="422" frameborder="0" style="border:0" allowfullscreen></iframe>
-
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane" id="reviews">
-
-                                                    <h2>Check the users reviews</h2>
-
-                                                    <div class="tab-rate-form" id="formulario-rate">
-                                                        <span class="color2"><b>Customer 1:</b></span><br />
-                                                        <span class="color3"><label for="date" class="rate-date">January 12, 2016 at 12:26pm</label></span><br />
-                                                        <span><b>Perfect, thanks!</b></span>
-                                                        <input type="number" name="your_awesome_parameter" id="some_id" class="rating" data-clearable="remove" />
-                                                        <hr>
-                                                        <span class="color2"><b>Customer 2:</b></span><br />
-                                                        <span class="color3"><label for="date" class="rate-date">January 13, 2016 at 05:15pm</label></span><br />
-                                                        <span><b>Great service.</b></span>
-                                                        <input type="number" name="your_awesome_parameter" id="some_id" class="rating" data-clearable="remove" />
-                                                        <hr>
-                                                        <span class="color2"><b>Customer 3:</b></span><br />
-                                                        <span class="color3"><label for="date" class="rate-date">December 6, 2015 at 06:50pm</label></span><br />
-                                                        <span><b>Highly recommended!</b></span>
-                                                        <input type="number" name="your_awesome_parameter" id="some_id" class="rating" data-clearable="remove" />
-                                                        <hr>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-                        <!-- Result row ends -->
-                        <!-- Results loop ends  -----------------------------------------------------      -->
-
-
-                    </div>
-
-
+﻿
+@model List<Web.Models.ResultsView>
+@{
+    ViewBag.BodyType = "quelinka booking";
+}
+	
+  <div class="container-fluid banner-img for-booking">
+    <div class="container">
+
+        <div class="row booking">
+
+            <!-- This is a preview:
+            <img src="img/booking-preview.jpg" width="1096" height="712" class="preview-img" title="Clicking on +info triggers the pop-up" data-toggle="modal" data-target="#plusInfo">
+             -->
+
+            <div class="col-md-3 by-parking-type">
+                @*FILTERS FOR PARKING*@
+                @*START*@
+                @Html.Partial("FilterPartialView", Model)
+                @*END*@
+            </div>
+
+            <div class="col-md-9 filter-results">
+                <div class="results-quote-form">
+                    @*FORM TO BOOK THE PARKING*@
+                    @*START*@
+                    @Html.Partial("BookingPartialView")
+                    @*END*@
                 </div>
+
+                @foreach (var result in Model)
+                {
+                            <!-- Results loop begins  -----------------------------------------------------      -->
+                            <!-- Result row begins -->
+
+                    <div class="row result-row">
+                        <div class="col-md-4 col-sm-4 col-xs-4 airport manchester-airport">
+                            <h3>@result.Company</h3>
+                        </div>
+                        <div class="col-md-8 col-sm-8 col-xs-8 result-info">
+                            <div class="result-form">
+                                <form role="form" class="row">
+                                    <div class="form-group col-md-8 result-options">
+                                        <ul class="list-inline for-time-and-distance">
+                                            <li class="time">
+                                                <i class="fa fa-bus fa-2x"></i>
+                                                @result.TransferTime minutes transfer
+                                            </li>
+                                            <li class="map">
+                                                <i class="fa fa-map-marker fa-2x"></i>
+                                                @result.DistanceFromAirport
+                                                @if (@result.DistanceFromAirport == 1)
+                                                {
+                                                    @Html.Raw("mile")
+                                                }
+                                                else { @Html.Raw("miles")
+                                                } from the airport
+                                            </li>
+                                        </ul>
+                                        <p class="result-data">
+                                             @{ 
+                                                 var description = "";
+                                                 if (@result.Description != null)
+                                                 {
+                                                     description = result.Description.Substring(0, 120) + "...[find out more]";
+                                                  
+                                                  }
+                                              }
+                                               @description
+                                        </p>
+                                        <div class="options">
+                                            <span><input type="checkbox" value="24 hours security" name="checked" checked="@result.Is24hSecurity"> 24 hours security </span>
+                                            <span><input type="checkbox" value="Family friendly" name="checked" checked="@result.IsFamilyFriendly"> Family friendly </span>
+                                            <span><input type="checkbox" value="You retain keys" name="checked" checked="@result.IsRetainKeys"> You retain keys </span>
+                                            <span><input type="checkbox" value="Regular transfers" name="checked" checked="@result.IsRegularTransfers"> Regular transfers</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4 result-actions">
+                                        <span class="result-price"><i class="currency">&pound;</i> @result.Price</span>
+                                        <button type="submit" class="btn">Book now</button>
+                                        <ul class="list-inline for-info-and-map">
+                                            <li class="moreinfo">
+                                                <a data-toggle="modal" data-target="#plusInfo" href="#">
+                                                    <i class="fa fa-plus-circle fa-lg"></i>
+                                                    Info
+                                                </a>
+                                            </li>
+                                            <li class="map">
+                                                <a href="#">
+                                                    <i class="fa fa-map-marker fa-lg"></i>
+                                                    Map
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>                
+
+                }
+            
+
+                <!-- Result row ends -->
+                <!-- Results loop ends  -----------------------------------------------------      -->
 
 
             </div>
+
+
         </div>
+
+
     </div>
-</div>        
+</div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
-    
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <!-- ������      <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> ????? -->
-    <!-- ������  <link rel="stylesheet" type="text/css" href="css/ie10-viewport-bug-workaround.css"/>  ????? -->
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <!-- ������  <script src="bootstrap-3.3.6-dist/css/bootstrap.npm.js"></script>  ????? -->
+   <!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+<script src="~/Scripts/bootstrap.min.js"></script>
 
-    @*<script src="~/Scripts/jquery.datetimepicker.full.min.js"></script>*@
-    <script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<!-- ������      <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> ????? -->
+<!-- ������  <link rel="stylesheet" type="text/css" href="css/ie10-viewport-bug-workaround.css"/>  ????? -->
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<!-- ������  <script src="bootstrap-3.3.6-dist/css/bootstrap.npm.js"></script>  ????? -->
+
+<script src="~/Scripts/jquery.datetimepicker.full.min.js"></script>
+<script>
 /*
 window.onerror = function(errorMsg) {
 	$('#console').html($('#console').html()+'<br>'+errorMsg)
@@ -960,7 +186,7 @@ $('#datetimepicker11').datetimepicker({
 		return [true, ""];
 	}
 });
-$('#datetimepicker12').datetimepicker({
+$('#DropOff').datetimepicker({
 	beforeShowDay: function(date) {
 		if (date.getMonth() == dateToDisable.getMonth() && date.getDate() == dateToDisable.getDate()) {
 			return [true, "custom-date-style"];
@@ -970,7 +196,7 @@ $('#datetimepicker12').datetimepicker({
 	}
 });
 
-$('#datetimepicker13').datetimepicker({
+$('#ReturnDate').datetimepicker({
 	beforeShowDay: function(date) {
 		if (date.getMonth() == dateToDisable.getMonth() && date.getDate() == dateToDisable.getDate()) {
 			return [true, "custom-date-style"];
@@ -982,64 +208,7 @@ $('#datetimepicker13').datetimepicker({
 
 
 
-    </script>
+</script>
 
-    <script src="~/Scripts/bootstrap-rating-input.min.js"></script>
-
-
-    <!-- <script>$(function(){ $('input').on('change', function(){ alert("Changed: " + $(this).val()) }); }); </script> -->
-
-    <script src="~/Scripts/common.js"></script>
-
-</body>
-
-@*@{
-    ViewBag.Title = "Results";
-    Layout = "~/Views/Shared/_NPSLayout.cshtml";
-}
-
-<h2>Results</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ClientName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PublicationDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Review)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rating)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ClientName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PublicationDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Review)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rating)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
-
-</table>*@
+<script src="~/Scripts/bootstrap-rating-input.min.js"></script>
+<script src="~/Scripts/common.js"></script>

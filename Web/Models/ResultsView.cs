@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -11,6 +12,8 @@ namespace Web.Models
         public byte[] CompanyLogo { get; set; }
         public decimal? TransferTime { get; set; }
         public decimal? DistanceFromAirport { get; set; }
+
+        
         public string Description { get; set; }
         public decimal? Price { get; set; }
         public bool? IsFamilyFriendly { get; set; }

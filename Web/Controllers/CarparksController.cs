@@ -30,16 +30,17 @@ namespace Web.Controllers
         [HttpGet]
         [Route("")]
         public async Task<ActionResult> Index()
-        {            
+        {
             try
             {
                 FillAirports();
             }
             catch (Exception ex)
             {
-               
+
             }
-            return View(new QuoteModelView { Airport="", Discount="", ReturnDate="", Pickup= "" });            
+            return View(new QuoteModelView { Airport = "", Discount = "", ReturnDate = "", DropOffDate = "" });
+           
         }
 
         [HttpGet]
@@ -47,7 +48,7 @@ namespace Web.Controllers
         public async Task<ActionResult> Results(QuoteModelView model)
         {
             FillAirports();
-
+            List<ResultsView> resultsview = new List<ResultsView>();
             QuoteModel quote = new QuoteModel();
             quote.Pickup = new DateTime(2016, 12, 23, 16, 30, 00);
             quote.Dropoff = new DateTime(2016, 12, 28, 18, 40, 00);
@@ -62,16 +63,16 @@ namespace Web.Controllers
                 {
                     var results = await _quoteservice.GetQuoteWithPriceAndReviews(quote);
 
-                    var resultsview = ToResultsView(results);
-
-                    return View(resultsview);
+                    resultsview = ToResultsView(results);
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.ToString());
+               
             }
-            return View();
+
+            return View(resultsview);
         }
 
         private List<ResultsView> ToResultsView(QuoteModel model)

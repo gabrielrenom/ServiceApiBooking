@@ -2,8 +2,8 @@
 
 
 /* Global NPS */
-$("#datetimepicker12").after('<img src="img/ico-calendar-h.gif" alt="Date/Time" class="input-icon">');
-$("#datetimepicker13").after('<img src="img/ico-calendar-h.gif" alt="Date/Time" class="input-icon">');
+$("#DropOff").after('<img src="img/ico-calendar-h.gif" alt="Date/Time" class="input-icon">');
+$("#ReturnDate").after('<img src="img/ico-calendar-h.gif" alt="Date/Time" class="input-icon">');
 $("#discount-code").after('<img src="img/ico-question.gif" alt="Discount" class="input-icon">');
 
 /* Booking */

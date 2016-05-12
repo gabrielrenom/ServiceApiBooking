@@ -1,159 +1,167 @@
 ﻿@model Web.Models.QuoteModelView
-<div class="container banner-img">
-    @*ADD THE PAGE STUFF HERE*@
-    @*@RENDER*@
-    <div>
-        <div class="container">
-            <div class="col-lg-8 col-md-8 col-sm-5 banner banner1">
-                <div class="mensaje">
-                    <span>GET EXCLUSIVE OFFERS</span>
-                    <a class="btn btn-primary btn-lg" href="#" role="button">LEARN MORE</a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-7 get-quote">
 
-                <div class="formulario-home">
-                    @*<form method="post" action="@Url.Action("index")">*@
-                    <form method="post" action="/carparks/index">                            
-                            @Html.AntiForgeryToken()
 
-                            <div class="form-group">
-                                <label for="date">AIRPORT</label>
-                                <select class="form-control back1 color4" id="Airport" name="Airport">
-                                    <option value="">-- Select Airport --</option>
-                                    @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.airports)
-                                    {
-                                        <option value=@item.Value>@item.Text</option>
-                                    }
-                                </select>
-                                @Html.ValidationMessageFor(model => model.Airport, "The airport is required")
-                            </div>
+<div class="container-fluid banner-img">
+    <div class="container">
 
-                            <div class="form-group">
-                                <label for="date">Drop-off date/time</label>
-                                <input type="text" id="DropOffDate" name="DropOffDate" class="form-control color5" placeholder="02/03/2016 03:45" />
-                                @Html.ValidationMessageFor(model => model.DropOffDate, "The dropoff date/time is required", new { @class = "text-danger" })
-                            </div>
-
-                            <div class="form-group">
-                                <label for="date">Return date/time</label>
-                                <input type="text" id="ReturnDate" name="ReturnDate" class="form-control color5" placeholder="MM/DD/YYYY" value="@Model.ReturnDate" />
-                                @Html.ValidationMessageFor(model => model.ReturnDate, "The return date/time is required", new { @class = "text-danger" })
-                            </div>
-
-                            <div class="form-group">
-                                <label for="input">Discount</label>
-                                <input type="text" class="form-control" id="Discount" name="Discount" placeholder="Insert discount code here" />
-                            </div>
-
-                            <button type="submit" class="btn btn-default">Get quote</button>
-
-                        </form>
-                </div>
-
+        <div class="col-lg-8 col-md-8 col-sm-5 banner banner1">
+            <div class="mensaje">
+                <span>GET EXCLUSIVE OFFERS</span>
+                <a class="btn btn-primary btn-lg" href="#" role="button">LEARN MORE</a>
             </div>
         </div>
+        <div class="col-lg-4 col-md-4 col-sm-7 get-quote">
 
+            <div class="formulario-home">
+                <form role="form" id="formHome1">
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 offers">
-
-                    <!--<iframe style="border:none;display:block;margin:0 auto;overflow-x: hidden!important;" width="100%" height="250" marginwidth="0" marginheight="0" noresize scrolling="No"  src="offers.html"></iframe>-->
-
-                    <h2 class="offers-heading">Airport parking offers</h2>
-
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-6 offer">
-                            <a href="#">
-                                <span class="price">19 &pound;</span>
-                                <dl>
-                                    <dt>
-                                        <h3>London <span>Gatwick</span></h3>
-                                    </dt>
-                                    <dd>
-                                        Parking
-                                        <span>Top offer</span>
-                                    </dd>
-                                </dl>
-                            </a>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6 offer">
-                            <a href="#">
-                                <span class="price">19 &pound;</span>
-                                <dl>
-                                    <dt>
-                                        <h3>Manchester <span>Airport</span></h3>
-                                    </dt>
-                                    <dd>
-                                        Parking
-                                        <span>Top offer</span>
-                                    </dd>
-                                </dl>
-                            </a>
-                        </div>
-
-                        <div class="col-md-6 col-sm-6 col-xs-6 offer">
-                            <a href="#">
-                                <span class="price">19 &pound;</span>
-                                <dl>
-                                    <dt>
-                                        <h3>London <span>Heathrow</span></h3>
-                                    </dt>
-                                    <dd>
-                                        Parking
-                                        <span>Top offer</span>
-                                    </dd>
-                                </dl>
-                            </a>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6 offer">
-                            <a href="#">
-                                <span class="price">19 &pound;</span>
-                                <dl>
-                                    <dt>
-                                        <h3>Norwich <span>Airport</span></h3>
-                                    </dt>
-                                    <dd>
-                                        Parking
-                                        <span>Top offer</span>
-                                    </dd>
-                                </dl>
-                            </a>
-                        </div>
+                    <div class="form-group">
+                        <label for="date">AIRPORT</label>
+                        <select class="form-control back1 color4" id="Airport" name="Airport">
+                            <option value="">-- Select Airport --</option>
+                            @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.airports)
+                            {
+                                <option value=@item.Value>@item.Text</option>
+                            }
+                        </select>
+                        @Html.ValidationMessageFor(model => model.Airport, "The airport is required")
                     </div>
 
 
+                    <div class="form-group">
+                        <label for="date">Drop-off date/time</label>
+                        <input type="text" id="DropOffDate" name="DropOffDate" class="form-control color5" placeholder="02/03/2016 03:45" />
+                        @Html.ValidationMessageFor(model => model.DropOffDate, "The dropoff date/time is required", new { @class = "text-danger" })
+                    </div>
 
-                </div>
+                    <div class="form-group">
+                        <label for="date">Return date/time</label>
+                        <input type="text" id="ReturnDate" name="ReturnDate" class="form-control color5" placeholder="MM/DD/YYYY" value="@Model.ReturnDate" />
+                        @Html.ValidationMessageFor(model => model.ReturnDate, "The return date/time is required", new { @class = "text-danger" })
+                    </div>
 
-                <div class="col-md-4 rating">
-                    <h2>Rate</h2>
-                    <!-- <iframe style="border:none;display:block;margin:0 auto;overflow-x: hidden!important;" width="100%" height="250" marginwidth="0" marginheight="0" noresize scrolling="No"  src="rate.html"></iframe> -->
-                    <div id="formulario-rate">
-                        <span class="color2"><b>Customer 1:</b></span><br />
-                        <span class="color3"><label for="date" class="rate-date">January 12, 2016 at 12:26pm</label></span><br />
-                        <span><b>Perfect, thanks!</b></span>
-                        <input type="number" name="your_awesome_parameter" id="some_id" class="rating" data-clearable="remove" disabled="disabled" data-disabled="true" />
-                        <hr>
-                        <span class="color2"><b>Customer 2:</b></span><br />
-                        <span class="color3"><label for="date" class="rate-date">January 13, 2016 at 05:15pm</label></span><br />
-                        <span><b>Great service.</b></span>
-                        <input type="number" name="your_awesome_parameter" id="some_id2" class="rating" data-clearable="remove" data-disabled="true" />
-                        <hr>
-                        <span class="color2"><b>Customer 3:</b></span><br />
-                        <span class="color3"><label for="date" class="rate-date">December 6, 2015 at 06:50pm</label></span><br />
-                        <span><b>Highly recommended!</b></span>
-                        <input type="number" name="your_awesome_parameter" id="some_id3" class="rating" data-clearable="remove" data-disabled="true" />
-                        <hr>
+                    <div class="form-group">
+                        <label for="input">Discount</label>
+                        <input type="text" class="form-control" id="Discount" name="Discount" placeholder="Insert discount code here" />
+                    </div>                   
+
+                    <button type="submit" class="btn btn-default">Get quote</button>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid for-offers-and-rating">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-8 col-md-8">
+
+                <!--<iframe style="border:none;display:block;margin:0 auto;overflow-x: hidden!important;" width="100%" height="250" marginwidth="0" marginheight="0" noresize scrolling="No"  src="offers.html"></iframe>-->
+
+                <h2 class="offers-heading">Airport parking offers</h2>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 offer">
+                        <a href="#">
+                            <span class="price">19 &pound;</span>
+                            <dl>
+                                <dt>
+                                    <h3>London <span>Gatwick</span></h3>
+                                </dt>
+                                <dd>
+                                    Parking
+                                    <span>Top offer</span>
+                                </dd>
+                            </dl>
+                        </a>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 offer">
+                        <a href="#">
+                            <span class="price">19 &pound;</span>
+                            <dl>
+                                <dt>
+                                    <h3>Manchester <span>Airport</span></h3>
+                                </dt>
+                                <dd>
+                                    Parking
+                                    <span>Top offer</span>
+                                </dd>
+                            </dl>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 offer">
+                        <a href="#">
+                            <span class="price">19 &pound;</span>
+                            <dl>
+                                <dt>
+                                    <h3>London <span>Heathrow</span></h3>
+                                </dt>
+                                <dd>
+                                    Parking
+                                    <span>Top offer</span>
+                                </dd>
+                            </dl>
+                        </a>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 offer">
+                        <a href="#">
+                            <span class="price">19 &pound;</span>
+                            <dl>
+                                <dt>
+                                    <h3>Norwich <span>Airport</span></h3>
+                                </dt>
+                                <dd>
+                                    Parking
+                                    <span>Top offer</span>
+                                </dd>
+                            </dl>
+                        </a>
                     </div>
                 </div>
+
+
 
             </div>
+
+            <div class="col-lg-4 col-md-4 rating">
+                <h2>Rate</h2>
+                <!-- <iframe style="border:none;display:block;margin:0 auto;overflow-x: hidden!important;" width="100%" height="250" marginwidth="0" marginheight="0" noresize scrolling="No"  src="rate.html"></iframe> -->
+                <div id="formulario-rate">
+                    <span class="color2"><b>Customer 1:</b></span><br />
+                    <span class="color3"><label for="date" class="rate-date">January 12, 2016 at 12:26pm</label></span><br />
+                    <span><b>Perfect, thanks!</b></span>
+                    <input type="number" name="your_awesome_parameter" id="some_id" class="rating" data-clearable="remove" disabled="disabled" data-disabled="true" />
+                    <hr>
+                    <span class="color2"><b>Customer 2:</b></span><br />
+                    <span class="color3"><label for="date" class="rate-date">January 13, 2016 at 05:15pm</label></span><br />
+                    <span><b>Great service.</b></span>
+                    <input type="number" name="your_awesome_parameter" id="some_id2" class="rating" data-clearable="remove" data-disabled="true" />
+                    <hr>
+                    <span class="color2"><b>Customer 3:</b></span><br />
+                    <span class="color3"><label for="date" class="rate-date">December 6, 2015 at 06:50pm</label></span><br />
+                    <span><b>Highly recommended!</b></span>
+                    <input type="number" name="your_awesome_parameter" id="some_id3" class="rating" data-clearable="remove" data-disabled="true" />
+                    <hr>
+                </div>
+            </div>
+
         </div>
 
     </div>
 </div>
+
+
+
+
+
+
+
 
 <!-- Bootstrap core JavaScript
     ================================================== -->
