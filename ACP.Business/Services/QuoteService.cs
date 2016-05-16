@@ -65,11 +65,11 @@ namespace ACP.Business.Services
         {
             QuoteModel quoteresult = quote;
 
-            var list = _bookingPricingManager.GetAllPricesAndReviewsByPickLocationAndDropLocation(quote.PickupLocation.Name, quote.DropoffLocation.Name, quote.Pickup, quote.Dropoff);//_bookingPricingManager.GetAllPrices().Where(x => quote.Pickup>x.Start  && quote.Dropoff<x.End ).ToList();
+            var list = await _bookingPricingManager.GetAllPricesAndReviewsByPickLocationAndDropLocationById(quote.PickupLocation.Id, quote.DropoffLocation.Id, quote.Dropoff, quote.Pickup);//_bookingPricingManager.GetAllPrices().Where(x => quote.Pickup>x.Start  && quote.Dropoff<x.End ).ToList();
 
             foreach (var item in list)
             {
-                double days = Math.Round((quote.Dropoff - quote.Pickup).TotalDays);
+                double days = Math.Round((quote.Pickup-quote.Dropoff).TotalDays);
                 quote.Pricing.Add(new ItemPriceModel
                 {
                     Price = item.DayPrices.Where(x => x.Day == days).FirstOrDefault().Dayprice,

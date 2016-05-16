@@ -43,8 +43,7 @@ namespace ACP.DataAccess.Repository
             IQueryable<T> query = _context.Set<T>();
 
             return include.Aggregate(query, (current, item) => current.Include(item));
-        }
-
+        }       
 
         public T GetSingle<T>(Func<T, bool> where, params Expression<Func<T, object>>[] include) where T : class
         {

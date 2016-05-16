@@ -1,0 +1,156 @@
+﻿@model Web.Models.ResultsView
+
+<!-- + INFO Modal -->
+<div class="modal fade" id="plusInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#10005;</span></button>
+                <h4 class="modal-title tabs-heading" id="myModalLabel"><span class="subject">Manchester</span> Airport</h4>
+                <p class="lead">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incid ut labore et dolore magna aliqua. sequi nes.
+                </p>
+                <form role="form" class="tab-booking">
+                    <button type="submit" class="btn">
+                        <span>
+                            <i class="currency">&pound;</i> 24.00
+                        </span>
+                        Book now
+                    </button>
+                </form>
+
+            </div>
+            <div class="modal-body">
+
+                <div class="info-tabs">
+
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation"><a href="#summary" aria-controls="summary" role="tab" data-toggle="tab">Summary</a></li>
+                        <li role="presentation"><a href="#full-info" aria-controls="full-info" role="tab" data-toggle="tab">Full information</a></li>
+                        <li role="presentation"><a href="#important" aria-controls="important" role="tab" data-toggle="tab">Important</a></li>
+                        <li role="presentation" class="active"><a href="#map" aria-controls="map" role="tab" data-toggle="tab">Map</a></li>
+                        <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Reviews</a></li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane" id="summary">
+
+                            <h2>Summary</h2>
+
+                            <ul class="tab-summary-list">
+                                <li><i class="fa fa-angle-double-right"></i>Hourly/Short-Duration Parking: <span>Yes</span></li>
+                                <li><i class="fa fa-angle-double-right"></i>Daily Parking: <span>Yes</span></li>
+                                <li><i class="fa fa-angle-double-right"></i>Free 30-Minute Parking: <span>No</span></li>
+                                <li><i class="fa fa-angle-double-right"></i>No Overnight Parking Zones: <span>Yes</span></li>
+                                <li><i class="fa fa-angle-double-right"></i>Holiday/Overflow Parking: <span>No</span></li>
+                                <li><i class="fa fa-angle-double-right"></i>Parking Condominiums: <span>No</span></li>
+                            </ul>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="full-info">
+
+                            <h2>Full information</h2>
+
+                            <div class="text">
+
+                                <p>
+                                    <strong>Architectural and Design Strategies </strong>
+                                    For example, several passive design features such as visible stair or elevator cores, improved lighting, or improved visibility can improve the level of safety, and their use should be considered when planning and designing a parking facility. However, such features are not addressed in this guidebook.
+                                </p>
+
+                                <p>
+                                    <strong>Environmental and Sustainability Strategies </strong>
+                                    Although the guidebook does describe the use of strategies to reduce vehicle circulation, install solar panels, and install electric vehicle charging stations, these strategies represent just a few of the many available programs
+                                    that can reduce environmental impacts.
+                                </p>
+
+                                <p>
+                                    <strong>Parking Operations </strong>
+                                    It does not address staff training, supervision, or responsibilities or other day-to-day operational tasks. It does not address maintenance procedures, the use of security patrols, or revenue control practices (e.g., cash handling, auditing, or accounting).
+                                </p>
+
+                                <p>
+                                    <strong>Multi-Use Facilities </strong>
+                                    In addition to airline passengers (i.e., "public" customers), some airport parking structures are used by rental car companies, ground transportation operators (e.g., the operators of taxicabs, limousines, courtesy vehicles serving hotels/motels), or employees of the airport operator, airlines, or other airport tenants. This guidebook is not intended to address the operation, design, or planning of such multi-use facilities.
+                                </p>
+
+                            </div>
+
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="important">
+
+                            <h2>Important for you to know</h2>
+
+                            <div class="tab-important">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Vehicle Washing and Servicing</th>
+                                            <th>Baggage Check-In</th>
+                                            <th>Electric Charging Stations</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>A.3</td>
+                                            <td>B.5</td>
+                                            <td>C.10</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>A.3</td>
+                                            <td>B.5</td>
+                                            <td>C.10</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td>A.3</td>
+                                            <td>B.5</td>
+                                            <td>C.10</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane active" id="map">
+
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d45309.4909839975!2d-2.2876589501606497!3d53.356022272999866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x487a52c0dfd893c5%3A0x8b0b8247e5e4a5e0!2sManchester+Airport%2C+Manchester+M90+1QX!3m2!1d53.3588026!2d-2.2727303!5e0!3m2!1ses!2sus!4v1458546021866" width="922" height="422" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="reviews">
+
+                            <h2>Check the users reviews</h2>
+
+                            <div class="tab-rate-form" id="formulario-rate">
+                                <span class="color2"><b>Customer 1:</b></span><br />
+                                <span class="color3"><label for="date" class="rate-date">January 12, 2016 at 12:26pm</label></span><br />
+                                <span><b>Perfect, thanks!</b></span>
+                                <input type="number" name="your_awesome_parameter" id="some_id" class="rating" data-clearable="remove" />
+                                <hr>
+                                <span class="color2"><b>Customer 2:</b></span><br />
+                                <span class="color3"><label for="date" class="rate-date">January 13, 2016 at 05:15pm</label></span><br />
+                                <span><b>Great service.</b></span>
+                                <input type="number" name="your_awesome_parameter" id="some_id" class="rating" data-clearable="remove" />
+                                <hr>
+                                <span class="color2"><b>Customer 3:</b></span><br />
+                                <span class="color3"><label for="date" class="rate-date">December 6, 2015 at 06:50pm</label></span><br />
+                                <span><b>Highly recommended!</b></span>
+                                <input type="number" name="your_awesome_parameter" id="some_id" class="rating" data-clearable="remove" />
+                                <hr>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

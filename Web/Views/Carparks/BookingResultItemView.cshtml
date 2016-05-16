@@ -1,0 +1,66 @@
+﻿@model Web.Models.ResultsView
+
+<div class="row result-row">
+    <div class="col-md-4 col-sm-4 col-xs-4 airport manchester-airport">
+        <h3>@Model.Company</h3>
+    </div>
+    <div class="col-md-8 col-sm-8 col-xs-8 result-info">
+        <div class="result-form">
+            <form role="form" class="row">
+                <div class="form-group col-md-8 result-options">
+                    <ul class="list-inline for-time-and-distance">
+                        <li class="time">
+                            <i class="fa fa-bus fa-2x"></i>
+                            @Model.TransferTime minutes transfer
+                        </li>
+                        <li class="map">
+                            <i class="fa fa-map-marker fa-2x"></i>
+                            @Model.DistanceFromAirport
+                            @if (@Model.DistanceFromAirport == 1)
+                            {
+                                @Html.Raw("mile")
+                            }
+                            else { @Html.Raw("miles")
+                            } from the airport
+                        </li>
+                    </ul>
+                    <p class="result-data">
+                        @{
+                            var description = "";
+                            if (@Model.Description != null)
+                            {
+                                description = Model.Description.Substring(0, 120) + "...[find out more]";
+
+                            }
+                        }
+                        @description
+                    </p>
+                    <div class="options">
+                        <span><input type="checkbox" value="24 hours security" name="checked" checked="@Model.Is24hSecurity"> 24 hours security </span>
+                        <span><input type="checkbox" value="Family friendly" name="checked" checked="@Model.IsFamilyFriendly"> Family friendly </span>
+                        <span><input type="checkbox" value="You retain keys" name="checked" checked="@Model.IsRetainKeys"> You retain keys </span>
+                        <span><input type="checkbox" value="Regular transfers" name="checked" checked="@Model.IsRegularTransfers"> Regular transfers</span>
+                    </div>
+                </div>
+                <div class="form-group col-md-4 result-actions">
+                    <span class="result-price"><i class="currency">&pound;</i> @Model.Price</span>
+                    <button type="submit" class="btn">Book now</button>
+                    <ul class="list-inline for-info-and-map">
+                        <li class="moreinfo">
+                            <a data-toggle="modal" data-target="#plusInfo" href="#">
+                                <i class="fa fa-plus-circle fa-lg"></i>
+                                Info
+                            </a>
+                        </li>
+                        <li class="map">
+                            <a href="#">
+                                <i class="fa fa-map-marker fa-lg"></i>
+                                Map
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

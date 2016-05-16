@@ -48,33 +48,42 @@ namespace Web.Controllers
         public async Task<ActionResult> Results(QuoteModelView model)
         {
             FillAirports();
+
             List<ResultsView> resultsview = new List<ResultsView>();
-            QuoteModel quote = new QuoteModel();
-            quote.Pickup = new DateTime(2016, 12, 23, 16, 30, 00);
-            quote.Dropoff = new DateTime(2016, 12, 28, 18, 40, 00);
-            quote.PickupLocation = new LocationModel() { Id = 1, Name = "Man" };
-            quote.DropoffLocation = new LocationModel() { Id = 1, Name = "Man" };
-            quote.BookingServices.Add(new BookingServiceModel() { Name = "Carpark" });
-
-            model = new QuoteModelView();
-            try
-            {
-                if (model != null)
+            ViewBag.Searched = model;
+            if (ModelState.IsValid)
+            {         
+                //QuoteModel quote = new QuoteModel();
+                //quote.Pickup = Convert.ToDateTime(model.ReturnDate);//new DateTime(2016, 12, 28, 18, 40, 00); 
+                //quote.Dropoff = Convert.ToDateTime(model.DropOffDate); //new DateTime(2016, 12, 23, 16, 30, 00);
+                //quote.PickupLocation = new LocationModel() { Id = Convert.ToInt32(model.Airport)};
+                //quote.DropoffLocation = new LocationModel() { Id = Convert.ToInt32(model.Airport)};
+                //quote.BookingServices.Add(new BookingServiceModel() { Name = "Carpark" });               
+                try
                 {
-                    var results = await _quoteservice.GetQuoteWithPriceAndReviews(quote);
+                    if (model != null)
+                    {
+                        var results = await _quoteservice.GetQuoteWithPriceAndReviews(new QuoteModel
+                        {
+                            Pickup = Convert.ToDateTime(model.ReturnDate),
+                            Dropoff = Convert.ToDateTime(model.DropOffDate),
+                            PickupLocation = new LocationModel() { Id = Convert.ToInt32(model.Airport) },
+                            DropoffLocation = new LocationModel() { Id = Convert.ToInt32(model.Airport) },
+                            BookingServices = new List<BookingServiceModel> { new BookingServiceModel { Name = "Carpark" } }
+                        });
 
-                    resultsview = ToResultsView(results);
+                        resultsview = ToResultsView(results);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.ToString());
+
                 }
             }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
-               
-            }
-
             return View(resultsview);
         }
-
+   
         private List<ResultsView> ToResultsView(QuoteModel model)
         {
             List<ResultsView> domainModel = new List<ResultsView>();
@@ -141,5 +150,46 @@ namespace Web.Controllers
             }
                 
         }
+
+        [HttpPost]
+        [Route("getquote")]
+        public async Task<ActionResult> GetQuote(QuoteModelView model)
+        {
+            FillAirports();
+            List<ResultsView> resultsview = new List<ResultsView>();
+            ViewBag.Searched = model;
+            if (ModelState.IsValid)
+            {
+                //QuoteModel quote = new QuoteModel();
+                //quote.Pickup = Convert.ToDateTime(model.ReturnDate);//new DateTime(2016, 12, 28, 18, 40, 00); 
+                //quote.Dropoff = Convert.ToDateTime(model.DropOffDate); //new DateTime(2016, 12, 23, 16, 30, 00);
+                //quote.PickupLocation = new LocationModel() { Id = Convert.ToInt32(model.Airport)};
+                //quote.DropoffLocation = new LocationModel() { Id = Convert.ToInt32(model.Airport)};
+                //quote.BookingServices.Add(new BookingServiceModel() { Name = "Carpark" });               
+                try
+                {
+                    if (model != null)
+                    {
+                        var results = await _quoteservice.GetQuoteWithPriceAndReviews(new QuoteModel
+                        {
+                            Pickup = Convert.ToDateTime(model.ReturnDate),
+                            Dropoff = Convert.ToDateTime(model.DropOffDate),
+                            PickupLocation = new LocationModel() { Id = Convert.ToInt32(model.Airport) },
+                            DropoffLocation = new LocationModel() { Id = Convert.ToInt32(model.Airport) },
+                            BookingServices = new List<BookingServiceModel> { new BookingServiceModel { Name = "Carpark" } }
+                        });
+
+                        resultsview = ToResultsView(results);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.ToString());
+
+                }
+            }
+            return View(model);
+        }
+
     }
 }

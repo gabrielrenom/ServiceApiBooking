@@ -76,7 +76,7 @@ namespace ACP.DataAccess.Managers
 
         }
 
-        public IList<BookingPricingModel> GetAllPricesAndReviewsByPickLocationAndDropLocation(string pickuplocation, string droplocation, DateTime pickup, DateTime dropoff)
+        public IList<BookingPricingModel> GetAllPricesAndReviewsByPickLocationAndDropLocationByName(string pickuplocation, string droplocation, DateTime dropoff, DateTime pickup )
         {
 
             //return GetListIncluding(x => x.BookingEntity.Name.ToLower().Contains(droplocation.ToLower()) == true && pickup > x.Start && dropoff < x.End,
@@ -84,8 +84,8 @@ namespace ACP.DataAccess.Managers
             //    x => x.BookingEntity.Prices,
             //    x => x.BookingEntity.Prices.Select(y => x.DayPrices))
             //    .OrderBy(a => a.Name).ToList();
-
-            return GetListIncluding(x => (pickup > x.Start && dropoff < x.End) && (x.BookingEntity.RootBookingEntity.Name.ToLower().Contains(droplocation.ToLower()) == true),
+           
+            return GetListIncluding(x => (dropoff > x.Start && pickup < x.End) && (x.BookingEntity.RootBookingEntity.Name.ToLower().Contains(droplocation.ToLower()) == true),
                 x => x.BookingEntity,
                 x => x.BookingEntity.RootBookingEntity,
                 x => x.BookingEntity.Prices,
@@ -96,7 +96,23 @@ namespace ACP.DataAccess.Managers
 
         }
 
+        public async Task<IList<BookingPricingModel>> GetAllPricesAndReviewsByPickLocationAndDropLocationById(int pickuplocationid, int droplocationid, DateTime dropoff, DateTime pickup)
+        {
+            var results = await GetListIncludingAsync(x => (dropoff > x.Start && pickup < x.End) && (x.BookingEntity.RootBookingEntity.Id == droplocationid),
+                x => x.BookingEntity,
+                x => x.BookingEntity.RootBookingEntity,
+                x => x.BookingEntity.Prices,
+                x => x.BookingEntity.Properties,
+                x => x.BookingEntity.Reviews,
+                x => x.BookingEntity.Prices.Select(y => x.DayPrices));
 
+            if (results.Count()>0)
+            {
+                return results.OrderBy(a => a.Name).ToList();
+            }
+           return results.ToList();
+
+        }
         public override BookingPricingModel ToDomainModelWithChildNodes(BookingPricing dataModel)
         {
             BookingPricingModel domainModel = new BookingPricingModel();

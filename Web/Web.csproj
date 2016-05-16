@@ -309,12 +309,12 @@
     <Content Include="Scripts\jquery-1.11.3.min.js" />
     <Content Include="Scripts\jquery.rateyo.less" />
     <Content Include="Scripts\jquery-1.11.3.min.map" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-1.12.0.min.js" />
     <Content Include="Scripts\jquery.datetimepicker.full.min.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.rateyo.js" />
     <Content Include="Scripts\jquery.rateyo.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -363,6 +363,8 @@
     <Content Include="Views\Carparks\Results.cshtml" />
     <Content Include="Views\Carparks\BookingPartialView.cshtml" />
     <Content Include="Views\Carparks\FilterPartialView.cshtml" />
+    <Content Include="Views\Carparks\ModalResultPartialView.cshtml" />
+    <Content Include="Views\Carparks\BookingResultItemView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

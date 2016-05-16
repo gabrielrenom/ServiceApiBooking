@@ -1,25 +1,31 @@
-﻿<form class="form-inline">
+﻿@using (Html.BeginForm("results", "carparks", FormMethod.Get, new { @class = "form-inline bookingform" }))
+{
+
+@*<form class="form-inline">*@
     <div class="form-group">
         <label for="date">AIRPORT</label>
-        <select class="form-control back1 color4" id="Airport" name="Airport">
+        <select class="form-control back1 color4" id="Airport" name="Airport" required>
             <option value="">-- Select Airport --</option>
             @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.airports)
             {
                 <option value=@item.Value>@item.Text</option>
             }
-        </select>
+        </select>        
     </div>
-    <div class="form-group">
-        <label for="date">Drop-off date/time</label>
-        <input type="text" id="DropOff" class="form-control color5" placeholder="02/03/2016 03:45" />
-    </div>
-    <div class="form-group">
+    <div class="form-group">     
+            <label for="date">Drop-off date/time</label>
+            <input type="text" id="DropOff" name="DropOffDate" class="form-control color5" placeholder="02/03/2016 03:45" required />
+     </div>
+    <div class="form-group">     
         <label for="date">Return date/time</label>
-        <input type="text" id="ReturnDate" class="form-control color5" placeholder="MM/DD/YYYY" />
+        <input type="text" id="ReturnDate" name="ReturnDate" class="form-control color5" placeholder="MM/DD/YYYY" required />
+        
     </div>
     <div class="form-group">
         <label for="input">Discount code</label>
-        <input type="input" class="form-control" id="discount-code" />
+        <input type="text" class="form-control" name="Discount" id="discount-code"/>
+
     </div>
     <button type="submit" class="btn btn-default get-quote">Get quote again</button>
-</form>
+    ////</form>
+}

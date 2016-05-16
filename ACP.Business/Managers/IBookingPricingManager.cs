@@ -23,10 +23,12 @@ namespace ACP.Business.Managers
 
         bool UpdatePricesWithDays(int bookingEntityId, IList<BookingPricingModel> list);
 
-        IList<BookingPricingModel> GetAllPricesByBookEntity(int bookingentityid, DateTime pickup, DateTime dropoff);
+        IList<BookingPricingModel> GetAllPricesByBookEntity(int bookingentityid,DateTime dropoff, DateTime pickup);
 
         IList<BookingPricingModel> GetAllPricesByPickLocationAndDropLocation(string pickuplocation, string droplocation, DateTime pickup, DateTime dropoff);
 
-        IList<BookingPricingModel> GetAllPricesAndReviewsByPickLocationAndDropLocation(string pickuplocation, string droplocation, DateTime pickup, DateTime dropoff);
+        IList<BookingPricingModel> GetAllPricesAndReviewsByPickLocationAndDropLocationByName(string pickuplocation, string droplocation, DateTime pickup, DateTime dropoff);
+        Task<IList<BookingPricingModel>> GetAllPricesAndReviewsByPickLocationAndDropLocationById(int pickuplocationid, int droplocationid, DateTime dropoff, DateTime pickup);
+
     }
 }

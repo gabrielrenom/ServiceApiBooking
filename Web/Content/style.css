@@ -329,8 +329,7 @@ h2:before {content:''; margin:0 12px 0 2px; height:25px; float:left; border-left
 	.for-logos img {max-width:160px; height:auto;  }
 	strong.nps {line-height:17px;} 
 	.nps-newsletter .your-email {min-width:210px;}
-	.nps-info, .nps-local {padding-top:62px; }
-	
+	.nps-info, .nps-local {padding-top:62px; }	
 }
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
