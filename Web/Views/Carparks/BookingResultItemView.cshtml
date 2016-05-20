@@ -29,7 +29,7 @@
                             var description = "";
                             if (@Model.Description != null)
                             {
-                                description = Model.Description.Substring(0, 120) + "...[find out more]";
+                                description = Model.Description.Length>0?Model.Description.Substring(0, 120) + "...[find out more]":"No description attached";
 
                             }
                         }
@@ -47,7 +47,7 @@
                     <button type="submit" class="btn">Book now</button>
                     <ul class="list-inline for-info-and-map">
                         <li class="moreinfo">
-                            <a data-toggle="modal" data-target="#plusInfo" href="#">
+                            <a data-toggle="modal" data-target="@Html.Raw("#")@Html.Raw("modal")@Model.Id" href="#">
                                 <i class="fa fa-plus-circle fa-lg"></i>
                                 Info
                             </a>

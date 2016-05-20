@@ -28,13 +28,13 @@
                     @Html.Partial("BookingPartialView")                    
                 </div>
 
-                @foreach (var result in Model)
+                @foreach (Web.Models.ResultsView result in Model)
                 {                            
                     @*BOOK ITEM TO BE DISPLAYED*@
                     @Html.Partial("BookingResultItemView",result)
 
                     @*MODAL FORM FOR THE ITEM*@                    
-                    @Html.Partial("ModalResultPartialView",result)                    
+                    @Html.Partial("ModalResultPartialView",(Web.Models.ResultsView)result)                    
                 }            
             </div>
         </div>

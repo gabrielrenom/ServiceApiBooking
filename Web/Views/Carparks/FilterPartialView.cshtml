@@ -3,11 +3,13 @@
 <h2>Filter results by parking type</h2>
 <div class="types">
     @{
+
+
         var disabled = "disabled";
         if (Model.Count >0)
         {
             disabled = "";
-        }       
+        }
     }
 
     <span><input type="radio" value="All" name="checked" checked @disabled> All (<span class="counter">@Model.Count</span>) </span>
