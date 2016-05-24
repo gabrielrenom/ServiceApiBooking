@@ -12,15 +12,15 @@
         }
     }
 
-    <span><input type="radio" value="All" name="checked" checked @disabled> All (<span class="counter">@Model.Count</span>) </span>
-    <span><input type="radio" value="Park and Ride" name="checked" @disabled> Park and Ride (<span class="counter">@Model.Where(x => x.IsParkAndRide == true).ToList().Count </span>)</span>
-    <span><input type="radio" value="Meet and Greet" name="checked" @disabled> Meet and Greet (<span class="counter">@Model.Where(x => x.IsMeetAndGreet == true).ToList().Count</span>)</span>
-    <span><input type="radio" value="On-Airport" name="checked" @disabled> On-Airport (<span class="counter">@Model.Where(x => x.IsOnAirport == true).ToList().Count</span>)</span>
+    <span><input type="radio" id="All" value="All" name="checked" checked @disabled> All (<span class="counter">@Model.Count</span>) </span>
+    <span><input type="radio" id="ParkandRide" value="Park and Ride" name="checked" @disabled> Park and Ride (<span class="counter">@Model.Where(x => x.IsParkAndRide == true).ToList().Count </span>)</span>
+    <span><input type="radio" id="MeetandGreet" value="MeetandGreet" name="checked" @disabled> Meet and Greet (<span class="counter">@Model.Where(x => x.IsMeetAndGreet == true).ToList().Count</span>)</span>
+    <span><input type="radio" id="OnAirport" value="On-Airport" name="checked" @disabled> On-Airport (<span class="counter">@Model.Where(x => x.IsOnAirport == true).ToList().Count</span>)</span>
 </div>
-<select name="TERMINALS" class="form-control terminals back1 color4" @disabled>
+@*<select name="TERMINALS" class="form-control terminals back1 color4" @disabled>
     <option selected>Terminals</option>
     <option>North</option>
     <option>East</option>
     <option>South</option>
     <option>West</option>
-</select>
+</select>*@

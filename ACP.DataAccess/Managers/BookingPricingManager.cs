@@ -42,7 +42,6 @@ namespace ACP.DataAccess.Managers
                 x => x.BookingEntity.Prices,
                 x => x.BookingEntity.Prices.Select(y => x.DayPrices))
                 .OrderBy(a => a.Name).ToList();
-
         }
 
         public IList<BookingPricingModel> GetAllPricesByBookEntity(int bookingentityid, DateTime pickup, DateTime dropoff)
@@ -104,6 +103,7 @@ namespace ACP.DataAccess.Managers
                 x => x.BookingEntity.Prices,
                 x => x.BookingEntity.Properties,
                 x => x.BookingEntity.Reviews,
+                x=>x.BookingEntity.Address,
                 x => x.BookingEntity.Prices.Select(y => x.DayPrices));
 
             if (results.Count()>0)

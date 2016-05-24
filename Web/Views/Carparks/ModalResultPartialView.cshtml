@@ -93,8 +93,22 @@
                         </div>
                         
                         <div role="tabpanel" class="tab-pane active" id="@Html.Raw("map"+@Model.Id)">
+                            @{
+                                var googleMapsAddress =  @Model.Address.Postcode;
+                             }
+                            @*<iframe width="600"
+                                    height="450"
+                                    frameborder="0"
+                                    style="border:0"
+                                    src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJD2KzY860e0gR3h2v3bLT5cM&key=AIzaSyBjOKVNJ4sQnOJ0EHiBqRSED3thEZjImrs"
+                                    allowfullscreen></iframe>*@
 
-                            @*<iframe src="https://www.google.com/maps/@Model.Address.Postcode" width="922" height="422" frameborder="0" style="border:0" allowfullscreen></iframe>*@
+                            <iframe width="600"
+                                    height="450"
+                                    frameborder="0"
+                                    style="border:0"
+                                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBjOKVNJ4sQnOJ0EHiBqRSED3thEZjImrs&q=SK74QW"
+                                    allowfullscreen></iframe>
 
                         </div>
                         <div role="tabpanel" class="tab-pane" id="@Html.Raw("reviews"+@Model.Id)">
@@ -106,15 +120,15 @@
                                 {
                                     <span class="color2"><b>@review.ClientName:</b></span><br />
                                     <span class="color3"><label for="date" class="rate-date">@review.PublicationDate</label></span><br />
-                                    <span><b>@review.Review</b></span>
+                                    <span><b>@review.Review</b></span>               
                                     <div class="rating-input">
-                                        <i class="glyphicon @Html.Raw(Convert.ToInt32(@review.Rating)==5?"glyphicon-star-empty":"glyphicon-star")" data-value="1"></i>
-                                        <i class="glyphicon @Html.Raw(Convert.ToInt32(@review.Rating)==5?"glyphicon-star-empty":"glyphicon-star")" data-value="2"></i>
-                                        <i class="glyphicon @Html.Raw(Convert.ToInt32(@review.Rating)==5?"glyphicon-star-empty":"glyphicon-star")" data-value="3"></i>
-                                        <i class="glyphicon @Html.Raw(Convert.ToInt32(@review.Rating)==5?"glyphicon-star-empty":"glyphicon-star")" data-value="4"></i>
-                                        <i class="glyphicon @Html.Raw(Convert.ToInt32(@review.Rating)==5?"glyphicon-star-empty":"glyphicon-star")" data-value="5">
-                                        </i>
-                                    </div>                                        
+                                        @{ for (int i = 1; i < 6; i++)
+                                            {
+                                                var emptystar = Convert.ToInt32(@review.Rating) < i ? "glyphicon-star-empty" : "";
+                                                @Html.Raw("<i class='glyphicon glyphicon-star " + emptystar + "' data-value=" + i + @"></i>");
+                                            }
+                                        }
+                                    </div>
                                     <hr>
                                 }                                                               
                             </div>

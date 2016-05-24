@@ -1,6 +1,29 @@
 ﻿@model Web.Models.ResultsView
+@{ 
+    var service = 0;
 
-<div class="row result-row">
+    if (Model.IsParkAndRide == true)
+    {
+        service += 1;
+    }
+
+    if (Model.IsMeetAndGreet == true)
+    {
+        service += 3;
+    }
+    if (Model.IsOnAirport == true)
+    {
+        service += 7;
+    }
+
+    //# IF PR = 1
+    //# IF PR + MG = 4
+    //# IF PR + MG + A = 11
+
+    string services = "services" + service.ToString();
+
+}
+<div class="row result-row @services">
     <div class="col-md-4 col-sm-4 col-xs-4 airport manchester-airport">
         <h3>@Model.Company</h3>
     </div>
@@ -53,7 +76,7 @@
                             </a>
                         </li>
                         <li class="map">
-                            <a href="#">
+                            <a data-toggle="modal" data-target="@Html.Raw("#")@Html.Raw("modal")@Model.Id" href="#">
                                 <i class="fa fa-map-marker fa-lg"></i>
                                 Map
                             </a>

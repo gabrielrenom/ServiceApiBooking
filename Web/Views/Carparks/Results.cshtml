@@ -45,23 +45,12 @@
    <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>*@
+<script src="~/Scripts/jquery-1.11.3.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
-
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<!-- ������      <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> ????? -->
-<!-- ������  <link rel="stylesheet" type="text/css" href="css/ie10-viewport-bug-workaround.css"/>  ????? -->
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<!-- ������  <script src="bootstrap-3.3.6-dist/css/bootstrap.npm.js"></script>  ????? -->
-
 <script src="~/Scripts/jquery.datetimepicker.full.min.js"></script>
 <script src="~/Scripts/si"></script>
 <script>
-/*
-window.onerror = function(errorMsg) {
-	$('#console').html($('#console').html()+'<br>'+errorMsg)
-}*/
 
 $.datetimepicker.setLocale('en');
 
@@ -157,12 +146,44 @@ $(function () {
             //}
         });
     });
+
+    //#############################################
+    //## Filtering results by hiding and displaying
+    //## PR = 1
+    //## MG = 3
+    //## A  = 7
+    //#############################################
+
+    //## 1
+    $("#ParkandRide").click(function ()
+    {
+        $(".services1").fadeIn();
+        $(".services3").fadeOut();
+        $(".services7").fadeOut();
+    });
+
+    //## 3
+    $("#MeetandGreet").click(function () {
+        $(".services1").fadeOut();
+        $(".services3").fadeIn();
+        $(".services7").fadeOut();
+    });
+
+    //## 7
+    $("#OnAirport").click(function () {
+        $(".services1").fadeOut();
+        $(".services3").fadeOut();
+        $(".services7").fadeIn();
+    });
+
+    $("#All").click(function () {
+        $(".services1").fadeIn();
+        $(".services3").fadeIn();
+        $(".services7").fadeIn();
+    });
 });
 
 
 </script>
-<div id="result">
-
-</div>
 <script src="~/Scripts/bootstrap-rating-input.min.js"></script>
 <script src="~/Scripts/common.js"></script>
