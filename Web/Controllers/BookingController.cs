@@ -11,10 +11,18 @@ namespace Web.Controllers
     {
         // GET: Booking
         [HttpGet]
-        public ActionResult Index()
+        //public ActionResult Index(QuoteModelView quotemodel)
+        public ActionResult Index(int airportId, string discount, string dropoffDate , string returnDate , decimal price)       
         {
 
             BookingGuestViewModel model = new BookingGuestViewModel();
+
+            model.Price = price;
+            model.AirportId = airportId;
+            model.DropOffDate = Convert.ToDateTime(dropoffDate);
+            model.ReturnDate = Convert.ToDateTime(returnDate);
+            model.CouponDiscount = discount;
+            model.BookingFee = 0;
 
             return View(model);
         }

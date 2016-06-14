@@ -8,6 +8,7 @@ namespace Web.Models
 {
     public class QuoteModelView
     {
+        public int Id { get; set; }
         [Required]
         public String Airport { get; set; }
         [Required]

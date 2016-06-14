@@ -12,9 +12,7 @@ namespace Web.Models
         public string Company { get; set; }
         public byte[] CompanyLogo { get; set; }
         public decimal? TransferTime { get; set; }
-        public decimal? DistanceFromAirport { get; set; }
-
-        
+        public decimal? DistanceFromAirport { get; set; }        
         public string Description { get; set; }
         public decimal Price { get; set; }
         public bool IsFamilyFriendly { get; set; }
@@ -29,6 +27,6 @@ namespace Web.Models
         public bool IsOnAirport { get; set; }
         public virtual List<ReviewView> Reviews {get;set;}
         public virtual AddressView Address { get; set; }
-
+        public virtual QuoteModelView Quote { get; set; }
     }
 }

@@ -27,63 +27,72 @@
     <div class="col-md-4 col-sm-4 col-xs-4 airport manchester-airport">
         <h3>@Model.Company</h3>
     </div>
+    @{ 
+        Model.Quote.Id = Model.Id;
+
+    }
+    <button type="submit" class="btn">
+        @Html.ActionLink("Book now", "index", "booking", @Model.Quote, new { @class = "btn" })
+    </button>
     <div class="col-md-8 col-sm-8 col-xs-8 result-info">
         <div class="result-form">
-            <form role="form" class="row">
-                <div class="form-group col-md-8 result-options">
-                    <ul class="list-inline for-time-and-distance">
-                        <li class="time">
-                            <i class="fa fa-bus fa-2x"></i>
-                            @Model.TransferTime minutes transfer
-                        </li>
-                        <li class="map">
-                            <i class="fa fa-map-marker fa-2x"></i>
-                            @Model.DistanceFromAirport
-                            @if (@Model.DistanceFromAirport == 1)
+                <form role="form" class="row" method="post" action="book">
+                    <div class="form-group col-md-8 result-options">
+                        <ul class="list-inline for-time-and-distance">
+                            <li class="time">
+                                <i class="fa fa-bus fa-2x"></i>
+                                @Model.TransferTime minutes transfer
+                            </li>
+                            <li class="map">
+                                <i class="fa fa-map-marker fa-2x"></i>
+                                @Model.DistanceFromAirport
+                                @if (@Model.DistanceFromAirport == 1)
                             {
-                                @Html.Raw("mile")
+                            @Html.Raw("mile")
                             }
                             else { @Html.Raw("miles")
                             } from the airport
-                        </li>
-                    </ul>
-                    <p class="result-data">
-                        @{
+                            </li>
+                        </ul>
+                        <p class="result-data">
+                            @{
                             var description = "";
                             if (@Model.Description != null)
                             {
                                 description = Model.Description.Length>0?Model.Description.Substring(0, 120) + "...[find out more]":"No description attached";
 
                             }
-                        }
-                        @description
-                    </p>
-                    <div class="options">
-                        <span><input type="checkbox" value="24 hours security" name="checked" checked="@Model.Is24hSecurity"> 24 hours security </span>
-                        <span><input type="checkbox" value="Family friendly" name="checked" checked="@Model.IsFamilyFriendly"> Family friendly </span>
-                        <span><input type="checkbox" value="You retain keys" name="checked" checked="@Model.IsRetainKeys"> You retain keys </span>
-                        <span><input type="checkbox" value="Regular transfers" name="checked" checked="@Model.IsRegularTransfers"> Regular transfers</span>
+                            }
+                            @description
+                        </p>
+                        <div class="options">
+                            <span><input type="checkbox" value="24 hours security" name="checked" checked="@Model.Is24hSecurity"> 24 hours security </span>
+                            <span><input type="checkbox" value="Family friendly" name="checked" checked="@Model.IsFamilyFriendly"> Family friendly </span>
+                            <span><input type="checkbox" value="You retain keys" name="checked" checked="@Model.IsRetainKeys"> You retain keys </span>
+                            <span><input type="checkbox" value="Regular transfers" name="checked" checked="@Model.IsRegularTransfers"> Regular transfers</span>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group col-md-4 result-actions">
-                    <span class="result-price"><i class="currency">&pound;</i> @Model.Price</span>
-                    <button type="submit" class="btn">Book now</button>
-                    <ul class="list-inline for-info-and-map">
-                        <li class="moreinfo">
-                            <a data-toggle="modal" data-target="@Html.Raw("#")@Html.Raw("modal")@Model.Id" href="#">
-                                <i class="fa fa-plus-circle fa-lg"></i>
-                                Info
-                            </a>
-                        </li>
-                        <li class="map">
-                            <a data-toggle="modal" data-target="@Html.Raw("#")@Html.Raw("modal")@Model.Id" href="#">
-                                <i class="fa fa-map-marker fa-lg"></i>
-                                Map
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </form>
-        </div>
+                    <div class="form-group col-md-4 result-actions">
+                        <span class="result-price"><i class="currency">&pound;</i> @Model.Price</span>
+                        
+                            @Html.ActionLink("Book now", "index", "booking",new { airportId=Model.Quote.Airport, discount=Model.Quote.Discount, dropoffDate = Model.Quote.DropOffDate, returnDate = Model.Quote.ReturnDate, price= Model.Price }, new { @class = "btn" })
+                        
+                        <ul class="list-inline for-info-and-map">
+                            <li class="moreinfo">
+                                <a data-toggle="modal" data-target="@Html.Raw("#")@Html.Raw("modal")@Model.Id" href="#">
+                                    <i class="fa fa-plus-circle fa-lg"></i>
+                                    Info
+                                </a>
+                            </li>
+                            <li class="map">
+                                <a data-toggle="modal" data-target="@Html.Raw("#")@Html.Raw("modal")@Model.Id" href="#">
+                                    <i class="fa fa-map-marker fa-lg"></i>
+                                    Map
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+</div>
     </div>
 </div>
