@@ -31,9 +31,7 @@
         Model.Quote.Id = Model.Id;
 
     }
-    <button type="submit" class="btn">
-        @Html.ActionLink("Book now", "index", "booking", @Model.Quote, new { @class = "btn" })
-    </button>
+
     <div class="col-md-8 col-sm-8 col-xs-8 result-info">
         <div class="result-form">
                 <form role="form" class="row" method="post" action="book">

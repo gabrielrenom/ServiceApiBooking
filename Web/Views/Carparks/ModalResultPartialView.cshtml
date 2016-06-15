@@ -21,12 +21,7 @@
                         </div>
                         <div class="col-sm-2">
                             <form role="form" class="tab-booking">
-                                <button type="submit" class="btn">
-                                    <span>
-                                        <i class="currency">&pound;</i> @Model.Price
-                                    </span>
-                                    Book now
-                                </button>
+                                @Html.ActionLink(@Model.Price.ToString("c")+" Book now", "index", "booking", new { airportId = Model.Quote.Airport, discount = Model.Quote.Discount, dropoffDate = Model.Quote.DropOffDate, returnDate = Model.Quote.ReturnDate, price = Model.Price }, new { @class = "btn" })
                             </form>
                         </div>
                     </div>
