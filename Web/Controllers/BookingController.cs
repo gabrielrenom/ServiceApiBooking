@@ -27,6 +27,20 @@ namespace Web.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult lilo(BookingGuestViewModel model)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+            }
+
+            return View();
+        }
+
+
+
         // GET: Booking
         [HttpPost]
         public ActionResult Index(BookingGuestViewModel model)
@@ -37,7 +51,7 @@ namespace Web.Controllers
               
             }
 
-            return View();
+            return View(model);
         }
     }
 }

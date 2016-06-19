@@ -368,6 +368,7 @@
     <Content Include="Views\Carparks\ModalResultPartialView.cshtml" />
     <Content Include="Views\Carparks\BookingResultItemView.cshtml" />
     <Content Include="Views\Booking\Index.cshtml" />
+    <Content Include="Views\Booking\BookingLoginPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

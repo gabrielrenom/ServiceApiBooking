@@ -9,6 +9,8 @@ namespace Web.Models
     public class BookingGuestViewModel
     {
 
+        public LoginViewModel Login { get; set; }
+
         [Required(ErrorMessage = "The email address is required")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
@@ -40,8 +42,8 @@ namespace Web.Models
         [Required(ErrorMessage = "The make is required")]
         public string Make { get; set; }
 
-        [Required(ErrorMessage = "The model is required")]
-        public string Model { get; set; }
+        [Required(ErrorMessage = "The car model is required")]
+        public string CarModel { get; set; }
 
         [Required(ErrorMessage = "The colour is required")]
         public string Color { get; set; }
@@ -61,8 +63,10 @@ namespace Web.Models
 
         public decimal Price { get; set; }
         public DateTime DropOffDate { get; set; }
-        public DateTime ReturnDate { get; internal set; }
-        public int AirportId { get; internal set; }
-        public decimal BookingFee { get; internal set; }
+        public DateTime ReturnDate { get; set; }
+        public int AirportId { get; set; }
+        public decimal BookingFee { get; set; }
     }
+
 }
+
