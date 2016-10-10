@@ -135,12 +135,13 @@ namespace ServiceAPI.Controllers
 
                     model.User= new UserModel
                     {
-                        FirstName = model.Customer.Forename,
+                        FirstName = model.Customer.Forename,                        
                         LastName = model.Customer.Surname,
                         Created = DateTime.Now,
                         Modified = DateTime.Now,
                         CreatedBy = model.Customer.Forename + " " + model.Customer.Surname,
-                        ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname
+                        ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname,
+                        DOB= model.User.DOB                       
                     };
 
                     model.Created = DateTime.Now;

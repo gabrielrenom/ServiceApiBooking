@@ -81,19 +81,30 @@ namespace ACP.DataAccess.Managers
             return result;
         }
 
-        public async Task<IList<SlotModel>> FindSlotAvailable(DateTime startdate, DateTime enddate, string rootname)
+        public async Task<IList<SlotModel>> FindSlotAvailable(DateTime startdate, DateTime enddate, string carparkname)
         {
 
             return GetListIncluding(x => x.IsOccupied == false,
                 x => x.Availability,
                 x => x.BookingEntity,
                 x => x.BookingEntity.RootBookingEntity)
-                .Where(x => x.BookingEntity.RootBookingEntity.Name.Contains(rootname))
-                .Where(x => x.Availability
-                .Where(y => y.StartDate >= startdate &&
+                .Where(x => x.BookingEntity.Name.ToLower().Contains(carparkname.ToLower()))
+                .Where(x => x.Availability.Where(y => y.StartDate >= startdate &&
                        y.StartDate <= enddate)
                 .Count() == 0)
-                .ToList();         
+                .ToList();
+
+            
+
+            //return GetListIncluding(x => x.IsOccupied == false,
+            //    x => x.Availability,
+            //    x => x.BookingEntity,
+            //    x => x.BookingEntity.RootBookingEntity)
+            //    .Where(x => x.BookingEntity.RootBookingEntity.Name.Contains(carparkname))
+            //    .Where(x => x.Availability.Where(y => y.StartDate >= startdate &&
+            //           y.StartDate <= enddate)
+            //    .Count() == 0)
+            //    .ToList();         
         }
 
         public async Task<IList<SlotModel>> FindSlotAvailableByBookingEntityCode(DateTime startdate, DateTime enddate, string code)
@@ -104,6 +115,21 @@ namespace ACP.DataAccess.Managers
                 x => x.BookingEntity,
                 x => x.BookingEntity.RootBookingEntity)
                 .Where(x => x.BookingEntity.Code.Contains(code))
+                .Where(x => x.Availability
+                .Where(y => y.StartDate >= startdate &&
+                       y.StartDate <= enddate)
+                .Count() == 0)
+                .ToList();
+        }
+
+        public async Task<IList<SlotModel>> FindSlotAvailableByBookingEntityId(DateTime startdate, DateTime enddate, int BookEntityId)
+        {
+            //##REVISE
+            return GetListIncluding(x => x.IsOccupied == false,
+                x => x.Availability,
+                x => x.BookingEntity,
+                x => x.BookingEntity.RootBookingEntity)
+                .Where(x => x.BookingEntity.Id== BookEntityId)
                 .Where(x => x.Availability
                 .Where(y => y.StartDate >= startdate &&
                        y.StartDate <= enddate)

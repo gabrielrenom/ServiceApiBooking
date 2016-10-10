@@ -1,0 +1,112 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_NPSLayout.cshtml";
+}
+@model Web.Models.BookingGuestViewModel
+ 
+
+
+
+   <div class="container-fluid banner-img for-login">
+        <div class="container">
+
+            <div class="customer-login">
+
+                <div class="row returning-customer">
+                    <form class="form-inline filter">
+                        <div class="form-group">
+                            <label for="returning">Have you booked with us before?</label>
+                            <span><input id ="loginoption"type="radio" name="returning" value="yes" >Yes, and I would like to log in </span>
+                            <span><input id="guestoption" type="radio" name="returning" value="no" checked>No, I would like to book as a guest </span>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="row all-customer-details">
+
+                    <div class="col-md-9 detail-and-payment">                                          
+                        <div class="login" style="display:none">
+                            @*@Html.Partial("BookingLoginPartialView", (Web.Models.BookingLoginViewModel)Model)*@
+                        </div>
+                        <div class="guest">
+                            @Html.Partial("BookingGuestPartialView", Model)
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 summary-sidebar">
+                        <ul>
+                            <li class="totals">
+                                Total to pay:  <span><i class="currency"></i>@((Model.Price).ToString("c"))</span>
+                            </li>
+                            <li class="where-and-when">
+                                <strong>Manchsester airport</strong>
+                                <p>From @Model.DropOffDate.ToString("r") to @Model.ReturnDate.ToString("r")</p>
+                                <a data-toggle="modal" data-target="#plusInfo" href="#">
+                                    <i class="fa fa-plus-circle fa-lg"></i>
+                                    Info
+                                </a>
+                                <em class="subtotal">
+                                    <i class="currency">&pound;</i>
+                                    <span>@Model.Price</span>
+                                </em>
+                            </li>
+                            <li class="booking-fee">
+                                <b>Booking fee</b>
+                                <span><i class="currency">&pound;</i>@Model.BookingFee</span>
+                                <p>
+                                    We don&#39;t charge debit or card fees just flat booking fee to cover our costs.
+                                    <a href="#" target="_blank">Find out more</a>
+                                </p>
+                            </li>
+                            <li class="totals">
+                                Total to pay:  <span><i class="currency"></i>@((Model.Price + Model.BookingFee).ToString("c"))</span>
+                                <p>
+                                    On making payment you agree to our booking <a href="#" target="_blank">terms and conditions</a>.
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+}
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="~/Scripts/jquery-1.11.3.min.js"></script>
+
+
+
+<script src="~/Scripts/jquery.datetimepicker.full.min.js"></script>
+
+<script src="~/Scripts/bootstrap-rating-input.min.js"
+
+
+    <script src="~/Scripts/common.js"></script>
+
+
+@Scripts.Render("~/bundles/jqueryval")
+
+
+<script>
+    $(document).ready(function () {
+
+        $("#loginoption").click(function () {
+            $(".guest").hide();
+            $(".login").show();
+        });
+
+        $("#guestoption").click(function () {
+            $(".guest").show();
+            $(".login").hide();
+        });
+        $(".guestvalidationmsg").hide();
+    });
+</script>

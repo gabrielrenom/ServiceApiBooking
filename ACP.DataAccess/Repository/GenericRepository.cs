@@ -219,6 +219,15 @@ namespace ACP.DataAccess.Repository
 
                 throw innerException;
             }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                Exception innerException = ex;
+
+                while (innerException.InnerException != null) innerException = innerException.InnerException;
+
+                throw innerException;
+            }
 
         }
 

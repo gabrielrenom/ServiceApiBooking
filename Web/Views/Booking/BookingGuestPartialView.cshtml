@@ -1,0 +1,260 @@
+﻿
+@model Web.Models.BookingGuestViewModel
+
+<h2>Book as a guest</h2>
+
+@using (Html.BeginForm("Index", "Booking", Model, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(m => m.AirportId)
+    @Html.HiddenFor(m => m.DropOffDate)
+    @Html.HiddenFor(m => m.ReturnDate)
+    @Html.HiddenFor(m => m.BookingFee)
+    @Html.HiddenFor(m => m.CouponDiscount)        
+        
+<div class="form-inline process">
+
+    <div class="form-group for-customer-email">
+        <legend>Email address <span>(required)</span></legend>
+        <label for="guest-email" class="sr-only">Email</label>
+        @Html.TextBoxFor(m => Model.Email, new { @class = "form-control", @placeholder = "Email" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        <label for="confirm-guest-email" class="sr-only">Email</label>
+        @Html.TextBoxFor(m => m.ConfirmEmail, new { @class = "form-control", @placeholder = "Confirmation Email" })
+        @Html.ValidationMessageFor(m => m.ConfirmEmail, "", new { @class = "text-danger" })
+        <p class="notice">This is the address your confirmation will be sent to. It will include the booking reference and all parking/arrival procedures. </p>
+    </div>
+
+    <div class="form-group for-customer-details">
+        <legend>Customer details <span>(required)</span></legend>
+        <label class="sr-only" for="customer-title">Title</label>
+        <select id="customer-title" id="Title" name="Title">
+            <option>Title</option>
+            <option>Miss</option>
+            <option>Mrs.</option>
+            <option>Ms.</option>
+            <option checked>Mr.</option>
+        </select>
+        @Html.ValidationMessageFor(model => model.Title, "Title is required")
+        <label class="sr-only" for="first-name">First name</label>
+        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name" })
+        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+
+        <label class="sr-only" for="last-name">Last name</label>
+        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+
+
+        <label class="sr-only" for="mobile">Mobile</label>
+        @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @placeholder = "Mobile" })
+        @Html.ValidationMessageFor(m => m.Mobile, "", new { @class = "text-danger" })
+
+        <label class="sr-only" for="Address">Address</label>
+        @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
+        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+
+        <label class="sr-only" for="Postcode">Postcode</label>
+        @Html.TextBoxFor(m => m.Postcode, new { @class = "form-control", @placeholder = "City" })
+        @Html.ValidationMessageFor(m => m.Postcode, "", new { @class = "text-danger" })
+
+        <label class="sr-only" for="City">City</label>
+        @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "Postcode" })
+        @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
+
+
+    </div>
+
+    <div class="form-group for-car-details">
+        <legend>Car details <span>(required)</span></legend>
+        <label class="sr-only" for="passengers">Passengers</label>
+        <select id="Passangers" name="Passangers">
+            <option>Passengers</option>
+            <option checked>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+        </select>
+        @Html.ValidationMessageFor(model => model.Passangers, "Number of passengers is required")
+        <label class="sr-only" for="registration">Registration</label>
+        @Html.TextBoxFor(m => m.Registration, new { @class = "form-control", @placeholder = "Registration" })
+        @Html.ValidationMessageFor(m => m.Registration, "", new { @class = "text-danger" })
+
+        <label class="sr-only" for="make">Make</label>
+        @Html.TextBoxFor(m => m.Make, new { @class = "form-control", @placeholder = "Make" })
+        @Html.ValidationMessageFor(m => m.Make, "", new { @class = "text-danger" })
+
+        <label class="sr-only" for="model">Car Model</label>
+        @Html.TextBoxFor(m => m.CarModel, new { @class = "form-control", @placeholder = "Model" })
+        @Html.ValidationMessageFor(m => m.CarModel, "", new { @class = "text-danger" })
+
+
+        <label class="sr-only" for="color">Color</label>
+        @Html.TextBoxFor(m => m.Color, new { @class = "form-control", @placeholder = "Color" })
+        @Html.ValidationMessageFor(m => m.Color, "", new { @class = "text-danger" })
+
+    </div>
+
+    <div class="form-group for-travel-details">
+        <legend>Know your travel details? <span>(optional)</span></legend>
+        <label class="sr-only" for="passengers">Terminal out</label>
+        <select id="TerminalOut" name="TerminalOut">
+            <option>Terminal out</option>
+            <option checked>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+        </select>
+
+        <label class="sr-only" for="flight-number">Outbound flight number</label>
+        @Html.TextBoxFor(m => m.OutboundFlight, new { @class = "form-control", @placeholder = "Outbound flight number" })
+        @Html.ValidationMessageFor(m => m.OutboundFlight, "", new { @class = "text-danger" })
+
+
+        <label class="sr-only" for="passengers">Terminal in</label>
+        <select id="TerminalIn" name="TerminalIn">
+            <option>Terminal in</option>
+            <option checked>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+        </select>
+        <label class="sr-only" for="inbound-flight-number">Inbound flight number</label>
+        @Html.TextBoxFor(m => m.InboundFlight, new { @class = "form-control", @placeholder = "Inbound flight number" })
+        @Html.ValidationMessageFor(m => m.InboundFlight, "", new { @class = "text-danger" })
+
+
+    </div>
+
+
+    <div class="form-group for-extras">
+        <legend>Check if you want some extra details <span>(optional)</span></legend>
+        <ul class="list-inline extra-options">
+            <li>
+                <span>
+                    @Html.TextBoxFor(m => m.CouponDiscount, new { @class = "form-control", @placeholder = "Type your coupon here" })
+                    @Html.ValidationMessageFor(m => m.CouponDiscount, "", new { @class = "text-danger" })
+
+                    <label class="sr-only" for="coupon-worth">Have a coupon worth?</label>
+                </span>
+            </li>
+            <li>
+                <span>
+                    <input type="checkbox" name="IsAddCarWashService" value="true" id="car-wash">
+                    <label for="car-wash">Add our car wash service?</label>
+                </span>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="form-group for-payment">
+        <legend><span>Payment</span></legend>
+     
+            <div class="form-group creditcard-payment-form " >
+                <label class="col-sm-3 control-label" for="CardName">Name on Card</label>
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(m => m.CardName, new { @class = "form-control", @placeholder = "Card Holder's Name" })                   
+                    @Html.ValidationMessageFor(m => m.CardName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group creditcard-payment-form ">
+                <label class="col-sm-3 control-label" for="CardNumber">Card Number</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control", @placeholder = "Debit/Credit Card Number" })                    
+                    @Html.ValidationMessageFor(m => m.CardNumber, "", new { @class = "text-danger" })
+                </div>
+                <label class="col-sm-3 control-label" for="CardNumber">Card Type</label>
+                <div class="col-sm-3">
+                    <select class="form-control col-sm-2" name="CreditCardType" id="CreditCardType">
+                        <option>Type</option>
+                        <option value="visa">Visa</option>
+                        <option value="mastercard">Mastercard</option>
+                        <option value="mastercard">American Express</option>
+                    </select>
+                    @Html.ValidationMessageFor(model => model.CreditCardType, "Credit Card type is required")
+                </div>
+            </div>
+            <div class="form-group creditcard-payment-form ">
+                <label class="col-sm-3 control-label" for="Expirymonth">Expiration Date</label>
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <select class="form-control col-sm-2" name="Expirymonth" id="Expirymonth">
+                                <option>Month</option>
+                                <option value="01">Jan (01)</option>
+                                <option value="02">Feb (02)</option>
+                                <option value="03">Mar (03)</option>
+                                <option value="04">Apr (04)</option>
+                                <option value="05">May (05)</option>
+                                <option value="06">June (06)</option>
+                                <option value="07">July (07)</option>
+                                <option value="08">Aug (08)</option>
+                                <option value="09">Sep (09)</option>
+                                <option value="10">Oct (10)</option>
+                                <option value="11">Nov (11)</option>
+                                <option value="12">Dec (12)</option>
+                            </select>
+                            @Html.ValidationMessageFor(model => model.ExpiryMonth, "Expiry month is required")
+                        </div>
+                        <div class="col-xs-3">
+                            <select class="form-control" name="ExpiryYear">
+                                <option value="2016">2016</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                            </select>
+                            @Html.ValidationMessageFor(model => model.ExpiryYear, "Expiry year is required")
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group creditcard-payment-form ">
+                <label class="col-sm-3 control-label" for="cvv">Card CVV</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m => m.CVV, new { @class = "form-control", @placeholder = "Security Code" })                    
+                    @Html.ValidationMessageFor(m => m.CVV, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <p class="total-to-pay">
+                Total to pay: <i class="currency"></i> @((Model.Price + Model.BookingFee).ToString("c"))
+            </p>
+           
+        <ul class="list-inline payment-options">
+            <li class="secure-payments">
+                <img src="../img/secure-payment.jpg" alt="Secure Payment" width="214" height="63">
+            </li>
+            <li class="sms">
+                <span>
+                    <input type="checkbox" name="IsAddSMSConfirmation" value="true" id="sms-confirmation">
+                    <label for="sms-confirmation">Add SMS confirmation - &pound;0.50</label>
+                    <p>Why not have your booking details sent direct to your mobile, for a quick and easy check in? </p>
+                    <img src="img/ico-question.gif" alt="Know more" class="type-icon">
+                </span>
+            </li>
+            <li class="cover">
+                <span>
+                    <input type="checkbox" name="IsCancelationCover" value="true" id="cancellation-cover">
+                    <label for="cancellation-cover">Add cancellation cover - &pound;1.49</label>
+                    <p>Our cancellation cover protects you if you do need to cancel or amend your booking (selected airport parking products only) </p>
+                    <img src="img/ico-question.gif" alt="Know more" class="type-icon">
+                </span>
+            </li>
+        </ul>
+        <ul class="list-inline make-payment">
+            <li class="pay-button">
+                <button type="submit" class="btn">Make payment</button>
+
+            </li>
+            <li class="secured-by">
+                <img src="../img/secured-by.jpg" alt="Secured by Norton and Secure Metrics" width="162" height="44">
+            </li>
+    </div>
+
+</div>
+}

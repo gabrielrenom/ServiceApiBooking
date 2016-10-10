@@ -9,6 +9,6 @@ namespace ACP.Data.Enums
     public enum AvailabilityStatus
     {
         Free = 201,
-        Occupied = 202,        
+        Occupied = 202
     }
 }

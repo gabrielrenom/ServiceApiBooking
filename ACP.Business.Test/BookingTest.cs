@@ -190,7 +190,7 @@ namespace ACP.Business.Test
                      payment
                  }
             };
-
+            model.SourceCode = "Manchester";
             //Act
             var result = await bookingservice.Add(model);
 

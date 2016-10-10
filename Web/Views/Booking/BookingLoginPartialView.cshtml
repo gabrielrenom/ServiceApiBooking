@@ -1,1 +1,21 @@
-﻿
+﻿@model Web.Models.BookingGuestViewModel
+
+<h2>Welcome back</h2>
+
+@using (Html.BeginForm("Login", "Booking", Model, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+        @Html.AntiForgeryToken()
+<div>
+
+    <div class="form-inline returning-customer-login">
+        <label class="sr-only" for="login">Login</label>
+        @Html.TextBoxFor(m => m.UserEmail, new { @class = "form-control", @placeholder = "Email" })       
+        @Html.ValidationMessageFor(m => m.UserEmail, "Email", new { @class = "text-danger" })       
+        <label class="sr-only" for="password">Password</label>
+        @Html.PasswordFor(m => m.Password, new { @placeholder = "Password", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        <button type="submit" class="btn ">OK</button>
+    </div>
+
+</div>
+}

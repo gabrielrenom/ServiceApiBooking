@@ -15,3 +15,6 @@
 {
     line-height:1.5; 
 }
+.creditcard-payment-form {
+    border-bottom: none!important;
+}

@@ -1,0 +1,27 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net46": {
+      "wrappedProject": "../../ACP.HMAC/ACP.HMAC.csproj",
+      "bin": {
+        "assembly": "../../ACP.HMAC/obj/{configuration}/ACP.HMAC.dll",
+        "pdb": "../../ACP.HMAC/obj/{configuration}/ACP.HMAC.pdb"
+      },
+      "dependencies": {
+        "Microsoft.VisualStudio.QualityTools.UnitTestFramework": "1.0.0-*",
+        "System.Net.Http.Formatting": "1.0.0-*"
+      }
+    },
+    "net461": {
+      "wrappedProject": "../../ACP.HMAC/ACP.HMAC.csproj",
+      "bin": {
+        "assembly": "../../ACP.HMAC/obj/{configuration}/ACP.HMAC.dll",
+        "pdb": "../../ACP.HMAC/obj/{configuration}/ACP.HMAC.pdb"
+      },
+      "dependencies": {
+        "Microsoft.VisualStudio.QualityTools.UnitTestFramework": "1.0.0-*",
+        "System.Net.Http.Formatting": "1.0.0-*"
+      }
+    }
+  }
+}

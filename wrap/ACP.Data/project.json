@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net46": {
+      "wrappedProject": "../../ACP.Data/ACP.Data.csproj",
+      "bin": {
+        "assembly": "../../ACP.Data/obj/{configuration}/ACP.Data.dll",
+        "pdb": "../../ACP.Data/obj/{configuration}/ACP.Data.pdb"
+      }
+    },
+    "net461": {
+      "wrappedProject": "../../ACP.Data/ACP.Data.csproj",
+      "bin": {
+        "assembly": "../../ACP.Data/obj/{configuration}/ACP.Data.dll",
+        "pdb": "../../ACP.Data/obj/{configuration}/ACP.Data.pdb"
+      }
+    }
+  }
+}

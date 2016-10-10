@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net46": {
+      "wrappedProject": "../../ACP.Business/ACP.Business.csproj",
+      "bin": {
+        "assembly": "../../ACP.Business/obj/{configuration}/ACP.Business.dll",
+        "pdb": "../../ACP.Business/obj/{configuration}/ACP.Business.pdb"
+      },
+      "dependencies": {
+        "Microsoft.AspNet.WebApi.Client": "5.2.3",
+        "Newtonsoft.Json": "6.0.4",
+        "ACP.Data": "1.0.0-*",
+        "ACP.HMAC": "1.0.0-*"
+      }
+    },
+    "net461": {
+      "wrappedProject": "../../ACP.Business/ACP.Business.csproj",
+      "bin": {
+        "assembly": "../../ACP.Business/obj/{configuration}/ACP.Business.dll",
+        "pdb": "../../ACP.Business/obj/{configuration}/ACP.Business.pdb"
+      },
+      "dependencies": {
+        "Microsoft.AspNet.WebApi.Client": "5.2.3",
+        "Newtonsoft.Json": "6.0.4",
+        "ACP.Data": "1.0.0-*",
+        "ACP.HMAC": "1.0.0-*"
+      }
+    }
+  }
+}

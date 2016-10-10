@@ -19,6 +19,5 @@ namespace ACP.Data
 
         //public virtual Status Status { get; set; }
         public virtual Slot Slot { get; set; }
-
     }
 }

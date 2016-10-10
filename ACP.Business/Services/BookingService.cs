@@ -25,6 +25,17 @@ namespace ACP.Business.Services
             _pricemanager = pricemanager;
         }
 
+        public async Task<BookingModel> AddAsync(BookingModel model)
+        {
+            IList<SlotModel> slots = new List<SlotModel>();
+            //## 1- Generate the Booking reference
+            model.BookingReference = GenerateReference();
+
+            //## 6- FINALLY Adding the booking.
+            return await _bookingManager.AddAsync(model);
+
+        }
+
         public async Task<BookingModel> Add(BookingModel model)
         {
             
@@ -56,7 +67,7 @@ namespace ACP.Business.Services
             return await _bookingManager.AddAsync(model);
 
         }
-
+    
         public async Task<BookingModel> Add(BookingModel model, bool IsBookingEntity)
         {
             IList<SlotModel> slots = new List<SlotModel>();
@@ -66,8 +77,10 @@ namespace ACP.Business.Services
             //## 2- Find the slot
             if (!IsBookingEntity)
                 slots = await _slotmanager.FindSlotAvailable(model.StartDate, model.EndDate, model.SourceCode);
-            else
+            else if(IsBookingEntity && model.SourceCode!=null)
                 slots = await _slotmanager.FindSlotAvailableByBookingEntityCode(model.StartDate, model.EndDate, model.SourceCode);
+            else
+                slots = await _slotmanager.FindSlotAvailableByBookingEntityId(model.StartDate, model.EndDate, model.Id);
 
             //## 3- Generate the price
             var price = _pricemanager.GetAllPricesByBookEntity(slots.FirstOrDefault().BookingEntityId, model.EndDate, model.StartDate).FirstOrDefault();
@@ -126,6 +139,11 @@ namespace ACP.Business.Services
         public async Task<bool> Update(BookingModel model)
         {
             return await _bookingManager.UpdateAsync(model);
+        }
+
+        public void Paid(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

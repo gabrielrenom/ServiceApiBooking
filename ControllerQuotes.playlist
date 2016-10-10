@@ -1,0 +1,1 @@
+<Playlist Version="1.0"><Add Test="ServiceAPI.Tests.Controllers.QuoteControllerTest.GuivenADayInOut_WhenGetQuoteWithPricesIsCalled_BeSureTheQuoteIsreturned" /></Playlist>

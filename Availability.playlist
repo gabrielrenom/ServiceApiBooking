@@ -1,0 +1,1 @@
+<Playlist Version="1.0"><Add Test="ServiceAPI.Tests.Controllers.AvailabilityControllerTest.GuivenADayInOut_WhenGettByAvailabilityWithPriceCalled_BeSureTheAvailabilityIsreturned" /></Playlist>

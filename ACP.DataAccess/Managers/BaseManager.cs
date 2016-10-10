@@ -191,8 +191,7 @@ namespace ACP.DataAccess.Managers
             }
 
             var dataModel = ToDataModel(domainModel);
-            dataModel.Created = DateTime.UtcNow;
-           
+            dataModel.Created = DateTime.UtcNow;           
 
             Repository.Add(dataModel);
             await Repository.CommitAsync();

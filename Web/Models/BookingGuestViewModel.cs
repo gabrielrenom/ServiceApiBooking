@@ -6,10 +6,18 @@ using System.Web;
 
 namespace Web.Models
 {
-    public class BookingGuestViewModel
+    public class BookingLoginViewModel
     {
 
-        public LoginViewModel Login { get; set; }
+        [Required]
+        [Display(Name = "Email")]
+        [EmailAddress]
+        public string UserEmail { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
 
         [Required(ErrorMessage = "The email address is required")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
@@ -66,6 +74,122 @@ namespace Web.Models
         public DateTime ReturnDate { get; set; }
         public int AirportId { get; set; }
         public decimal BookingFee { get; set; }
+
+        [DataType(DataType.CreditCard)]
+        [Required(ErrorMessage = "The Credit Number required")]
+        public string CardNumber { get; set; }
+
+        [Required(ErrorMessage = "The Credit Nameis required")]
+        public string CardName { get; set; }
+
+        [Required(ErrorMessage = "The Credit Card Type is required")]
+        public string CardType { get; set; }
+
+        [Required(ErrorMessage = "The Epiry Month is required")]
+        public string Expirymonth { get; set; }
+
+        [Required(ErrorMessage = "The Epiry Year is required")]
+        public string ExpiryYear { get; set; }
+
+    
+        public int BookEntityId { get; set; }
+    }
+
+    public class BookingGuestViewModel
+    {
+        //[Required]
+        //[Display(Name = "Email")]
+        [EmailAddress]
+        public string UserEmail { get; set; }
+
+        //[Required]
+        //[DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+
+        [Required(ErrorMessage = "The email address is required")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "The email address is required")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        public string ConfirmEmail { get; set; }
+
+        [Required(ErrorMessage = "The title is required")]
+        public string Title { get; set; }
+
+        [Required(ErrorMessage = "The first name is required")]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "The last name is required")]
+        public string LastName { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
+        [Required(ErrorMessage = "The mobile number is required")]
+        public string Mobile { get; set; }
+
+        [Range(1, 8)]
+        [Required(ErrorMessage = "Passamger numbers are required")]
+        public int Passangers { get; set; }
+
+        [Required(ErrorMessage = "The registration plate is required")]
+        public string Registration { get; set; }
+
+        [Required(ErrorMessage = "The make is required")]
+        public string Make { get; set; }
+
+        [Required(ErrorMessage = "The car model is required")]
+        public string CarModel { get; set; }
+
+        [Required(ErrorMessage = "The colour is required")]
+        public string Color { get; set; }
+        public string TerminalIn { get; set; }
+
+        [Required(ErrorMessage = "The outbound fight is required")]
+        public string OutboundFlight { get; set; }
+        public string TerminalOut { get; set; }
+
+        [Required(ErrorMessage = "The inbound fight is required")]
+        public string InboundFlight { get; set; }
+
+        public string CouponDiscount { get; set; }
+        public bool IsAddSMSConfirmation { get; set; }
+        public bool IsCancelationCover { get; set; }
+        public bool IsAddCarWashService { get; set; }
+
+        public decimal Price { get; set; }
+        public DateTime DropOffDate { get; set; }
+        public DateTime ReturnDate { get; set; }
+        public int AirportId { get; set; }
+        public decimal BookingFee { get; set; }
+
+        public int BookEntityId { get; set; }
+        public string Description { get; set; }
+        public string CarParkName { get; set; }
+
+        [DataType(DataType.CreditCard)]
+        [Required(ErrorMessage = "The Credit Number required")]
+        public string CardNumber { get; set; }
+
+        [Required(ErrorMessage = "The Credit Nameis required")]
+        public string CardName { get; set; }
+
+        [Required(ErrorMessage = "The Credit Card Type is required")]
+        public string CreditCardType { get; set; }
+
+        [Required(ErrorMessage = "The Epiry Month is required")]
+        public string ExpiryMonth { get; set; }
+
+        [Required(ErrorMessage = "The Epiry Year is required")]
+        public string ExpiryYear { get; set; }
+
+        [Required(ErrorMessage = "CVV is required")]
+        public string CVV { get; set; }
+
+        public string Postcode { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
     }
 
 }

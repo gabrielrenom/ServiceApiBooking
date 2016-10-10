@@ -10,11 +10,13 @@ namespace ACP.Business.Services.Interfaces
     public interface IBookingService
     {
         Task<BookingModel> Add(BookingModel model);
+        Task<BookingModel> AddAsync(BookingModel model);
         Task<bool> Remove(int Id);
         Task<bool> Update(BookingModel model);
         Task<BookingModel> GetById(int Id);
         Task<IList<BookingModel>> GetAll();
         Task<BookingModel> GetByReference(string reference);
         Task<BookingModel> Add(BookingModel model, bool IsBookingEntity);
+        void Paid(int id);
     }
 }

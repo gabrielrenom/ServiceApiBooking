@@ -73,7 +73,8 @@ namespace ACP.Business.Services
                 quote.Pricing.Add(new ItemPriceModel
                 {
                     Price = item.DayPrices.Where(x => x.Day == days).FirstOrDefault().Dayprice,
-                    PriceModel = item
+                    PriceModel = item,
+                    
                 });
             }
 
