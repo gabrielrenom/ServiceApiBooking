@@ -13,7 +13,7 @@
     @Html.HiddenFor(m => m.ReturnDate)
     @Html.HiddenFor(m => m.BookingFee)
     @Html.HiddenFor(m => m.CouponDiscount)        
-        
+
 <div class="form-inline process">
 
     <div class="form-group for-customer-email">
@@ -220,7 +220,27 @@
                     @Html.TextBoxFor(m => m.CVV, new { @class = "form-control", @placeholder = "Security Code" })                    
                     @Html.ValidationMessageFor(m => m.CVV, "", new { @class = "text-danger" })
                 </div>
+               
             </div>
+            @{ if (Model.Error!=null)         
+                {
+
+                                <div class="form-group creditcard-payment-form">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-9">
+                                        <blockquote style="border-left-width: 5px; border-left-style: solid; border-left-color: red;">
+                                            <p>
+                                                Payment Error
+                                            </p>
+                                            <small>
+                                                <cite>@Model.Error</cite>
+                                            </small>
+                                        </blockquote>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                    }
+            }
             <p class="total-to-pay">
                 Total to pay: <i class="currency"></i> @((Model.Price + Model.BookingFee).ToString("c"))
             </p>

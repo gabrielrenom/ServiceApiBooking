@@ -10,6 +10,7 @@ namespace ACP.Business.Managers
 {
     public interface IBookingManager : IBaseManager<BookingModel, Booking>
     {
-        Task<BookingModel> GetByReference(string reference);    
+        Task<BookingModel> GetByReference(string reference);
+        Task<bool> Paid(int id);
     }
 }

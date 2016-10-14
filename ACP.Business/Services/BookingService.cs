@@ -141,9 +141,9 @@ namespace ACP.Business.Services
             return await _bookingManager.UpdateAsync(model);
         }
 
-        public void Paid(int id)
+        public async Task<bool> Paid(int id)
         {
-            throw new NotImplementedException();
+            return await _bookingManager.Paid(id);
         }
     }
 }

@@ -338,6 +338,7 @@ namespace ACP.DataAccess.Managers
                 CreatedBy = domainModel.User.CreatedBy,
                 ModifiedBy = domainModel.User.ModifiedBy,
                 Modified = domainModel.User.Modified,
+                DOB = domainModel.User.DOB
             } : null;
 
 
@@ -528,6 +529,7 @@ namespace ACP.DataAccess.Managers
                 LastName = dataModel.User.LastName,
                 Password = dataModel.User.Password,
                 PhoneNumber = dataModel.User.PhoneNumber,
+                DOB = dataModel.User.DOB,
                 Address = dataModel.User.Address != null ? new AddressModel
                 {
                     Id = dataModel.User.Address.Id,
@@ -716,6 +718,7 @@ namespace ACP.DataAccess.Managers
                  LastName= domainModel.User.LastName,
                  Password = domainModel.User.Password,
                  PhoneNumber = domainModel.User.PhoneNumber,
+                 DOB = domainModel.User.DOB,
                  Address= domainModel.User.Address != null ? new Address
                  {
                     Id = domainModel.User.Address.Id,

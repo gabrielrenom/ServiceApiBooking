@@ -26,7 +26,6 @@ namespace Web.Controllers
         //public ActionResult Index(QuoteModelView quotemodel)
         public ActionResult Index(int airportId, string discount, string dropoffDate , string returnDate , decimal price, int bookingentityId, string carparkName, string description)       
         {
-
             BookingGuestViewModel model = new BookingGuestViewModel();
 
             model.Price = price;
@@ -42,16 +41,17 @@ namespace Web.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public ActionResult lilo(BookingLoginViewModel model)
+        [HttpGet]
+        [Route("booking/completed")]
+        public ActionResult PaymentCompleted(BookingConfirmationView model)
         {
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
 
-            }
+            //}
 
-            return View();
+            return View(model);
         }
 
 
@@ -59,18 +59,48 @@ namespace Web.Controllers
         // GET: Booking
         [HttpPost]
         public async Task<ActionResult> Index(BookingGuestViewModel model)
-        {          
-
+        {
             if (ModelState.IsValid)
             {
-                var result =await _bookingservice.AddAsync(ToBookingModel(model));
-                if (_paypalservice.PaymentWithCreditCard(ToPayPalModel(model), Configuration.GetAPIContext())=="approved")
+                var result = await _bookingservice.AddAsync(ToBookingModel(model));
+                var paymentresult = _paypalservice.PaymentWithCreditCard(ToPayPalModel(model), Configuration.GetAPIContext());
+                if (paymentresult == "approved")
                 {
-                    _bookingservice.Paid(result.Id);
+                    var havebeenpaid = await _bookingservice.Paid(result.Id);
+                    if (havebeenpaid) return RedirectToAction("completed", ToBookingConfirmationView(model, result.BookingReference));                                                            
                 }
-            }
+                model.Error = paymentresult;
+            }            
 
             return View(model);
+        }
+
+        private BookingConfirmationView ToBookingConfirmationView(BookingGuestViewModel model,string reference)
+        {
+            return new BookingConfirmationView {
+                 BookingReference = reference,
+                 CarModel = model.CarModel,
+                 CarParkName = model.CarParkName,
+                 Color = model.Color,
+                 Description = model.Description,
+                 DropOffDate = model.DropOffDate,
+                 FirstName = model.FirstName,
+                 InboundFlight = model.InboundFlight,
+                 IsAddCarWashService = model.IsAddCarWashService,
+                 IsAddSMSConfirmation = model.IsAddSMSConfirmation,
+                 IsCancelationCover = model.IsCancelationCover,
+                 LastName = model.LastName,
+                 Make = model.Make,
+                 Mobile = model.Mobile,
+                 OutboundFlight = model.OutboundFlight,
+                 Passangers = model.Passangers,
+                 Price = model.Price,
+                 Registration =model.Registration,
+                 ReturnDate = model.ReturnDate,
+                 TerminalIn = model.TerminalIn,
+                 TerminalOut = model.TerminalOut,
+                 Title = model.Title
+            };
         }
 
         private PayPalModel ToPayPalModel(BookingGuestViewModel model)
@@ -106,6 +136,20 @@ namespace Web.Controllers
             //## Only when he pays it is flagged to true
             BookingModel bookingModel = new BookingModel();
 
+            bookingModel.User = new UserModel
+            {
+                Created = DateTime.Now,
+                CreatedBy = model.Email,
+                Modified = DateTime.Now,
+                ModifiedBy = model.Email,
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Gender = model.Title.ToLower().Contains('s') ? ACP.Business.Enums.Gender.Female : ACP.Business.Enums.Gender.Male,
+                DOB = DateTime.Now,
+                
+            };
+
             bookingModel.Car = new CarModel
             {
                 Created = DateTime.Now,
@@ -115,17 +159,25 @@ namespace Web.Controllers
                 Model = model.CarModel,
                 Make = model.Make,
                 Registration = model.Registration,
-                Colour = model.Color
-                //User = new UserModel {
-                //    Created = DateTime.Now,
-                //    CreatedBy = model.Email,
-                //    Modified = DateTime.Now,
-                //    ModifiedBy = model.Email,
-                //    Email = model.Email,                     
-                //    FirstName = model.FirstName,
-                //    LastName = model.LastName,
-                //    Gender = model.Title.ToLower().Contains('s') ? ACP.Business.Enums.Gender.Female : ACP.Business.Enums.Gender.Male                   
-                // }                                                
+                Colour = model.Color,
+                User = new UserModel
+                {
+                    Address = new AddressModel
+                    {
+                        Created = DateTime.Now,
+                        CreatedBy = model.Email,
+                        Modified = DateTime.Now,
+                        ModifiedBy = model.Email,
+                    },
+                    Created = DateTime.Now,
+                    CreatedBy = model.Email,
+                    Modified = DateTime.Now,
+                    ModifiedBy = model.Email,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Gender = model.Title.ToLower().Contains('s') ? ACP.Business.Enums.Gender.Female : ACP.Business.Enums.Gender.Male
+                }
             };
 
             bookingModel.TravelDetails = new TravelDetailsModel
@@ -146,6 +198,7 @@ namespace Web.Controllers
             bookingModel.StartDate = model.DropOffDate;
             bookingModel.EndDate = model.ReturnDate;
             bookingModel.Status = ACP.Business.Enums.StatusType.Processing;
+            bookingModel.Modified = DateTime.Now;
             bookingModel.Extras = new List<ExtraModel>
             {
                 new ExtraModel {
@@ -166,6 +219,8 @@ namespace Web.Controllers
                   Forename = model.FirstName,
                   Surname = model.LastName,
                   Mobile = model.Mobile,
+                  Created = DateTime.Now,
+                  Modified =DateTime.Now,
                   Address = new AddressModel
                   {
                       Created = DateTime.Now,

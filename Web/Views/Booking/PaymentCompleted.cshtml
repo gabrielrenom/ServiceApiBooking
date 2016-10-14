@@ -1,0 +1,121 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_NPSLayout.cshtml";
+}
+@model Web.Models.BookingConfirmationView
+
+
+
+<div class="container-fluid banner-img for-login">
+    <div class="container">
+        <div class="customer-login">
+            <div class="">
+                <div class="customer-login">
+                    <div class="row returning-customer">
+                        <label class="paid">Transaction completed </label>
+                    </div>
+                    <div class="row all-customer-details">
+                        <div class="col-md-6 payment-received">
+                            <h2>Thank you! Your payment has been received </h2>
+                            <p>Your transaction has been completed, and a receipt for your booking has been emailed to you. </p>
+                            <div class="">
+                                <div class="row">
+                                    <div class="col-md-6"><b>Reference:</b></div>
+                                    <div class="col-md-6"><b>@Model.BookingReference</b></div>
+                                </div>                              
+                                <div class="row">
+                                    <div class="col-md-6">Carpark:</div>
+                                    <div class="col-md-6">@Model.CarParkName</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Return Drop Off Date:</div>
+                                    <div class="col-md-6">@Model.DropOffDate</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Return Date:</div>
+                                    <div class="col-md-6">@Model.ReturnDate</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">InboundFlight:</div>
+                                    <div class="col-md-6">@Model.InboundFlight</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">OutboundFlight:</div>
+                                    <div class="col-md-6">@Model.OutboundFlight</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Registration:</div>
+                                    <div class="col-md-6">@Model.Registration</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Terminal In:</div>
+                                    <div class="col-md-6">@Model.TerminalIn</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">Does it have car whash service?</div>
+                                    <div class="col-md-6">@{ if (Model.IsAddCarWashService) { @Html.Raw("Yes"); } else { @Html.Raw("No"); } }</div>
+                               </div>
+                                <div class="row">
+                                    <div class="col-md-6">Cancelation servicee?</div>
+                                    <div class="col-md-6">@{ if (Model.IsCancelationCover) { @Html.Raw("Yes"); } else{ @Html.Raw("No");} }</div>
+                                </div>
+                </div>
+
+                <p> You may log into your account at <a href = "https://www.paypal.com/es/webapps/mpp/home" title = "Log into your PayPal account" target = "_blank" > www.paypal.com </a> to view details of this transaction. </p>
+                       <p>
+                             <strong> Booking details </strong>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incid ut labore et dolore magna aliqua. sequi nes.
+                       </p>
+                       <p> 
+                           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+                       </p>
+               </div>
+                   <div class="col-md-6 even-more">
+                            <div class="col-lg-8 col-md-8 col-sm-5 banner banner1">
+                                <div class="mensaje">
+                                    <span>GET EXCLUSIVE OFFERS</span>
+                                    <a class="btn btn-primary btn-lg" href="#" role="button">LEARN MORE</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                                    }
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="~/Scripts/jquery-1.11.3.min.js"></script>
+
+
+
+<script src="~/Scripts/jquery.datetimepicker.full.min.js"></script>
+
+<script src="~/Scripts/bootstrap-rating-input.min.js"
+
+
+    <script src="~/Scripts/common.js"></script>
+
+
+@Scripts.Render("~/bundles/jqueryval")
+
+
+<script>
+    $(document).ready(function () {
+
+        $("#loginoption").click(function () {
+            $(".guest").hide();
+            $(".login").show();
+        });
+
+        $("#guestoption").click(function () {
+            $(".guest").show();
+            $(".login").hide();
+        });
+        $(".guestvalidationmsg").hide();
+    });
+</script>

@@ -190,7 +190,33 @@ namespace Web.Models
         public string Postcode { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
+        public string Error { get; set; }
     }
 
+    public class BookingConfirmationView
+    {
+        public string BookingReference { get; set; }
+        public decimal Price { get; set; }
+        public DateTime DropOffDate { get; set; }
+        public DateTime ReturnDate { get; set; }
+        public string Description { get; set; }
+        public string CarParkName { get; set; }
+        public bool IsAddSMSConfirmation { get; set; }
+        public bool IsCancelationCover { get; set; }
+        public bool IsAddCarWashService { get; set; }
+        public string Title { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Mobile { get; set; }
+        public int Passangers { get; set; }
+        public string Registration { get; set; }
+        public string Make { get; set; }
+        public string CarModel { get; set; }
+        public string Color { get; set; }
+        public string TerminalIn { get; set; }
+        public string OutboundFlight { get; set; }
+        public string TerminalOut { get; set; }
+        public string InboundFlight { get; set; }
+    }
 }
 

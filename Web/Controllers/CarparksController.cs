@@ -132,7 +132,6 @@ namespace Web.Controllers
                 Quote = quote
             }).ToList() : null;
             
-
             return domainModel;
         }
 
