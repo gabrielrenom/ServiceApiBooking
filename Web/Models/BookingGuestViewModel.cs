@@ -175,20 +175,31 @@ namespace Web.Models
         [Required(ErrorMessage = "The Credit Nameis required")]
         public string CardName { get; set; }
 
-        [Required(ErrorMessage = "The Credit Card Type is required")]
+        [Required]
+        [RegularExpression("^[0-9]*$",ErrorMessage = "The Credit Card Type is required")]
         public string CreditCardType { get; set; }
 
-        [Required(ErrorMessage = "The Epiry Month is required")]
+        [Range(1, 12)]
+        [Required(ErrorMessage = "The Expiry Month is required")]
         public string ExpiryMonth { get; set; }
 
-        [Required(ErrorMessage = "The Epiry Year is required")]
+        [Range(2016,2030)]
+        [Required(ErrorMessage = "The Expiry Year is required")]
         public string ExpiryYear { get; set; }
 
         [Required(ErrorMessage = "CVV is required")]
+        [MaxLength(3)]
+        [MinLength(3)]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "CVV is required")]
         public string CVV { get; set; }
 
+        [Required(ErrorMessage = "Please enter Postcode")]
         public string Postcode { get; set; }
+
+        [Required(ErrorMessage = "Please enter address")]
         public string Address { get; set; }
+
+        [Required(ErrorMessage = "Please enter city")]
         public string City { get; set; }
         public string Error { get; set; }
     }

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Web.Controllers
 {
+    [RoutePrefix("booking")]
     public class BookingController : Controller
     {
         private IBookingService _bookingservice;
@@ -21,23 +22,34 @@ namespace Web.Controllers
             _paypalservice = paypalService;
         }
 
+        //[HttpGet]
+        //[Route("")]
+        //public ActionResult GoToSearch()
+        //{
+        //    return RedirectToAction("index","carparks");
+        //}
+
         // GET: Booking
         [HttpGet]
-        //public ActionResult Index(QuoteModelView quotemodel)
-        public ActionResult Index(int airportId, string discount, string dropoffDate , string returnDate , decimal price, int bookingentityId, string carparkName, string description)       
+        //[Route("{airportId:int}/{discount}/{dropoffDate}/{returnDate}/{price:decimal}/{bookingentityId:int}/{carparkName}/{description}")]
+        public ActionResult Index(int? airportId, string discount, string dropoffDate, string returnDate, decimal? price, int? bookingentityId, string carparkName, string description)
         {
+
+            if (!airportId.HasValue || !price.HasValue || !bookingentityId.HasValue)
+                return RedirectToAction("index", "carparks");
+
             BookingGuestViewModel model = new BookingGuestViewModel();
 
-            model.Price = price;
-            model.AirportId = airportId;
+            model.Price = (decimal)price;
+            model.AirportId = (int)airportId;
             model.DropOffDate = Convert.ToDateTime(dropoffDate);
             model.ReturnDate = Convert.ToDateTime(returnDate);
             model.CouponDiscount = discount;
             model.BookingFee = 0;
-            model.BookEntityId = bookingentityId;
+            model.BookEntityId = (int)bookingentityId;
             model.Description = description;
             model.CarParkName = carparkName;
-               
+
             return View(model);
         }
 
@@ -67,51 +79,52 @@ namespace Web.Controllers
                 if (paymentresult == "approved")
                 {
                     var havebeenpaid = await _bookingservice.Paid(result.Id);
-                    if (havebeenpaid) return RedirectToAction("completed", ToBookingConfirmationView(model, result.BookingReference));                                                            
+                    if (havebeenpaid) return RedirectToAction("completed", ToBookingConfirmationView(model, result.BookingReference));
                 }
                 model.Error = paymentresult;
-            }            
+            }
 
             return View(model);
         }
 
-        private BookingConfirmationView ToBookingConfirmationView(BookingGuestViewModel model,string reference)
+        private BookingConfirmationView ToBookingConfirmationView(BookingGuestViewModel model, string reference)
         {
-            return new BookingConfirmationView {
-                 BookingReference = reference,
-                 CarModel = model.CarModel,
-                 CarParkName = model.CarParkName,
-                 Color = model.Color,
-                 Description = model.Description,
-                 DropOffDate = model.DropOffDate,
-                 FirstName = model.FirstName,
-                 InboundFlight = model.InboundFlight,
-                 IsAddCarWashService = model.IsAddCarWashService,
-                 IsAddSMSConfirmation = model.IsAddSMSConfirmation,
-                 IsCancelationCover = model.IsCancelationCover,
-                 LastName = model.LastName,
-                 Make = model.Make,
-                 Mobile = model.Mobile,
-                 OutboundFlight = model.OutboundFlight,
-                 Passangers = model.Passangers,
-                 Price = model.Price,
-                 Registration =model.Registration,
-                 ReturnDate = model.ReturnDate,
-                 TerminalIn = model.TerminalIn,
-                 TerminalOut = model.TerminalOut,
-                 Title = model.Title
+            return new BookingConfirmationView
+            {
+                BookingReference = reference,
+                CarModel = model.CarModel,
+                CarParkName = model.CarParkName,
+                Color = model.Color,
+                Description = model.Description,
+                DropOffDate = model.DropOffDate,
+                FirstName = model.FirstName,
+                InboundFlight = model.InboundFlight,
+                IsAddCarWashService = model.IsAddCarWashService,
+                IsAddSMSConfirmation = model.IsAddSMSConfirmation,
+                IsCancelationCover = model.IsCancelationCover,
+                LastName = model.LastName,
+                Make = model.Make,
+                Mobile = model.Mobile,
+                OutboundFlight = model.OutboundFlight,
+                Passangers = model.Passangers,
+                Price = model.Price,
+                Registration = model.Registration,
+                ReturnDate = model.ReturnDate,
+                TerminalIn = model.TerminalIn,
+                TerminalOut = model.TerminalOut,
+                Title = model.Title
             };
         }
 
         private PayPalModel ToPayPalModel(BookingGuestViewModel model)
         {
-            return new PayPalModel {
+            var paypal = new PayPalModel
+            {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Currency = "GBP",
                 Description = model.Description,
                 Name = model.CardName,
-                Type = model.CreditCardType,
                 Total = Convert.ToString(model.Price + model.BookingFee),
                 Number = model.CardNumber,
                 BillingAddressCity = model.City,
@@ -126,8 +139,15 @@ namespace Web.Controllers
                 CVV2 = model.CVV,
                 SKU = "123",
                 InvoiceNumber = new Random().Next(1000, 10000).ToString()
-
             };
+            if (model.CreditCardType == "0")
+                paypal.Type = "visa";
+            else if (model.CreditCardType == "1")
+                paypal.Type = "mastercard";
+            else if (model.CreditCardType == "2")
+                paypal.Type = "americanexpress";
+
+            return paypal;
         }
 
         private BookingModel ToBookingModel(BookingGuestViewModel model)
@@ -147,7 +167,7 @@ namespace Web.Controllers
                 LastName = model.LastName,
                 Gender = model.Title.ToLower().Contains('s') ? ACP.Business.Enums.Gender.Female : ACP.Business.Enums.Gender.Male,
                 DOB = DateTime.Now,
-                
+
             };
 
             bookingModel.Car = new CarModel
@@ -191,7 +211,7 @@ namespace Web.Controllers
                 OutboundFlight = model.OutboundFlight,
                 OutboundTerminal = model.TerminalOut,
                 ReturnboundTerminal = model.TerminalIn,
-                ReturnFlight = model.InboundFlight,                
+                ReturnFlight = model.InboundFlight,
             };
 
             bookingModel.Cost = Convert.ToDouble(model.Price);
@@ -208,26 +228,26 @@ namespace Web.Controllers
                     ModifiedBy = model.Email,
                     BookingEntityId = model.BookEntityId,
                     Name = "Parking",
-                    Price = model.Price                    
+                    Price = model.Price
                 }
             };
 
             bookingModel.Customer = new CustomerModel
             {
-                  Email = model.Email,
-                  Initials = model.Title,
-                  Forename = model.FirstName,
-                  Surname = model.LastName,
-                  Mobile = model.Mobile,
-                  Created = DateTime.Now,
-                  Modified =DateTime.Now,
-                  Address = new AddressModel
-                  {
-                      Created = DateTime.Now,
-                      CreatedBy = model.Email,
-                      Modified = DateTime.Now,
-                      ModifiedBy = model.Email,                      
-                  }
+                Email = model.Email,
+                Initials = model.Title,
+                Forename = model.FirstName,
+                Surname = model.LastName,
+                Mobile = model.Mobile,
+                Created = DateTime.Now,
+                Modified = DateTime.Now,
+                Address = new AddressModel
+                {
+                    Created = DateTime.Now,
+                    CreatedBy = model.Email,
+                    Modified = DateTime.Now,
+                    ModifiedBy = model.Email,
+                }
             };
 
             bookingModel.Status = ACP.Business.Enums.StatusType.Processing;
@@ -241,7 +261,7 @@ namespace Web.Controllers
             if (ModelState.IsValid)
             {
 
-            }   
+            }
 
             return View(model);
         }

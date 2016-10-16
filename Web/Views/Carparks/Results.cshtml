@@ -25,7 +25,7 @@
             <div class="col-md-9 filter-results">
                 <div class="results-quote-form">
                     @*FORM TO BOOK THE PARKING*@                    
-                    @Html.Partial("BookingPartialView")                    
+                    @Html.Partial("BookingPartialView", Model.Count>0?Model.FirstOrDefault().Quote:new Web.Models.QuoteModelView())                    
                 </div>
 
                 @foreach (Web.Models.ResultsView result in Model)

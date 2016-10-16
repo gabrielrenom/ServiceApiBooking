@@ -229,5 +229,21 @@
             $(document).ready(function () {
 
                 $(".input-icon").hide();
-            })
+            });
+
+            Date.prototype.toDateInputValueToday = (function () {
+                var local = new Date(this);
+                local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+                return local.toJSON().slice(0, 10);
+            });
+
+            Date.prototype.toDateInputValueTomorrow = (function () {
+                var local = new Date(this);
+                local.setDate(local.getDate() + 1);
+                local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+                return local.toJSON().slice(0, 10);
+            });
+          
+            document.getElementById('DropOffDate').value = new Date().toDateInputValueToday();
+            document.getElementById('ReturnDate').value = new Date().toDateInputValueTomorrow();
 </script>

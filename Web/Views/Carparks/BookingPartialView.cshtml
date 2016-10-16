@@ -1,4 +1,6 @@
-﻿@using (Html.BeginForm("results", "carparks", FormMethod.Get, new { @class = "form-inline bookingform" }))
+﻿@model Web.Models.QuoteModelView
+
+@using (Html.BeginForm("results", "carparks", FormMethod.Get, new { @class = "form-inline bookingform" }))
 {
 
 @*<form class="form-inline">*@
@@ -8,22 +10,29 @@
             <option value="">-- Select Airport --</option>
             @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.airports)
             {
-                <option value=@item.Value>@item.Text</option>
+                if (item.Value == Model.Airport)
+                {
+                    <option selected value=@item.Value>@item.Text</option>
+                }
+                else
+                {
+                    <option value=@item.Value>@item.Text</option>
+                }
             }
         </select>        
     </div>
     <div class="form-group">     
             <label for="date">Drop-off date/time</label>
-            <input type="text" id="DropOff" name="DropOffDate" class="form-control color5" placeholder="02/03/2016 03:45" required />
+            <input type="text" id="DropOff" name="DropOffDate" value="@Model.DropOffDate" class="form-control color5" placeholder="MM/DD/YYYY" required />
      </div>
     <div class="form-group">     
         <label for="date">Return date/time</label>
-        <input type="text" id="ReturnDate" name="ReturnDate" class="form-control color5" placeholder="MM/DD/YYYY" required />
+        <input type="text" id="ReturnDate" name="ReturnDate" value="@Model.ReturnDate" class="form-control color5" placeholder="MM/DD/YYYY" required />
         
     </div>
     <div class="form-group">
         <label for="input">Discount code</label>
-        <input type="text" class="form-control" name="Discount" id="discount-code"/>
+        <input type="text" class="form-control" name="Discount" value="@Model.Discount" id="discount-code"/>
 
     </div>
     <button type="submit" class="btn btn-default get-quote">Get quote again</button>
