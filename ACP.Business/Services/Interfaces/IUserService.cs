@@ -18,6 +18,10 @@ namespace ACP.Business.Services.Interfaces
         Task<bool> Update(UserModel model);
 
         Task<bool> DeleteById(int Id);
+
+        Task<bool> Login(string username, string password);
+
+        Task<UserModel> GetUserDetails(string userEmail, string password);
     }
 
      

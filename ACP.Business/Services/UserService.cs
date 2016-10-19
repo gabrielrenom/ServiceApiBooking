@@ -45,5 +45,15 @@ namespace ACP.Business.Services
         {
             return _usermanager.DeleteById(Id);
         }
-}
+
+        public async Task<bool> Login(string username, string password)
+        {
+            return await _usermanager.Login(username, password);
+        }
+
+        public async Task<UserModel> GetUserDetails(string userEmail, string password)
+        {
+            return await _usermanager.GetUserDetails(userEmail, password);
+        }
+    }
 }

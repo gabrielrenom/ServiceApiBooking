@@ -15,11 +15,13 @@ namespace Web.Controllers
     {
         private IBookingService _bookingservice;
         private IPayPalService _paypalservice;
+        private IUserService _userService;
 
-        public BookingController(IBookingService bookingservice, IPayPalService paypalService)
+        public BookingController(IBookingService bookingservice, IPayPalService paypalService, IUserService userService)
         {
             _bookingservice = bookingservice;
             _paypalservice = paypalService;
+            _userService = userService;
         }
 
         //[HttpGet]
@@ -115,6 +117,37 @@ namespace Web.Controllers
                 Title = model.Title
             };
         }
+
+        private BookingGuestViewModel ToBookingConfirmationFromUserView(UserModel model, BookingGuestViewModel guestmodel)
+        {
+            BookingGuestViewModel viewmodel = new BookingGuestViewModel();
+
+            if (model.Bookings != null)
+            {
+                viewmodel.CarModel = model.Bookings.FirstOrDefault().Car.Model;
+                viewmodel.Color = model.Bookings.FirstOrDefault().Car.Colour;
+                viewmodel.Make = model.Bookings.FirstOrDefault().Car.Make;
+                viewmodel.Registration = model.Bookings.FirstOrDefault().Car.Registration;
+            }            
+            viewmodel.CarParkName = guestmodel.CarParkName;            
+            viewmodel.Description = guestmodel.Description;
+            viewmodel.DropOffDate = guestmodel.DropOffDate;
+            viewmodel.FirstName = model.FirstName;
+            viewmodel.InboundFlight = guestmodel.InboundFlight;
+            viewmodel.IsAddCarWashService = guestmodel.IsAddCarWashService;
+            viewmodel.IsAddSMSConfirmation = guestmodel.IsAddSMSConfirmation;
+            viewmodel.IsCancelationCover = guestmodel.IsCancelationCover;
+            viewmodel.LastName = model.LastName;            
+            viewmodel.Mobile = model.PhoneNumber;
+            viewmodel.OutboundFlight = guestmodel.OutboundFlight;            
+            viewmodel.ReturnDate = guestmodel.ReturnDate;
+            viewmodel.UserEmail = guestmodel.UserEmail;
+            viewmodel.Email = guestmodel.UserEmail;
+            viewmodel.ConfirmEmail = guestmodel.UserEmail;
+            viewmodel.IsUser = true;
+            return viewmodel;
+        }
+
 
         private PayPalModel ToPayPalModel(BookingGuestViewModel model)
         {
@@ -254,16 +287,20 @@ namespace Web.Controllers
             return bookingModel;
         }
 
+
         [HttpPost]
-        public ActionResult Login(BookingGuestViewModel model)
+        public async Task<ActionResult> Login(BookingGuestViewModel model)
         {
-
-            if (ModelState.IsValid)
+            if (model.UserEmail.Length > 0 && model.Password.Length > 0)
             {
-
-            }
-
-            return View(model);
+                var customerDetails = await _userService.GetUserDetails(model.UserEmail, model.Password);
+                if (customerDetails!=null)
+                    return View("Index",ToBookingConfirmationFromUserView(customerDetails, model));                
+            }            
+            model.Error = "User or Password incorrect";
+            model.ErrorType = 1;
+            
+            return View("Index",model);
         }
     }
 }

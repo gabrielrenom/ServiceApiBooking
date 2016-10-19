@@ -257,5 +257,21 @@ namespace ACP.DataAccess.Managers
             //return GetListIncluding(x => x.Id > 0, x => x.Cars,x=>x.Address).ToList();
             return GetListIncluding(x => x.Id > 0, x => x.Address).ToList();
         }
+
+        public async Task<bool> Login(string username, string password)
+        {
+            var dataModel = await Repository.GetSingleAsync<User>(a => a.Email==username && a.Password==password);
+            return dataModel != null ? true : false;
+        }
+
+        public async Task<UserModel> GetUserDetails(string username, string password)
+        {
+            var dataModel = await Repository.GetSingleAsync<User>(a => a.Email == username && a.Password == password, 
+                x=>x.Address,
+                x=>x.Bookings,
+                x=>x.Bookings.Select(y=>y.Car));
+
+            return ToDomainModel(dataModel);
+        }
     }
 }

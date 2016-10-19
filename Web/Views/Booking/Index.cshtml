@@ -14,11 +14,16 @@
 
                 <div class="row returning-customer">
                     <form class="form-inline filter">
-                        <div class="form-group">
-                            <label for="returning">Have you booked with us before?</label>
-                            <span><input id ="loginoption"type="radio" name="returning" value="yes" >Yes, and I would like to log in </span>
-                            <span><input id="guestoption" type="radio" name="returning" value="no" checked>No, I would like to book as a guest </span>
-                        </div>
+                        @{
+                            if (!Model.IsUser)
+                            {
+                                <div class="form-group">
+                                    <label for="returning">Have you booked with us before?</label>                            
+                                    <span><input id ="loginoption"type="radio" name="returning" value="yes" >Yes, and I would like to log in </span>
+                                    <span><input id="guestoption" type="radio" name="returning" value="no" checked>No, I would like to book as a guest </span>
+                                </div>
+                             }
+                           }
                     </form>
                 </div>
 
@@ -26,7 +31,7 @@
 
                     <div class="col-md-9 detail-and-payment">                                          
                         <div class="login" style="display:none">
-                            @*@Html.Partial("BookingLoginPartialView", (Web.Models.BookingLoginViewModel)Model)*@
+                            @Html.Partial("BookingLoginPartialView", Model)
                         </div>
                         <div class="guest">
                             @Html.Partial("BookingGuestPartialView", Model)

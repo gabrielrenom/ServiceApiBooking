@@ -97,6 +97,12 @@ namespace Web.Models
 
     public class BookingGuestViewModel
     {
+        public BookingGuestViewModel()
+        {
+            IsUser = false;
+        }
+
+
         //[Required]
         //[Display(Name = "Email")]
         [EmailAddress]
@@ -202,6 +208,9 @@ namespace Web.Models
         [Required(ErrorMessage = "Please enter city")]
         public string City { get; set; }
         public string Error { get; set; }
+        public int ErrorType { get; set; }
+
+        public bool IsUser { get; set; }
     }
 
     public class BookingConfirmationView
