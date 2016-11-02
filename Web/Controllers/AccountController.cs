@@ -9,6 +9,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Web.Models;
+using System.Security.Principal;
+using System.Threading;
+using Microsoft.Owin;
 
 namespace Web.Controllers
 {
@@ -19,7 +22,7 @@ namespace Web.Controllers
         private ApplicationUserManager _userManager;
 
         public AccountController()
-        {
+        {            
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -61,21 +64,54 @@ namespace Web.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/Login
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Login(string login, string password)
+        //{
+           
+
+        //            return RedirectToLocal(returnUrl);
+            
+        //    }
+        //    //// Create generic identity.
+        //    //GenericIdentity MyIdentity = new GenericIdentity("MyIdentity");
+
+        //    //// Create generic principal.
+        //    //String[] MyStringArray = { "Manager", "Teller" };
+        //    //GenericPrincipal MyPrincipal =
+        //    //    new GenericPrincipal(MyIdentity, MyStringArray);
+
+
+        //    //Thread.CurrentPrincipal = new GenericPrincipal(MyIdentity, MyStringArray);
+        //    //HttpContext.User = MyPrincipal;            
+        //    //bool iso = this.User.Identity.IsAuthenticated;
+        //    //return RedirectToAction("Index", "Carparks");
+
+        //    //OwinContext ctx = Request.GetOwinContext();
+        //    //ClaimsPrincipal user = ctx.Authentication.User;
+        //    //IEnumerable<Claim> claims = user.Claims;
+        //}
+
+
+
+    //POST: /Account/Login
+    [HttpPost]
+    [AllowAnonymous]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+    {
+       // return RedirectToAction("Index", "Carparks");
+
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(model);
+            //}
+
+         //   This doesn't count login failures towards account lockout
+         //To enable password failures to trigger account lockout, change to shouldLockout: true
+        var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -87,13 +123,15 @@ namespace Web.Controllers
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
+                    Session["error"] = "Invalid login attempt.";
+                    return RedirectToLocal(returnUrl);
                     return View(model);
             }
         }
 
-        //
-        // GET: /Account/VerifyCode
-        [AllowAnonymous]
+    //
+    // GET: /Account/VerifyCode
+    [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
             // Require that the user has already logged in via username/password or external login
@@ -205,6 +243,10 @@ namespace Web.Controllers
                 var user = await UserManager.FindByNameAsync(model.Email);
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
+                    var code = await UserManager.GenerateUserTokenAsync("ResetPassword", user.Id);
+                    
+                    var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+                     await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
                 }
@@ -232,9 +274,12 @@ namespace Web.Controllers
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
+        public ActionResult ResetPassword(string code, string userId)
         {
-            return code == null ? View("Error") : View();
+
+            var user =  UserManager.VerifyUserToken(userId, "ResetPassword", code);
+
+            return !user ? View("Error") : View();
         }
 
         //
@@ -254,6 +299,7 @@ namespace Web.Controllers
                 // Don't reveal that the user does not exist
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
+     
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
@@ -392,7 +438,7 @@ namespace Web.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Carparks");
         }
 
         //
@@ -449,7 +495,7 @@ namespace Web.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Carparks");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

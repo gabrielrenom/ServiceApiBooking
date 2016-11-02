@@ -11,15 +11,39 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Web.Models;
+using System.Net.Mail;
+using System.Net;
 
 namespace Web
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
+            var fromAddress = new MailAddress("gabrielrenom@gmail.com");
+            var fromPassword = "mt8102721hm5i";
+            var toAddress = new MailAddress("gabrielrenom@gmail.com");
+
+            // convert IdentityMessage to a MailMessage
+            var email = new MailMessage(new MailAddress("gabrielrenom@gmail.com", "(do not reply)"),
+               new MailAddress(message.Destination))
+               {
+                   Subject = message.Subject,
+                   Body = message.Body,
+                   IsBodyHtml = true
+               };
+
+            using (var client = new SmtpClient("smtp.gmail.com", 587)) // SmtpClient configuration comes from config file
+            {
+                client.EnableSsl = true;
+                client.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential(fromAddress.Address, fromPassword);
+                await client.SendMailAsync(email);
+            }
+
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            //return await Task.FromResult(0);
         }
     }
 

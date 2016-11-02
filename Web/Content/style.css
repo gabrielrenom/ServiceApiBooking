@@ -213,7 +213,7 @@ h2:before {content:''; margin:0 12px 0 2px; height:25px; float:left; border-left
 @media screen and (max-width: 768px) {
 	.sombra {border:none;}
 	.banner1 {overflow:auto; background-size:contain; height:auto; margin-top:21px; background:none; padding:21px;  }
-	#DropOff, #ReturnDate, #discount-code {width:90%; float:left; }
+	#DropOff,#DropOffDate, #ReturnDate, #discount-code {width:90%; float:left; }
 	.mensaje {font-size:31px; margin:30px 15px 0 25px;}
 	.mensaje span {padding:0 0 21px 51px; text-shadow:0px 5px 30px rgba(0, 0, 0, 1); }
 	.mensaje .btn-primary {margin:0 0 20px 50px;}

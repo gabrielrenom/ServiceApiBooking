@@ -26,10 +26,9 @@
                         @Html.ValidationMessageFor(model => model.Airport, "The airport is required")
                     </div>
 
-
                     <div class="form-group">
                         <label for="date">Drop-off date/time</label>
-                        <input type="text" id="DropOffDate" name="DropOffDate" class="form-control color5" placeholder="02/03/2016 03:45" />
+                        <input type="text" id="DropOff" name="DropOffDate" class="form-control color5" placeholder="MM/DD/YYYY" value="@Model.DropOffDate"/>
                         @Html.ValidationMessageFor(model => model.DropOffDate, "The dropoff date/time is required", new { @class = "text-danger" })
                     </div>
 
@@ -165,33 +164,7 @@
 <script src="~/Scripts/common.js"></script>
 <script>
             $.datetimepicker.setLocale('en');
-
-            $('#datetimepicker_format').datetimepicker({ value: '2015/04/15 05:03', format: $("#datetimepicker_format_value").val() });
-            $("#datetimepicker_format_change").on("click", function (e) {
-                $("#datetimepicker_format").data('xdsoft_datetimepicker').setOptions({ format: $("#datetimepicker_format_value").val() });
-            });
-            $("#datetimepicker_format_locale").on("change", function (e) {
-                $.datetimepicker.setLocale($(e.currentTarget).val());
-            });
-
-            $('#datetimepicker').datetimepicker({
-                dayOfWeekStart: 1,
-                lang: 'en',
-                disabledDates: ['1986/01/08', '1986/01/09', '1986/01/10'],
-                startDate: '1986/01/05'
-            });
-            $('#datetimepicker').datetimepicker({ value: '2015/04/15 05:03', step: 10 });
-
-            $('.some_class').datetimepicker();
-
-            $('#default_datetimepicker').datetimepicker({
-                formatTime: 'H:i',
-                formatDate: 'd.m.Y',
-                defaultDate: '+03.01.1970',
-                defaultTime: '10:00',
-                timepickerScrollbar: false
-            });
-
+           
             var logic = function (currentDateTime) {
                 if (currentDateTime && currentDateTime.getDay() == 6) {
                     this.setOptions({
@@ -205,16 +178,6 @@
             var dateToDisable = new Date();
             dateToDisable.setDate(dateToDisable.getDate() + 2);
 
-            $('#DropOffDate').datetimepicker({
-                beforeShowDay: function (date) {
-                    if (date.getMonth() == dateToDisable.getMonth() && date.getDate() == dateToDisable.getDate()) {
-                        return [true, "custom-date-style"];
-                    }
-
-                    return [true, ""];
-                }
-            });
-
             $('#ReturnDate').datetimepicker({
                 beforeShowDay: function (date) {
                     if (date.getMonth() == dateToDisable.getMonth() && date.getDate() == dateToDisable.getDate()) {
@@ -225,12 +188,16 @@
                 }
             });
 
+            $('#DropOffDate').datetimepicker({
+                beforeShowDay: function (date) {
+                    if (date.getMonth() == dateToDisable.getMonth() && date.getDate() == dateToDisable.getDate()) {
+                        return [true, "custom-date-style"];
+                    }
 
-            $(document).ready(function () {
-
-                $(".input-icon").hide();
+                    return [true, ""];
+                }
             });
-
+      
             Date.prototype.toDateInputValueToday = (function () {
                 var local = new Date(this);
                 local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
@@ -244,6 +211,6 @@
                 return local.toJSON().slice(0, 10);
             });
           
-            document.getElementById('DropOffDate').value = new Date().toDateInputValueToday();
+            document.getElementById('DropOff').value = new Date().toDateInputValueToday();
             document.getElementById('ReturnDate').value = new Date().toDateInputValueTomorrow();
 </script>

@@ -47,8 +47,6 @@ namespace Web.Controllers
         [Route("results")]
         public async Task<ActionResult> Results(QuoteModelView model)
         {
-
-
             FillAirports();
 
             List<ResultsView> resultsview = new List<ResultsView>();

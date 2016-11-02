@@ -1,4 +1,8 @@
 ﻿<!DOCTYPE html>
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+}
 
 <html>
 <head>
@@ -7,11 +11,9 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href='https://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="~/Content/jquery.datetimepicker.css" />
-    
+    <link rel="stylesheet" type="text/css" href="~/Content/jquery.datetimepicker.css" />    
     <link rel="stylesheet" href="~/Content/font-awesome.min.css">
     <link href="~/Content/style.css" rel="stylesheet" type="text/css" />
-
 </head>
 <body class="@ViewBag.BodyType">
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -43,22 +45,52 @@
                             </div>
 
                             <div class="col-lg-8 col-md-7 col-sm-5 for-client-login">
-                                <form class="navbar-form navbar-right form-inline client-login" role="search">
-                                    <div class="form-group">
-                                        <label class="sr-only" for="login">Login</label>
-                                        <input id="login" placeholder="LOGIN" class="form-control" type="text">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="sr-only" for="password">Password</label>
-                                        <input id="password" placeholder="PASSWORD" class="form-control" type="password">
-                                    </div>
-                                    <button type="submit" class="btn ">OK</button>
-                                </form>
+                                @if (Request.IsAuthenticated)
+                                {
+                                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                    {
+                                        @Html.AntiForgeryToken()
 
-                                <ul class="list-inline login-actions">
-                                    <li> <a href="#">New customer? Start here</a> </li>
-                                    <li> <a href="#">Lost password?</a> </li>
-                                </ul>
+                                        <ul class="list-inline login-actions">
+                                            <li> @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" }) </li>
+                                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a> </li>
+                                        </ul>
+
+
+                                    }
+                                }
+                                else
+                                {
+                                    using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "navbar-form navbar-right form-inline client-login", role = "form" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+
+                                         <form class="navbar-form navbar-right form-inline client-login" role="search">
+                                         <div class="form-group">
+                                               <label class="sr-only" for="login" >Login</label>
+                                               <input id="Email"  name="Email" placeholder="LOGIN" class="form-control" type="text">
+                                          </div>
+                                          <div class="form-group">
+                                                <label class="sr-only" for="password">Password</label>
+                                                <input id="Password" placeholder="PASSWORD" name="Password" class="form-control" type="password">
+                                           </div>
+                                           <button type="submit" class="btn ">OK</button>
+                                           </form>
+                                    }
+                                    <ul class="list-inline login-actions">
+                                        <li> @Html.ActionLink("New customer? Start here", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" }) </li>
+                                        <li> @Html.ActionLink("Forgot your password?", "ForgotPassword", "Account") </li>
+                                        @if (Session["error"] == (string)"Invalid login attempt.")
+                                        {
+                                            <li>
+                                                @{Session["error"] = null;
+                                                }
+                                                <a href="#" style="color:red;">Invalid login attempt.</a>
+                                            </li>
+                                        } 
+                                    </ul>
+                                }
+                                
                             </div>
                         </div><!-- .row -->
                     </div>
