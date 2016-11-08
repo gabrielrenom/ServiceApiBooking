@@ -145,6 +145,16 @@ namespace Web.Controllers
         [Route("index")]
         public async Task<ActionResult> Index(QuoteModelView model)
         {
+            if (Convert.ToDateTime(model.DropOffDate) > Convert.ToDateTime(model.ReturnDate))
+            {
+                ModelState.AddModelError("DropOffDate", "The date supplied is older than the Return Date");
+            }
+
+            if (Convert.ToDateTime(model.DropOffDate) < DateTime.Today)
+            {
+                ModelState.AddModelError("DropOffDate", "The date supplied can be in an earlier date");
+            }
+
             if (ModelState.IsValid)
             {
                 return this.RedirectToAction("results", new RouteValueDictionary(model));
@@ -214,6 +224,8 @@ namespace Web.Controllers
             }
             return View(model);
         }
+
+      
 
     }
 }

@@ -188,7 +188,7 @@
                 }
             });
 
-            $('#DropOffDate').datetimepicker({
+            $('#DropOff').datetimepicker({
                 beforeShowDay: function (date) {
                     if (date.getMonth() == dateToDisable.getMonth() && date.getDate() == dateToDisable.getDate()) {
                         return [true, "custom-date-style"];
@@ -198,6 +198,17 @@
                 }
             });
       
+            $('.input-icon').datetimepicker({
+                beforeShowDay: function (date) {
+                    if (date.getMonth() == dateToDisable.getMonth() && date.getDate() == dateToDisable.getDate()) {
+                        return [true, "custom-date-style"];
+                    }
+
+                    return [true, ""];
+                }
+            });
+            
+
             Date.prototype.toDateInputValueToday = (function () {
                 var local = new Date(this);
                 local.setMinutes(this.getMinutes() - this.getTimezoneOffset());

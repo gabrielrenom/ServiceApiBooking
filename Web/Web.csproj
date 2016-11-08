@@ -322,6 +322,9 @@
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\Gruntfile.js" />
     <Content Include="Scripts\ie10-viewport-bug-workaround.js" />
+    <None Include="Properties\PublishProfiles\ncp - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\ncp - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\ncpparkings2017.pubxml" />
     <None Include="Scripts\jquery-1.11.3.intellisense.js" />
     <Content Include="Scripts\jquery-1.11.3.js" />
     <Content Include="Scripts\jquery-1.11.3.min.js" />
@@ -341,7 +344,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
