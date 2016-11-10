@@ -238,6 +238,7 @@
     <Compile Include="Models\AdressView.cs" />
     <Compile Include="Models\BookingGuestViewModel.cs" />
     <Compile Include="Models\Configuration.cs" />
+    <Compile Include="Models\ContactUsViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PaymentView.cs" />
@@ -325,6 +326,7 @@
     <None Include="Properties\PublishProfiles\ncp - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\ncp - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ncpparkings2017.pubxml" />
+    <None Include="Properties\PublishProfiles\nps-test.pubxml" />
     <None Include="Scripts\jquery-1.11.3.intellisense.js" />
     <Content Include="Scripts\jquery-1.11.3.js" />
     <Content Include="Scripts\jquery-1.11.3.min.js" />
@@ -398,6 +400,10 @@
     <Content Include="Views\Paypal\FailureView.cshtml" />
     <Content Include="Views\Booking\CreditCardPaymentPartialView.cshtml" />
     <Content Include="Views\Booking\PaymentCompleted.cshtml" />
+    <Content Include="Views\Carparks\About.cshtml" />
+    <Content Include="Views\Carparks\ContactUs.cshtml" />
+    <Content Include="Views\Carparks\Faq.cshtml" />
+    <Content Include="Views\Carparks\Confirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

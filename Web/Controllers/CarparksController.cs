@@ -3,6 +3,7 @@ using ACP.Business.Models;
 using ACP.Business.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -18,13 +19,16 @@ namespace Web.Controllers
     {
         private IRootBookingEntityService _airportservice;
         private IQuoteService _quoteservice;
+        private IEmailService _emailService;
 
         public CarparksController(
             IRootBookingEntityService airportservice,
-            IQuoteService quoteservice)
+            IQuoteService quoteservice,
+            IEmailService emailService)
         {
             _airportservice = airportservice;
             _quoteservice = quoteservice;
+            _emailService = emailService;
         }
         
         [HttpGet]
@@ -225,7 +229,56 @@ namespace Web.Controllers
             return View(model);
         }
 
-      
+        [HttpGet]
+        [Route("about")]
+        public async Task<ActionResult> About()
+        {
+           
+            return View();
+        }
 
+        [HttpGet]
+        [Route("contactus")]
+        public async Task<ActionResult> ContactUs()
+        {
+
+            return View(new Web.Models.ContactUsViewModel());
+        }
+
+        [HttpPost]
+        [Route("contactus")]
+        public async Task<ActionResult> ContactUs(ContactUsViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _emailService.SendEmail(
+                    ConfigurationManager.AppSettings["eMail:Server"],
+                    model.Email,
+                    ConfigurationManager.AppSettings["eMail:To"],
+                    model.Name,
+                    model.Comments,
+                    ConfigurationManager.AppSettings["eMail:Password"],
+                    Convert.ToInt32(ConfigurationManager.AppSettings["eMail:Password"]));
+
+                model.Confirmation = "Your comments have been sent";
+            }
+
+            return View(model);
+            
+        }
+
+        [HttpGet]
+        [Route("confirmation")]
+        public async Task<ActionResult> Confirmation()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [Route("faq")]
+        public async Task<ActionResult> Faq()
+        {
+            return View();
+        }
     }
 }

@@ -132,6 +132,8 @@
     <Compile Include="Services\BookingEntityService.cs" />
     <Compile Include="Services\BookingPricingService.cs" />
     <Compile Include="Services\BookingService.cs" />
+    <Compile Include="Services\Email.cs" />
+    <Compile Include="Services\Interfaces\IEmail.cs" />
     <Compile Include="Services\Interfaces\IPayPalService.cs" />
     <Compile Include="Services\PayPalService.cs" />
     <Compile Include="Services\QuoteService.cs" />

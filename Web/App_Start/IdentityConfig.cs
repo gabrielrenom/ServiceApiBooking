@@ -41,9 +41,6 @@ namespace Web
                 client.Credentials = new NetworkCredential(fromAddress.Address, fromPassword);
                 await client.SendMailAsync(email);
             }
-
-            // Plug in your email service here to send an email.
-            //return await Task.FromResult(0);
         }
     }
 
