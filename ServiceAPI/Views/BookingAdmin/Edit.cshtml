@@ -365,14 +365,22 @@
                                                         <option value="">-- Please Select --</option>
                                                         @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.paymenttype)
                                                         {
-                                                            if (item.Value == Model.Payments.FirstOrDefault().PaymentMethod.ToString())
+                                                            if (Model.Payments.Count > 0)
                                                             {
+
+                                                                if (item.Value == Model.Payments.FirstOrDefault().PaymentMethod.ToString())
+                                                                {
                                                                 <option value=@item.Value selected="selected">@item.Text</option>
+                                                                }
+                                                                else
+                                                                {
+                                                                <option value=@item.Value >@item.Text</option>
+                                                                }
                                                             }
                                                             else
                                                             {
-                                                                <option value=@item.Value >@item.Text</option>
-                                                            }                                              
+                                                            <option value=@item.Value>@item.Text</option>
+                                                            }
                                                         }
                                                     </select>
                                                 </div>
@@ -433,9 +441,16 @@
                                                             <option value="">-- Please Select --</option>
                                                             @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.cctype)
                                                             {
-                                                                if (item.Value == Convert.ToString((int)Model.Payments.FirstOrDefault().CreditCard.Type))
+                                                                if (Model.Payments.Count() > 0)
                                                                 {
+                                                                    if (item.Value == Convert.ToString((int)Model.Payments.FirstOrDefault().CreditCard.Type))
+                                                                    {
                                                                     <option value=@item.Value selected="selected">@item.Text</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                    <option value=@item.Value>@item.Text</option>
+                                                                    }
                                                                 }
                                                                 else
                                                                 {
@@ -474,7 +489,14 @@
                                                         <label for="inputPassword3" class="control-label">Expiry Date</label>
                                                     </div>
                                                     <div class="col-sm-10">
-                                                        <input type="date" class="form-control" name="ccexpirydate" placeholder="ie: 01/01/2017" value = @Model.Payments.FirstOrDefault().CreditCard.ExpiryDate.ToString("yyyy-MM-dd")>
+                                                        @{
+                                                            if (Model.Payments.Count() > 0)
+                                                            {
+                                                                <input type="date" class="form-control" name="ccexpirydate" placeholder="ie: 01/01/2017" value = @Model.Payments.FirstOrDefault().CreditCard.ExpiryDate.ToString("yyyy-MM-dd") >
+                                                            }
+
+                                                            
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>

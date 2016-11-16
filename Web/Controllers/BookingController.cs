@@ -74,6 +74,8 @@ namespace Web.Controllers
         [HttpPost]
         public async Task<ActionResult> Index(BookingGuestViewModel model)
         {
+            LoadDefaultValues(model);
+
             if (Convert.ToDateTime(model.DropOffDate) > Convert.ToDateTime(model.ReturnDate))
             {
                 ModelState.AddModelError("DropOffDate", "The date supplied is older than the Return Date");
@@ -97,6 +99,25 @@ namespace Web.Controllers
             }
 
             return View(model);
+        }
+
+        private void LoadDefaultValues(BookingGuestViewModel model)
+        {
+            ViewBag.title = model.Title;
+            ViewBag.creditCardType = model.CreditCardType;
+            ViewBag.month = model.ExpiryMonth;
+            ViewBag.year = model.ExpiryYear;
+            ViewBag.passanger = model.Passangers;
+            ViewBag.terminalout = model.TerminalOut;
+            ViewBag.terminalin = model.TerminalIn;
+            if (model.CreditCardType == "0")
+                ViewBag.creditcardname = "Visa";
+            else if (model.CreditCardType == "1")
+                ViewBag.creditcardname = "Mastercard";
+            else if (model.CreditCardType == "2")
+                ViewBag.creditcardname = "American Express";
+            ViewBag.year = model.ExpiryYear;
+            ViewBag.month = model.ExpiryMonth;
         }
 
         private BookingConfirmationView ToBookingConfirmationView(BookingGuestViewModel model, string reference)

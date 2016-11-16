@@ -403,7 +403,6 @@
     <Content Include="Views\Carparks\About.cshtml" />
     <Content Include="Views\Carparks\ContactUs.cshtml" />
     <Content Include="Views\Carparks\Faq.cshtml" />
-    <Content Include="Views\Carparks\Confirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -252,26 +252,19 @@ namespace Web.Controllers
             if (ModelState.IsValid)
             {
                 await _emailService.SendEmail(
-                    ConfigurationManager.AppSettings["eMail:Server"],
+                    ConfigurationManager.AppSettings["eMail:Server"].ToString(),
                     model.Email,
-                    ConfigurationManager.AppSettings["eMail:To"],
+                    ConfigurationManager.AppSettings["eMail:To"].ToString(),
                     model.Name,
                     model.Comments,
-                    ConfigurationManager.AppSettings["eMail:Password"],
-                    Convert.ToInt32(ConfigurationManager.AppSettings["eMail:Password"]));
+                    ConfigurationManager.AppSettings["eMail:Password"].ToString(),
+                    Convert.ToInt32(ConfigurationManager.AppSettings["eMail:Port"]));
 
                 model.Confirmation = "Your comments have been sent";
             }
 
             return View(model);
             
-        }
-
-        [HttpGet]
-        [Route("confirmation")]
-        public async Task<ActionResult> Confirmation()
-        {
-            return View();
         }
 
         [HttpGet]

@@ -29,6 +29,9 @@
                     @Html.DisplayNameFor(model => model.EndDate)
                 </th>
                 <th>
+                    Payment
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Price)
                 </th>                
                 <th>
@@ -76,25 +79,51 @@
                         @Html.DisplayFor(modelItem => item.EndDate)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>                    
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SourceCode)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AgentReference)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BookingReference)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Cost)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Message)
-                    </td>
-                    <td>
-                        <a href="@Url.Action("Details", "BookingAdmin", new { id=item.Id })" class="btn">
+                        @{
+                            if (item.Status == ACP.Business.Enums.StatusType.Paid)
+                            {
+                                <div class="alert-success">Paid</div>
+                            }
+                            else if (item.Status == ACP.Business.Enums.StatusType.Processing)
+                            {
+                                <div class="alert-warning">Processing</div>
+                            }
+                            else
+                            {
+                                <div class="alert-warning">Not paid</div>
+                            }
+
+                        }
+                                    @Html.DisplayFor(modelItem => item.Price)
+                                </td>
+            
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Price)
+                                </td>
+            
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SourceCode)
+                                </td>
+            
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AgentReference)
+                                </td>
+            
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BookingReference)
+                                </td>
+            
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Cost)
+                                </td>
+            
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Message)
+                                </td>
+            
+                                <td>
+            
+                                    <a href="@Url.Action("Details", "BookingAdmin", new { id=item.Id })" class="btn">
                             <span class="fa fa-2x fa-fw fa-th-large text-primary"></span>
                         </a>
                     </td>

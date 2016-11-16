@@ -36,6 +36,11 @@
             <option>Mrs.</option>
             <option>Ms.</option>
             <option checked>Mr.</option>
+            @{ if (ViewBag.title != null)
+                {
+                    <option selected>@ViewBag.title</option>
+                }
+            }
         </select>
         @Html.ValidationMessageFor(model => model.Title, "Title is required")
         <label class="sr-only" for="first-name">First name</label>
@@ -75,6 +80,11 @@
             <option>2</option>
             <option>3</option>
             <option>4</option>
+            @{ if (ViewBag.passanger != null)
+                {
+                    <option selected>@ViewBag.passanger</option>
+                }
+            }
         </select>
         @Html.ValidationMessageFor(model => model.Passangers, "Number of passengers is required")
         <label class="sr-only" for="registration">Registration</label>
@@ -105,6 +115,11 @@
             <option>2</option>
             <option>3</option>
             <option>4</option>
+            @{ if (ViewBag.terminalout != null)
+                {
+                    <option selected>@ViewBag.terminalout</option>
+                }
+            }
         </select>
 
         <label class="sr-only" for="flight-number">Outbound flight number</label>
@@ -119,6 +134,11 @@
             <option>2</option>
             <option>3</option>
             <option>4</option>
+            @{ if (ViewBag.terminalin != null)
+                {
+                    <option selected>@ViewBag.terminalin</option>
+                }
+            }
         </select>
         <label class="sr-only" for="inbound-flight-number">Inbound flight number</label>
         @Html.TextBoxFor(m => m.InboundFlight, new { @class = "form-control", @placeholder = "Inbound flight number" })
@@ -172,6 +192,11 @@
                         <option checked value="1">Visa</option>
                         <option value="2">Mastercard</option>
                         <option value="3">American Express</option>
+                        @{ if (ViewBag.creditcardname != null)
+                            {
+                                <option selected value="@ViewBag.creditCardType">@ViewBag.creditcardname</option>
+                            }
+                        }
                     </select>
                     @Html.ValidationMessageFor(model => model.CreditCardType, "Credit Card type is required")
                 </div>
@@ -183,18 +208,24 @@
                         <div class="col-xs-3">
                             <select class="form-control col-sm-2" name="Expirymonth" id="Expirymonth">
                                 <option>Month</option>
-                                <option checked value="01">Jan (01)</option>
-                                <option value="02">Feb (02)</option>
-                                <option value="03">Mar (03)</option>
-                                <option value="04">Apr (04)</option>
-                                <option value="05">May (05)</option>
-                                <option value="06">June (06)</option>
-                                <option value="07">July (07)</option>
-                                <option value="08">Aug (08)</option>
-                                <option value="09">Sep (09)</option>
-                                <option value="10">Oct (10)</option>
-                                <option value="11">Nov (11)</option>
-                                <option value="12">Dec (12)</option>
+                                <option checked value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                @{
+                                    if (ViewBag.month != null)
+                                    {
+                                        <option value="@ViewBag.month">ViewBag.month</option>
+                                    }
+                                }
                             </select>
                             @Html.ValidationMessageFor(model => model.ExpiryMonth, "Expiry month is required")
                         </div>
@@ -208,6 +239,12 @@
                                 <option value="2021">2021</option>
                                 <option value="2022">2022</option>
                                 <option value="2023">2023</option>
+                                @{
+                                    if (ViewBag.year != null)
+                                    {
+                                        <option value="@ViewBag.year">ViewBag.year</option>
+                                    }
+                                }
                             </select>
                             @Html.ValidationMessageFor(model => model.ExpiryYear, "Expiry year is required")
                         </div>
