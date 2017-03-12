@@ -179,7 +179,7 @@ namespace ACP.Business.Test
             var bookingentity = bookingentities.LastOrDefault();
             bookingentity.Price = 999;
             bookingentity.Address.Postcode = "SK74QW";
-            bookingentity.Prices.FirstOrDefault().DayPrices.FirstOrDefault().HourPrices.FirstOrDefault().Hourprice = 8888;
+           // bookingentity.Prices.FirstOrDefault().DayPrices.FirstOrDefault().HourPrices.FirstOrDefault().Hourprice = 8888;
             //Act
             var results = await service.Update(bookingentity);
 
