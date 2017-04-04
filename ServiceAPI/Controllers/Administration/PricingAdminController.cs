@@ -36,7 +36,7 @@ namespace ServiceAPI.Controllers
                 _pricingcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
                 _pricingcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
                 var result = await _pricingcontroller.GetAll();
-
+                await FillDropBoxes();
                 result.TryGetContentValue(out prices);
 
             }

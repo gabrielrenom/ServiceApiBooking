@@ -436,7 +436,33 @@ namespace ACP.DataAccess.Managers
                         Description = x.Description
                     }).ToList() : null;
                 }
-           
+
+                if (record.Slot.Count > 0)
+                {
+                    Repository.DeleteMany<Slot>(record.Slot.ToArray());
+
+                    record.Slot = domainModel.Slot != null ? domainModel.Slot.Select(x => new Slot
+                    {
+                        Created = x.Created,
+                        CreatedBy = x.CreatedBy,
+                        Modified = x.Modified,
+                        ModifiedBy = x.ModifiedBy,
+                         Number = x.Number,
+                          Identifier = x.Identifier,
+                           IsOccupied = x.IsOccupied,
+                            Availability = x.Availability!=null? x.Availability.Select(y=>new Availability {
+                                Created = y.Created,
+                                CreatedBy = y.CreatedBy,
+                                Modified = y.Modified,
+                                ModifiedBy = y.ModifiedBy,
+                                 StartDate = y.StartDate,
+                                  EndDate = y.EndDate,
+                                   Status = (Data.Enums.AvailabilityStatus)y.Status
+                            }).ToList():null
+
+                    }).ToList():null;
+                }
+
                 if (record.Prices.Count>0)
                 {
                     Repository.DeleteMany<BookingPricing>(record.Prices.ToArray());

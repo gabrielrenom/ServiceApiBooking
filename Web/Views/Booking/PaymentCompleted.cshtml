@@ -22,7 +22,7 @@
                                 <div class="row">
                                     <div class="col-md-6"><b>Reference:</b></div>
                                     <div class="col-md-6"><b>@Model.BookingReference</b></div>
-                                </div>                              
+                                </div>
                                 <div class="row">
                                     <div class="col-md-6">Carpark:</div>
                                     <div class="col-md-6">@Model.CarParkName</div>
@@ -53,24 +53,34 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">Does it have car whash service?</div>
-                                    <div class="col-md-6">@{ if (Model.IsAddCarWashService) { @Html.Raw("Yes"); } else { @Html.Raw("No"); } }</div>
-                               </div>
+                                    <div class="col-md-6">@{ if (Model.IsAddCarWashService)
+                                        { @Html.Raw("Yes");
+                                        }
+                                        else
+                                        { @Html.Raw("No");
+                                        } }</div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-6">Cancelation servicee?</div>
-                                    <div class="col-md-6">@{ if (Model.IsCancelationCover) { @Html.Raw("Yes"); } else{ @Html.Raw("No");} }</div>
+                                    <div class="col-md-6">@{ if (Model.IsCancelationCover)
+                                        { @Html.Raw("Yes");
+                                        }
+                                        else
+                                        { @Html.Raw("No");
+                                        } }</div>
                                 </div>
-                </div>
+                            </div>
 
-                <p> You may log into your account at <a href = "https://www.paypal.com/es/webapps/mpp/home" title = "Log into your PayPal account" target = "_blank" > www.paypal.com </a> to view details of this transaction. </p>
-                       <p>
-                             <strong> Booking details </strong>
+                            <p> You may log into your account at <a href="https://www.paypal.com/es/webapps/mpp/home" title="Log into your PayPal account" target="_blank"> www.paypal.com </a> to view details of this transaction. </p>
+                            <p>
+                                <strong> Booking details </strong>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incid ut labore et dolore magna aliqua. sequi nes.
-                       </p>
-                       <p> 
-                           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
-                       </p>
-               </div>
-                   <div class="col-md-6 even-more">
+                            </p>
+                            <p>
+                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </p>
+                        </div>
+                        <div class="col-md-6 even-more">
                             <div class="col-lg-8 col-md-8 col-sm-5 banner banner1">
                                 <div class="mensaje">
                                     <span>GET EXCLUSIVE OFFERS</span>
@@ -84,7 +94,7 @@
         </div>
     </div>
 </div>
-                                    }
+                                    
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

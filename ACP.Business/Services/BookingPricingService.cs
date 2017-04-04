@@ -22,7 +22,9 @@ namespace ACP.Business.Services
 
         public async Task<IList<BookingPricingModel>> GetAll()
         {
-            return _bookingPricingManager.GetAll().ToList();
+            var result =  await _bookingPricingManager.GetAllIncludingAsync(x => x.BookingEntity);
+            return result.ToList();
+            //return _bookingPricingManager.GetAll().ToList();
         }
 
 

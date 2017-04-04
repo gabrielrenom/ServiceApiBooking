@@ -33,6 +33,8 @@ namespace ACP.Business.Test
             localuser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
         }
 
+
+        
         [TestMethod]
         public void GivenALlAirportsRootBookingEntity_WhenIsAdded_BeSureItRestunsTrue()
         {
@@ -74,6 +76,28 @@ namespace ACP.Business.Test
             //Assert
             Assert.IsTrue(result.Id > 0);
         }
+
+        [TestMethod]
+        public async Task WhenEntityIsPassed_WhenUpdateIsCalled_BeSureEntityIsUpdated()
+        {
+            //Arrange
+            var model = await service.GetAll();
+            model[0].Name = "National";
+            model[0].Address.Country = "Biolorrusia";
+            model[0].Status.StatusType = Enums.StatusType.Active;
+            foreach (var item in model[0].BookingEntities)
+            {
+                item.Name = "Barca";
+                item.Address.Address1 = "Spain";
+            }
+
+            //Act
+            var result = await service.Update(model[0]);
+
+            //Assert
+            Assert.IsTrue(result);
+        }
+
 
         [TestMethod]
         public void GivenARootBookingEntity_WhenIsAdded_BeSureItRestunsTrue()
@@ -146,27 +170,7 @@ namespace ACP.Business.Test
             Assert.IsTrue(result.Count > 0);
         }
 
-        [TestMethod]
-        public async void WhenEntityIsPassed_WhenUpdateIsCalled_BeSureEntityIsUpdated()
-        { 
-            //Arrange
-            var model = await service.GetAll();
-            model[0].Name = "National";
-            model[0].Address.Country = "Biolorrusia";
-            model[0].Status.StatusType = Enums.StatusType.Active;
-            foreach (var item in model[0].BookingEntities)
-            {
-                item.Name = "Barca";
-                item.Address.Address1 = "Spain";
-            }
-
-            //Act
-            var result = await service.Update(model[0]);
-
-            //Assert
-            Assert.IsTrue(result);
-        }
-
+     
         [TestMethod]
         public async void WhenIdIsPassed_WhenDeleteIsCalled_BeSureEntityIsDelete()
         {

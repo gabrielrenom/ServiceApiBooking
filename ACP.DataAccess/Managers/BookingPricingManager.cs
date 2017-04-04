@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace ACP.DataAccess.Managers
 {
@@ -55,7 +56,10 @@ namespace ACP.DataAccess.Managers
                 .OrderBy(a => a.Name).ToList(); 
 
         }
-
+        public async Task<IEnumerable<BookingPricingModel>> GetAllIncludingAsync(params Expression<Func<BookingPricing, object>>[] navigationProperties)
+        {
+            return await base.GetAllIncludingAsync(navigationProperties); 
+        }
         public IList<BookingPricingModel> GetAllPricesByPickLocationAndDropLocation(string pickuplocation, string droplocation, DateTime pickup, DateTime dropoff)
         {
 
@@ -64,7 +68,7 @@ namespace ACP.DataAccess.Managers
             //    x => x.BookingEntity.Prices,
             //    x => x.BookingEntity.Prices.Select(y => x.DayPrices))
             //    .OrderBy(a => a.Name).ToList();
-
+           
             return GetListIncluding(x => (pickup > x.Start && dropoff < x.End) && (x.BookingEntity.RootBookingEntity.Name.ToLower().Contains(droplocation.ToLower()) == true),
                 x => x.BookingEntity,
                 x => x.BookingEntity.RootBookingEntity,
@@ -74,7 +78,7 @@ namespace ACP.DataAccess.Managers
                 .OrderBy(a => a.Name).ToList();
 
         }
-
+        
         public IList<BookingPricingModel> GetAllPricesAndReviewsByPickLocationAndDropLocationByName(string pickuplocation, string droplocation, DateTime dropoff, DateTime pickup )
         {
 
@@ -307,7 +311,7 @@ namespace ACP.DataAccess.Managers
             model.Start = domainModel.Start;
             model.End = domainModel.End;
             model.BookingEntityId = domainModel.BookingEntityId;
-
+         
             model.DayPrices = domainModel.DayPrices != null ? domainModel.DayPrices.Select(r => new DayPrice
             {
                 Created = r.Created,

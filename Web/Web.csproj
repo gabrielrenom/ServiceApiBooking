@@ -18,7 +18,7 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44321</IISExpressSSLPort>
+    <IISExpressSSLPort>44335</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -323,6 +323,8 @@
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\Gruntfile.js" />
     <Content Include="Scripts\ie10-viewport-bug-workaround.js" />
+    <None Include="Properties\PublishProfiles\docker-iis.pubxml" />
+    <None Include="Properties\PublishProfiles\DockerDeployment.pubxml" />
     <None Include="Properties\PublishProfiles\ncp - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\ncp - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ncpparkings2017.pubxml" />

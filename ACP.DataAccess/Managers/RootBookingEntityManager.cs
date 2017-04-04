@@ -30,16 +30,17 @@ namespace ACP.DataAccess.Managers
 
         public override bool Update(RootBookingEntityModel domainModel)
         {
-            var dataModel = Repository.GetSingle<RootBookingEntity>(a => a.Id == domainModel.Id, x => x.Status, x => x.Address, x => x.BookingEntities, x => x.BookingEntities.Select(y => y.Address));
-
+            //var dataModel = Repository.GetSingle<RootBookingEntity>(a => a.Id == domainModel.Id, x => x.Status, x => x.Address, x => x.BookingEntities, x => x.BookingEntities.Select(y => y.Address));
+            //var dataModel = Repository.GetSingle<RootBookingEntity>(a => a.Id == domainModel.Id, x => x.Status, x => x.Address);
+            var dataModel = Repository.GetSingle<RootBookingEntity>(a => a.Id == domainModel.Id, x => x.Address, x => x.Status);
             dataModel.Code = domainModel.Code;
             dataModel.Website = domainModel.Website;
             dataModel.Created = domainModel.Created;
             dataModel.CreatedBy = domainModel.CreatedBy;
             dataModel.Modified = domainModel.Modified;
             dataModel.ModifiedBy = domainModel.ModifiedBy;
-            dataModel.Id = domainModel.Id;
-            //dataModel.AddressId = domainModel.Address!=null?domainModel.AddressId:0;
+            //dataModel.Id = domainModel.Id;
+            dataModel.AddressId = domainModel.Address!=null?domainModel.AddressId:0;
             if (domainModel.Address != null)
             {
                 dataModel.AddressId = domainModel.AddressId;
@@ -54,9 +55,12 @@ namespace ACP.DataAccess.Managers
                 dataModel.Address.ModifiedBy = domainModel.Address.ModifiedBy;
                 dataModel.Address.Number = domainModel.Address.Number;
                 dataModel.Address.Postcode = domainModel.Address.Postcode;
+                dataModel.Address.City = domainModel.Address.City;
+              
+
             }
             //dataModel.StatusId = domainModel.Status!=null?domainModel.StatusId:0;
-           
+
             if (domainModel.Status != null)
             {
                 dataModel.StatusId = domainModel.Status != null ? domainModel.StatusId : 0;
@@ -70,55 +74,57 @@ namespace ACP.DataAccess.Managers
             dataModel.Name = domainModel.Name;
             dataModel.Telephone = domainModel.Telephone;
 
-            if (dataModel.BookingEntities.Count > 0)
-            {
-                Repository.DeleteMany<BookingEntity>(dataModel.BookingEntities.ToArray());
+            ////if (dataModel.BookingEntities.Count > 0)
+            ////{
+            ////    Repository.DeleteMany<BookingEntity>(dataModel.BookingEntities.ToArray());
 
-                dataModel.BookingEntities = domainModel.BookingEntities != null ? domainModel.BookingEntities.Select(r => new BookingEntity
-                {
-                    Code = r.Code,
-                    Comission = r.Comission,
-                    Created = r.Created,
-                    Id = r.Id,
-                    RootBookingEntityId=r.RootBookEntityId,
-                    CreatedBy = r.CreatedBy,
-                    Image = r.Image,
-                    Logo = r.Logo,
-                    Modified = r.Modified,
-                    ModifiedBy = r.ModifiedBy,
-                    Name = r.Name,
-                    Price = r.Price,
-                    Sameday = r.Sameday,                    
-                    Properties = r.Properties!=null?r.Properties.Select(y=> new Property{
-                         Created= y.Created,
-                          Id = y.Id,
-                           Key = y.Key,
-                            Value = y.Value,
-                             CreatedBy = y.CreatedBy,
-                              ModifiedBy = y.ModifiedBy,
-                               Modified = y.Modified,
-                                Type = (ACP.Data.Enums.PropertyType)y.Type
-                    }).ToList():null,
-                    //AddressId = r.Address==null?0:r.Address.Id,
-                    Address =r.Address==null?null:new Address
-                    {
-                        
-                        Address1 = r.Address.Address1,
-                        Address2 = r.Address.Address2,
-                        Country = r.Address.Country,
-                        County = r.Address.County,
-                        Created = r.Address.Created,
-                        CreatedBy = r.Address.CreatedBy,
-                        Id = r.Address.Id,
-                        Modified = r.Address.Modified,
-                        ModifiedBy = r.Address.ModifiedBy,
-                        Number = r.Address.Number,
-                        Postcode = r.Address.Postcode,                        
-                        City = r.Address.City
 
-                    }
-                }).ToList() : null;
-            }
+
+            ////    dataModel.BookingEntities = domainModel.BookingEntities != null ? domainModel.BookingEntities.Select(r => new BookingEntity
+            ////    {
+            ////        Code = r.Code,
+            ////        Comission = r.Comission,
+            ////        Created = r.Created,
+            ////        Id = r.Id,
+            ////        RootBookingEntityId=r.RootBookEntityId,
+            ////        CreatedBy = r.CreatedBy,
+            ////        Image = r.Image,
+            ////        Logo = r.Logo,
+            ////        Modified = r.Modified,
+            ////        ModifiedBy = r.ModifiedBy,
+            ////        Name = r.Name,
+            ////        Price = r.Price,
+            ////        Sameday = r.Sameday,                    
+            ////        Properties = r.Properties!=null?r.Properties.Select(y=> new Property{
+            ////             Created= y.Created,
+            ////              Id = y.Id,
+            ////               Key = y.Key,
+            ////                Value = y.Value,
+            ////                 CreatedBy = y.CreatedBy,
+            ////                  ModifiedBy = y.ModifiedBy,
+            ////                   Modified = y.Modified,
+            ////                    Type = (ACP.Data.Enums.PropertyType)y.Type
+            ////        }).ToList():null,
+            ////        //AddressId = r.Address==null?0:r.Address.Id,
+            ////        Address =r.Address==null?null:new Address
+            ////        {
+
+            ////            Address1 = r.Address.Address1,
+            ////            Address2 = r.Address.Address2,
+            ////            Country = r.Address.Country,
+            ////            County = r.Address.County,
+            ////            Created = r.Address.Created,
+            ////            CreatedBy = r.Address.CreatedBy,
+            ////            Id = r.Address.Id,
+            ////            Modified = r.Address.Modified,
+            ////            ModifiedBy = r.Address.ModifiedBy,
+            ////            Number = r.Address.Number,
+            ////            Postcode = r.Address.Postcode,                        
+            ////            City = r.Address.City
+
+            ////        }
+            ////    }).ToList() : null;
+            ////}
 
             Repository.Update<RootBookingEntity>(dataModel);
             Repository.Commit();
@@ -374,7 +380,8 @@ namespace ACP.DataAccess.Managers
                     Modified = dataModel.Address.Modified,
                     ModifiedBy = dataModel.Address.ModifiedBy,
                     Number = dataModel.Address.Number,
-                    Postcode = dataModel.Address.Postcode
+                    Postcode = dataModel.Address.Postcode,
+                   City = dataModel.Address.City
                 };
 
                 model.AddressId = dataModel.AddressId;

@@ -56,7 +56,7 @@ namespace Web.Controllers
         }
 
         [HttpGet]
-        [Route("booking/completed")]
+        [Route("booking/paymentcompleted")]
         public ActionResult PaymentCompleted(BookingConfirmationView model)
         {
 
@@ -93,7 +93,7 @@ namespace Web.Controllers
                 if (paymentresult == "approved")
                 {
                     var havebeenpaid = await _bookingservice.Paid(result.Id);
-                    if (havebeenpaid) return RedirectToAction("completed", ToBookingConfirmationView(model, result.BookingReference));
+                    if (havebeenpaid) return RedirectToAction("paymentcompleted", ToBookingConfirmationView(model, result.BookingReference));
                 }
                 model.Error = paymentresult;
             }

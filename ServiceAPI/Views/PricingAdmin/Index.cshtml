@@ -11,6 +11,21 @@
 
 }
 
+<div class="container">
+    <div class="col-lg-6"></div>
+    <div class="col-lg-6">
+        <select class="form-control" id="carparkslist" name="carparkslist">
+            <option value="">-- Please Select --</option>
+            @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.carparkslist)
+            {
+                    <option value=@item.Value>@item.Text</option>
+                
+            }
+        </select>
+
+    </div>
+</div>
+<br />
 <table class="table">
     <tr>
         <th>
@@ -99,3 +114,20 @@
 }
 
 </table>
+
+<script>
+    $("#carparkslist").change(function () {
+        var result = $("#carparkslist").find(":selected").text();
+
+        if (result != "-- Please Select --") {
+            $(".table tr td").parent().hide();
+            $(".table tr td:contains('" + result + "')").parent().show();
+        }
+        else
+        {
+            $(".table tr td").parent().show();
+        }
+
+    });
+         
+</script>

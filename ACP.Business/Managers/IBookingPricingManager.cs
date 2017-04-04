@@ -4,6 +4,7 @@ using ACP.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,6 +30,7 @@ namespace ACP.Business.Managers
 
         IList<BookingPricingModel> GetAllPricesAndReviewsByPickLocationAndDropLocationByName(string pickuplocation, string droplocation, DateTime pickup, DateTime dropoff);
         Task<IList<BookingPricingModel>> GetAllPricesAndReviewsByPickLocationAndDropLocationById(int pickuplocationid, int droplocationid, DateTime dropoff, DateTime pickup);
+        Task<IEnumerable<BookingPricingModel>> GetAllIncludingAsync(params Expression<Func<BookingPricing, object>>[] navigationProperties);
 
     }
 }

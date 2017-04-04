@@ -6,15 +6,20 @@
 @{ 
     var icon = "fa-barcode";
 }
+
+
 <div class="section">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h3 class="text-info">
-                    <i class="fa fa-1x fa-fw @icon text-success"></i>Edit
-                </h3>
+        <div class="well">
+            <div class="row">
+                <div class="col-md-6">
+                 
+                    <h2><span class="fa fa-1x fa-fw @icon text-success"></span>Edit Booking</h2>
+
+                </div>
             </div>
         </div>
+       
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
@@ -29,7 +34,6 @@
                 @Html.HiddenFor(model => model.Price)
                 @Html.HiddenFor(model => model.Car.Id)
                 @Html.HiddenFor(model => model.TravelDetails.Id)
-                <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <form class="form-horizontal" role="form">
                     <div class="section">
