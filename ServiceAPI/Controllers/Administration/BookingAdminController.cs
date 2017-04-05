@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace ServiceAPI.Controllers
 {
@@ -230,7 +231,12 @@ namespace ServiceAPI.Controllers
                     var bookingresult = await _bookingcontroller.GettById(model.Id);
 
                     bookingresult.TryGetContentValue(out booking);
-                                       
+
+                    if (booking.Payments.Count == 0)
+                    {
+                        booking.Payments = new Collection<PaymentModel> { new PaymentModel()};
+                    }
+
                     booking.Payments.FirstOrDefault().Modified = DateTime.Now;
                     booking.Payments.FirstOrDefault().ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname;
 
@@ -312,10 +318,10 @@ namespace ServiceAPI.Controllers
                 {
                     await FillDropBoxes();
 
-                    return View();
+                    return View(model);
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 await FillDropBoxes();
 
@@ -387,6 +393,14 @@ namespace ServiceAPI.Controllers
             currency.Add(new SelectListItem() { Text = "£", Value = "1" });
             ViewBag.currency = currency;
 
+            var statuses = new List<SelectListItem> {
+                new SelectListItem { Text = ACP.Business.Enums.StatusType.Processing.ToString(), Value = ((int)ACP.Business.Enums.StatusType.Processing).ToString() },
+                new SelectListItem { Text = ACP.Business.Enums.StatusType.Active.ToString(), Value = ((int)ACP.Business.Enums.StatusType.Active).ToString() },
+                new SelectListItem { Text = ACP.Business.Enums.StatusType.Inactive.ToString(), Value = ((int)ACP.Business.Enums.StatusType.Inactive).ToString() },
+                new SelectListItem { Text = ACP.Business.Enums.StatusType.Completed.ToString(), Value = ((int)ACP.Business.Enums.StatusType.Completed).ToString() },
+                new SelectListItem { Text = ACP.Business.Enums.StatusType.Paid.ToString(), Value = ((int)ACP.Business.Enums.StatusType.Paid).ToString() }
+            };
+            ViewBag.statuses = statuses;
             //var carparkslist = new List<SelectListItem>();
             //List<BookingEntityModel> carparks = new List<BookingEntityModel>();
             //_carparkcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute

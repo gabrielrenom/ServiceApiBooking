@@ -13,6 +13,7 @@ namespace ACP.Business.Enums
         Active = 2,
         Inactive = 3,
         Processing = 4,
-        Paid = 5
+        Paid = 5,
+        Completed = 6
     }
 }
