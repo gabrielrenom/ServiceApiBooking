@@ -27,49 +27,7 @@
         <p class="notice">This is the address your confirmation will be sent to. It will include the booking reference and all parking/arrival procedures. </p>
     </div>
 
-    <div class="form-group for-customer-details">
-        <legend>Customer details <span>(required)</span></legend>
-        <label class="sr-only" for="customer-title">Title</label>
-        <select id="customer-title" id="Title" name="Title">
-            <option>Title</option>
-            <option>Miss</option>
-            <option>Mrs.</option>
-            <option>Ms.</option>
-            <option checked>Mr.</option>
-            @{ if (ViewBag.title != null)
-                {
-                    <option selected>@ViewBag.title</option>
-                }
-            }
-        </select>
-        @Html.ValidationMessageFor(model => model.Title, "Title is required")
-        <label class="sr-only" for="first-name">First name</label>
-        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name" })
-        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
-
-        <label class="sr-only" for="last-name">Last name</label>
-        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name" })
-        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
-
-
-        <label class="sr-only" for="mobile">Mobile</label>
-        @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @placeholder = "Mobile" })
-        @Html.ValidationMessageFor(m => m.Mobile, "", new { @class = "text-danger" })
-
-        <label class="sr-only" for="Address">Address</label>
-        @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
-        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
-
-        <label class="sr-only" for="Postcode">Postcode</label>
-        @Html.TextBoxFor(m => m.Postcode, new { @class = "form-control", @placeholder = "City" })
-        @Html.ValidationMessageFor(m => m.Postcode, "", new { @class = "text-danger" })
-
-        <label class="sr-only" for="City">City</label>
-        @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "Postcode" })
-        @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
-
-
-    </div>
+    
 
     <div class="form-group for-car-details">
         <legend>Car details <span>(required)</span></legend>
@@ -169,16 +127,72 @@
     </div>
 
 
-    <div class="form-group for-payment">
+    <div class=" for-payment">
         <legend><span>Payment</span></legend>
      
-            <div class="form-group creditcard-payment-form " >
-                <label class="col-sm-3 control-label" for="CardName">Name on Card</label>
-                <div class="col-sm-9">
-                    @Html.TextBoxFor(m => m.CardName, new { @class = "form-control", @placeholder = "Card Holder's Name" })                   
-                    @Html.ValidationMessageFor(m => m.CardName, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group creditcard-payment-form ">
+            <label class="col-sm-3 control-label" for="CardName">First Name</label>
+            <div>
+                <select id="Title" name="Title">
+                    <option>Title</option>
+                    <option>Miss</option>
+                    <option>Mrs.</option>
+                    <option>Ms.</option>
+                    <option checked>Mr.</option>
+                    @{ if (ViewBag.title != null)
+                    {
+                            <option selected>@ViewBag.title</option>
+                        }
+                    }
+                </select>
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name" })
+                @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
             </div>
+        </div>
+        <div class="form-group creditcard-payment-form ">
+
+            <label class="col-sm-3 control-label" for="CardName">Last Name</label>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+                @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group creditcard-payment-form ">
+            <label class="col-sm-3 control-label" for="CardName">Mobile</label>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @placeholder = "Mobile" })
+                @Html.ValidationMessageFor(m => m.Mobile, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group creditcard-payment-form ">
+            <label class="col-sm-3 control-label" for="CardName">Address</label>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
+                @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group creditcard-payment-form ">
+            <label class="col-sm-3 control-label" for="CardName">Postcode</label>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(m => m.Postcode, new { @class = "form-control", @placeholder = "City" })
+                @Html.ValidationMessageFor(m => m.Postcode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group creditcard-payment-form ">
+            <label class="col-sm-3 control-label" for="CardName">City</label>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City" })
+                @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group creditcard-payment-form ">
+            <label class="col-sm-3 control-label" for="CardName">Name on Card</label>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(m => m.CardName, new { @class = "form-control", @placeholder = "Card Holder's Name" })
+                @Html.ValidationMessageFor(m => m.CardName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       
             <div class="form-group creditcard-payment-form ">
                 <label class="col-sm-3 control-label" for="CardNumber">Card Number</label>
                 <div class="col-sm-3">
@@ -300,17 +314,23 @@
                     <label for="cancellation-cover">Add cancellation cover - &pound;1.49</label>
                     <p>Our cancellation cover protects you if you do need to cancel or amend your booking (selected airport parking products only) </p>
                     <img src="img/ico-question.gif" alt="Know more" class="type-icon">
+                    
                 </span>
             </li>
         </ul>
+        <span class="make-payment">
+            <button type="submit" class="btn">Make payment</button>
+
+        </span>
         <ul class="list-inline make-payment">
             <li class="pay-button">
-                <button type="submit" class="btn">Make payment</button>
-
+                
             </li>
             <li class="secured-by">
                 <img src="../img/secured-by.jpg" alt="Secured by Norton and Secure Metrics" width="162" height="44">
             </li>
+            
+       </ul>
     </div>
 
 </div>
