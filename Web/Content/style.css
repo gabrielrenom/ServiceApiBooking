@@ -29,7 +29,7 @@ body {background-color:transparent; background:url(../img/mainbg.jpg) no-repeat 
 .jumbotron { background-color:transparent!important;}
 .jumbotron { padding-bottom:0px!important; margin-bottom:0px!important;}
 
-.navbar-brand {width:237px; height:70px; background:url(../img/national-parking-services.jpg) no-repeat center; text-indent:-9999px; padding:0px 0px!important;
+.navbar-brand {width:237px; height:70px; background:url(../img/fssparking-logo.png) no-repeat center; text-indent:-9999px; padding:0px 0px!important;
 -webkit-transition: all 0.7s ease; -moz-transition: all 0.3s ease; -o-transition: all 0.7s ease; -ms-transition: all 0.7s ease; transition: all 0.7s ease;
 }
 .navbar-brand:hover {-webkit-filter: invert(100%); filter: invert(100%);}

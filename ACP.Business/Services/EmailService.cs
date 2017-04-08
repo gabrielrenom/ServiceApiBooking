@@ -1,4 +1,6 @@
 ﻿using ACP.Business.Services.Interfaces;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,5 +39,28 @@ namespace ACP.Business.Services
 
             return true;
         }
+
+        public async Task<bool> SendEmail(string from, string fromname, string to, string toname, string key, bool IsHtml, string body = null, string subject = null)
+        {
+            var client = new SendGridClient(key);
+            var msg = new SendGridMessage();
+
+            msg.From = new EmailAddress(from, fromname);
+            msg.Subject = subject;
+            if (IsHtml)
+            {
+                msg.HtmlContent = body;
+            }
+            else
+            {
+                msg.PlainTextContent = body;
+            }
+
+            msg.AddTo(new EmailAddress(to, toname));
+            var response = await client.SendEmailAsync(msg);
+
+            return response.StatusCode == System.Net.HttpStatusCode.Accepted ? true : false;
+        }
+
     }
 }

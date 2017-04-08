@@ -275,6 +275,7 @@
     <Content Include="img\bookingbg.jpg" />
     <Content Include="img\bristol-airport.png" />
     <Content Include="img\fondo-header.jpg" />
+    <Content Include="img\fssparking-logo.png" />
     <Content Include="img\guest-login-preview.jpg" />
     <Content Include="img\ico-calendar-h.gif" />
     <Content Include="img\ico-calendar-h.png" />
@@ -325,6 +326,7 @@
     <Content Include="Scripts\ie10-viewport-bug-workaround.js" />
     <None Include="Properties\PublishProfiles\docker-iis.pubxml" />
     <None Include="Properties\PublishProfiles\DockerDeployment.pubxml" />
+    <None Include="Properties\PublishProfiles\fss-web - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ncp - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\ncp - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ncpparkings2017.pubxml" />
