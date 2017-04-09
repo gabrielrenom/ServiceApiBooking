@@ -237,6 +237,7 @@ namespace Web.Models
         public string OutboundFlight { get; set; }
         public string TerminalOut { get; set; }
         public string InboundFlight { get; set; }
+        public string Email { get; set; }
     }
 }
 

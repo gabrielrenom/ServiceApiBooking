@@ -16,12 +16,14 @@ namespace Web.Controllers
         private IBookingService _bookingservice;
         private IPayPalService _paypalservice;
         private IUserService _userService;
+        private IEmailService _emailService;
 
-        public BookingController(IBookingService bookingservice, IPayPalService paypalService, IUserService userService)
+        public BookingController(IBookingService bookingservice, IPayPalService paypalService, IUserService userService, IEmailService emailService)
         {
             _bookingservice = bookingservice;
             _paypalservice = paypalService;
             _userService = userService;
+            _emailService = emailService;
         }
 
         //[HttpGet]
@@ -59,10 +61,13 @@ namespace Web.Controllers
         [Route("booking/paymentcompleted")]
         public ActionResult PaymentCompleted(BookingConfirmationView model)
         {
-
+            try
+            {
+                _emailService.SendEmail(model.BookingReference)
+            }
             //if (ModelState.IsValid)
             //{
-
+            .
             //}
 
             return View(model);
@@ -145,7 +150,8 @@ namespace Web.Controllers
                 ReturnDate = model.ReturnDate,
                 TerminalIn = model.TerminalIn,
                 TerminalOut = model.TerminalOut,
-                Title = model.Title
+                Title = model.Title,
+                Email = model.Email
             };
         }
 

@@ -359,6 +359,7 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\1YwB1sO8YE1Lyjf12WNiUA.woff2" />
     <Content Include="fonts\UyBMtLsHKBKXelqf4x7VRQ.woff2" />
+    <None Include="Properties\PublishProfiles\fss-api - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\NationalParkingServices.pubxml" />
     <None Include="Properties\PublishProfiles\thecarparksupermarket.pubxml" />
     <None Include="Properties\PublishProfiles\TheCarParkSupermarketAPI%28Default-Web-WestEurope%29.pubxml" />
