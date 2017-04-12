@@ -30,7 +30,7 @@ namespace ACP.Business.Services
             IList<SlotModel> slots = new List<SlotModel>();
             //## 1- Generate the Booking reference
             model.BookingReference = GenerateReference();
-
+          
             //## 6- FINALLY Adding the booking.
             return await _bookingManager.AddAsync(model);
 

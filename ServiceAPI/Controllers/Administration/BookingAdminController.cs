@@ -195,7 +195,6 @@ namespace ServiceAPI.Controllers
         // GET: BookingAdmin/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
-            await FillDropBoxes();
 
             BookingModel booking = new BookingModel();
             if (ModelState.IsValid)
@@ -206,12 +205,17 @@ namespace ServiceAPI.Controllers
 
                 result.TryGetContentValue(out booking);
 
+                await FillDropBoxes();
+
                 if (booking != null)
                 {
                     
                 }
                     return View(booking);
             }
+            else
+                await FillDropBoxes();
+
 
             return View();
         }
@@ -375,18 +379,18 @@ namespace ServiceAPI.Controllers
             }
         }
 
-        private async Task FillDropBoxes()
+        private async Task FillDropBoxes(int? creditcard = null)
         {
             var cctypelist = new List<SelectListItem>();
-            cctypelist.Add(new SelectListItem() { Text = "Visa", Value = "1" });
-            cctypelist.Add(new SelectListItem() { Text = "Mastercard", Value = "2" });
-            cctypelist.Add(new SelectListItem() { Text = "American Express", Value = "3" });
-            cctypelist.Add(new SelectListItem() { Text = "Maestro", Value = "3" });
+            cctypelist.Add(new SelectListItem() { Text = "Visa", Value = "1", Selected= creditcard==1?true:false });
+            cctypelist.Add(new SelectListItem() { Text = "Mastercard", Value = "2", Selected = creditcard == 2 ? true : false });
+            cctypelist.Add(new SelectListItem() { Text = "American Express", Value = "3", Selected = creditcard == 3 ? true : false });
+            cctypelist.Add(new SelectListItem() { Text = "Maestro", Value = "3", Selected = creditcard == 4 ? true : false });
             ViewBag.cctype = cctypelist;
 
             var paymenttypelist = new List<SelectListItem>();
-            paymenttypelist.Add(new SelectListItem() { Text = "Bank Account", Value = "1" });
-            paymenttypelist.Add(new SelectListItem() { Text = "Credit Card", Value = "2" });
+            paymenttypelist.Add(new SelectListItem() { Text = "Bank Account", Value = "1",Selected = creditcard != null ? true : false });
+            paymenttypelist.Add(new SelectListItem() { Text = "Credit Card", Value = "2", Selected = creditcard !=null ? true : false });
             ViewBag.paymenttype = paymenttypelist;
 
             var currency = new List<SelectListItem>();

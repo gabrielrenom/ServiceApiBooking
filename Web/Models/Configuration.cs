@@ -46,7 +46,10 @@ namespace Web.Models
             // Pass in a `APIContext` object to authenticate 
             // the call and to send a unique request id 
             // (that ensures idempotency). The SDK generates
-            // a request id if you do not pass one explicitly. 
+            // a request id if you do not pass one explicitly.
+#if DEBUG
+            return null;
+#else
             APIContext apiContext = new APIContext(GetAccessToken());
             apiContext.Config = GetConfig();
 
@@ -57,6 +60,7 @@ namespace Web.Models
             // APIContext apiContext = new APIContext(GetAccessToken(), requestId ));
 
             return apiContext;
+#endif
         }
 
     }

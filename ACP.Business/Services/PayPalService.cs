@@ -17,6 +17,9 @@ namespace ACP.Business.Services
         {
             try
             {
+#if DEBUG
+                return "approved";
+#else
                 APIContext apiContext = context;
                 Payment createdPayment = ToPaymentModel(model).Create(apiContext);
 
@@ -24,6 +27,7 @@ namespace ACP.Business.Services
                 {
                     return "approved";
                 }
+#endif
             }
             catch (PayPal.PayPalException ex)
             {

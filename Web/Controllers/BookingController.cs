@@ -7,6 +7,10 @@ using System.Web.Mvc;
 using Web.Models;
 using ACP.Business.Models;
 using System.Threading.Tasks;
+using System.Web.Configuration;
+using System.Diagnostics;
+using System.Collections.ObjectModel;
+using ACP.Business.Enums;
 
 namespace Web.Controllers
 {
@@ -63,11 +67,26 @@ namespace Web.Controllers
         {
             try
             {
-                _emailService.SendEmail(model.BookingReference)
+                var result = _emailService.SendEmail(
+                    WebConfigurationManager.AppSettings["Email:From"],
+                    WebConfigurationManager.AppSettings["Email:FromName"],
+                    model.Email,
+                    model.FirstName + " " + model.LastName,
+                    WebConfigurationManager.AppSettings["Email:Key"],
+                    true,
+                    "",
+                    WebConfigurationManager.AppSettings["Email:ConfirmationSubject"]);
+
+                Trace.TraceInformation(string.Format("Email sent to {0} on {1}send status:{2}",model.Email,DateTime.Now.ToString(), result.ToString()));
             }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.ToString());
+            }
+            
             //if (ModelState.IsValid)
             //{
-            .
+            
             //}
 
             return View(model);
@@ -240,6 +259,37 @@ namespace Web.Controllers
 
             };
 
+
+            if (model.CreditCardType != null)
+            {
+                CreditCardTypes creditcardtype = CreditCardTypes.Visa;
+                if (model.CreditCardType.ToLower() == "visa") creditcardtype = CreditCardTypes.Visa;
+                else if (model.CreditCardType.ToLower() == "maestro") creditcardtype = CreditCardTypes.Maestro;
+                else if (model.CreditCardType.ToLower() == "mastercard") creditcardtype = CreditCardTypes.Mastercard;
+                else if (model.CreditCardType.ToLower() == "americanexpress") creditcardtype = CreditCardTypes.AmericanExpress;
+
+                bookingModel.Payments = model.CreditCardType != null ? new Collection<PaymentModel>
+                {
+                    new PaymentModel{ CreditCard = new CreditCardModel{ ExpiryDate = new DateTime(Convert.ToInt32(model.ExpiryYear), Convert.ToInt32(model.ExpiryMonth), 1),
+                        Created = DateTime.Now,
+                        CreatedBy = "System",
+                        Deleted = false,
+                        Name = model.CardName + "" + model.LastName,
+                        Modified =DateTime.Now,
+                        ModifiedBy = "System",
+                        Number = model.CardNumber,
+                        Type =creditcardtype,
+                        PlainNumber = model.CardNumber
+                    },
+                     CreatedBy = "System",
+                     Status = StatusType.Paid,
+                     Modified = DateTime.Now,
+                     ModifiedBy = "System",
+                     Created = DateTime.Now,
+                     CurrencyId = 1
+                }
+            } : null;
+            }
             bookingModel.Car = new CarModel
             {
                 Created = DateTime.Now,

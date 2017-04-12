@@ -18,6 +18,6 @@ namespace ACP.Business.Services.Interfaces
             /// <param name="body"></param>
             /// <param name="subject"></param>
             /// <returns></returns>
-            Task<bool> SendEmail(string from, string fromname, string to, string toname, string key, bool IsHtml, string body = null, string subject = null);
+        Task<bool> SendEmail(string from, string fromname, string to, string toname, string key, bool IsHtml, string body = null, string subject = null);
     }
 }
