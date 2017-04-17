@@ -17,6 +17,7 @@ namespace ServiceAPI.Controllers
         BookingController _bookingcontroller;
         CarParkController _carparkcontroller;
         AirportController _airportcontroller;
+        
 
 
         public BookingAdminController(BookingController bookingcontroller, AirportController airportcontroller, CarParkController carparkcontroller)
@@ -102,7 +103,7 @@ namespace ServiceAPI.Controllers
                     payment.CurrencyId = Convert.ToInt32(paymentform["currency"]);
 
                     //## Bank account
-                    if (paymentform["paymenttype"] == "1")
+                    if (paymentform["paymenttype"] != "100")
                     {
                         BankAccountModel bankaccount = new BankAccountModel();
                         bankaccount.AccountName = paymentform["baname"];
@@ -204,7 +205,6 @@ namespace ServiceAPI.Controllers
                 var result = await _bookingcontroller.GettById(id);
 
                 result.TryGetContentValue(out booking);
-
                 await FillDropBoxes();
 
                 if (booking != null)
@@ -225,9 +225,26 @@ namespace ServiceAPI.Controllers
         public async Task<ActionResult> Edit(BookingModel model)
         {
             bool updated = false;
+            BookingModel booking = new BookingModel();
             try
-            {                
-                BookingModel booking = new BookingModel();
+            {
+                if (model.EndDate < model.StartDate)
+                {
+                    ModelState.AddModelError(string.Empty, "The End date has to older than the start date");
+
+                    _bookingcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                    _bookingcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                    var result = await _bookingcontroller.GettById(model.Id);
+
+                    result.TryGetContentValue(out booking);
+                    booking.EndDate = model.EndDate;
+                    booking.StartDate = model.StartDate;
+                    await FillDropBoxes();
+
+                    return View(booking);
+                }
+
+               
                 if (ModelState.IsValid)
                 {
                     _bookingcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
@@ -249,7 +266,7 @@ namespace ServiceAPI.Controllers
                     booking.Payments.FirstOrDefault().CurrencyId = Convert.ToInt32(paymentform["currency"]);
 
                     //## Bank account
-                    if (paymentform["paymenttype"] == "1")
+                    if (paymentform["paymenttype"] != "100")
                     {
                         if (booking.Payments.FirstOrDefault().BankAccount == null)
                             booking.Payments.FirstOrDefault().BankAccount = new BankAccountModel();
@@ -308,10 +325,24 @@ namespace ServiceAPI.Controllers
                     booking.StartDate = model.StartDate;
                     booking.EndDate = model.EndDate;
 
+                    booking.BookingReference = model.BookingReference;
+                    booking.Created = model.Created;
+                    booking.Modified = DateTime.Now;
+                    booking.CreatedBy = "System";
+                    booking.ModifiedBy = "System";
+                    booking.Cost = model.Cost;
+
+
+
                     _bookingcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
                     _bookingcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
-                    model.SourceCode = paymentform["airport"];
-                    var result = await _bookingcontroller.Update(model);
+                    //model.SourceCode = paymentform["airport"];
+                    foreach (var item in booking.Extras)
+                    {
+                        item.BookingEntityId = Convert.ToInt32(paymentform["airport"]);
+                    }
+                   
+                    var result = await _bookingcontroller.Update(booking);
 
                     result.TryGetContentValue(out updated);
 
@@ -382,15 +413,15 @@ namespace ServiceAPI.Controllers
         private async Task FillDropBoxes(int? creditcard = null)
         {
             var cctypelist = new List<SelectListItem>();
-            cctypelist.Add(new SelectListItem() { Text = "Visa", Value = "1", Selected= creditcard==1?true:false });
-            cctypelist.Add(new SelectListItem() { Text = "Mastercard", Value = "2", Selected = creditcard == 2 ? true : false });
-            cctypelist.Add(new SelectListItem() { Text = "American Express", Value = "3", Selected = creditcard == 3 ? true : false });
-            cctypelist.Add(new SelectListItem() { Text = "Maestro", Value = "3", Selected = creditcard == 4 ? true : false });
+            cctypelist.Add(new SelectListItem() { Text = "Visa", Value = "100", Selected= creditcard==1?true:false });
+            cctypelist.Add(new SelectListItem() { Text = "Mastercard", Value = "101", Selected = creditcard == 2 ? true : false });
+            cctypelist.Add(new SelectListItem() { Text = "American Express", Value = "102", Selected = creditcard == 3 ? true : false });
+            cctypelist.Add(new SelectListItem() { Text = "Maestro", Value = "103", Selected = creditcard == 4 ? true : false });
             ViewBag.cctype = cctypelist;
 
             var paymenttypelist = new List<SelectListItem>();
-            paymenttypelist.Add(new SelectListItem() { Text = "Bank Account", Value = "1",Selected = creditcard != null ? true : false });
-            paymenttypelist.Add(new SelectListItem() { Text = "Credit Card", Value = "2", Selected = creditcard !=null ? true : false });
+            paymenttypelist.Add(new SelectListItem() { Text = "Bank Account", Value = "101",Selected = creditcard != null ? true : false });
+            paymenttypelist.Add(new SelectListItem() { Text = "Credit Card", Value = "100", Selected = creditcard !=null ? true : false });
             ViewBag.paymenttype = paymenttypelist;
 
             var currency = new List<SelectListItem>();
@@ -405,20 +436,22 @@ namespace ServiceAPI.Controllers
                 new SelectListItem { Text = ACP.Business.Enums.StatusType.Paid.ToString(), Value = ((int)ACP.Business.Enums.StatusType.Paid).ToString() }
             };
             ViewBag.statuses = statuses;
-            //var carparkslist = new List<SelectListItem>();
-            //List<BookingEntityModel> carparks = new List<BookingEntityModel>();
-            //_carparkcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
-            //_carparkcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
-            //var result = await _carparkcontroller.GetAll();
-            //result.TryGetContentValue(out carparks);
-            //if (carparks != null)
-            //{
-            //    foreach (var carpark in carparks)
-            //    {
-            //        carparkslist.Add(new SelectListItem() { Text = carpark.Name, Value = carpark.Id.ToString() });
-            //    }
-            //}
+
+            var carparkslist = new List<SelectListItem>();
+            List<BookingEntityModel> carparks = new List<BookingEntityModel>();
+            _carparkcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+            _carparkcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+            var result = await _carparkcontroller.GetAll();
+            result.TryGetContentValue(out carparks);
+            if (carparks != null)
+            {
+                foreach (var carpark in carparks)
+                {
+                    carparkslist.Add(new SelectListItem() { Text = carpark.Name, Value = carpark.Id.ToString(), Group = new SelectListGroup() { Name = carpark.RootBookingEntity.Name } });
+                }
+            }
             //ViewBag.carparkslist = carparkslist;
+            ViewBag.carparkslist = carparks;
 
             var airportlist = new List<SelectListItem>();
             List<RootBookingEntityModel> airports = new List<RootBookingEntityModel>();
@@ -434,6 +467,7 @@ namespace ServiceAPI.Controllers
                 }
             }
             ViewBag.airportlist = airportlist;
+            
         }
     }
 }

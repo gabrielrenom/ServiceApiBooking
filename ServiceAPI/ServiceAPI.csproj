@@ -356,7 +356,9 @@
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
     <Content Include="apiapp.json" />
-    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="fonts\1YwB1sO8YE1Lyjf12WNiUA.woff2" />
     <Content Include="fonts\UyBMtLsHKBKXelqf4x7VRQ.woff2" />
     <None Include="Properties\PublishProfiles\fss-api - Web Deploy.pubxml" />

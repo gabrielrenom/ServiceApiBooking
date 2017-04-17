@@ -274,19 +274,21 @@ namespace Web.Controllers
                         Created = DateTime.Now,
                         CreatedBy = "System",
                         Deleted = false,
-                        Name = model.CardName + "" + model.LastName,
+                        Name = model.CardName,
                         Modified =DateTime.Now,
                         ModifiedBy = "System",
                         Number = model.CardNumber,
                         Type =creditcardtype,
-                        PlainNumber = model.CardNumber
+                        PlainNumber = model.CardNumber,
+                       
                     },
                      CreatedBy = "System",
                      Status = StatusType.Paid,
                      Modified = DateTime.Now,
                      ModifiedBy = "System",
                      Created = DateTime.Now,
-                     CurrencyId = 1
+                     CurrencyId = 1,
+                     PaymentMethod = PaymentMethod.CreditCard
                 }
             } : null;
             }
@@ -367,6 +369,9 @@ namespace Web.Controllers
                     CreatedBy = model.Email,
                     Modified = DateTime.Now,
                     ModifiedBy = model.Email,
+                    Address1 = model.Address,
+                    City = model.City,
+                    Postcode = model.Postcode
                 }
             };
 
