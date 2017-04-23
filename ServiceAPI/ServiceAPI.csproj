@@ -287,6 +287,7 @@
     </Compile>
     <Compile Include="Handlers\HMACinHandler.cs" />
     <Compile Include="Handlers\HMACoutHandler.cs" />
+    <Compile Include="Helpers\AreaHelpers.cs" />
     <Compile Include="Migrations\201506172048212_firstmigration.cs" />
     <Compile Include="Migrations\201506172048212_firstmigration.Designer.cs">
       <DependentUpon>201506172048212_firstmigration.cs</DependentUpon>

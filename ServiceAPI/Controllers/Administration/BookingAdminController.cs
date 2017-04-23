@@ -66,7 +66,23 @@ namespace ServiceAPI.Controllers
         // GET: BookingAdmin/Create
         public async Task<ActionResult> Create()
         {
-            await FillDropBoxes();
+            BookingModel model = new BookingModel();
+          
+            _bookingcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+            _bookingcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+            var result = await _bookingcontroller.GetModel();
+
+            result.TryGetContentValue(out model);
+
+            if (result != null)
+            {
+                model.Customer = new CustomerModel();
+                model.Customer.Address = new AddressModel();
+                model.TravelDetails = new TravelDetailsModel();
+                await FillDropBoxes();
+                return View(model);
+            }
+
 
             return View();
         }
@@ -302,7 +318,9 @@ namespace ServiceAPI.Controllers
                     booking.TravelDetails.OutboundDate = model.TravelDetails.OutboundDate;
                     booking.TravelDetails.OutboundFlight = model.TravelDetails.OutboundFlight;
                     booking.TravelDetails.OutboundTerminal = model.TravelDetails.OutboundTerminal;
-
+                    booking.TravelDetails.ReturnFlight = model.TravelDetails.ReturnFlight;
+                    booking.TravelDetails.ReturnDate = model.TravelDetails.ReturnDate;
+                    booking.TravelDetails.ReturnboundTerminal = model.TravelDetails.ReturnboundTerminal;
 
                     booking.Car.Created = DateTime.Now;
                     booking.Car.Modified = DateTime.Now;
@@ -310,6 +328,7 @@ namespace ServiceAPI.Controllers
                     booking.Car.ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname;
                     booking.Car.Colour = model.Car.Colour;
                     booking.Car.Make = model.Car.Make;
+                    booking.Car.Model = model.Car.Model;
                     booking.Car.Registration = model.Car.Registration;
 
                     booking.Customer.Modified = DateTime.Now;

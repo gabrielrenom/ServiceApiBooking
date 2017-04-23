@@ -1,5 +1,5 @@
 ﻿@model ACP.Business.Models.RootBookingEntityModel
-
+@using ServiceAPI.Helpers
 @{
     ViewBag.Title = "Edit Airport";
     Layout = "~/Views/Shared/_ActionLayout.cshtml";
@@ -156,15 +156,9 @@
 
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
-                        <button class="btn btn-warning" type="submit">Clear Fields</button>
-                        <button class="btn btn-primary" type="submit">Update</button>
-                    </div>
-
-                </div>
+                
             </div>
+            @Html.AreaSubmit(Areas.Airports, Operation.Update)
         </div>
     </div>
 

@@ -19,12 +19,52 @@ namespace ACP.DataAccess.Config
             .WithMany()
             .HasForeignKey(u => u.AddressId);
 
-            
+            HasMany(p => p.Properties)
+            .WithRequired()
+            .HasForeignKey(c => c.BookingEntityId)
+            .WillCascadeOnDelete(false);
+
+            HasMany(p => p.Extras)
+            .WithRequired()
+            .HasForeignKey(c => c.BookingEntityId)
+            .WillCascadeOnDelete(false);
+
+            HasMany(p => p.Prices)
+           .WithRequired()
+           .HasForeignKey(c => c.BookingEntityId)
+           .WillCascadeOnDelete(false);
+
+            HasMany(p => p.Service)
+           .WithRequired()
+           .HasForeignKey(c => c.BookingEntityId)
+           .WillCascadeOnDelete(false);
+
+            HasMany(p => p.Slot)
+          .WithRequired()
+          .HasForeignKey(c => c.BookingEntityId)
+          .WillCascadeOnDelete(false);
+
+            HasMany(p => p.Reviews)
+        .WithRequired()
+        .HasForeignKey(c => c.BookingEntityId)
+        .WillCascadeOnDelete(false);
+
+
+            //HasRequired(u => u.RootBookingEntity).WithRequiredPrincipal().WillCascadeOnDelete(true);
+            //// HasRequired(u => u.Address).WithRequiredPrincipal().WillCascadeOnDelete(true);
+
+            //HasMany(u => u.Properties).WithRequired().HasForeignKey(a => a.BookingEntityId).WillCascadeOnDelete(true);
+            //HasMany(u => u.Extras).WithRequired().HasForeignKey(a => a.BookingEntityId).WillCascadeOnDelete(true);
+            //HasMany(u => u.Prices).WithRequired().HasForeignKey(a => a.BookingEntityId).WillCascadeOnDelete(true);
+            //HasMany(u => u.Service).WithRequired().HasForeignKey(a => a.BookingEntityId).WillCascadeOnDelete(true);
+            //HasMany(u => u.Slot).WithRequired().HasForeignKey(a => a.BookingEntityId).WillCascadeOnDelete(true);
+            //HasMany(u => u.Reviews).WithRequired().HasForeignKey(a => a.BookingEntityId).WillCascadeOnDelete(true);
+
             //HasRequired(p => p.RootBookingEntity)
             // .WithMany(p=>p.BookingEntities)
             // .HasForeignKey(p => p.RootBookingEntityId)
             // .WillCascadeOnDelete(false);
-            
+
 
         }
     }

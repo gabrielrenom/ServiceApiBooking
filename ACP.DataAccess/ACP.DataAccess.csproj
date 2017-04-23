@@ -74,6 +74,7 @@
     <Compile Include="Config\RootBookingEntityConfig.cs" />
     <Compile Include="Config\HourPriceConfig.cs" />
     <Compile Include="Config\RootBookingPropertiesConfig.cs" />
+    <Compile Include="Config\SlotConfig.cs" />
     <Compile Include="Config\StatusConfig.cs" />
     <Compile Include="Config\TravelDetailsConfig.cs" />
     <Compile Include="Config\UserConfig.cs" />
@@ -89,81 +90,13 @@
     <Compile Include="Managers\StatusManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Managers\SlotManager.cs" />
-    <Compile Include="Migrations\201509230818393_first.cs" />
-    <Compile Include="Migrations\201509230818393_first.Designer.cs">
-      <DependentUpon>201509230818393_first.cs</DependentUpon>
+    <Compile Include="Migrations\201704211806231_first.cs" />
+    <Compile Include="Migrations\201704211806231_first.Designer.cs">
+      <DependentUpon>201704211806231_first.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201509261238243_bookingsadded.cs" />
-    <Compile Include="Migrations\201509261238243_bookingsadded.Designer.cs">
-      <DependentUpon>201509261238243_bookingsadded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509261527588_bookings_status_added_as_a_flag.cs" />
-    <Compile Include="Migrations\201509261527588_bookings_status_added_as_a_flag.Designer.cs">
-      <DependentUpon>201509261527588_bookings_status_added_as_a_flag.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509261758102_bookings_payments_modified.cs" />
-    <Compile Include="Migrations\201509261758102_bookings_payments_modified.Designer.cs">
-      <DependentUpon>201509261758102_bookings_payments_modified.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509261800567_payment_status_changed.cs" />
-    <Compile Include="Migrations\201509261800567_payment_status_changed.Designer.cs">
-      <DependentUpon>201509261800567_payment_status_changed.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509261818277_minor_changes_cc.cs" />
-    <Compile Include="Migrations\201509261818277_minor_changes_cc.Designer.cs">
-      <DependentUpon>201509261818277_minor_changes_cc.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509271614264_users_and_cars_removed_from_bookings_from_now.cs" />
-    <Compile Include="Migrations\201509271614264_users_and_cars_removed_from_bookings_from_now.Designer.cs">
-      <DependentUpon>201509271614264_users_and_cars_removed_from_bookings_from_now.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509271837275_users_and_cars_added_to_bookings.cs" />
-    <Compile Include="Migrations\201509271837275_users_and_cars_added_to_bookings.Designer.cs">
-      <DependentUpon>201509271837275_users_and_cars_added_to_bookings.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509271905361_users_in_cars_removed.cs" />
-    <Compile Include="Migrations\201509271905361_users_in_cars_removed.Designer.cs">
-      <DependentUpon>201509271905361_users_in_cars_removed.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509272010129_relationship_changed3.cs" />
-    <Compile Include="Migrations\201509272010129_relationship_changed3.Designer.cs">
-      <DependentUpon>201509272010129_relationship_changed3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509272012283_relationship_changed4.cs" />
-    <Compile Include="Migrations\201509272012283_relationship_changed4.Designer.cs">
-      <DependentUpon>201509272012283_relationship_changed4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509291903022_customer_removed_with_payments.cs" />
-    <Compile Include="Migrations\201509291903022_customer_removed_with_payments.Designer.cs">
-      <DependentUpon>201509291903022_customer_removed_with_payments.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510030905382_website.cs" />
-    <Compile Include="Migrations\201510030905382_website.Designer.cs">
-      <DependentUpon>201510030905382_website.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510031353484_codeaddedinbooking.cs" />
-    <Compile Include="Migrations\201510031353484_codeaddedinbooking.Designer.cs">
-      <DependentUpon>201510031353484_codeaddedinbooking.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510040819243_statustableremoveitfromavailability.cs" />
-    <Compile Include="Migrations\201510040819243_statustableremoveitfromavailability.Designer.cs">
-      <DependentUpon>201510040819243_statustableremoveitfromavailability.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510040824334_constrainscachngedforaddressinroot.cs" />
-    <Compile Include="Migrations\201510040824334_constrainscachngedforaddressinroot.Designer.cs">
-      <DependentUpon>201510040824334_constrainscachngedforaddressinroot.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510040828419_addreswhereitwas.cs" />
-    <Compile Include="Migrations\201510040828419_addreswhereitwas.Designer.cs">
-      <DependentUpon>201510040828419_addreswhereitwas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601211650019_newfieldsinuser_gende.cs" />
-    <Compile Include="Migrations\201601211650019_newfieldsinuser_gende.Designer.cs">
-      <DependentUpon>201601211650019_newfieldsinuser_gende.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604200644132_ReviewsAdded.cs" />
-    <Compile Include="Migrations\201604200644132_ReviewsAdded.Designer.cs">
-      <DependentUpon>201604200644132_ReviewsAdded.cs</DependentUpon>
+    <Compile Include="Migrations\201704211822309_sec.cs" />
+    <Compile Include="Migrations\201704211822309_sec.Designer.cs">
+      <DependentUpon>201704211822309_sec.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -188,62 +121,11 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201509230818393_first.resx">
-      <DependentUpon>201509230818393_first.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704211806231_first.resx">
+      <DependentUpon>201704211806231_first.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509261238243_bookingsadded.resx">
-      <DependentUpon>201509261238243_bookingsadded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509261527588_bookings_status_added_as_a_flag.resx">
-      <DependentUpon>201509261527588_bookings_status_added_as_a_flag.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509261758102_bookings_payments_modified.resx">
-      <DependentUpon>201509261758102_bookings_payments_modified.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509261800567_payment_status_changed.resx">
-      <DependentUpon>201509261800567_payment_status_changed.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509261818277_minor_changes_cc.resx">
-      <DependentUpon>201509261818277_minor_changes_cc.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509271614264_users_and_cars_removed_from_bookings_from_now.resx">
-      <DependentUpon>201509271614264_users_and_cars_removed_from_bookings_from_now.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509271837275_users_and_cars_added_to_bookings.resx">
-      <DependentUpon>201509271837275_users_and_cars_added_to_bookings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509271905361_users_in_cars_removed.resx">
-      <DependentUpon>201509271905361_users_in_cars_removed.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509272010129_relationship_changed3.resx">
-      <DependentUpon>201509272010129_relationship_changed3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509272012283_relationship_changed4.resx">
-      <DependentUpon>201509272012283_relationship_changed4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509291903022_customer_removed_with_payments.resx">
-      <DependentUpon>201509291903022_customer_removed_with_payments.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510030905382_website.resx">
-      <DependentUpon>201510030905382_website.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510031353484_codeaddedinbooking.resx">
-      <DependentUpon>201510031353484_codeaddedinbooking.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510040819243_statustableremoveitfromavailability.resx">
-      <DependentUpon>201510040819243_statustableremoveitfromavailability.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510040824334_constrainscachngedforaddressinroot.resx">
-      <DependentUpon>201510040824334_constrainscachngedforaddressinroot.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510040828419_addreswhereitwas.resx">
-      <DependentUpon>201510040828419_addreswhereitwas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601211650019_newfieldsinuser_gende.resx">
-      <DependentUpon>201601211650019_newfieldsinuser_gende.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604200644132_ReviewsAdded.resx">
-      <DependentUpon>201604200644132_ReviewsAdded.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704211822309_sec.resx">
+      <DependentUpon>201704211822309_sec.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

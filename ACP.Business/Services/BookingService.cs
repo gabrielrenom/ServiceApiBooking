@@ -15,7 +15,7 @@ namespace ACP.Business.Services
         private IAvailabilityManager _availability;
         private IBookingPricingManager _pricemanager;
         private ISlotManager _slotmanager;
-
+        
 
         public BookingService(IBookingManager bookingManager, IAvailabilityManager availability, ISlotManager slotmanager, IBookingPricingManager pricemanager)
         {
@@ -144,6 +144,11 @@ namespace ACP.Business.Services
         public async Task<bool> Paid(int id)
         {
             return await _bookingManager.Paid(id);
+        }
+
+        public async Task<BookingModel> GetModel()
+        {
+           return _bookingManager.GetModel();
         }
     }
 }

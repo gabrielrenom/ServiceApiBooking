@@ -62,50 +62,58 @@ namespace ACP.DataAccess.Managers
 
         public  override async Task<bool> DeleteByIdAsync(int id)
         {
-            var record =  await Repository.GetSingleAsync<Booking>(x => x.Id > 0
-                //x => x.Car,
-                //x => x.Customer,
-                //x => x.Customer.Address,
-                //x => x.Extras
-                //x => x.TravelDetails
-                //x => x.Payments
-                //x => x.Payments.Select(y => y.CreditCard),
-                //x => x.Payments.Select(y => y.BankAccount),
-                //x => x.Payments.Select(y => y.Currency)
-                );
-            //if (record.Car != null)
-            //{
-            //    Repository.Delete<Car>(record.Car);
-            //}
-
-            //if (record.Customer != null)
-            //{
-            //    Repository.Delete<Customer>(record.Customer);
-            //}
-
-            if (record.TravelDetails != null)
+            try
             {
-                Repository.Delete<TravelDetails>(record.TravelDetails);
+                var record = await Repository.GetSingleAsync<Booking>(x => x.Id > 0,
+                    x => x.Car,
+                    //x => x.Customer,
+                    //x => x.Customer.Address,
+                    //x => x.Extras
+                    //x => x.TravelDetails
+                    x => x.Payments,
+                    x => x.Payments.Select(y => y.CreditCard),
+                    x => x.Payments.Select(y => y.BankAccount),
+                    x => x.Payments.Select(y => y.Currency)
+                    );
+                //if (record.Car != null)
+                //{
+                //    Repository.Delete<Car>(record.Car);
+                //}
+
+                //if (record.Customer != null)
+                //{
+                //    Repository.Delete<Customer>(record.Customer);
+                //}
+
+                if (record.TravelDetails != null)
+                {
+                    Repository.Delete<TravelDetails>(record.TravelDetails);
+                }
+
+                if (record.Payments != null)
+                {
+                    Repository.DeleteMany<Payment>(record.Payments.ToArray());
+                }
+
+                //if (record.Extras!=null )
+                //{
+                //    Repository.DeleteMany<Extra>(record.Extras.ToArray());
+                //}
+                if (record.BookingLink != null)
+                {
+                    Repository.DeleteMany<BookingLink>(record.BookingLink.ToArray());
+                }
+
+                Repository.Delete<Booking>(record);
+                Repository.Commit();
+
+                return true;
             }
-
-            if (record.Payments != null)
+            catch (Exception ex)
             {
-                Repository.DeleteMany<Payment>(record.Payments.ToArray());
+                Trace.TraceError(ex.ToString());
+                return false;
             }
-
-            //if (record.Extras!=null )
-            //{
-            //    Repository.DeleteMany<Extra>(record.Extras.ToArray());
-            //}
-            if (record.BookingLink!=null )
-            {
-                Repository.DeleteMany<BookingLink>(record.BookingLink.ToArray());
-            }           
-
-            Repository.Delete<Booking>(record);
-            Repository.Commit();
-
-            return true;
         }
 
         public IEnumerable<BookingModel> GetAll()
@@ -162,6 +170,7 @@ namespace ACP.DataAccess.Managers
                 dataModel.Status = (Data.Enums.StatusType)domainModel.Status;
                 dataModel.AgentReference = domainModel.AgentReference;
                 dataModel.Cost = domainModel.Cost;
+                dataModel.Message = domainModel.Message;
                 dataModel.BookingReference = domainModel.BookingReference;
                 dataModel.CarId = domainModel.CarId;
                 dataModel.Car = domainModel.Car != null ? new Car
@@ -389,6 +398,7 @@ namespace ACP.DataAccess.Managers
             domainModel.AgentReference = dataModel.AgentReference;
             domainModel.Cost = dataModel.Cost;
             domainModel.BookingReference = dataModel.BookingReference;
+            domainModel.Message = dataModel.Message;
             domainModel.CarId = dataModel.CarId;
             domainModel.Car = dataModel.Car != null ? new CarModel
             {
@@ -579,6 +589,7 @@ namespace ACP.DataAccess.Managers
             dataModel.AgentReference = domainModel.AgentReference;
             dataModel.Cost = domainModel.Cost;
             dataModel.BookingReference = domainModel.BookingReference;
+            dataModel.Message = domainModel.Message;
             dataModel.CarId = domainModel.CarId;
             dataModel.Car = domainModel.Car != null ? new Car
             {
@@ -769,6 +780,14 @@ namespace ACP.DataAccess.Managers
             return ToDomainModel(result);
         }
 
+        public BookingModel GetModel()
+        {
+            Booking model = new Booking();
+
+            model.Payments = base.ACPRepository.AllIncluding<Payment>(x=>x.Currency).ToList();
+
+            return (ToDomainModel(model));
+        }
       
     }
 }

@@ -283,13 +283,13 @@ namespace ServiceAPI.Controllers
                     if (!hasbeenupdated)
                     {
                         await FillDropBoxes();
-                        return View();
+                        return View(model);
                     }
                 }
                 else
                 {
                     await FillDropBoxes();
-                    return View();
+                    return View(model);
                 }
 
             }

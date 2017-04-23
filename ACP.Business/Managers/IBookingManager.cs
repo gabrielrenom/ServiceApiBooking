@@ -12,5 +12,6 @@ namespace ACP.Business.Managers
     {
         Task<BookingModel> GetByReference(string reference);
         Task<bool> Paid(int id);
+        BookingModel GetModel();
     }
 }

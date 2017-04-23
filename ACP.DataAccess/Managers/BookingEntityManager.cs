@@ -2,8 +2,10 @@
 using ACP.Business.Models;
 using ACP.Business.Repository;
 using ACP.Data;
+using ACP.Data.Classes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -412,7 +414,8 @@ namespace ACP.DataAccess.Managers
                         County = domainModel.Address.County,
                         Created = domainModel.Address.Created,
                         CreatedBy = domainModel.Address.CreatedBy,
-                         Id = domainModel.Address.Id,
+                        City = domainModel.Address.City,
+                        Id = domainModel.Address.Id,
                         Modified = domainModel.Address.Modified,
                         ModifiedBy = domainModel.Address.ModifiedBy,
                         Number = domainModel.Address.Number,
@@ -437,7 +440,7 @@ namespace ACP.DataAccess.Managers
                     }).ToList() : null;
                 }
 
-                if (record.Slot.Count > 0)
+                if (record.Slot?.Count > 0)
                 {
                     Repository.DeleteMany<Slot>(record.Slot.ToArray());
 
@@ -507,26 +510,57 @@ namespace ACP.DataAccess.Managers
 
         public override bool DeleteById(int id)
         {
-            var record = Repository.GetSingle<BookingEntity>(x => x.Id == id, x => x.Address, x => x.Extras, x => x.Properties, x => x.Prices.Select(e => e.DayPrices), x => x.Prices.Select(w => w.DayPrices.Select(y => y.HourPrices)));
-
-            if (record.Extras.Count > 0)
+            try
             {
-                Repository.DeleteMany<Extra>(record.Extras.ToArray());
+                //var record = Repository.GetSingle<BookingEntity>(x => x.Id == id, 
+                //    x => x.Address, 
+                //    x => x.Extras, 
+                //    x => x.Properties, 
+                //    x => x.Prices.Select(e => e.DayPrices), 
+                //    x => x.Prices.Select(w => w.DayPrices.Select(y => y.HourPrices)),
+                //    x=>x.Slot,
+                //    x=>x.Reviews,
+                //    x=>x.Service);
+
+                var record = Repository.GetSingle<BookingEntity>(x => x.Id == id);
+
+                //if (record.Service.Count > 0)
+                //{
+                //    Repository.DeleteMany<BookingService>(record.Service.ToArray());
+                //}
+                //if (record.Reviews.Count > 0)
+                //{
+                //    Repository.DeleteMany<Review>(record.Reviews.ToArray());
+                //}
+                //if (record.Extras.Count > 0)
+                //{
+                //    Repository.DeleteMany<Extra>(record.Extras.ToArray());
+                //}
+                //if (record.Prices.Count > 0)
+                //{
+                //    Repository.DeleteMany<BookingPricing>(record.Prices.ToArray());
+                //}
+
+                //if (record.Address != null)
+                //{
+                //    Repository.Delete<Address>(record.Address);
+                //}
+
+                //if (record.Slot != null)
+                //{
+                //    Repository.DeleteMany<Slot>(record.Slot.ToArray());
+                //}
+
+                Repository.Delete<BookingEntity>(record);
+                Repository.Commit();
+
+                return true;
             }
-            if (record.Prices.Count > 0)
+            catch (Exception ex)
             {
-                Repository.DeleteMany<BookingPricing>(record.Prices.ToArray());
+                Trace.TraceError(ex.ToString());
+                return false;
             }
-
-            if (record.Address!=null)
-            {
-                Repository.Delete<Address>(record.Address);
-            }
-
-            Repository.Delete<BookingEntity>(record);
-            Repository.Commit();
-
-            return true;
         }
 
         public async Task<BookingEntityModel> GetByName(string name)

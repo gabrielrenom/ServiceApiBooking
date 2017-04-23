@@ -7,13 +7,13 @@ namespace ACP.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class codeaddedinbooking : IMigrationMetadata
+    public sealed partial class sec : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(codeaddedinbooking));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(sec));
         
         string IMigrationMetadata.Id
         {
-            get { return "201510031353484_codeaddedinbooking"; }
+            get { return "201704211822309_sec"; }
         }
         
         string IMigrationMetadata.Source

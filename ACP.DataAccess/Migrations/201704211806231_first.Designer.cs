@@ -7,13 +7,13 @@ namespace ACP.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class minor_changes_cc : IMigrationMetadata
+    public sealed partial class first : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(minor_changes_cc));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(first));
         
         string IMigrationMetadata.Id
         {
-            get { return "201509261818277_minor_changes_cc"; }
+            get { return "201704211806231_first"; }
         }
         
         string IMigrationMetadata.Source

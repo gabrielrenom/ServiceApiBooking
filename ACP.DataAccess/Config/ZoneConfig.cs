@@ -15,10 +15,10 @@ namespace ACP.DataAccess.Config
         {
             HasKey(t => t.Id);
 
-            HasRequired(t => t.BookingEntity)
-                .WithMany(t => t.Slot)
-                .HasForeignKey(t => t.BookingEntityId)
-                .WillCascadeOnDelete(false);        
+            //HasRequired(t => t.BookingEntity)
+            //    .WithMany(t => t.Slot)
+            //    .HasForeignKey(t => t.BookingEntityId)
+            //    .WillCascadeOnDelete(false);        
         }
     }
 }

@@ -174,6 +174,53 @@ namespace ServiceAPI.Controllers
         }
 
         /// <summary>
+        /// It will retrieve the booking after passing the id.
+        /// </summary>
+        /// <param name="id">The id of the booking</param>
+        /// <returns>The booking</returns>
+        [HttpGet]
+        [Route("getmodel")]
+        public async Task<HttpResponseMessage> GetModel()
+        {
+            BookingModel booking = null;
+            try
+            {
+                booking = await _bookingservice.GetModel();
+            }
+            catch (HttpRequestException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+            catch (SecurityException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, ex.Message);
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message);
+            }
+            catch (ValidationErrorsException ex)
+            {
+                var errorMessages = ex.ValidationErrors.Select(x => x.ErrorMessage);
+
+                var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
+
+                Trace.TraceError(exceptionMessage);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, exceptionMessage);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.Created, booking, new JsonMediaTypeFormatter());
+        }
+
+        /// <summary>
         /// It will add a booking to the service including the payment.
         /// </summary>
         /// <param name="model">Booking</param>

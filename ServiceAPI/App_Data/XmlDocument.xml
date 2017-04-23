@@ -530,6 +530,13 @@
             <param name="id">The id of the booking</param>
             <returns>The booking</returns>
         </member>
+        <member name="M:ServiceAPI.Controllers.BookingController.GetModel">
+            <summary>
+            It will retrieve the booking after passing the id.
+            </summary>
+            <param name="id">The id of the booking</param>
+            <returns>The booking</returns>
+        </member>
         <member name="M:ServiceAPI.Controllers.BookingController.Add(ACP.Business.Models.BookingModel)">
             <summary>
             It will add a booking to the service including the payment.

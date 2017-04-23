@@ -10,6 +10,8 @@ namespace ACP.Data
     {
         public string Name { get; set; }
 
+        public int BookingEntityId { get; set; }
+
         public virtual BookingEntity BookingEntity { get; set; }      
     }
 }
