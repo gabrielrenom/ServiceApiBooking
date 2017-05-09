@@ -110,5 +110,40 @@ namespace ACP.Business.Services
             }
             return quoteresult;
         }
+
+        public async Task<QuoteModel> GetQuoteWithPriceByBookingEntityId(int bookingEntityId, DateTime pickup, DateTime dropoff)
+        {
+            QuoteModel quoteresult = new QuoteModel
+            {
+                 Dropoff = dropoff,
+                  Pickup = pickup, 
+                  Pricing = new List<ItemPriceModel>()
+            };
+
+            if (pickup < dropoff)
+            {
+                try
+                {
+                    var list = _bookingPricingManager.GetAllPricesByBookEntity(bookingEntityId, pickup, dropoff);//_bookingPricingManager.GetAllPrices().Where(x => quote.Pickup>x.Start  && quote.Dropoff<x.End ).ToList();
+
+                    foreach (var item in list)
+                    {
+                        double days = Math.Round((dropoff - pickup).TotalDays);
+                        quoteresult.PickupLocation = new LocationModel { Name = item.BookingEntity.Name, Address = item.BookingEntity.Address, Id = item.BookingEntity.Id };
+                        quoteresult.Pricing.Add(new ItemPriceModel
+                        {
+                            Price = item.DayPrices.Where(x => x.Day == days).FirstOrDefault().Dayprice,
+                            PriceModel = item
+                        });
+                        quoteresult.Price = item.DayPrices.Where(x => x.Day == days).FirstOrDefault().Dayprice;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string e = ex.ToString();
+                }
+            }
+            return quoteresult;
+        }
     }
 }

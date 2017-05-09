@@ -301,8 +301,11 @@
       <DependentUpon>201506172108029_h.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AddressView.cs" />
     <Compile Include="Models\AddressViewModel.cs" />
     <Compile Include="Models\QuoteModel.cs" />
+    <Compile Include="Models\QuoteModelView.cs" />
+    <Compile Include="Models\ResultsView.cs" />
     <Compile Include="Models\RootBookingPropertyViewModel.cs" />
     <Compile Include="Models\AvailabilityViewModel.cs" />
     <Compile Include="Models\BookingPricingViewModel.cs" />
@@ -431,6 +434,7 @@
     <Content Include="Views\UserAdmin\Create.cshtml" />
     <Content Include="Views\UserAdmin\Details.cshtml" />
     <Content Include="Views\UserAdmin\Delete.cshtml" />
+    <Content Include="Views\BookingAdmin\Results.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Administration\" />

@@ -9,6 +9,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Collections;
 using System.Collections.ObjectModel;
+using ServiceAPI.Models;
+using ACP.Business.Services.Interfaces;
 
 namespace ServiceAPI.Controllers
 {
@@ -17,16 +19,159 @@ namespace ServiceAPI.Controllers
         BookingController _bookingcontroller;
         CarParkController _carparkcontroller;
         AirportController _airportcontroller;
-        
+        QuoteController _quotecontroller;
 
 
-        public BookingAdminController(BookingController bookingcontroller, AirportController airportcontroller, CarParkController carparkcontroller)
+
+        public BookingAdminController(BookingController bookingcontroller, AirportController airportcontroller, CarParkController carparkcontroller, QuoteController quotecontroller)
         {
             _bookingcontroller = bookingcontroller;
             _carparkcontroller = carparkcontroller;
             _airportcontroller = airportcontroller;
+            _quotecontroller = quotecontroller;
 
         }
+
+        private BookingModel ToBookingModel(BookingModel model)
+        {
+            //## The client books but it is flaged to false,
+            //## Only when he pays it is flagged to true
+            BookingModel bookingModel = new BookingModel();
+
+            bookingModel.User = new UserModel
+            {
+                Created = DateTime.Now,
+                CreatedBy = model.Customer.Email,
+                Modified = DateTime.Now,
+                ModifiedBy = model.Customer.Email,
+                Email = model.Customer.Email,
+                FirstName = model.Customer.Forename,
+                LastName = model.Customer.Surname,
+                Gender = model.Customer.Title.ToLower().Contains('s') ? ACP.Business.Enums.Gender.Female : ACP.Business.Enums.Gender.Male,
+                DOB = DateTime.Now,
+
+            };
+
+
+            //if (model.CreditCardType != null)
+            //{
+            //    CreditCardTypes creditcardtype = CreditCardTypes.Visa;
+            //    if (model.CreditCardType.ToLower() == "visa") creditcardtype = CreditCardTypes.Visa;
+            //    else if (model.CreditCardType.ToLower() == "maestro") creditcardtype = CreditCardTypes.Maestro;
+            //    else if (model.CreditCardType.ToLower() == "mastercard") creditcardtype = CreditCardTypes.Mastercard;
+            //    else if (model.CreditCardType.ToLower() == "americanexpress") creditcardtype = CreditCardTypes.AmericanExpress;
+
+            //    bookingModel.Payments = model.CreditCardType != null ? new Collection<PaymentModel>
+            //    {
+            //        new PaymentModel{ CreditCard = new CreditCardModel{ ExpiryDate = new DateTime(Convert.ToInt32(model.ExpiryYear), Convert.ToInt32(model.ExpiryMonth), 1),
+            //            Created = DateTime.Now,
+            //            CreatedBy = "System",
+            //            Deleted = false,
+            //            Name = model.CardName,
+            //            Modified =DateTime.Now,
+            //            ModifiedBy = "System",
+            //            Number = model.CardNumber,
+            //            Type =creditcardtype,
+            //            PlainNumber = model.CardNumber,
+
+            //        },
+            //         CreatedBy = "System",
+            //         Status = StatusType.Paid,
+            //         Modified = DateTime.Now,
+            //         ModifiedBy = "System",
+            //         Created = DateTime.Now,
+            //         CurrencyId = 1,
+            //         PaymentMethod = PaymentMethod.CreditCard
+            //    }
+            //} : null;
+            //}
+            bookingModel.Car = new CarModel
+            {
+                Created = DateTime.Now,
+                CreatedBy = model.Customer.Email,
+                Modified = DateTime.Now,
+                ModifiedBy = model.Customer.Email,
+                Model = model.Car.Model,
+                Make = model.Car.Make,
+                Registration = model.Car.Registration,
+                Colour = model.Car.Colour,
+                User = new UserModel
+                {
+                    Address = new AddressModel
+                    {
+                        Created = DateTime.Now,
+                        CreatedBy = model.Customer.Email,
+                        Modified = DateTime.Now,
+                        ModifiedBy = model.Customer.Email,
+                    },
+                    Created = DateTime.Now,
+                    CreatedBy = model.Customer.Email,
+                    Modified = DateTime.Now,
+                    ModifiedBy = model.Customer.Email,
+                    Email = model.Customer.Email,
+                    FirstName = model.Customer.Forename,
+                    LastName = model.Customer.Surname,
+                    Gender = model.Customer.Title.ToLower().Contains('s') ? ACP.Business.Enums.Gender.Female : ACP.Business.Enums.Gender.Male
+                }
+            };
+
+            bookingModel.TravelDetails = new TravelDetailsModel
+            {
+                Created = DateTime.Now,
+                CreatedBy = model.Customer.Email,
+                Modified = DateTime.Now,
+                ModifiedBy = model.Customer.Email,
+                OutboundDate = model.TravelDetails.OutboundDate,
+                ReturnDate = model.TravelDetails.ReturnDate,
+                OutboundFlight = model.TravelDetails.OutboundFlight,
+                OutboundTerminal = model.TravelDetails.OutboundTerminal,
+                ReturnboundTerminal = model.TravelDetails.ReturnboundTerminal,
+                ReturnFlight = model.TravelDetails.ReturnFlight,
+            };
+
+            bookingModel.Cost = Convert.ToDouble(model.Price);
+            bookingModel.StartDate = model.TravelDetails.OutboundDate;
+            bookingModel.EndDate = model.TravelDetails.ReturnDate;
+            bookingModel.Status = ACP.Business.Enums.StatusType.Processing;
+            bookingModel.Modified = DateTime.Now;
+            bookingModel.Extras = new List<ExtraModel>
+            {
+                //new ExtraModel {
+                //    Created = DateTime.Now,
+                //    CreatedBy = model.Customer.Email,
+                //    Modified = DateTime.Now,
+                //    ModifiedBy = model.Customer.Email,
+                //    BookingEntityId = model.Extras.ookEntityId,
+                //    Name = "Parking",
+                //    Price = model.Price
+                //}
+            };
+
+            bookingModel.Customer = new CustomerModel
+            {
+                Email = model.Customer.Email,
+                Initials = model.Customer.Title,
+                Forename = model.Customer.Forename,
+                Surname = model.Customer.Surname,
+                Mobile = model.Customer.Mobile,
+                Created = DateTime.Now,
+                Modified = DateTime.Now,
+                Address = new AddressModel
+                {
+                    Created = DateTime.Now,
+                    CreatedBy = model.Customer.Email,
+                    Modified = DateTime.Now,
+                    ModifiedBy = model.Customer.Email,
+                    Address1 = model.Customer.Address.Address1,
+                    City = model.Customer.Address.Address1,
+                    Postcode = model.Customer.Address.Postcode
+                }
+            };
+
+            bookingModel.Status = ACP.Business.Enums.StatusType.Processing;
+            return bookingModel;
+        }
+
 
         // GET: BookingAdmin
         public async Task<ActionResult> Index()
@@ -199,10 +344,10 @@ namespace ServiceAPI.Controllers
                     return View();
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 await FillDropBoxes();
-
+                
                 return View("Create");
             }
 
@@ -488,5 +633,83 @@ namespace ServiceAPI.Controllers
             ViewBag.airportlist = airportlist;
             
         }
+
+        [HttpGet]
+        [Route("results")]
+        public async Task<ActionResult> Results(QuoteModelView model)
+        {
+            ViewBag.Searched = model;
+            //if (ModelState.IsValid)
+            //{
+                try
+                {
+                    if (model != null)
+                    {
+                        QuoteModel quotemodel = new QuoteModel();
+                        _quotecontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                        _quotecontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                        var result = await _quotecontroller.GetQuoteWithPriceByCarcarkIdAndDates(model.Id, Convert.ToDateTime(model.ReturnDate), Convert.ToDateTime(model.DropOffDate));
+
+                        result.TryGetContentValue<QuoteModel>(out quotemodel);
+
+                        return Json(quotemodel, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.ToString());
+
+                }
+            //}
+            return Json(null);
+        }
+
+        private List<ResultsView> ToResultsView(QuoteModel model, QuoteModelView quote)
+        {
+            List<ResultsView> domainModel = new List<ResultsView>();
+
+            domainModel = model.Pricing != null ? model.Pricing.Select(x => new ResultsView
+            {
+                Address = x.PriceModel.BookingEntity.Address != null ? new AddressView
+                {
+                    Address1 = x.PriceModel.BookingEntity.Address.Address1,
+                    Address2 = x.PriceModel.BookingEntity.Address.Address2,
+                    City = x.PriceModel.BookingEntity.Address.City,
+                    Country = x.PriceModel.BookingEntity.Address.Country,
+                    County = x.PriceModel.BookingEntity.Address.County,
+                    Number = x.PriceModel.BookingEntity.Address.Number,
+                    Postcode = x.PriceModel.BookingEntity.Address.Postcode
+                } : new AddressView(),
+                Price = x.Price,
+                Company = x.PriceModel.BookingEntity.Name,
+                CompanyLogo = x.PriceModel.BookingEntity.Image == null ? new byte[] { } : x.PriceModel.BookingEntity.Image,
+                Description = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "description").FirstOrDefault() != null ? x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "description").FirstOrDefault().Value : "",
+                DistanceFromAirport = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "airportdistance").FirstOrDefault() != null ? (decimal?)Convert.ToDecimal(x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "airportdistance").FirstOrDefault().Value) : null,
+                TransferTime = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "transfer").FirstOrDefault() != null ? (decimal?)Convert.ToDecimal(x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "transfer").FirstOrDefault().Value) : 0,
+                IsRegularTransfers = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "isregulartransfers").FirstOrDefault() != null ? (bool)Convert.ToBoolean(x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "isregulartransfers").FirstOrDefault().Value) : false,
+                IsFamilyFriendly = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "isfamilyfriendly").FirstOrDefault() != null ? (bool)Convert.ToBoolean(x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "isfamilyfriendly").FirstOrDefault().Value) : false,
+                IsRetainKeys = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "isretainkeys").FirstOrDefault() != null ? (bool)Convert.ToBoolean(x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "isretainkeys").FirstOrDefault().Value) : false,
+                Is24hSecurity = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "isretainkeys").FirstOrDefault() != null ? (bool)Convert.ToBoolean(x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "is24security").FirstOrDefault().Value) : false,
+                IsParkAndRide = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "parkandride").FirstOrDefault() != null ? (bool)Convert.ToBoolean(x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "parkandride").FirstOrDefault().Value) : false,
+                IsMeetAndGreet = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "meetandgreet").FirstOrDefault() != null ? (bool)Convert.ToBoolean(x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "meetandgreet").FirstOrDefault().Value) : false,
+                IsOnAirport = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "onairport").FirstOrDefault() != null ? (bool)Convert.ToBoolean(x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "onairport").FirstOrDefault().Value) : false,
+                Summary = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "summary").FirstOrDefault() != null ? x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "summary").FirstOrDefault().Value : "",
+                Id = x.PriceModel.BookingEntity.Id,
+                Important = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "important").FirstOrDefault() != null ? x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "important").FirstOrDefault().Value : "",
+                FullString = x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "fullstring").FirstOrDefault() != null ? x.PriceModel.BookingEntity.Properties.Where(y => y.Key.ToLower() == "fullstring").FirstOrDefault().Value : "",
+                //Reviews = x.PriceModel.BookingEntity.Reviews != null ? x.PriceModel.BookingEntity.Reviews.Select(u => new ReviewView
+                //{
+                //    ClientName = u.Author,
+                //    Subject = u.Subject,
+                //    PublicationDate = (DateTime)u.Created,
+                //    Review = u.Comments,
+                //    Rating = u.Rating
+                //}).ToList() : null,
+                Quote = quote
+            }).ToList() : null;
+
+            return domainModel;
+        }
+
     }
 }
