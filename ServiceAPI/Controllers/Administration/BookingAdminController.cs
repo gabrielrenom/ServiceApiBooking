@@ -229,7 +229,7 @@ namespace ServiceAPI.Controllers
             }
 
 
-            return View();
+            return View(model);
         }
 
         // POST: BookingAdmin/Create
@@ -304,7 +304,7 @@ namespace ServiceAPI.Controllers
                         Modified = DateTime.Now,
                         CreatedBy = model.Customer.Forename + " " + model.Customer.Surname,
                         ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname,
-                        DOB= model.User.DOB                       
+                        //DOB= model.User.DOB                       
                     };
 
                     model.Created = DateTime.Now;

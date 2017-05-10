@@ -39,7 +39,7 @@
                                         ACP.Business.Models.BookingEntityModel item = ((List<ACP.Business.Models.BookingEntityModel>)ViewBag.carparkslist)[i];
                                        <option value="@item.Id">@item.RootBookingEntity.Name->@item.Name</option>
                                     }
-
+                                    <option value="0" selected>--Select Airport/Carpark--</option>
                                 </select>
 
                             </div>
@@ -442,24 +442,27 @@
     });
     $("#carpark").change(function () {
         var value = $(this).val();
-        $.ajax({
-            url: 'Results',
-            type: 'GET',
-            data: {
-                Id: '1',
-                DropOffDate: $('#EndDate').val(),
-                ReturnDate: $('#StartDate').val()
-            },
-            success: function (data)
-            {
-                $("#Price").val(data.Pricing[0].Price);
-                $("#currentprice").html("Total Price:  £" + data.Pricing[0].Price);
-            },
-            error: function (error)
-            {
-                alert(error);
-            }
-        });
+        if (value !== 0) {
+            $("#Price").val(0);
+            $("#currentprice").html("");
+
+            $.ajax({
+                url: 'Results',
+                type: 'GET',
+                data: {
+                    Id: value,
+                    DropOffDate: $('#EndDate').val(),
+                    ReturnDate: $('#StartDate').val()
+                },
+                success: function (data) {
+                    $("#Price").val(data.Pricing[0].Price);
+                    $("#currentprice").html("Total Price:  £" + data.Pricing[0].Price);
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            });
+        }
     });
 
 
