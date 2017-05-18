@@ -33,5 +33,6 @@ namespace ACP.Business.Models
         public virtual CarModel Car { get; set; }
 
         public virtual ICollection<BookingLinkModel> BookingLink { get; set; }
+      
     }
 }

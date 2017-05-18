@@ -144,7 +144,7 @@ namespace ServiceAPI.Controllers
                 {
                     int carparkid = Convert.ToInt32(collection["carpark"]);
                     List <DayPriceModel> days = new List<DayPriceModel>();
-                    for (int i = 1;i < 31; days.Add(new DayPriceModel { Day = i, Dayprice = Convert.ToDecimal(collection[Convert.ToString(i++)]), Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser }))  ;
+                    for (int i = 1;i < 29; days.Add(new DayPriceModel { Day = i, Dayprice = Convert.ToDecimal(collection[Convert.ToString(i++)]), Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser }))  ;
                     prices.Add(new BookingPricingModel
                     {
                          BookingEntityId= carparkid,

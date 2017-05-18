@@ -232,7 +232,7 @@ namespace ServiceAPI.Controllers
             BookingModel booking = null;
             try
             {                
-                booking = await _bookingservice.Add(model);
+                booking = await _bookingservice.AddAsync(model);
             }
             catch (HttpRequestException ex)
             {
@@ -361,5 +361,7 @@ namespace ServiceAPI.Controllers
             return Request.CreateResponse(HttpStatusCode.Created, booking, new JsonMediaTypeFormatter());
         }
 
+        public async Task<bool> Paid(int id) => (await _bookingservice.Paid(id));
+       
     }
 }

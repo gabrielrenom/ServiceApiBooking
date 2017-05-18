@@ -155,7 +155,7 @@ namespace ServiceAPI.Controllers
                     else
                     {
                         await FillDropBoxes();
-                        return View();
+                        return View(model);
                     }
                 }
             }
@@ -181,15 +181,15 @@ namespace ServiceAPI.Controllers
                 var exceptionMessage = string.Concat("The request is invalid: ", string.Join("; ", errorMessages));
 
                 Trace.TraceError(exceptionMessage);
-                return View(ex.Message);
+                return View(model);
             }
             catch (Exception ex)
             {
                 Trace.TraceError(ex.Message);
                 return View(ex.Message);
             }
-
-            return View("index");
+            await FillDropBoxes();
+            return View(model);
         }
 
         // GET: CarparkAdmin/Edit/5
@@ -238,6 +238,7 @@ namespace ServiceAPI.Controllers
                 return View(ex.Message);
             }
 
+            await FillDropBoxes();
             return View(carpark);
 
         }

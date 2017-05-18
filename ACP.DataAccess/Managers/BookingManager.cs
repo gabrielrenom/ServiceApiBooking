@@ -602,10 +602,10 @@ namespace ACP.DataAccess.Managers
                 CreatedBy = domainModel.Car.CreatedBy,
                 ModifiedBy = domainModel.Car.ModifiedBy,
                 Modified = domainModel.Car.Modified,
-                UserId = domainModel.Car.UserId,                 
+                UserId = domainModel.Car.UserId,
                 //User = domainModel.Car.User != null ? new User
-                //{                    
-                //    Id= domainModel.Id,
+                //{
+                //    Id = domainModel.Id,
                 //    Address = null,
                 //    Created = domainModel.Car.User.Created,
                 //    CreatedBy = domainModel.Car.User.CreatedBy,

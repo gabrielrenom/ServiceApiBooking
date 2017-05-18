@@ -11,25 +11,28 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using ServiceAPI.Models;
 using ACP.Business.Services.Interfaces;
+using System.Configuration;
+using ACP.Business.Enums;
 
 namespace ServiceAPI.Controllers
 {
     public class BookingAdminController : Controller
     {
-        BookingController _bookingcontroller;
-        CarParkController _carparkcontroller;
-        AirportController _airportcontroller;
-        QuoteController _quotecontroller;
+        private BookingController _bookingcontroller;
+        private CarParkController _carparkcontroller;
+        private AirportController _airportcontroller;
+        private QuoteController _quotecontroller;
+        private IPayPalService _paypalservice;
 
 
 
-        public BookingAdminController(BookingController bookingcontroller, AirportController airportcontroller, CarParkController carparkcontroller, QuoteController quotecontroller)
+        public BookingAdminController(BookingController bookingcontroller, AirportController airportcontroller, CarParkController carparkcontroller, QuoteController quotecontroller, IPayPalService paypalservice)
         {
             _bookingcontroller = bookingcontroller;
             _carparkcontroller = carparkcontroller;
             _airportcontroller = airportcontroller;
             _quotecontroller = quotecontroller;
-
+            _paypalservice = paypalservice;
         }
 
         private BookingModel ToBookingModel(BookingModel model)
@@ -238,20 +241,9 @@ namespace ServiceAPI.Controllers
         {
             try
             {
-             
-
                 BookingModel booking = new BookingModel();
                 if (ModelState.IsValid)
                 {
-                    //CurrencyModel currency = new CurrencyModel {
-                    //     Code="GBP",
-                    //     Symbol="£",
-                    //     CountryCode="GB",
-                    //     Created = DateTime.Now,
-                    //     Modified = DateTime.Now,
-                    //     CreatedBy = model.Customer.Forename + " " + model.Customer.Surname,
-                    //     ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname                         
-                    //    };
                     model.Payments = new List<PaymentModel>();
                     PaymentModel payment = new PaymentModel();
                     payment.Created = DateTime.Now;
@@ -274,7 +266,7 @@ namespace ServiceAPI.Controllers
                         bankaccount.Modified = DateTime.Now;
                         bankaccount.CreatedBy = model.Customer.Forename + " " + model.Customer.Surname;
                         bankaccount.ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname;
-
+                        payment.PaymentMethod = PaymentMethod.CreditCard;
                         payment.BankAccount = bankaccount;
                     }
                     else
@@ -284,15 +276,15 @@ namespace ServiceAPI.Controllers
                         creditcard.Type = (ACP.Business.Enums.CreditCardTypes) Convert.ToInt32(paymentform["ccardtype"]);
                         creditcard.Name = paymentform["ccname"];
                         creditcard.Number = paymentform["ccnumber"];
-                        creditcard.ExpiryDate = Convert.ToDateTime(paymentform["ccexpirydate"]);
+                        creditcard.ExpiryDate = new DateTime(Convert.ToInt32(paymentform["year"]), Convert.ToInt32(paymentform["month"]), 1); 
                         creditcard.GateWayKey = paymentform["cccsv"];
                         creditcard.Created = DateTime.Now;
                         creditcard.Modified = DateTime.Now;
                         creditcard.CreatedBy = model.Customer.Forename + " " + model.Customer.Surname;
                         creditcard.ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname;
-
+                        payment.PaymentMethod=PaymentMethod.CreditCard;
                         payment.CreditCard = creditcard;
-                        
+                        creditcard.Type = (CreditCardTypes)Convert.ToInt32(paymentform["ccardtype"]);
                     }
                     model.Payments.Add(payment);
 
@@ -304,7 +296,7 @@ namespace ServiceAPI.Controllers
                         Modified = DateTime.Now,
                         CreatedBy = model.Customer.Forename + " " + model.Customer.Surname,
                         ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname,
-                        //DOB= model.User.DOB                       
+                        DOB = DateTime.Now
                     };
 
                     model.Created = DateTime.Now;
@@ -321,16 +313,50 @@ namespace ServiceAPI.Controllers
                     model.Car.Modified = DateTime.Now;
                     model.Car.CreatedBy = model.Customer.Forename + " " + model.Customer.Surname;
                     model.Car.ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname;
+                    model.Car.User = new UserModel
+                    {
+                        FirstName = model.Customer.Forename,
+                        LastName = model.Customer.Surname,
+                        Created = DateTime.Now,
+                        Modified = DateTime.Now,
+                        CreatedBy = model.Customer.Forename + " " + model.Customer.Surname,
+                        ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname,
+                        DOB= DateTime.Now                      
+                    };
 
                     model.Customer.Created = DateTime.Now;
                     model.Customer.Modified = DateTime.Now;
                     model.Customer.CreatedBy = model.Customer.Forename + " " + model.Customer.Surname;
                     model.Customer.ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname;
 
+                    model.Extras = new List<ExtraModel>
+                    {
+                        new ExtraModel
+                        {
+                            BookingEntityId = Convert.ToInt32(paymentform["carpark"]),
+                            Name="Parking",
+                            Price =model.Price
+                        }
+                    };
+                    model.Cost = Convert.ToDouble(model.Price);
+
                     _bookingcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
                     _bookingcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
-                    model.SourceCode = paymentform["airport"];
+                   // model.SourceCode = paymentform["airport"];
+
                     var result = await _bookingcontroller.Add(model);
+
+                    result.TryGetContentValue(out booking);
+
+                    
+                    //var paymentresult = _paypalservice.PaymentWithCreditCard(ToPayPalModel(booking,model), Models.Configuration.GetAPIContext());
+                    //var paymentresult = _paypalservice.PaymentWithCreditCard(ToPayPalModel(booking, model), null);
+
+                    //if (paymentresult == "approved")
+                    //{
+                        var havebeenpaid = (await _bookingcontroller.Paid(booking.Id));
+                        //if (havebeenpaid) return RedirectToAction("paymentcompleted", ToBookingConfirmationView(model, result.BookingReference));
+                    //}
 
                     result.TryGetContentValue(out booking);
 
@@ -341,7 +367,7 @@ namespace ServiceAPI.Controllers
                 {
                     await FillDropBoxes();
                             
-                    return View();
+                    return View(model);
                 }
             }
             catch (Exception ex)
@@ -352,6 +378,74 @@ namespace ServiceAPI.Controllers
             }
 
             return View("Create");
+        }
+
+        private PayPalModel ToPayPalModel(BookingModel booking, BookingModel model)
+        {
+            var paypal = new PayPalModel
+            {
+                FirstName = model.Customer.Forename,
+                LastName = model.Customer.Surname,
+                Currency = "GBP",
+                Description = model.Message,
+                Name = booking.Customer.Forename + " " + booking.Customer.Surname,
+                Total = Convert.ToString(model.Price),
+                Number = model.Payments.FirstOrDefault().CreditCard.Number,
+                BillingAddressCity = model.Customer.Address.City,
+                BillingAddressCountry = "UK",
+                BillingAddressLine1 = model.Customer.Address.Address1,
+                BillingAddressPostCode = model.Customer.Address.Postcode,
+                BillingAddressState = "",
+                Price = model.Price.ToString(),
+                Quantity = 1,
+                ExpireYear = model.Payments.FirstOrDefault().CreditCard.ExpiryDate.Year.ToString(),
+                ExpireMonth = Convert.ToInt32(model.Payments.FirstOrDefault().CreditCard.ExpiryDate.Month).ToString(),
+                CVV2 = model.Payments.FirstOrDefault().CreditCard.GateWayKey,
+                SKU = "123",
+                InvoiceNumber = new Random().Next(1000, 10000).ToString()
+            };
+            if (model.Payments.FirstOrDefault().CreditCard.Type.ToString() == "0")
+                paypal.Type = "visa";
+            else if (model.Payments.FirstOrDefault().CreditCard.Type.ToString() == "1")
+                paypal.Type = "mastercard";
+            else if (model.Payments.FirstOrDefault().CreditCard.Type.ToString() == "2")
+                paypal.Type = "americanexpress";
+
+            return paypal;
+        }
+
+        private PayPalModel ToPayPalModel(BookingGuestViewModel model)
+        {
+            var paypal = new PayPalModel
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Currency = "GBP",
+                Description = model.Description,
+                Name = model.CardName,
+                Total = Convert.ToString(model.Price + model.BookingFee),
+                Number = model.CardNumber,
+                BillingAddressCity = model.City,
+                BillingAddressCountry = "UK",
+                BillingAddressLine1 = model.Address,
+                BillingAddressPostCode = model.Postcode,
+                BillingAddressState = "",
+                Price = model.Price.ToString(),
+                Quantity = 1,
+                ExpireYear = model.ExpiryYear,
+                ExpireMonth = Convert.ToInt32(model.ExpiryMonth).ToString(),
+                CVV2 = model.CVV,
+                SKU = "123",
+                InvoiceNumber = new Random().Next(1000, 10000).ToString()
+            };
+            if (model.CreditCardType == "0")
+                paypal.Type = "visa";
+            else if (model.CreditCardType == "1")
+                paypal.Type = "mastercard";
+            else if (model.CreditCardType == "2")
+                paypal.Type = "americanexpress";
+
+            return paypal;
         }
 
         // GET: BookingAdmin/Edit/5
@@ -584,7 +678,7 @@ namespace ServiceAPI.Controllers
             ViewBag.cctype = cctypelist;
 
             var paymenttypelist = new List<SelectListItem>();
-            paymenttypelist.Add(new SelectListItem() { Text = "Bank Account", Value = "101",Selected = creditcard != null ? true : false });
+            //paymenttypelist.Add(new SelectListItem() { Text = "Bank Account", Value = "101",Selected = creditcard != null ? true : false });
             paymenttypelist.Add(new SelectListItem() { Text = "Credit Card", Value = "100", Selected = creditcard !=null ? true : false });
             ViewBag.paymenttype = paymenttypelist;
 

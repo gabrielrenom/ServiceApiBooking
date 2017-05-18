@@ -20,59 +20,65 @@
                         <h3 class="text-success"><i class="fa fa-fw fa-calendar"></i>Booking Dates</h3>
 
                         <div role="form">
-                            <div class="form-group">
+                            @*<div class="form-group">
                                 <label>
                                     Airport
                                 </label>
 
                                 @Html.DropDownList("airport", (IEnumerable<SelectListItem>)ViewBag.airportlist, "-- Please Select --", new { @class = "form-control" })
-                            </div>
-                            <div class="form-group">
-                                <label>
-                                    Airport/Carpark
-                                </label>
+                            </div>*@
+                            <div class="price-calculation">
+                                <div class="form-group">
+                                    <label>
+                                        Airport/Carpark
+                                    </label>
 
-                                <select class="form-control" id="carpark" name="carpark">
+                                    <select class="form-control" id="carpark" name="carpark">
 
-                                    @for (int i = 0; i < ((List<ACP.Business.Models.BookingEntityModel>)ViewBag.carparkslist).Count; i++)
-                                    {
-                                        ACP.Business.Models.BookingEntityModel item = ((List<ACP.Business.Models.BookingEntityModel>)ViewBag.carparkslist)[i];
-                                       <option value="@item.Id">@item.RootBookingEntity.Name->@item.Name</option>
-                                    }
-                                    <option value="0" selected>--Select Airport/Carpark--</option>
-                                </select>
+                                        @for (int i = 0; i < ((List<ACP.Business.Models.BookingEntityModel>)ViewBag.carparkslist).Count; i++)
+                                        {
+                                            ACP.Business.Models.BookingEntityModel item = ((List<ACP.Business.Models.BookingEntityModel>)ViewBag.carparkslist)[i];
+                                            <option value="@item.Id">@item.RootBookingEntity.Name->@item.Name</option>
+                                        }
+                                        <option value="0" selected>--Select Airport/Carpark--</option>
+                                    </select>
 
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Start Date
+                                    </label>
+                                    @Html.TextBoxFor(model => model.StartDate, "{0:s}", new { @class = "form-control", placeholder = "OpeningDoor", type = "datetime-local", @Value = @DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss") })
+                                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        End Date
+                                    </label>
+                                    @Html.TextBoxFor(model => model.EndDate, "{0:s}", new { @class = "form-control", placeholder = "OpeningDoor", type = "datetime-local", @Value = @DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm:ss") })
+                                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>
-                                    Start Date
-                                </label>
-                                @Html.TextBoxFor(model => model.StartDate, "{0:s}", new { @class = "form-control", placeholder = "OpeningDoor", type = "datetime-local", @Value = @DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss") })
-                                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group">
-                                <label>
-                                    End Date
-                                </label>
-                                @Html.TextBoxFor(model => model.EndDate, "{0:s}", new { @class = "form-control", placeholder = "OpeningDoor", type = "datetime-local", @Value = @DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm:ss") })
-                                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group">
+
+                            @*<div class="form-group status-selected">
                                 <label>
                                     Status
                                 </label>
                                 @Html.DropDownList("airport", (IEnumerable<SelectListItem>)ViewBag.statuses, "-- Please Select --", new { @class = "form-control" })
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">
+                            </div>*@
+                            <div class="form-group message-selected">
+                                <label for="exampleInputEmail1">t
                                     Message
                                 </label>
                                 <textarea class="form-control" style="min-width: 100%" id="Message" Name="Message" rows="5"></textarea>
                                 @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
                             </div>
+                            <div class="form-group">
+                                <h1 id="currentprice" class="text-success"></h1>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 traveldetails-selected">
                         <h3 class="text-success"><i class="fa fa-fw fa-car"></i>Travel details</h3>
                         <div role="form">
                             <div class="form-group">
@@ -119,7 +125,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 cardetails-selected">
                         <h3 class="text-success"><i class="fa fa-fw fa-credit-card"></i>Car details</h3>
                         <div role="form">
                             <div class="form-group">
@@ -150,14 +156,17 @@
                                 @Html.EditorFor(model => model.Car.Registration, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: A3456DF", type = "text" } })
                                 @Html.ValidationMessageFor(model => model.Car.Registration, "", new { @class = "text-danger" })
                             </div>
+                            
                             <div class="form-group">
-                               
-                                <h1 id="currentprice" class="text-success"></h1>
+                                @if (@Model.BookingReference != null)
+                                {
+                                <h1 class="text-success">Booking Reference:@Model.BookingReference</h1>
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
-                
+            <div class="customer-selected">
                 <div class="row">
                     <div class="col-md-6">
                         <h3 class="text-success"><i class="fa fa-fw fa-street-view"></i>Customer</h3>
@@ -177,11 +186,29 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-4">
+                                    @Html.LabelFor(model => model.Customer.Initials, htmlAttributes: new { @class = "control-label col-md-2" })
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Customer.Initials, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: S ", type = "text" } })
+                                    @Html.ValidationMessageFor(model => model.Customer.Initials, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4">
                                     @Html.LabelFor(model => model.Customer.Forename, htmlAttributes: new { @class = "control-label col-md-2" })
                                 </div>
                                 <div class="col-md-8">
                                     @Html.EditorFor(model => model.Customer.Forename, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: Michael", type = "text" } })
                                     @Html.ValidationMessageFor(model => model.Customer.Forename, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    @Html.LabelFor(model => model.Customer.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Customer.Surname, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: Smith", type = "text" } })
+                                    @Html.ValidationMessageFor(model => model.Customer.Surname, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
@@ -193,15 +220,7 @@
                                     @Html.ValidationMessageFor(model => model.Customer.Email, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Customer.Telephone, htmlAttributes: new { @class = "control-label col-md-2" })
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Customer.Telephone, new { htmlAttributes = new { @class = "form-control", placeholder = "Telephone", type = "tel" } })
-                                    @Html.ValidationMessageFor(model => model.Customer.Telephone, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                            
                             <div class="form-group">
                                 <div class="col-md-4">
                                     @Html.LabelFor(model => model.Customer.Address.Number, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -209,6 +228,15 @@
                                 <div class="col-md-8">
                                     @Html.EditorFor(model => model.Customer.Address.Number, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: 3", type = "number" } })
                                     @Html.ValidationMessageFor(model => model.Customer.Address.Number, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    @Html.LabelFor(model => model.Customer.Address.Address1, htmlAttributes: new { @class = "control-label col-md-2" })
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Customer.Address.Address1, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: Downing Street", type = "text" } })
+                                    @Html.ValidationMessageFor(model => model.Customer.Address.Address1, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="form-group">
@@ -229,66 +257,12 @@
                                     @Html.ValidationMessageFor(model => model.Customer.Address.Postcode, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Customer.Address.Country, htmlAttributes: new { @class = "control-label col-md-2" })
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Customer.Address.Country, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: UK", type = "text" } })
-                                    @Html.ValidationMessageFor(model => model.Customer.Address.Country, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Customer.Initials, htmlAttributes: new { @class = "control-label col-md-2" })
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Customer.Initials, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: S ", type = "text" } })
-                                    @Html.ValidationMessageFor(model => model.Customer.Initials, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Customer.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Customer.Surname, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: Smith", type = "text" } })
-                                    @Html.ValidationMessageFor(model => model.Customer.Surname, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Customer.Mobile, htmlAttributes: new { @class = "control-label col-md-2" })
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Customer.Mobile, new { htmlAttributes = new { @class = "form-control", placeholder = "mobile", type = "tel" } })
-                                    @Html.ValidationMessageFor(model => model.Customer.Mobile, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Customer.Fax, htmlAttributes: new { @class = "control-label col-md-2" })
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Customer.Fax, new { htmlAttributes = new { @class = "form-control", placeholder = "Fax", type = "tel" } })
-                                    @Html.ValidationMessageFor(model => model.Customer.Fax, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Customer.Address.Address1, htmlAttributes: new { @class = "control-label col-md-2" })
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Customer.Address.Address1, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: Downing Street", type = "text" } })
-                                    @Html.ValidationMessageFor(model => model.Customer.Address.Address1, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
+                          
+                          <div class="form-group">
                                 <div class="col-md-4">
                                     @Html.LabelFor(model => model.Customer.Address.City, htmlAttributes: new { @class = "control-label col-md-2" })
                                 </div>
@@ -306,13 +280,50 @@
                                     @Html.ValidationMessageFor(model => model.Customer.Address.County, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    @Html.LabelFor(model => model.Customer.Address.Country, htmlAttributes: new { @class = "control-label col-md-2" })
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Customer.Address.Country, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: UK", type = "text" } })
+                                    @Html.ValidationMessageFor(model => model.Customer.Address.Country, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    @Html.LabelFor(model => model.Customer.Telephone, htmlAttributes: new { @class = "control-label col-md-2" })
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Customer.Telephone, new { htmlAttributes = new { @class = "form-control", placeholder = "Telephone", type = "tel" } })
+                                    @Html.ValidationMessageFor(model => model.Customer.Telephone, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    @Html.LabelFor(model => model.Customer.Mobile, htmlAttributes: new { @class = "control-label col-md-2" })
+                                </div>
+                                <div class="col-md-8">                                    
+                                    @Html.EditorFor(model => model.Customer.Mobile, new { htmlAttributes = new { @class = "form-control", placeholder = "mobile", type = "tel" } })
+                                    @Html.ValidationMessageFor(model => model.Customer.Mobile, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    @Html.LabelFor(model => model.Customer.Fax, htmlAttributes: new { @class = "control-label col-md-2" })
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Customer.Fax, new { htmlAttributes = new { @class = "form-control", placeholder = "Fax", type = "tel" } })
+                                    @Html.ValidationMessageFor(model => model.Customer.Fax, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            </div>
 
-            <div class="well">
+            <div class="well creditcard-selected">
                 <div class="row">
                     <div class="col-md-5">
                         <h3 class="text-success"><i class="fa fa-fw fa-credit-card"></i>Payments</h3>
@@ -328,7 +339,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-8 payment-selected">
                         <div class="form-horizontal">
                             <div class="form-group">
                                 <label class="control-label col-sm-2">Currency</label>
@@ -385,7 +396,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2">Number</label>
                                     <div class="col-sm-10">
-                                        <input type="number" class="form-control" name="ccnumber" placeholder="Credit Card Number" />
+                                        <input type="number" class="form-control ccnumber" name="ccnumber" placeholder="Credit Card Number" />
                                     </div>
                                 </div>
                             </div>
@@ -393,7 +404,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2">Name</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="ccname" placeholder="Credit Card Name" />
+                                        <input type="text" class="form-control ccname" name="ccname" placeholder="Credit Card Name" />
                                     </div>
                                 </div>
                             </div>
@@ -401,7 +412,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2">CSV</label>
                                     <div class="col-sm-10">
-                                        <input type="password" class="form-control" name="cccsv" placeholder="CSV" maxlength="3">
+                                        <input type="password" class="form-control cccsv" name="cccsv" placeholder="CSV" maxlength="3">
                                     </div>
                                 </div>
                             </div>
@@ -409,7 +420,10 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2">Expiry Date</label>
                                     <div class="col-sm-10">
-                                            <input type="date" class="form-control" name="ccexpirydate" placeholder="ie: 01/01/2017" />
+                                        <div class="row">
+                                            <div class="col-md-2"><input class="form-control month" type="number" name="month" placeholder="01"/></div>
+                                            <div class="col-md-2"><input class="form-control year" type="number" name="year" placeholder="2017"/></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -423,6 +437,14 @@
     </div>
 </div>
 <script>
+    $(".status-selected").hide();
+    $(".message-selected").hide();
+    $(".traveldetails-selected").hide();
+    $(".cardetails-selected").hide();
+    $(".customer-selected").hide();
+    $(".creditcard-selected").hide();
+    $(".btn.btn-primary").hide();
+    $(".payment-selected").hide();
     $("#bankdetails").hide();
     $("#creditcard").hide();
     $("#paymenttype").change(function () {
@@ -432,17 +454,26 @@
             if (str === "Credit Card") {
                 $("#bankdetails").hide();
                 $("#creditcard").show();
+                $(".payment-selected").show();
             }
-            else {
+            else if (str === "Bank Account"){
                 $("#bankdetails").show();
                 $("#creditcard").hide();
+                $(".payment-selected").show();
             }
 
         });
     });
-    $("#carpark").change(function () {
-        var value = $(this).val();
+    $(".price-calculation").change(function () {
+        var value = $("#carpark").val();
         if (value !== 0) {
+            $(".status-selected").show();
+            $(".message-selected").show();
+            $(".traveldetails-selected").show();
+            $(".cardetails-selected").show();
+            $(".customer-selected").show();
+            $(".creditcard-selected").show();
+           
             $("#Price").val(0);
             $("#currentprice").html("");
 
@@ -454,17 +485,30 @@
                     DropOffDate: $('#EndDate').val(),
                     ReturnDate: $('#StartDate').val()
                 },
-                success: function (data) {
+                success: function(data) {
                     $("#Price").val(data.Pricing[0].Price);
                     $("#currentprice").html("Total Price:  £" + data.Pricing[0].Price);
                 },
-                error: function (error) {
+                error: function(error) {
                     alert(error);
                 }
             });
+        } else if (value === 0) {
+            $(".status-selected").hide();
+            $(".message-selected").hide();
+            $(".traveldetails-selected").hide();
+            $(".cardetails-selected").hide();
+            $(".customer-selected").hide();
+            $(".creditcard-selected").hide();
+            
         }
     });
 
-
-
+    $(".creditcard-selected").change(function () {
+        if ($(".ccnumber").val() !== "" && $(".cccsv").val() !== "" && $(".month").val() !== "" && $(".year").val() !== "" && $("#ccardtype").val() !== "") {
+            $(".btn.btn-primary").show();
+        } else {
+            $(".btn.btn-primary").hide();
+        }
+    });
 </script>

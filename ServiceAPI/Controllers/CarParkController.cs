@@ -168,10 +168,11 @@ namespace ServiceAPI.Controllers
                 model.Modified = DateTime.Now;
                 if (model.Address != null)
                 {
-                    model.CreatedBy = User;
-                    model.ModifiedBy = User;
-                    model.Created = DateTime.Now;
-                    model.Modified = DateTime.Now;
+                    model.Address.CreatedBy = User;
+                    model.Address.ModifiedBy = User;
+                    model.Address.Created = DateTime.Now;
+                    model.Address.Modified = DateTime.Now;
+               
                 }
 
                 carpark = await _carparkservice.Add(model);
