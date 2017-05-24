@@ -1,15 +1,7 @@
-﻿@model ACP.Business.Models.BookingPricingModel
+﻿@using ServiceAPI.Helpers
+@model ACP.Business.Models.BookingPricingModel
 
-@{
-    //## Change it in the view
-    ViewBag.actionIcon = "fa-table";
 
-    //## Action, change it in the view
-    ViewBag.actionLabel = "Edit";
-
-    Layout = "~/Views/Shared/_ActionLayout.cshtml";
-
-}
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -18,47 +10,53 @@
 
     <div class="section">
         <div class="container">
-            <hr />
-            <div class="row">
-                <div class="col-sm-2">
-                   Season Details
+            @Html.AreaHeader(Areas.Pricings, Operation.Edit)
+
+            <div class="well">
+                <div class="row">
+                    <div class="col-sm-2">
+                        Season Details
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                        </div>
+                        <div class="col-sm-2">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-sm-1">
+                            @Html.Label("Season Start", htmlAttributes: new { @class = "control-label col-md-2" })
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control text-box single-line" type="date" name="Start" id="Start" value="@if (Model != null) {@(((DateTime)Model.Start).ToString("yyyy-MM-dd")) }" />
+                            @Html.ValidationMessageFor(model => model.Start, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-sm-2">
+                            @Html.Label("Season End", htmlAttributes: new { @class = "control-label col-md-2" })
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control text-box single-line" type="date" name="End" id="End" value="@if (Model != null) {@(((DateTime)Model.End).ToString("yyyy-MM-dd")) }" />
+                            @Html.ValidationMessageFor(model => model.End, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-1">
-                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="row correct-dates">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                        <label class="text-danger">Enter the correct Start and End dates.</label>
                     </div>
-                    <div class="col-sm-2">
-                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                    </div>
-
-                    <div class="col-sm-1">
-                        @Html.Label("Season Start", htmlAttributes: new { @class = "control-label col-md-2" })
-                    </div>
-                    <div class="col-sm-2">
-                        <input class="form-control text-box single-line" type="date" name="Start" id="Start" value="@if (Model != null) {@(((DateTime)Model.Start).ToString("yyyy-MM-dd")) }" />
-                        @Html.ValidationMessageFor(model => model.Start, "", new { @class = "text-danger" })
-                    </div>
-
-                    <div class="col-sm-2">
-                        @Html.Label("Season End", htmlAttributes: new { @class = "control-label col-md-2" })
-                    </div>
-                    <div class="col-sm-2">
-                        <input class="form-control text-box single-line" type="date" name="End" id="End" value="@if (Model != null) {@(((DateTime)Model.End).ToString("yyyy-MM-dd")) }" />
-                        @Html.ValidationMessageFor(model => model.End, "", new { @class = "text-danger" })
-                    </div>
-
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <hr />
-                </div>
-            </div>
-            <div>
+
+          
+            <div class="well">
                 <div class="row">
                     <div class="form-group">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="button">1 Day</button>
@@ -67,7 +65,7 @@
                                 <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 1).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 1).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="button">2 Days</button>
@@ -76,7 +74,7 @@
                                 <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 2).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 2).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="button">3 Days</button>
@@ -85,7 +83,7 @@
                                 <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 3).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 3).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="button">4 Days</button>
@@ -94,7 +92,16 @@
                                 <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 4).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 4).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="button">5 Days</button>
@@ -103,7 +110,7 @@
                                 <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 5).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 5).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="button">6 Days</button>
@@ -112,16 +119,7 @@
                                 <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 6).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 6).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <br />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="button">7 Days</button>
@@ -130,7 +128,7 @@
                                 <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 7).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 7).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="button">8 Days</button>
@@ -139,7 +137,17 @@
                                 <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 8).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 8).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                      
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="button">9 Days</button>
@@ -148,7 +156,7 @@
                                 <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 9).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 9).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="button">10 Days</button>
@@ -157,7 +165,7 @@
                                 <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 10).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 10).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="button">11 Days</button>
@@ -166,7 +174,7 @@
                                 <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 11).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 11).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="button">12 Days</button>
@@ -175,6 +183,97 @@
                                 <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 12).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 12).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
                             </div>
                         </div>
+                       
+                    </div>
+                </div>
+               
+                <div class="row">
+                    <div class="col-md-12">
+                        <br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="button">13 Days</button>
+                                <button class="btn btn-default" type="button">£</button>
+                            </div>
+                            <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 13).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 13).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="button">14 Days</button>
+                                <button class="btn btn-default" type="button">£</button>
+                            </div>
+                            <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 14).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 14).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="button">15 Days</button>
+                                <button class="btn btn-default" type="button">£</button>
+                            </div>
+                            <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 15).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 15).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="button">16 Days</button>
+                                <button class="btn btn-default" type="button">£</button>
+                            </div>
+                            <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 16).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 16).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                           
+                        </div>
+                    </div>
+                    <div >
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default" type="button">17 Days</button>
+                                        <button class="btn btn-default" type="button">£</button>
+                                    </div>
+                                    <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 17).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 17).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default" type="button">18 Days</button>
+                                        <button class="btn btn-default" type="button">£</button>
+                                    </div>
+                                    <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 18).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 18).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default" type="button">19 Days</button>
+                                        <button class="btn btn-default" type="button">£</button>
+                                    </div>
+                                    <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 19).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 19).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default" type="button">20 Days</button>
+                                        <button class="btn btn-default" type="button">£</button>
+                                    </div>
+                                    <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 20).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 20).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -184,88 +283,7 @@
                 </div>
                 <div class="row">
                     <div class="form-group">
-                        <div class="col-md-2">
-                            <div class="input-group">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-default" type="button">13 Days</button>
-                                    <button class="btn btn-default" type="button">£</button>
-                                </div>
-                                <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 13).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 13).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="input-group">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-default" type="button">14 Days</button>
-                                    <button class="btn btn-default" type="button">£</button>
-                                </div>
-                                <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 14).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 14).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="input-group">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-default" type="button">15 Days</button>
-                                    <button class="btn btn-default" type="button">£</button>
-                                </div>
-                                <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 15).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 15).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="input-group">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-default" type="button">16 Days</button>
-                                    <button class="btn btn-default" type="button">£</button>
-                                </div>
-                                <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 16).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 16).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="input-group">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-default" type="button">17 Days</button>
-                                    <button class="btn btn-default" type="button">£</button>
-                                </div>
-                                <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 17).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 17).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="input-group">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-default" type="button">18 Days</button>
-                                    <button class="btn btn-default" type="button">£</button>
-                                </div>
-                                <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 18).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 18).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <br />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            <div class="input-group">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-default" type="button">19 Days</button>
-                                    <button class="btn btn-default" type="button">£</button>
-                                </div>
-                                <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 19).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 19).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="input-group">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-default" type="button">20 Days</button>
-                                    <button class="btn btn-default" type="button">£</button>
-                                </div>
-                                <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 20).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 20).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="button">21 Days</button>
@@ -274,7 +292,7 @@
                                 <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 21).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 21).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="button">22 Days</button>
@@ -283,7 +301,7 @@
                                 <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 22).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 22).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="button">23 Days</button>
@@ -292,7 +310,7 @@
                                 <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 23).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 23).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="button">24 Days</button>
@@ -301,6 +319,7 @@
                                 <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 24).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 24).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
                             </div>
                         </div>
+                       
                     </div>
                 </div>
                 <div class="row">
@@ -310,7 +329,7 @@
                 </div>
                 <div class="row">
                     <div class="form-group">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="button">25 Days</button>
@@ -319,7 +338,7 @@
                                 <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 25).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 25).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="button">26 Days</button>
@@ -328,7 +347,7 @@
                                 <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 26).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 26).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="button">27 Days</button>
@@ -337,7 +356,7 @@
                                 <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 27).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 27).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="input-group">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="button">28 Days</button>
@@ -346,25 +365,67 @@
                                 <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 28).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 28).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
                             </div>
                         </div>
-                   
+
                     </div>
-                </div>
+                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <hr />
+                        <br />
                     </div>
                 </div>
-            </div>
-        </div>
-        <p>
-            <div class="container">
                 <div class="row">
-                    <div class="col-md-12 form-group">
-                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
-                        <input type="submit" value="Update" class="btn btn-success" />
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="button">Extra Days</button>
+                                    <button class="btn btn-default" type="button">£</button>
+                                </div>
+                                <input type="number" value="@(Model.DayPrices.Where(x => x.Day == 29).FirstOrDefault() != null ? Model.DayPrices.Where(x => x.Day == 29).FirstOrDefault().Dayprice : 0)" min="0" step="0.01" stepfactor="100" class="form-control" aria-label="...">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </p>
+
+            @Html.AreaSubmit(Areas.Pricings, Operation.Edit)
+
+
+        </div>
+      
     </div>
 }
+<script>
+    $(".correct-dates").hide();
+    $(".btn-primary").addClass("disabled");
+
+    $("#Start").change(function () {
+        if ($("#Start").val() && $("#End").val())
+        {
+
+            if (new Date($("#End").val()) <= new Date($("#Start").val())) {
+                $(".correct-dates").show();
+                $(".btn-primary").addClass("disabled");
+
+            } else {
+                $(".correct-dates").hide();
+                $(".btn-primary").removeClass("disabled");
+            }
+        }
+    });
+
+    $("#End").change(function () {
+        if ($("#Start").val() && $("#End").val())
+        {
+
+            if (new Date($("#End").val()) <= new Date($("#Start").val())) {
+                $(".correct-dates").show();
+                $(".btn-primary").addClass("disabled");
+
+            } else {
+                $(".correct-dates").hide();
+                $(".btn-primary").removeClass("disabled");
+            }
+        }
+    });
+</script>

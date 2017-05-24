@@ -135,7 +135,15 @@ namespace ACP.Business.Services
                             Price = item.DayPrices.Where(x => x.Day == days).FirstOrDefault().Dayprice,
                             PriceModel = item
                         });
-                        quoteresult.Price = item.DayPrices.Where(x => x.Day == days).FirstOrDefault().Dayprice;
+                       
+                        if (days > 28)
+                        {
+                            quoteresult.Price += (item.DayPrices.Where(x => x.Day == 29).FirstOrDefault().Dayprice) * Convert.ToDecimal((days - 28));
+                        }
+                        else
+                        {
+                            quoteresult.Price = item.DayPrices.Where(x => x.Day == days).FirstOrDefault().Dayprice;
+                        }
                     }
                 }
                 catch (Exception ex)

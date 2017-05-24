@@ -127,8 +127,8 @@ namespace ServiceAPI.Controllers
         public async  Task<ActionResult> Create()
         {
             await FillDropBoxes();
-
-            return View();
+            BookingPricingModel model = new BookingPricingModel();
+            return View(model);
         }
 
         // POST: PricingAdmin/Create
@@ -144,7 +144,12 @@ namespace ServiceAPI.Controllers
                 {
                     int carparkid = Convert.ToInt32(collection["carpark"]);
                     List <DayPriceModel> days = new List<DayPriceModel>();
-                    for (int i = 1;i < 29; days.Add(new DayPriceModel { Day = i, Dayprice = Convert.ToDecimal(collection[Convert.ToString(i++)]), Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser }))  ;
+                    //## OLD
+                    //for (int i = 1;i < 29; days.Add(new DayPriceModel { Day = i, Dayprice = Convert.ToDecimal(collection[Convert.ToString(i++)]), Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser }))  ;
+                    
+                    //## NEW
+                    for (int i = 1;i < 30; days.Add(new DayPriceModel { Day = i, Dayprice = Convert.ToDecimal(collection[Convert.ToString(i++)]), Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = localuser }))  ;
+
                     prices.Add(new BookingPricingModel
                     {
                          BookingEntityId= carparkid,
