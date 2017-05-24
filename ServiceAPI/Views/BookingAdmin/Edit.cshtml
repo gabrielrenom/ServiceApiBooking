@@ -123,7 +123,7 @@
                     <div class="col-md-4">
                         <h3 class="text-success"><i class="fa fa-fw fa-car"></i>Travel details</h3>
                         <div role="form">
-                            <div class="form-group">
+                            <div class="form-group" style="display:none">
                                 <label>
                                     OutboundDate
                                 </label>
@@ -144,7 +144,7 @@
                                 @Html.EditorFor(model => model.TravelDetails.OutboundTerminal, new { htmlAttributes = new { @class = "form-control", placeholder = "Outbound Terminal", type = "text" } })
                                 @Html.ValidationMessageFor(model => model.TravelDetails.OutboundTerminal, "", new { @class = "text-danger" })
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display:none;">
                                 <label>
                                     Return Date
                                 </label>

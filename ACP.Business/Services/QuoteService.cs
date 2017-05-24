@@ -130,18 +130,26 @@ namespace ACP.Business.Services
                     {
                         double days = Math.Round((dropoff - pickup).TotalDays);
                         quoteresult.PickupLocation = new LocationModel { Name = item.BookingEntity.Name, Address = item.BookingEntity.Address, Id = item.BookingEntity.Id };
-                        quoteresult.Pricing.Add(new ItemPriceModel
-                        {
-                            Price = item.DayPrices.Where(x => x.Day == days).FirstOrDefault().Dayprice,
-                            PriceModel = item
-                        });
                        
                         if (days > 28)
                         {
-                            quoteresult.Price += (item.DayPrices.Where(x => x.Day == 29).FirstOrDefault().Dayprice) * Convert.ToDecimal((days - 28));
+                            decimal finalprice = item.DayPrices.Where(x => x.Day == 28).FirstOrDefault().Dayprice;
+                            finalprice += (item.DayPrices.Where(x => x.Day == 29).FirstOrDefault().Dayprice) * Convert.ToDecimal((days - 28));
+
+                            quoteresult.Pricing.Add(new ItemPriceModel
+                            {
+                                Price = finalprice,
+                                PriceModel = item
+                            });
                         }
                         else
                         {
+                            quoteresult.Pricing.Add(new ItemPriceModel
+                            {
+                                Price = item.DayPrices.Where(x => x.Day == days).FirstOrDefault().Dayprice,
+                                PriceModel = item
+                            });
+
                             quoteresult.Price = item.DayPrices.Where(x => x.Day == days).FirstOrDefault().Dayprice;
                         }
                     }
