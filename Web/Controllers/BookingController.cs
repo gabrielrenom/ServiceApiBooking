@@ -11,6 +11,7 @@ using System.Web.Configuration;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
 using ACP.Business.Enums;
+using System.Web.Helpers;
 
 namespace Web.Controllers
 {
@@ -21,13 +22,15 @@ namespace Web.Controllers
         private IPayPalService _paypalservice;
         private IUserService _userService;
         private IEmailService _emailService;
+        private ICustomerService _customerService;
 
-        public BookingController(IBookingService bookingservice, IPayPalService paypalService, IUserService userService, IEmailService emailService)
+        public BookingController(IBookingService bookingservice, IPayPalService paypalService, IUserService userService, IEmailService emailService, ICustomerService customerService)
         {
             _bookingservice = bookingservice;
             _paypalservice = paypalService;
             _userService = userService;
             _emailService = emailService;
+            _customerService = customerService;
         }
 
         //[HttpGet]
@@ -393,6 +396,12 @@ namespace Web.Controllers
             model.ErrorType = 1;
             
             return View("Index",model);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetCustomerByEmail(string email)
+        {
+            return  Json(await _customerService.GetCustomerByEmail(email), JsonRequestBehavior.AllowGet);
         }
     }
 }

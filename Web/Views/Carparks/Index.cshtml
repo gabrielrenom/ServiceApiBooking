@@ -163,7 +163,8 @@
 <script src="~/Scripts/bootstrap-rating-input.min.js"></script>
 <script src="~/Scripts/common.js"></script>
 <script>
-            $.datetimepicker.setLocale('en');
+    $.datetimepicker.setLocale('en');
+    //$('#ReturnDate').datetimepicker({dateFormat:'dd-mm-yy'});
            
             var logic = function (currentDateTime) {
                 if (currentDateTime && currentDateTime.getDay() == 6) {
@@ -179,34 +180,40 @@
             dateToDisable.setDate(dateToDisable.getDate() + 2);
 
             $('#ReturnDate').datetimepicker({
-                beforeShowDay: function (date) {
-                    if (date.getMonth() == dateToDisable.getMonth() && date.getDate() == dateToDisable.getDate()) {
-                        return [true, "custom-date-style"];
-                    }
+                format: 'd-m-Y H:m:s',
+                //beforeShowDay: function (date) {
+                //    if (date.getMonth() == dateToDisable.getMonth() && date.getDate() == dateToDisable.getDate()) {
+                //        return [true, "custom-date-style"];
+                //    }
 
-                    return [true, ""];
-                }
+                //    return [true, ""];
+                //}
             });
 
-            $('#DropOff').datetimepicker({
-                beforeShowDay: function (date) {
-                    if (date.getMonth() == dateToDisable.getMonth() && date.getDate() == dateToDisable.getDate()) {
-                        return [true, "custom-date-style"];
-                    }
+            $('#DropOff').datetimepicker(
+                {
+                format:'d-m-Y H:m:s',
 
-                    return [true, ""];
+                //beforeShowDay: function (date)
+                //{
+                //    if (date.getMonth() == dateToDisable.getMonth() && date.getDate() == dateToDisable.getDate())
+                //    {
+                //        return [true, "custom-date-style"];
+                //    }
+                //    return [true, ""];
+                //}
                 }
-            });
+            );
       
-            $('.input-icon').datetimepicker({
-                beforeShowDay: function (date) {
-                    if (date.getMonth() == dateToDisable.getMonth() && date.getDate() == dateToDisable.getDate()) {
-                        return [true, "custom-date-style"];
-                    }
+            //$('.input-icon').datetimepicker({
+            //    beforeShowDay: function (date) {
+            //        if (date.getMonth() == dateToDisable.getMonth() && date.getDate() == dateToDisable.getDate()) {
+            //            return [true, "custom-date-style"];
+            //        }
 
-                    return [true, ""];
-                }
-            });
+            //        return [true, ""];
+            //    }
+            //});
             
 
             Date.prototype.toDateInputValueToday = (function () {
@@ -224,4 +231,7 @@
           
             document.getElementById('DropOff').value = new Date().toDateInputValueToday();
             document.getElementById('ReturnDate').value = new Date().toDateInputValueTomorrow();
+
+            //var dateObject = $("#ReturnDate").datetimepicker("getDate");
+            //$.datepicker.formatDate("dd-mm-yy", dateObject);
 </script>

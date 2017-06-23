@@ -266,6 +266,7 @@
     <Compile Include="Controllers\Administration\CarparkAdminController.cs" />
     <Compile Include="Controllers\CarparkPricingController.cs" />
     <Compile Include="Controllers\Administration\PricingAdminController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\PricingController.cs" />
     <Compile Include="Controllers\PurpleParkingController.cs" />
     <Compile Include="Controllers\QuoteController.cs" />
