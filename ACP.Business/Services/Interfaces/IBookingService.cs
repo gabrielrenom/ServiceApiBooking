@@ -19,5 +19,6 @@ namespace ACP.Business.Services.Interfaces
         Task<BookingModel> Add(BookingModel model, bool IsBookingEntity);
         Task<bool> Paid(int id);
         Task<BookingModel> GetModel();
+        Task<bool> PaymentInProgress(int id);
     }
 }

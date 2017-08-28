@@ -444,6 +444,8 @@
     <Content Include="Views\UserAdmin\Create.cshtml" />
     <Content Include="Views\UserAdmin\Details.cshtml" />
     <Content Include="Views\UserAdmin\Delete.cshtml" />
+    <Content Include="Views\BookingAdmin\Paid.cshtml" />
+    <Content Include="Views\BookingAdmin\_WorldpayPaymentForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Administration\" />

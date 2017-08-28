@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace ServiceAPI.Helpers
 {
     public enum Areas  {Carparks,Airports, Bookings, Pricings,Slots, Users};
-    public enum Operation { Edit, Create, Delete, Update}
+    public enum Operation { Edit, Create, Delete, Update, Back}
     public static class AreaHelpers
     {
         public static IHtmlString AreaHeader(this HtmlHelper helper, Areas area, Operation operation, string text="")
@@ -40,16 +40,28 @@ namespace ServiceAPI.Helpers
 
         public static IHtmlString AreaSubmit(this HtmlHelper helper, Areas area, Operation operation)
         {
-            string htmlString = String.Format(
-             @"<div class='well'>
-                    <div class='row'>
-                        <div class='col-md-6'>
-                            <a class='btn btn-default' href='/{0}Admin'>Back</a>
-                            <button class='btn btn-warning' type='submit'>Clear Fields</button>
-                            <button class='btn btn-primary' type='submit'>{1}</button>
-                        </div>
-                    </div>               </div>                ", area.ToString().Remove(area.ToString().Length-1), operation.ToString());
-            return new HtmlString(htmlString);
+            if (operation == Operation.Back)
+            {
+                return new HtmlString(String.Format(
+                @"<div class='well'>
+                        <div class='row'>
+                            <div class='col-md-6'>
+                                <a class='btn btn-default' href='/{0}Admin'>Back</a>
+                            </div>
+                        </div>                   </div>", area.ToString().Remove(area.ToString().Length - 1)));            }
+            else
+            {
+                return new HtmlString(String.Format(
+                 @"<div class='well'>
+                        <div class='row'>
+                            <div class='col-md-6'>
+                                <a class='btn btn-default' href='/{0}Admin'>Back</a>
+                                <button class='btn btn-warning' type='submit'>Clear Fields</button>
+                                <button class='btn btn-primary' type='submit'>{1}</button>
+                            </div>
+                        </div>                   </div>                    ", area.ToString().Remove(area.ToString().Length - 1), operation.ToString()));
+            }
+            
         }
     }
 

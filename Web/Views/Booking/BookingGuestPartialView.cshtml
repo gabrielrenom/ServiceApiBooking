@@ -185,7 +185,7 @@
                 @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group creditcard-payment-form ">
+        @*<div class="form-group creditcard-payment-form ">
             <label class="col-sm-3 control-label" for="CardName">Name on Card</label>
             <div class="col-sm-9">
                 @Html.TextBoxFor(m => m.CardName, new { @class = "form-control", @placeholder = "Card Holder's Name" })
@@ -291,15 +291,15 @@
                                     <div class="col-md-2"></div>
                                 </div>
                     }
-            }
+            }*@
             <p class="total-to-pay">
                 Total to pay: <i class="currency"></i> @((Model.Price + Model.BookingFee).ToString("c"))
             </p>
            
         <ul class="list-inline payment-options">
-            <li class="secure-payments">
+            @*<li class="secure-payments">
                 <img src="../img/secure-payment.jpg" alt="Secure Payment" width="214" height="63">
-            </li>
+            </li>*@
             <li class="sms">
                 <span>
                     <input type="checkbox" name="IsAddSMSConfirmation" value="true" id="sms-confirmation">
@@ -324,7 +324,7 @@
             </div>
             <div class="col-xs-10">
                 <span class="make-payment">
-                    <button type="submit" class="btn">Make payment</button>
+                    <button type="submit" class="btn">Book</button>
                 </span>
             </div>
             <div class="col-xs-0">

@@ -9,321 +9,357 @@
 <div class="section">
     <div class="container">
         @Html.AreaHeader(Areas.Bookings, Operation.Create)
+
+        @if (Model.Status == ACP.Business.Enums.StatusType.Processing)
+        {
+            <div class="well">
+                <div class="row">
+                    <div class="col-md-2">
+                        <h4>Payment Status</h4>
+
+                    </div>
+                    <div class="col-md-2" style="text-align:center">
+                        @if (Model.Status == ACP.Business.Enums.StatusType.Processing)
+                        {
+                            <h4 class="alert-warning">Processing</h4>
+                        }
+                        else
+                        {
+                            <h4 class="alert-success">Paid</h4>
+                        }
+                    </div>
+                    <div class="col-md-8">
+                      
+                        @if (Model.Status == ACP.Business.Enums.StatusType.Processing)
+                        {
+                            @Html.Partial("_WorldpayPaymentForm", @Model)
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
             @Html.HiddenFor(model=>model.Price) 
-            <div class="well">
 
-                <div class="row">
-                    <div class="col-md-4">
-                        <h3 class="text-success"><i class="fa fa-fw fa-calendar"></i>Booking Dates</h3>
+            if (Model.Status != ACP.Business.Enums.StatusType.Processing)
+            {
+                <div class="well">
 
-                        <div role="form">
-                            @*<div class="form-group">
-                                <label>
-                                    Airport
-                                </label>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h3 class="text-success"><i class="fa fa-fw fa-calendar"></i>Booking Dates</h3>
 
-                                @Html.DropDownList("airport", (IEnumerable<SelectListItem>)ViewBag.airportlist, "-- Please Select --", new { @class = "form-control" })
-                            </div>*@
-                            <div class="price-calculation">
-                                <div class="form-group">
-                                    <label>
-                                        Airport/Carpark
+                            <div role="form">
+                                @*<div class="form-group">
+                                        <label>
+                                            Airport
+                                        </label>
+
+                                        @Html.DropDownList("airport", (IEnumerable<SelectListItem>)ViewBag.airportlist, "-- Please Select --", new { @class = "form-control" })
+                                    </div>*@
+                                <div class="price-calculation">
+                                    <div class="form-group">
+                                        <label>
+                                            Airport/Carpark
+                                        </label>
+
+                                        <select class="form-control" id="carpark" name="carpark">
+
+                                            @for (int i = 0; i < ((List<ACP.Business.Models.BookingEntityModel>)ViewBag.carparkslist).Count; i++)
+                                            {
+                                                ACP.Business.Models.BookingEntityModel item = ((List<ACP.Business.Models.BookingEntityModel>)ViewBag.carparkslist)[i];
+                                                <option value="@item.Id">@item.RootBookingEntity.Name->@item.Name</option>
+                                            }
+                                            <option value="0" selected>--Select Airport/Carpark--</option>
+                                        </select>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            Start Date
+                                        </label>
+                                        @Html.TextBoxFor(model => model.StartDate, "{0:s}", new { @class = "form-control", placeholder = "OpeningDoor", type = "datetime-local", @Value = @DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss") })
+                                        @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            End Date
+                                        </label>
+                                        @Html.TextBoxFor(model => model.EndDate, "{0:s}", new { @class = "form-control", placeholder = "OpeningDoor", type = "datetime-local", @Value = @DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm:ss") })
+                                        @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                @*<div class="form-group status-selected">
+                                        <label>
+                                            Status
+                                        </label>
+                                        @Html.DropDownList("airport", (IEnumerable<SelectListItem>)ViewBag.statuses, "-- Please Select --", new { @class = "form-control" })
+                                    </div>*@
+                                <div class="form-group message-selected">
+                                    <label for="exampleInputEmail1">
+                                        Message
                                     </label>
-
-                                    <select class="form-control" id="carpark" name="carpark">
-
-                                        @for (int i = 0; i < ((List<ACP.Business.Models.BookingEntityModel>)ViewBag.carparkslist).Count; i++)
-                                        {
-                                            ACP.Business.Models.BookingEntityModel item = ((List<ACP.Business.Models.BookingEntityModel>)ViewBag.carparkslist)[i];
-                                            <option value="@item.Id">@item.RootBookingEntity.Name->@item.Name</option>
-                                        }
-                                        <option value="0" selected>--Select Airport/Carpark--</option>
-                                    </select>
-
+                                    <textarea class="form-control" style="min-width: 100%" id="Message" Name="Message" rows="5"></textarea>
+                                    @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group">
-                                    <label>
-                                        Start Date
-                                    </label>
-                                    @Html.TextBoxFor(model => model.StartDate, "{0:s}", new { @class = "form-control", placeholder = "OpeningDoor", type = "datetime-local", @Value = @DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss") })
-                                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-group">
-                                    <label>
-                                        End Date
-                                    </label>
-                                    @Html.TextBoxFor(model => model.EndDate, "{0:s}", new { @class = "form-control", placeholder = "OpeningDoor", type = "datetime-local", @Value = @DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm:ss") })
-                                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                                    <h1 id="currentprice" class="text-success"></h1>
                                 </div>
                             </div>
-
-                            @*<div class="form-group status-selected">
-                                <label>
-                                    Status
-                                </label>
-                                @Html.DropDownList("airport", (IEnumerable<SelectListItem>)ViewBag.statuses, "-- Please Select --", new { @class = "form-control" })
-                            </div>*@
-                            <div class="form-group message-selected">
-                                <label for="exampleInputEmail1">t
-                                    Message
-                                </label>
-                                <textarea class="form-control" style="min-width: 100%" id="Message" Name="Message" rows="5"></textarea>
-                                @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-4 traveldetails-selected">
+                            <h3 class="text-success"><i class="fa fa-fw fa-car"></i>Travel details</h3>
+                            <div role="form">
+                                <div class="form-group" style="display:none">
+                                    <label>
+                                        OutboundDate
+                                    </label>
+                                    @Html.TextBoxFor(model => model.TravelDetails.OutboundDate, "{0:s}", new { @class = "form-control", placeholder = "OpeningDoor", type = "datetime-local", @Value = @DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss") })
+                                    @Html.ValidationMessageFor(model => model.TravelDetails.OutboundDate, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Outbound Flight
+                                    </label>
+                                    @Html.EditorFor(model => model.TravelDetails.OutboundFlight, new { htmlAttributes = new { @class = "form-control", placeholder = "Outbound Flight", type = "text" } })
+                                    @Html.ValidationMessageFor(model => model.TravelDetails.OutboundFlight, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Outbound Terminal
+                                    </label>
+                                    @Html.EditorFor(model => model.TravelDetails.OutboundTerminal, new { htmlAttributes = new { @class = "form-control", placeholder = "Outbound Terminal", type = "text" } })
+                                    @Html.ValidationMessageFor(model => model.TravelDetails.OutboundTerminal, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group" style="display:none;">
+                                    <label>
+                                        Return Date
+                                    </label>
+                                    @Html.TextBoxFor(model => model.TravelDetails.ReturnDate, "{0:s}", new { @class = "form-control", placeholder = "OpeningDoor", type = "datetime-local", @Value = @DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm:ss") })
+                                    @Html.ValidationMessageFor(model => model.TravelDetails.ReturnDate, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Return Flight
+                                    </label>
+                                    @Html.EditorFor(model => model.TravelDetails.ReturnFlight, new { htmlAttributes = new { @class = "form-control", placeholder = "Return Flight", type = "text" } })
+                                    @Html.ValidationMessageFor(model => model.TravelDetails.ReturnFlight, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        Returnbound Terminal
+                                    </label>
+                                    @Html.EditorFor(model => model.TravelDetails.ReturnboundTerminal, new { htmlAttributes = new { @class = "form-control", placeholder = "Return Flight", type = "text" } })
+                                    @Html.ValidationMessageFor(model => model.TravelDetails.ReturnboundTerminal, "", new { @class = "text-danger" })
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <h1 id="currentprice" class="text-success"></h1>
+                        </div>
+                        <div class="col-md-4 cardetails-selected">
+                            <h3 class="text-success"><i class="fa fa-fw fa-credit-card"></i>Car details</h3>
+                            <div role="form">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">
+                                        Make
+                                    </label>
+                                    @Html.EditorFor(model => model.Car.Make, new { htmlAttributes = new { @class = "form-control", placeholder = "ie Bentley", type = "text" } })
+                                    @Html.ValidationMessageFor(model => model.Car.Make, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">
+                                        Model
+                                    </label>
+                                    @Html.EditorFor(model => model.Car.Model, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: GT", type = "text" } })
+                                    @Html.ValidationMessageFor(model => model.Car.Model, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">
+                                        Colour
+                                    </label>
+                                    @Html.EditorFor(model => model.Car.Colour, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: Red", type = "text" } })
+                                    @Html.ValidationMessageFor(model => model.Car.Colour, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">
+                                        Registration
+                                    </label>
+                                    @Html.EditorFor(model => model.Car.Registration, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: A3456DF", type = "text" } })
+                                    @Html.ValidationMessageFor(model => model.Car.Registration, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    @if (@Model.BookingReference != null)
+                                    {
+                                        <h1 class="text-success">Booking Reference:@Model.BookingReference</h1>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 traveldetails-selected">
-                        <h3 class="text-success"><i class="fa fa-fw fa-car"></i>Travel details</h3>
-                        <div role="form">
-                            <div class="form-group" style="display:none">
-                                <label>
-                                    OutboundDate
-                                </label>
-                                @Html.TextBoxFor(model => model.TravelDetails.OutboundDate, "{0:s}", new { @class = "form-control", placeholder = "OpeningDoor", type = "datetime-local", @Value = @DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss") })
-                                @Html.ValidationMessageFor(model => model.TravelDetails.OutboundDate, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group">
-                                <label>
-                                    Outbound Flight
-                                </label>
-                                @Html.EditorFor(model => model.TravelDetails.OutboundFlight, new { htmlAttributes = new { @class = "form-control", placeholder = "Outbound Flight", type = "text" } })
-                                @Html.ValidationMessageFor(model => model.TravelDetails.OutboundFlight, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group">
-                                <label>
-                                    Outbound Terminal
-                                </label>
-                                @Html.EditorFor(model => model.TravelDetails.OutboundTerminal, new { htmlAttributes = new { @class = "form-control", placeholder = "Outbound Terminal", type = "text" } })
-                                @Html.ValidationMessageFor(model => model.TravelDetails.OutboundTerminal, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group" style="display:none;">
-                                <label>
-                                    Return Date
-                                </label>
-                                @Html.TextBoxFor(model => model.TravelDetails.ReturnDate, "{0:s}", new { @class = "form-control", placeholder = "OpeningDoor", type = "datetime-local", @Value = @DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm:ss") })
-                                @Html.ValidationMessageFor(model => model.TravelDetails.ReturnDate, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group">
-                                <label>
-                                    Return Flight
-                                </label>
-                                @Html.EditorFor(model => model.TravelDetails.ReturnFlight, new { htmlAttributes = new { @class = "form-control", placeholder = "Return Flight", type = "text" } })
-                                @Html.ValidationMessageFor(model => model.TravelDetails.ReturnFlight, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group">
-                                <label>
-                                    Returnbound Terminal
-                                </label>
-                                @Html.EditorFor(model => model.TravelDetails.ReturnboundTerminal, new { htmlAttributes = new { @class = "form-control", placeholder = "Return Flight", type = "text" } })
-                                @Html.ValidationMessageFor(model => model.TravelDetails.ReturnboundTerminal, "", new { @class = "text-danger" })
+                    <div class="customer-selected">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3 class="text-success"><i class="fa fa-fw fa-street-view"></i>Customer</h3>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 cardetails-selected">
-                        <h3 class="text-success"><i class="fa fa-fw fa-credit-card"></i>Car details</h3>
-                        <div role="form">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">
-                                    Make
-                                </label>
-                                @Html.EditorFor(model => model.Car.Make, new { htmlAttributes = new { @class = "form-control", placeholder = "ie Bentley", type = "text" } })
-                                @Html.ValidationMessageFor(model => model.Car.Make, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            @Html.LabelFor(model => model.Customer.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.Customer.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: Dr.", type = "text" } })
+                                            @Html.ValidationMessageFor(model => model.Customer.Title, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            @Html.LabelFor(model => model.Customer.Initials, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.Customer.Initials, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: S ", type = "text" } })
+                                            @Html.ValidationMessageFor(model => model.Customer.Initials, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            @Html.LabelFor(model => model.Customer.Forename, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.Customer.Forename, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: Michael", type = "text" } })
+                                            @Html.ValidationMessageFor(model => model.Customer.Forename, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            @Html.LabelFor(model => model.Customer.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.Customer.Surname, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: Smith", type = "text" } })
+                                            @Html.ValidationMessageFor(model => model.Customer.Surname, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            @Html.LabelFor(model => model.Customer.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.Customer.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "email", type = "email" } })
+                                            @Html.ValidationMessageFor(model => model.Customer.Email, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            @Html.LabelFor(model => model.Customer.Address.Number, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.Customer.Address.Number, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: 3", type = "number" } })
+                                            @Html.ValidationMessageFor(model => model.Customer.Address.Number, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            @Html.LabelFor(model => model.Customer.Address.Address1, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.Customer.Address.Address1, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: Downing Street", type = "text" } })
+                                            @Html.ValidationMessageFor(model => model.Customer.Address.Address1, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            @Html.LabelFor(model => model.Customer.Address.Address2, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.Customer.Address.Address2, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Customer.Address.Address2, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            @Html.LabelFor(model => model.Customer.Address.Postcode, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.Customer.Address.Postcode, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: SK7654Q", type = "text" } })
+                                            @Html.ValidationMessageFor(model => model.Customer.Address.Postcode, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">
-                                    Model
-                                </label>
-                                @Html.EditorFor(model => model.Car.Model, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: GT", type = "text" } })
-                                @Html.ValidationMessageFor(model => model.Car.Model, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">
-                                    Colour
-                                </label>
-                                @Html.EditorFor(model => model.Car.Colour, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: Red", type = "text" } })
-                                @Html.ValidationMessageFor(model => model.Car.Colour, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">
-                                    Registration
-                                </label>
-                                @Html.EditorFor(model => model.Car.Registration, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: A3456DF", type = "text" } })
-                                @Html.ValidationMessageFor(model => model.Car.Registration, "", new { @class = "text-danger" })
-                            </div>
-                            
-                            <div class="form-group">
-                                @if (@Model.BookingReference != null)
-                                {
-                                <h1 class="text-success">Booking Reference:@Model.BookingReference</h1>
-                                }
+                            <div class="col-md-6">
+                                <div class="form-horizontal" role="form">
+
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            @Html.LabelFor(model => model.Customer.Address.City, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.Customer.Address.City, new { htmlAttributes = new { @class = "form-control", placeholder = "", type = "text" } })
+                                            @Html.ValidationMessageFor(model => model.Customer.Address.City, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            @Html.LabelFor(model => model.Customer.Address.County, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.Customer.Address.County, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: Greater Manchester", type = "text" } })
+                                            @Html.ValidationMessageFor(model => model.Customer.Address.County, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            @Html.LabelFor(model => model.Customer.Address.Country, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.Customer.Address.Country, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: UK", type = "text" } })
+                                            @Html.ValidationMessageFor(model => model.Customer.Address.Country, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            @Html.LabelFor(model => model.Customer.Telephone, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.Customer.Telephone, new { htmlAttributes = new { @class = "form-control", placeholder = "Telephone", type = "tel" } })
+                                            @Html.ValidationMessageFor(model => model.Customer.Telephone, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            @Html.LabelFor(model => model.Customer.Mobile, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.Customer.Mobile, new { htmlAttributes = new { @class = "form-control", placeholder = "mobile", type = "tel" } })
+                                            @Html.ValidationMessageFor(model => model.Customer.Mobile, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            @Html.LabelFor(model => model.Customer.Fax, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        </div>
+                                        <div class="col-md-8">
+                                            @Html.EditorFor(model => model.Customer.Fax, new { htmlAttributes = new { @class = "form-control", placeholder = "Fax", type = "tel" } })
+                                            @Html.ValidationMessageFor(model => model.Customer.Fax, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            <div class="customer-selected">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3 class="text-success"><i class="fa fa-fw fa-street-view"></i>Customer</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Customer.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Customer.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: Dr.", type = "text" } })
-                                    @Html.ValidationMessageFor(model => model.Customer.Title, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Customer.Initials, htmlAttributes: new { @class = "control-label col-md-2" })
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Customer.Initials, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: S ", type = "text" } })
-                                    @Html.ValidationMessageFor(model => model.Customer.Initials, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Customer.Forename, htmlAttributes: new { @class = "control-label col-md-2" })
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Customer.Forename, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: Michael", type = "text" } })
-                                    @Html.ValidationMessageFor(model => model.Customer.Forename, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Customer.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Customer.Surname, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: Smith", type = "text" } })
-                                    @Html.ValidationMessageFor(model => model.Customer.Surname, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Customer.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Customer.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "email", type = "email" } })
-                                    @Html.ValidationMessageFor(model => model.Customer.Email, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Customer.Address.Number, htmlAttributes: new { @class = "control-label col-md-2" })
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Customer.Address.Number, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: 3", type = "number" } })
-                                    @Html.ValidationMessageFor(model => model.Customer.Address.Number, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Customer.Address.Address1, htmlAttributes: new { @class = "control-label col-md-2" })
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Customer.Address.Address1, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: Downing Street", type = "text" } })
-                                    @Html.ValidationMessageFor(model => model.Customer.Address.Address1, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Customer.Address.Address2, htmlAttributes: new { @class = "control-label col-md-2" })
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Customer.Address.Address2, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Customer.Address.Address2, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Customer.Address.Postcode, htmlAttributes: new { @class = "control-label col-md-2" })
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Customer.Address.Postcode, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: SK7654Q", type = "text" } })
-                                    @Html.ValidationMessageFor(model => model.Customer.Address.Postcode, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-horizontal" role="form">
-                          
-                          <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Customer.Address.City, htmlAttributes: new { @class = "control-label col-md-2" })
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Customer.Address.City, new { htmlAttributes = new { @class = "form-control", placeholder = "", type = "text" } })
-                                    @Html.ValidationMessageFor(model => model.Customer.Address.City, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Customer.Address.County, htmlAttributes: new { @class = "control-label col-md-2" })
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Customer.Address.County, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: Greater Manchester", type = "text" } })
-                                    @Html.ValidationMessageFor(model => model.Customer.Address.County, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Customer.Address.Country, htmlAttributes: new { @class = "control-label col-md-2" })
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Customer.Address.Country, new { htmlAttributes = new { @class = "form-control", placeholder = "ie: UK", type = "text" } })
-                                    @Html.ValidationMessageFor(model => model.Customer.Address.Country, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Customer.Telephone, htmlAttributes: new { @class = "control-label col-md-2" })
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Customer.Telephone, new { htmlAttributes = new { @class = "form-control", placeholder = "Telephone", type = "tel" } })
-                                    @Html.ValidationMessageFor(model => model.Customer.Telephone, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Customer.Mobile, htmlAttributes: new { @class = "control-label col-md-2" })
-                                </div>
-                                <div class="col-md-8">                                    
-                                    @Html.EditorFor(model => model.Customer.Mobile, new { htmlAttributes = new { @class = "form-control", placeholder = "mobile", type = "tel" } })
-                                    @Html.ValidationMessageFor(model => model.Customer.Mobile, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    @Html.LabelFor(model => model.Customer.Fax, htmlAttributes: new { @class = "control-label col-md-2" })
-                                </div>
-                                <div class="col-md-8">
-                                    @Html.EditorFor(model => model.Customer.Fax, new { htmlAttributes = new { @class = "form-control", placeholder = "Fax", type = "tel" } })
-                                    @Html.ValidationMessageFor(model => model.Customer.Fax, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
 
-            <div class="well creditcard-selected">
+            }
+
+            <div class="well creditcard-selected" style="display:none;">
                 <div class="row">
                     <div class="col-md-5">
                         <h3 class="text-success"><i class="fa fa-fw fa-credit-card"></i>Payments</h3>
@@ -432,7 +468,15 @@
 
 
                 </div>
+            if (Model.Status == ACP.Business.Enums.StatusType.Processing)
+            {
+                @Html.AreaSubmit(Areas.Bookings, Operation.Back)
+            }
+            else
+            {
                 @Html.AreaSubmit(Areas.Bookings, Operation.Create)
+            }
+
         }
     </div>
 </div>
@@ -472,7 +516,7 @@
             $(".traveldetails-selected").show();
             $(".cardetails-selected").show();
             $(".customer-selected").show();
-            $(".creditcard-selected").show();
+            //$(".creditcard-selected").show();
            
             $("#Price").val(0);
             $("#currentprice").html("");
@@ -510,5 +554,38 @@
         } else {
             $(".btn.btn-primary").hide();
         }
+    });
+
+    $("input").change(function () {
+        if ($("#StartDate").val() !== "" && 
+            $("#EndtDate").val() !== "" &&
+            $("#TravelDetails_OutboundFlight").val() !== "" &&
+            $("#TravelDetails_OutboundTerminal").val() !== "" &&
+            $("#TravelDetails_ReturnFlight").val() !== "" &&
+            $("#TravelDetails_ReturnboundTerminal").val() !== "" &&
+            $("#Car_Make").val() !== "" &&
+            $("#Car_Model").val() !== "" &&
+            $("#Car_Colour").val() !== "" &&
+            $("#Car_Registration").val() !== "" &&
+            $("#Customer_Title").val() !== "" &&
+            $("#Customer_Forename").val() !== "" &&
+            $("#Customer_Surname").val() !== "" &&
+            $("#Customer_Email").val() !== "" &&
+            $("#Customer_Address_Address1").val() !== "" &&
+            $("#Customer_Address_Postcode").val() !== "" &&
+            $("#Customer_Address_City").val() !== "" &&
+            $("#Customer_Mobile").val() !== "")
+        {
+            $(".btn.btn-primary").show();
+        }
+        else
+        {
+            $(".btn.btn-primary").hide();
+        }
+       
+    });
+
+    $("#MYFORM").bind('ajax:complete', function ()
+    {
     });
 </script>

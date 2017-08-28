@@ -12,6 +12,30 @@
 <div class="section">
     <div class="container">
         @Html.AreaHeader(Areas.Bookings, Operation.Edit)
+            <div class="well">
+                <div class="row">
+                    <div class="col-md-2"><h4>Payment Status</h4>
+                    
+                    </div>
+                    <div class="col-md-2" style="text-align:center">
+                        @if (Model.Status == ACP.Business.Enums.StatusType.Processing)
+                        {
+                            <h4 class="alert-warning" >Processing</h4>
+                        }
+                        else
+                        {
+                            <h4 class="alert-success">Paid</h4>
+                        }
+                    </div>
+                    <div class="col-md-8">
+                        @if (Model.Status == ACP.Business.Enums.StatusType.Processing)
+                        {
+                            @Html.Partial("_WorldpayPaymentForm", @Model)
+                        }
+                    </div>
+                </div>
+            </div>
+        
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
@@ -354,14 +378,14 @@
                         </div>
                 </div>
             </div>
-            <div class="well">
+            <div class="well" style="display:none;">
                 <div class="row">
                     <div class="col-md-5">
                         <h3 class="text-success"><i class="fa fa-fw fa-credit-card"></i>Payments</h3>
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row" style="display:none;">
                     <div class="col-md-4">
                         <div class="form">
                             <div class="form-group">
@@ -434,7 +458,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="creditcard">
+                        @*<div id="creditcard">
                             <div class="form-horizontal">
                                 <div class="form-group">
                                     <label class="control-label col-sm-2">Credit Card</label>
@@ -498,7 +522,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
               

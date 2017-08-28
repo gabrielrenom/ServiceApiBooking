@@ -145,7 +145,11 @@ namespace ACP.Business.Services
         {
             return await _bookingManager.Paid(id);
         }
-
+        public async Task<bool> PaymentInProgress(int id)
+        {
+            return await _bookingManager.PaymentInProcess(id);
+        }
+        
         public async Task<BookingModel> GetModel()
         {
            return _bookingManager.GetModel();
