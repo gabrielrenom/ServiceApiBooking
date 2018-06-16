@@ -56,7 +56,7 @@ namespace ServiceAPI.Helpers
                         <div class='row'>
                             <div class='col-md-6'>
                                 <a class='btn btn-default' href='/{0}Admin'>Back</a>
-                                <button class='btn btn-warning' type='submit'>Clear Fields</button>
+                                <a class='btn btn-warning' onclick='location.reload();'> Clear Fields</a>
                                 <button class='btn btn-primary' type='submit'>{1}</button>
                             </div>
                         </div>                   </div>                    ", area.ToString().Remove(area.ToString().Length - 1), operation.ToString()));

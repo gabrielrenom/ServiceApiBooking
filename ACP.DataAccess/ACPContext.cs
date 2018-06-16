@@ -19,7 +19,8 @@ namespace ACP.DataAccess
 
         static ACPContext()
         {
-            Database.SetInitializer<ACPContext>(new ACPInitialiser());
+            //Database.SetInitializer<ACPContext>(new ACPInitialiser());
+            Database.SetInitializer<ACPContext>(null);
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

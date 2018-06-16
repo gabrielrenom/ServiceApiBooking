@@ -235,6 +235,11 @@ namespace ServiceAPI.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult> Paid(int id)
         {
@@ -556,8 +561,9 @@ namespace ServiceAPI.Controllers
                         booking.Payments.FirstOrDefault().CreditCard.ExpiryDate = Convert.ToDateTime(paymentform["ccexpirydate"]);
                         booking.Payments.FirstOrDefault().CreditCard.GateWayKey = paymentform["cccsv"];
                         booking.Payments.FirstOrDefault().CreditCard.Modified = DateTime.Now;
-                        booking.Payments.FirstOrDefault().CreditCard.ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname;                       
+                        booking.Payments.FirstOrDefault().CreditCard.ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname;
 
+                        await FillDropBoxes();
                     }
 
                     booking.Modified = DateTime.Now;

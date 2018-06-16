@@ -61,16 +61,19 @@ namespace ACP.DataAccess.Managers
             }
             //dataModel.StatusId = domainModel.Status!=null?domainModel.StatusId:0;
 
-            if (domainModel.Status != null)
-            {
-                dataModel.StatusId = domainModel.Status != null ? domainModel.StatusId : 0;
-                dataModel.Status.Created = domainModel.Status.Created;
-                dataModel.Status.CreatedBy = domainModel.Status.CreatedBy;
-                dataModel.Status.Id = domainModel.Status.Id;
-                dataModel.Status.Modified = domainModel.Status.Modified;
-                dataModel.Status.ModifiedBy = domainModel.Status.ModifiedBy;
-                dataModel.Status.StatusType = (Data.Enums.StatusType)domainModel.Status.StatusType;
-            }
+            var statusid = Repository.GetSingle<Status>(a => a.StatusType== (Data.Enums.StatusType)domainModel.Status.StatusType);
+            dataModel.StatusId = statusid.Id;
+
+            //if (domainModel.Status != null)
+            //{
+            //    dataModel.StatusId = domainModel.Status != null ? domainModel.StatusId : 0;
+            //    dataModel.Status.Created = domainModel.Status.Created;
+            //    dataModel.Status.CreatedBy = domainModel.Status.CreatedBy;
+            //    dataModel.Status.Id = domainModel.Status.Id;
+            //    dataModel.Status.Modified = domainModel.Status.Modified;
+            //    dataModel.Status.ModifiedBy = domainModel.Status.ModifiedBy;
+            //    dataModel.Status.StatusType = (Data.Enums.StatusType)domainModel.Status.StatusType;
+            //}
             dataModel.Name = domainModel.Name;
             dataModel.Telephone = domainModel.Telephone;
 
@@ -232,6 +235,7 @@ namespace ACP.DataAccess.Managers
                     County = r.Address.County,
                     Created = r.Address.Created,
                     CreatedBy = r.Address.CreatedBy,
+                    City= r.Address.City,
                     Id = r.Address.Id,
                     Modified = r.Address.Modified,
                     ModifiedBy = r.Address.ModifiedBy,
@@ -276,6 +280,7 @@ namespace ACP.DataAccess.Managers
                     Country = dataModel.Address.Country,
                     County = dataModel.Address.County,
                     Created = dataModel.Address.Created,
+                    City = dataModel.Address.City,
                     CreatedBy = dataModel.Address.CreatedBy,
                     Id = dataModel.Address.Id,
                     Modified = dataModel.Address.Modified,
@@ -340,6 +345,7 @@ namespace ACP.DataAccess.Managers
                         Country = r.Address.Country,
                         County = r.Address.County,
                         Created = r.Address.Created,
+                        City = r.Address.City,
                         CreatedBy = r.Address.CreatedBy,
                         Id = r.Address.Id,
                         Modified = r.Address.Modified,
@@ -420,6 +426,7 @@ namespace ACP.DataAccess.Managers
                         County = r.Address.County,
                         Created = r.Address.Created,
                         CreatedBy = r.Address.CreatedBy,
+                        City = r.Address.City,
                         Id = r.Address.Id,
                         Modified = r.Address.Modified,
                         ModifiedBy = r.Address.ModifiedBy,

@@ -15,6 +15,10 @@
     <input type="hidden" name="currency" value="GBP">
     <!-- This creates the button. When it is selected in the browser, the form submits the purchase details to us. -->
     <!-- This goes to the server -->
-    <input type="hidden" name="MC_callback" value="http://localhost:9999/BookingAdmin/paid?id=@Model.Id">
+    @*<input type="hidden" name="MC_callback" value="https://fss-api.azurewebsites.net/BookingAdmin/paid?id=@Model.Id">*@
+    <input type="hidden" name="MC_callback" value="https://fss-api.azurewebsites.net/BookingAdmin/index">
+
+
+
     <input class="btn btn-warning btn-block" type=submit value="Pay">
 </form>

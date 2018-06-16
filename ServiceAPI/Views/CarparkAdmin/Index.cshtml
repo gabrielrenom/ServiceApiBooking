@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<ACP.Business.Models.BookingEntityModel>
-
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
+      rel="stylesheet" type="text/css">
+@Styles.Render("~/Content/theme-bootstrap")
+@Scripts.Render("~/bundles/modernizr")
 @{
     //## Change it in the view
     ViewBag.actionIcon = "fa-automobile";
@@ -15,13 +18,13 @@
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Id)
-        </th>        
+        </th>
         <th>
             Airport
-        </th>        
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.ModifiedBy)
-        </th>        
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Modified)
         </th>
@@ -51,54 +54,55 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Id)
-        </td>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.RootBookingEntity.Name)
-        </td>
-       
-        <td>
-            @Html.DisplayFor(modelItem => item.ModifiedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Modified)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Code)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Comission)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sameday)
-        </td>
-        
-        <td>
-            <a href="@Url.Action("Details", "CarparkAdmin", new { id=item.Id })" class="btn">
-                <span class="fa fa-2x fa-fw fa-th-large text-primary"></span>
-            </a>
-        </td>
-        <td>
-            <a href="@Url.Action("Edit", "CarparkAdmin", new { id=item.Id })" class="btn">
-                <span class="fa fa-2x fa-edit fa-fw text-success"></span>
-            </a>
-        </td>
-        <td>
-            <a href="@Url.Action("Delete", "CarparkAdmin", new { id=item.Id })" class="btn">
-                <span class="fa fa-2x fa-fw fa-close text-danger"></span>
-            </a>
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.RootBookingEntity.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modified)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comission)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sameday)
+            </td>
+
+            <td>
+                @*<a href="@Url.Action("Details", "CarparkAdmin", new { id=item.Id })" class="btn">
+                    <span class="fa fa-2x fa-fw fa-th-large text-primary"></span>
+                </a>*@
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", "CarparkAdmin", new { id=item.Id })" class="btn">
+                    <span class="fa fa-2x fa-edit fa-fw text-success"></span>
+                </a>
+            </td>
+            <td>
+                <a href="@Url.Action("Delete", "CarparkAdmin", new { id=item.Id })" class="btn">
+                    <span class="fa fa-2x fa-fw fa-close text-danger"></span>
+                </a>
+            </td>
+        </tr>
+    }
 
 </table>

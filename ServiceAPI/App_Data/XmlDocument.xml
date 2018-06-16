@@ -503,6 +503,13 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="M:ServiceAPI.Controllers.BookingAdminController.Paid(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:ServiceAPI.Controllers.BookingController">
             <summary>
             This controller it will be in charge of manage the bookings from the admin and user.
