@@ -48,7 +48,9 @@ namespace ServiceAPI.Helpers
                             <div class='col-md-6'>
                                 <a class='btn btn-default' href='/{0}Admin'>Back</a>
                             </div>
-                        </div>                   </div>", area.ToString().Remove(area.ToString().Length - 1)));            }
+                        </div>
+                   </div>", area.ToString().Remove(area.ToString().Length - 1)));
+            }
             else
             {
                 return new HtmlString(String.Format(
@@ -59,7 +61,9 @@ namespace ServiceAPI.Helpers
                                 <a class='btn btn-warning' onclick='location.reload();'> Clear Fields</a>
                                 <button class='btn btn-primary' type='submit'>{1}</button>
                             </div>
-                        </div>                   </div>                    ", area.ToString().Remove(area.ToString().Length - 1), operation.ToString()));
+                        </div>
+                   </div>
+                    ", area.ToString().Remove(area.ToString().Length - 1), operation.ToString()));
             }
             
         }
