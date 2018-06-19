@@ -48,7 +48,9 @@ namespace ServiceAPI.Helpers
                             <button class='btn btn-warning' type='submit'>Clear Fields</button>
                             <button class='btn btn-primary' type='submit'>{1}</button>
                         </div>
-                    </div>               </div>                ", area.ToString().Remove(area.ToString().Length-1), operation.ToString());
+                    </div>
+               </div>
+                ", area.ToString().Remove(area.ToString().Length-1), operation.ToString());
             return new HtmlString(htmlString);
         }
     }
