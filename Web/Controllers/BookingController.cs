@@ -116,7 +116,7 @@ namespace Web.Controllers
             if (ModelState.IsValid)
             {
                 var result = await _bookingservice.AddAsync(ToBookingModel(model));
-                var paymentresult = _paypalservice.PaymentWithCreditCard(ToPayPalModel(model), Configuration.GetAPIContext());
+                var paymentresult = "approved";//_paypalservice.PaymentWithCreditCard(ToPayPalModel(model), Configuration.GetAPIContext());
                 if (paymentresult == "approved")
                 {
                     var havebeenpaid = await _bookingservice.Paid(result.Id);
@@ -131,20 +131,20 @@ namespace Web.Controllers
         private void LoadDefaultValues(BookingGuestViewModel model)
         {
             ViewBag.title = model.Title;
-            ViewBag.creditCardType = model.CreditCardType;
-            ViewBag.month = model.ExpiryMonth;
-            ViewBag.year = model.ExpiryYear;
+            //ViewBag.creditCardType = model.CreditCardType;
+            //ViewBag.month = model.ExpiryMonth;
+            //ViewBag.year = model.ExpiryYear;
             ViewBag.passanger = model.Passangers;
             ViewBag.terminalout = model.TerminalOut;
             ViewBag.terminalin = model.TerminalIn;
-            if (model.CreditCardType == "0")
-                ViewBag.creditcardname = "Visa";
-            else if (model.CreditCardType == "1")
-                ViewBag.creditcardname = "Mastercard";
-            else if (model.CreditCardType == "2")
-                ViewBag.creditcardname = "American Express";
-            ViewBag.year = model.ExpiryYear;
-            ViewBag.month = model.ExpiryMonth;
+            //if (model.CreditCardType == "0")
+            //    ViewBag.creditcardname = "Visa";
+            //else if (model.CreditCardType == "1")
+            //    ViewBag.creditcardname = "Mastercard";
+            //else if (model.CreditCardType == "2")
+            //    ViewBag.creditcardname = "American Express";
+            //ViewBag.year = model.ExpiryYear;
+            //ViewBag.month = model.ExpiryMonth;
         }
 
         private BookingConfirmationView ToBookingConfirmationView(BookingGuestViewModel model, string reference)
@@ -216,9 +216,9 @@ namespace Web.Controllers
                 LastName = model.LastName,
                 Currency = "GBP",
                 Description = model.Description,
-                Name = model.CardName,
+                //Name = model.CardName,
                 Total = Convert.ToString(model.Price + model.BookingFee),
-                Number = model.CardNumber,
+                //Number = model.CardNumber,
                 BillingAddressCity = model.City,
                 BillingAddressCountry = "UK",
                 BillingAddressLine1 = model.Address,
@@ -226,18 +226,18 @@ namespace Web.Controllers
                 BillingAddressState = "",
                 Price = model.Price.ToString(),
                 Quantity = 1,
-                ExpireYear = model.ExpiryYear,
-                ExpireMonth = Convert.ToInt32(model.ExpiryMonth).ToString(),
-                CVV2 = model.CVV,
+                //ExpireYear = model.ExpiryYear,
+                //ExpireMonth = Convert.ToInt32(model.ExpiryMonth).ToString(),
+                //CVV2 = model.CVV,
                 SKU = "123",
                 InvoiceNumber = new Random().Next(1000, 10000).ToString()
             };
-            if (model.CreditCardType == "0")
-                paypal.Type = "visa";
-            else if (model.CreditCardType == "1")
-                paypal.Type = "mastercard";
-            else if (model.CreditCardType == "2")
-                paypal.Type = "americanexpress";
+            //if (model.CreditCardType == "0")
+            //    paypal.Type = "visa";
+            //else if (model.CreditCardType == "1")
+            //    paypal.Type = "mastercard";
+            //else if (model.CreditCardType == "2")
+            //    paypal.Type = "americanexpress";
 
             return paypal;
         }
@@ -263,38 +263,38 @@ namespace Web.Controllers
             };
 
 
-            if (model.CreditCardType != null)
-            {
-                CreditCardTypes creditcardtype = CreditCardTypes.Visa;
-                if (model.CreditCardType.ToLower() == "visa") creditcardtype = CreditCardTypes.Visa;
-                else if (model.CreditCardType.ToLower() == "maestro") creditcardtype = CreditCardTypes.Maestro;
-                else if (model.CreditCardType.ToLower() == "mastercard") creditcardtype = CreditCardTypes.Mastercard;
-                else if (model.CreditCardType.ToLower() == "americanexpress") creditcardtype = CreditCardTypes.AmericanExpress;
+            //if (model.CreditCardType != null)
+            //{
+            //    CreditCardTypes creditcardtype = CreditCardTypes.Visa;
+            //    if (model.CreditCardType.ToLower() == "visa") creditcardtype = CreditCardTypes.Visa;
+            //    else if (model.CreditCardType.ToLower() == "maestro") creditcardtype = CreditCardTypes.Maestro;
+            //    else if (model.CreditCardType.ToLower() == "mastercard") creditcardtype = CreditCardTypes.Mastercard;
+            //    else if (model.CreditCardType.ToLower() == "americanexpress") creditcardtype = CreditCardTypes.AmericanExpress;
 
-                bookingModel.Payments = model.CreditCardType != null ? new Collection<PaymentModel>
-                {
-                    new PaymentModel{ CreditCard = new CreditCardModel{ ExpiryDate = new DateTime(Convert.ToInt32(model.ExpiryYear), Convert.ToInt32(model.ExpiryMonth), 1),
-                        Created = DateTime.Now,
-                        CreatedBy = "System",
-                        Deleted = false,
-                        Name = model.CardName,
-                        Modified =DateTime.Now,
-                        ModifiedBy = "System",
-                        Number = model.CardNumber,
-                        Type =creditcardtype,
-                        PlainNumber = model.CardNumber,
+            //    bookingModel.Payments = model.CreditCardType != null ? new Collection<PaymentModel>
+            //    {
+            //        new PaymentModel{ CreditCard = new CreditCardModel{ ExpiryDate = new DateTime(Convert.ToInt32(model.ExpiryYear), Convert.ToInt32(model.ExpiryMonth), 1),
+            //            Created = DateTime.Now,
+            //            CreatedBy = "System",
+            //            Deleted = false,
+            //            Name = model.CardName,
+            //            Modified =DateTime.Now,
+            //            ModifiedBy = "System",
+            //            Number = model.CardNumber,
+            //            Type =creditcardtype,
+            //            PlainNumber = model.CardNumber,
                        
-                    },
-                     CreatedBy = "System",
-                     Status = StatusType.Paid,
-                     Modified = DateTime.Now,
-                     ModifiedBy = "System",
-                     Created = DateTime.Now,
-                     CurrencyId = 1,
-                     PaymentMethod = PaymentMethod.CreditCard
-                }
-            } : null;
-            }
+            //        },
+            //         CreatedBy = "System",
+            //         Status = StatusType.Paid,
+            //         Modified = DateTime.Now,
+            //         ModifiedBy = "System",
+            //         Created = DateTime.Now,
+            //         CurrencyId = 1,
+            //         PaymentMethod = PaymentMethod.CreditCard
+            //    }
+            //} : null;
+            //}
             bookingModel.Car = new CarModel
             {
                 Created = DateTime.Now,

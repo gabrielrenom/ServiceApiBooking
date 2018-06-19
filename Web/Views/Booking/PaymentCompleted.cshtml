@@ -20,7 +20,7 @@
                             <p>Your transaction has been completed, and a receipt for your booking has been emailed to you. </p>
                             <div class="">
                                 <div class="row">
-                                    <div class="col-md-6"><b>Reference:</b></div>
+                                    <div class="col-md-6"><b>Reference:</b> <small>(You will need your payment reference as well)</small></div>
                                     <div class="col-md-6"><b>@Model.BookingReference</b></div>
                                 </div>
                                 <div class="row">
@@ -71,14 +71,32 @@
                                 </div>
                             </div>
 
-                            <p> You may log into your account at <a href="https://www.paypal.com/es/webapps/mpp/home" title="Log into your PayPal account" target="_blank"> www.paypal.com </a> to view details of this transaction. </p>
-                            <p>
-                                <strong> Booking details </strong>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incid ut labore et dolore magna aliqua. sequi nes.
-                            </p>
-                            <p>
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
+                            <div class="row well">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8">
+                                    <form action="https://secure-test.worldpay.com/wcc/purchase" method=POST>
+                                        <!-- This next line contains the testMode parameter - it specifies that the submission is a test submission -->
+                                        <input type="hidden" name="testMode" value="100">
+                                        <!-- This next line contains a mandatory parameter. Put your Installation ID inside the quotes after value= -->
+                                        <!-- You will need to get the installation ID from your Worldpay account. Login to your account, click setting and under installations
+                                        you should have an option called select junior and a number, put the number between “" e.g. “123456"-->
+                                        <input type="hidden" name="instId" value="1217260">
+                                        <!-- Another mandatory parameter. Put your own reference identifier for the item purchased inside the quotes after value= -->
+                                        <input type="hidden" name="cartId" value="@Model.BookingReference">
+                                        <!-- Another mandatory parameter. Put the total cost of the item inside the quotes -->
+                                        <input type="hidden" name="amount" value="@string.Format("{0:N}", @Model.Price)">
+                                        <!-- Another mandatory parameter. Put the code for the purchase currency inside the quotes after value= -->
+                                        <input type="hidden" name="currency" value="GBP">
+                                        <!-- This creates the button. When it is selected in the browser, the form submits the purchase details to us. -->
+                                        <input type="hidden" name="MC_callback" value="http://www.myserver.com/mycallbackscript.cgi">
+
+                                        <input class="btn btn-lg btn-primary btn-block" type=submit value="Pay">
+                                    </form>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+
+                         
                         </div>
                         <div class="col-md-6 even-more">
                             <div class="col-lg-8 col-md-8 col-sm-5 banner banner1">
@@ -105,7 +123,7 @@
 
 <script src="~/Scripts/jquery.datetimepicker.full.min.js"></script>
 
-<script src="~/Scripts/bootstrap-rating-input.min.js"
+<script src="~/Scripts/bootstrap-rating-input.min.js"></script>
 
 
     <script src="~/Scripts/common.js"></script>

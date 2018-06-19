@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Web.Controllers
 {
-    public class WroldpayController : Controller
+    public class WorldpayController : Controller
     {
         // GET: Wroldpay
         public ActionResult Index()

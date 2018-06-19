@@ -168,7 +168,7 @@ namespace ACP.DataAccess.Managers
                     Modified = x.Modified,
                     ModifiedBy = x.ModifiedBy,
                     PropertyType = (Business.Enums.RootBookingPropertyType)x.Type,
-                    RootBookingEntityId = x.RootBookingEntityId,
+                    RootBookingEntityId = x.RootBookingEntityId,                     
                     Key = x.Key,
                     Value = x.Value
                 }).ToList() : null               
@@ -384,22 +384,43 @@ namespace ACP.DataAccess.Managers
         {
             var record = Repository.GetSingle<BookingEntity>(x=>x.Id==domainModel.Id,x => x.Address, x=>x.Extras, x => x.Properties,x => x.Prices.Select(e=>e.DayPrices), x=>x.Prices.Select(w=>w.DayPrices.Select(y=>y.HourPrices) ));
 
-                record.RootBookingEntityId = domainModel.RootBookEntityId;
-                record.Code = domainModel.Code;
-                record.Comission = domainModel.Comission;
-                record.Created = domainModel.Created;
-                record.Id = domainModel.Id;
-                record.CreatedBy = domainModel.CreatedBy;
-                record.Image = domainModel.Image;
-                record.Logo = domainModel.Logo;
-                record.Modified = domainModel.Modified;
-                record.ModifiedBy = domainModel.ModifiedBy;
-                record.Name = domainModel.Name;
-                record.Price = domainModel.Price;
-                record.Sameday = domainModel.Sameday;
-                record.Properties = record.Properties != null ? record.Properties.Select(x => new Property
+            record.RootBookingEntityId = domainModel.RootBookEntityId;
+            record.Code = domainModel.Code;
+            record.Comission = domainModel.Comission;
+            record.Created = domainModel.Created;
+            record.Id = domainModel.Id;
+            record.CreatedBy = domainModel.CreatedBy;
+            record.Image = domainModel.Image;
+            record.Logo = domainModel.Logo;
+            record.Modified = domainModel.Modified;
+            record.ModifiedBy = domainModel.ModifiedBy;
+            record.Name = domainModel.Name;
+            record.Price = domainModel.Price;
+            record.Sameday = domainModel.Sameday;
+
+            if (record.Extras.Count > 0)
+            {
+                Repository.DeleteMany<Extra>(record.Extras.ToArray());
+
+                record.Extras = domainModel.Extras != null ? domainModel.Extras.Select(x => new Extra
                 {
-                    Id = x.Id,
+                    Created = x.Created,
+                    CreatedBy = x.CreatedBy,
+                    Modified = x.Modified,
+                    ModifiedBy = x.ModifiedBy,
+                    BookingEntityId = x.BookingEntityId,
+                    Name = x.Name,
+                    Price = x.Price,
+                    Description = x.Description
+                }).ToList() : null;
+            }
+
+            if (record.Properties.Count > 0)
+            {
+                Repository.DeleteMany<Property>(record.Properties.ToArray());
+
+                record.Properties = domainModel.Properties != null ? domainModel.Properties.Select(x => new Property
+                {
                     Created = x.Created,
                     CreatedBy = x.CreatedBy,
                     Modified = x.Modified,
@@ -407,105 +428,113 @@ namespace ACP.DataAccess.Managers
                     Type = (Data.Enums.PropertyType)x.Type,
                     BookingEntityId = x.BookingEntityId,
                     Key = x.Key,
-                    Value = x.Value
+                    Value = x.Value,
                 }).ToList() : null;
-                 record.Address = domainModel.Address != null ? new Address
-                    {
-                        Address1 = domainModel.Address.Address1,
-                        Address2 = domainModel.Address.Address2,
-                        Country = domainModel.Address.Country,
-                        County = domainModel.Address.County,
-                        Created = domainModel.Address.Created,
-                        CreatedBy = domainModel.Address.CreatedBy,
-                        City = domainModel.Address.City,
-                        Id = domainModel.Address.Id,
-                        Modified = domainModel.Address.Modified,
-                        ModifiedBy = domainModel.Address.ModifiedBy,
-                        Number = domainModel.Address.Number,
-                        Postcode = domainModel.Address.Postcode,
-                    } : null;
-                
-                    
-                if (record.Extras.Count>0)
+
+            }
+
+
+            record.Address = domainModel.Address != null ? new Address
+            {
+                Address1 = domainModel.Address.Address1,
+                Address2 = domainModel.Address.Address2,
+                Country = domainModel.Address.Country,
+                County = domainModel.Address.County,
+                Created = domainModel.Address.Created,
+                CreatedBy = domainModel.Address.CreatedBy,
+                City = domainModel.Address.City,
+                Id = domainModel.Address.Id,
+                Modified = domainModel.Address.Modified,
+                ModifiedBy = domainModel.Address.ModifiedBy,
+                Number = domainModel.Address.Number,
+                Postcode = domainModel.Address.Postcode,
+            } : null;
+
+
+            if (record.Extras.Count > 0)
+            {
+                Repository.DeleteMany<Extra>(record.Extras.ToArray());
+
+                record.Extras = domainModel.Extras != null ? domainModel.Extras.Select(x => new Extra
                 {
-                    Repository.DeleteMany<Extra>(record.Extras.ToArray());
+                    Created = x.Created,
+                    CreatedBy = x.CreatedBy,
+                    Modified = x.Modified,
+                    ModifiedBy = x.ModifiedBy,
+                    BookingEntityId = x.BookingEntityId,
+                    Name = x.Name,
+                    Price = x.Price,
+                    Description = x.Description
+                }).ToList() : null;
+            }
 
-                    record.Extras = domainModel.Extras != null ? domainModel.Extras.Select(x => new Extra
-                    {
-                        Created = x.Created,
-                        CreatedBy = x.CreatedBy,                   
-                        Modified = x.Modified,
-                        ModifiedBy = x.ModifiedBy,
-                        BookingEntityId = x.BookingEntityId,
-                        Name = x.Name,
-                        Price = x.Price,
-                        Description = x.Description
-                    }).ToList() : null;
-                }
+            if (record.Slot?.Count > 0)
+            {
+                Repository.DeleteMany<Slot>(record.Slot.ToArray());
 
-                if (record.Slot?.Count > 0)
+                record.Slot = domainModel.Slot != null ? domainModel.Slot.Select(x => new Slot
                 {
-                    Repository.DeleteMany<Slot>(record.Slot.ToArray());
-
-                    record.Slot = domainModel.Slot != null ? domainModel.Slot.Select(x => new Slot
+                    Created = x.Created,
+                    CreatedBy = x.CreatedBy,
+                    Modified = x.Modified,
+                    ModifiedBy = x.ModifiedBy,
+                    Number = x.Number,
+                    Identifier = x.Identifier,
+                    IsOccupied = x.IsOccupied,
+                    Availability = x.Availability != null ? x.Availability.Select(y => new Availability
                     {
-                        Created = x.Created,
-                        CreatedBy = x.CreatedBy,
-                        Modified = x.Modified,
-                        ModifiedBy = x.ModifiedBy,
-                         Number = x.Number,
-                          Identifier = x.Identifier,
-                           IsOccupied = x.IsOccupied,
-                            Availability = x.Availability!=null? x.Availability.Select(y=>new Availability {
-                                Created = y.Created,
-                                CreatedBy = y.CreatedBy,
-                                Modified = y.Modified,
-                                ModifiedBy = y.ModifiedBy,
-                                 StartDate = y.StartDate,
-                                  EndDate = y.EndDate,
-                                   Status = (Data.Enums.AvailabilityStatus)y.Status
-                            }).ToList():null
+                        Created = y.Created,
+                        CreatedBy = y.CreatedBy,
+                        Modified = y.Modified,
+                        ModifiedBy = y.ModifiedBy,
+                        StartDate = y.StartDate,
+                        EndDate = y.EndDate,
+                        Status = (Data.Enums.AvailabilityStatus)y.Status
+                    }).ToList() : null
 
-                    }).ToList():null;
-                }
+                }).ToList() : null;
+            }
 
-                if (record.Prices.Count>0)
+            if (record.Prices.Count > 0)
+            {
+                Repository.DeleteMany<BookingPricing>(record.Prices.ToArray());
+
+                record.Prices = domainModel.Prices != null ? domainModel.Prices.Select(x => new BookingPricing
                 {
-                    Repository.DeleteMany<BookingPricing>(record.Prices.ToArray());
-                    
-                    record.Prices = domainModel.Prices!=null?domainModel.Prices.Select(x=>new BookingPricing
-                    {                         
+                    Id = x.Id,
                     Created = x.Created,
                     CreatedBy = x.CreatedBy,
                     Modified = x.Modified,
                     ModifiedBy = x.ModifiedBy,
                     Name = x.Name,
                     Start = x.Start,
-                    End = x.End,               
+                    End = x.End,
                     DayPrices = x.DayPrices != null ? x.DayPrices.Select(r => new DayPrice
+                    {
+                        Created = r.Created,
+                        CreatedBy = r.CreatedBy,
+                        Modified = r.Modified,
+                        ModifiedBy = r.ModifiedBy,
+                        Day = r.Day,
+                        Dayprice = r.Dayprice,
+                        Id = r.Id,
+
+                        HourPrices = r.HourPrices != null ? r.HourPrices.Select(m => new HourPrice
                         {
-                            Created = r.Created,
-                            CreatedBy = r.CreatedBy,                            
-                            Modified = r.Modified,
-                            ModifiedBy = r.ModifiedBy,
-                            Day = r.Day,
-                            Dayprice = r.Dayprice,
-                        
-                            HourPrices = r.HourPrices != null ? r.HourPrices.Select(m => new HourPrice
-                            {
-                                Created = m.Created,
-                                CreatedBy = m.CreatedBy,
-                                Modified = m.Modified,
-                                ModifiedBy = m.ModifiedBy,
-                                HourMinute = m.HourMinute,
-                                Hourprice = m.Hourprice,
-                                DayPriceId = m.DayPriceId                           
-                            
-                            }).ToList() : null,                            
+                            Created = m.Created,
+                            CreatedBy = m.CreatedBy,
+                            Modified = m.Modified,
+                            ModifiedBy = m.ModifiedBy,
+                            HourMinute = m.HourMinute,
+                            Hourprice = m.Hourprice,
+                            DayPriceId = m.DayPriceId,
+                            Id = m.Id
+
                         }).ToList() : null,
-                    }).ToList():null;
-                }
-                Repository.Update<BookingEntity>(record);
+                    }).ToList() : null,
+                }).ToList() : null;
+            }
+            Repository.Update<BookingEntity>(record);
                 Repository.Commit();
 
                 return true;

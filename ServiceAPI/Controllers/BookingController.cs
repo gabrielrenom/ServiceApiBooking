@@ -362,6 +362,8 @@ namespace ServiceAPI.Controllers
         }
 
         public async Task<bool> Paid(int id) => (await _bookingservice.Paid(id));
-       
+
+        public async Task<bool> PaymentInProgress(int id) => (await _bookingservice.PaymentInProgress(id));
+
     }
 }

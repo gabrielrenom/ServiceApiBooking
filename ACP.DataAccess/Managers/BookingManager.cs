@@ -44,6 +44,26 @@ namespace ACP.DataAccess.Managers
 
         }
 
+        public async Task<bool> PaymentInProcess(int id)
+        {
+            try
+            {
+                var result = await this.GetByIdAsync(id);
+
+                result.Status = Business.Enums.StatusType.Processing;
+
+                await this.UpdateAsync(result);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+
+        }
+
         public async override Task<BookingModel> GetByIdAsync(int id)
         {
      

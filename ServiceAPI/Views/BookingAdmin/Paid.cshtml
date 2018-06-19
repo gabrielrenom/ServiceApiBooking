@@ -1,0 +1,9 @@
+﻿@using ServiceAPI.Helpers
+
+@{
+    ViewBag.Title = "Paid";
+    Layout = "~/Views/Shared/_ActionLayout.cshtml";
+}
+
+<h1>Payment Authorised</h1>
+@Html.AreaSubmit(Areas.Bookings, Operation.Back)

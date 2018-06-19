@@ -235,6 +235,19 @@ namespace ServiceAPI.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ActionResult> Paid(int id)
+        {
+            var procesingpayment = (await _bookingcontroller.Paid(id));
+
+            return View();
+        }
+
         // POST: BookingAdmin/Create
         [HttpPost]
         public async Task<ActionResult> Create(BookingModel model)
@@ -354,14 +367,19 @@ namespace ServiceAPI.Controllers
 
                     //if (paymentresult == "approved")
                     //{
-                        var havebeenpaid = (await _bookingcontroller.Paid(booking.Id));
+                        var procesingpayment = (await _bookingcontroller.PaymentInProgress(booking.Id));
                         //if (havebeenpaid) return RedirectToAction("paymentcompleted", ToBookingConfirmationView(model, result.BookingReference));
                     //}
 
                     result.TryGetContentValue(out booking);
 
-                    if (booking != null)
-                        return RedirectToAction("Index");
+                    if (booking != null && procesingpayment)
+                    {
+                        await FillDropBoxes();
+                        model.Status = StatusType.Processing;
+                        return View(model);
+                    }
+                        //return RedirectToAction("Index");
                 }
                 else
                 {
@@ -543,8 +561,9 @@ namespace ServiceAPI.Controllers
                         booking.Payments.FirstOrDefault().CreditCard.ExpiryDate = Convert.ToDateTime(paymentform["ccexpirydate"]);
                         booking.Payments.FirstOrDefault().CreditCard.GateWayKey = paymentform["cccsv"];
                         booking.Payments.FirstOrDefault().CreditCard.Modified = DateTime.Now;
-                        booking.Payments.FirstOrDefault().CreditCard.ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname;                       
+                        booking.Payments.FirstOrDefault().CreditCard.ModifiedBy = model.Customer.Forename + " " + model.Customer.Surname;
 
+                        await FillDropBoxes();
                     }
 
                     booking.Modified = DateTime.Now;

@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,7 +38,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -233,7 +234,7 @@
     <Compile Include="Controllers\CarparksController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PaypalController.cs" />
-    <Compile Include="Controllers\WroldpayController.cs" />
+    <Compile Include="Controllers\WorldpayController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -410,7 +411,7 @@
     <Content Include="Views\Carparks\About.cshtml" />
     <Content Include="Views\Carparks\ContactUs.cshtml" />
     <Content Include="Views\Carparks\Faq.cshtml" />
-    <Content Include="Views\Wroldpay\Index.cshtml" />
+    <Content Include="Views\Worldpay\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -428,6 +429,10 @@
     <ProjectReference Include="..\ACP.Business\ACP.Business.csproj">
       <Project>{bcf52cdd-2e05-4eb6-b7e7-a5975f326675}</Project>
       <Name>ACP.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ACP.Commons\ACP.Commons.csproj">
+      <Project>{b633d0b0-c8c6-4b5e-a601-ee0ec0b5a474}</Project>
+      <Name>ACP.Commons</Name>
     </ProjectReference>
     <ProjectReference Include="..\ACP.DataAccess\ACP.DataAccess.csproj">
       <Project>{3071fee3-8683-48f5-a510-ca347dbd97dc}</Project>

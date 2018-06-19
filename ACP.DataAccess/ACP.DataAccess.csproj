@@ -92,6 +92,7 @@
     <Compile Include="Managers\BookingEntityManager.cs" />
     <Compile Include="Managers\BookingManager.cs" />
     <Compile Include="Managers\BookingPricingManager.cs" />
+    <Compile Include="Managers\CustomerManager.cs" />
     <Compile Include="Managers\RootBookingEntityManager.cs" />
     <Compile Include="Managers\ServiceManager.cs" />
     <Compile Include="Managers\StatusManager.cs" />

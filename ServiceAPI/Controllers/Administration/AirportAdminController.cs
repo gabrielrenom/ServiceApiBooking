@@ -14,10 +14,12 @@ namespace ServiceAPI.Administration
     public class AirportAdminController : Controller
     {
         AirportController _airportcontroller;
+        StatusController _statuscontroller;
 
-        public AirportAdminController(AirportController airportcontroller)
+        public AirportAdminController(AirportController airportcontroller, StatusController statuscontroller)
         {
             _airportcontroller = airportcontroller;
+            _statuscontroller = statuscontroller;
         }
 
         // GET: AirportAdmin
@@ -45,10 +47,14 @@ namespace ServiceAPI.Administration
                     _airportcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
                     var result = await _airportcontroller.GetById(id);
 
+
+
                     result.TryGetContentValue(out airport);
 
                     if (airport != null)
+                    {
                         return View(airport);
+                    }
                 }
             }
             catch
@@ -71,7 +77,8 @@ namespace ServiceAPI.Administration
         {
             try
             {
-              
+                model.StatusId = await GetActiveStatusId();
+
                 RootBookingEntityModel airport = new RootBookingEntityModel();
                 if (ModelState.IsValid)
                 {
@@ -81,13 +88,17 @@ namespace ServiceAPI.Administration
 
                     result.TryGetContentValue(out airport);
 
-                    if (airport!=null)
+                    if (airport != null)
                         return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View(model);
                 }
             }
             catch
             {
-                return View("Create");
+                return View(model);
             }
 
             return View("Create");
@@ -107,6 +118,8 @@ namespace ServiceAPI.Administration
 
                     result.TryGetContentValue(out airport);
 
+                    //airport.Status = GetStatusModel(airport.Id);
+
                     if (airport != null)
                         return View(airport);
                 }
@@ -124,7 +137,7 @@ namespace ServiceAPI.Administration
         public async Task<ActionResult> Edit(int id, RootBookingEntityModel model)
         {
             try
-            {                 
+            {
                 bool airport = false;
                 if (ModelState.IsValid)
                 {
@@ -137,6 +150,10 @@ namespace ServiceAPI.Administration
                     if (airport)
                         return RedirectToAction("Index");
                 }
+                else
+                {
+                    return View(model);
+                }
             }
             catch
             {
@@ -146,21 +163,51 @@ namespace ServiceAPI.Administration
             return View("Edit");
         }
 
+        private async Task<int> GetActiveStatusId()
+        {
+            StatusModel statusmodel = new StatusModel();
+            _statuscontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+            _statuscontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+            var status = await _statuscontroller.GetByName(ACP.Business.Enums.StatusType.Active);
+
+            status.TryGetContentValue(out statusmodel);
+
+            return statusmodel.Id;
+        }
+
+        private async Task<StatusModel> GetStatusModel()
+        {
+            StatusModel statusmodel = new StatusModel();
+            _statuscontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+            _statuscontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+            var status = await _statuscontroller.GetByName(ACP.Business.Enums.StatusType.Active);
+
+            status.TryGetContentValue(out statusmodel);
+
+            return statusmodel;
+        }
+
         // GET: AirportAdmin/Delete/5
         public async Task<ActionResult> Delete(int id)
         {
             try
             {
-                bool isdeleted = false;
+                RootBookingEntityModel airport = new RootBookingEntityModel();
+                if (ModelState.IsValid)
+                {
                     _airportcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
                     _airportcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
-                    var result = await _airportcontroller.Delete(id);
+                    var result = await _airportcontroller.GetById(id);
 
-                    result.TryGetContentValue(out isdeleted);
 
-                    if (isdeleted)
-                        return RedirectToAction("Index");
-                
+
+                    result.TryGetContentValue(out airport);
+
+                    if (airport != null)
+                    {
+                        return View(airport);
+                    }
+                }
             }
             catch
             {
@@ -169,21 +216,31 @@ namespace ServiceAPI.Administration
 
             return View();
         }
+    
 
         // POST: AirportAdmin/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public async Task<ActionResult> Delete(int id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                bool isdeleted = false;
+                _airportcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
+                _airportcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+                var result = await _airportcontroller.Delete(id);
 
-                return RedirectToAction("Index");
+                result.TryGetContentValue(out isdeleted);
+
+                if (isdeleted)
+                    return RedirectToAction("Index");
+
             }
             catch
             {
                 return View();
             }
+
+            return View();
         }
     }
 }

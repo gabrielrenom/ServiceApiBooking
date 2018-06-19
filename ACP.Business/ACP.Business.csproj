@@ -89,6 +89,7 @@
     <Compile Include="Managers\IBookingEntityManager.cs" />
     <Compile Include="Managers\IBookingManager.cs" />
     <Compile Include="Managers\IBookingPricingManager.cs" />
+    <Compile Include="Managers\ICustomerManager.cs" />
     <Compile Include="Managers\IRootBookingEntityManager.cs" />
     <Compile Include="Managers\IServiceManager.cs" />
     <Compile Include="Managers\IStatusManager.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="Services\BookingEntityService.cs" />
     <Compile Include="Services\BookingPricingService.cs" />
     <Compile Include="Services\BookingService.cs" />
+    <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Services\Interfaces\ICustomerService.cs" />
     <Compile Include="Services\Interfaces\IEmailService.cs" />

@@ -36,7 +36,7 @@
                     @Html.DisplayNameFor(model => model.AddressId)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.StatusId)
+                   Status
                 </th>
                 <th>
 
@@ -68,12 +68,12 @@
                         @Html.DisplayFor(modelItem => item.AddressId)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.StatusId)
+                        @Html.DisplayFor(modelItem => item.Status.StatusType)
                     </td>
                     <td>
-                        <a href="@Url.Action("Details", "AirportAdmin", new { id=item.Id })" class="btn">
+                        @*<a href="@Url.Action("Details", "AirportAdmin", new { id=item.Id })" class="btn">
                             <i class="fa fa-2x fa-fw fa-th-large text-primary"></i>
-                        </a>
+                        </a>*@
                     </td>
                     <td>
                         <a href="@Url.Action("Edit", "AirportAdmin", new { id=item.Id })" class="btn">

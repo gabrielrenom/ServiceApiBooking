@@ -1,9 +1,11 @@
 ﻿
 using ACP.Business.Models;
 using ACP.Business.Services.Interfaces;
+using ACP.Commons;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -69,8 +71,8 @@ namespace Web.Controllers
                     {
                         var quote = new QuoteModel
                         {
-                            Pickup = Convert.ToDateTime(model.ReturnDate),
-                            Dropoff = Convert.ToDateTime(model.DropOffDate),
+                            Pickup = DateHelper.ConvertToUKDateTime(model.ReturnDate),
+                            Dropoff = DateHelper.ConvertToUKDateTime(model.DropOffDate),
                             PickupLocation = new LocationModel() { Id = Convert.ToInt32(model.Airport) },
                             DropoffLocation = new LocationModel() { Id = Convert.ToInt32(model.Airport) },
                             BookingServices = new List<BookingServiceModel> { new BookingServiceModel { Name = "Carpark" } }
@@ -149,28 +151,37 @@ namespace Web.Controllers
         [Route("index")]
         public async Task<ActionResult> Index(QuoteModelView model)
         {
-            if (Convert.ToDateTime(model.DropOffDate) > Convert.ToDateTime(model.ReturnDate))
-            {
-                ModelState.AddModelError("DropOffDate", "The date supplied is older than the Return Date");
-            }
+            CultureInfo culture = new CultureInfo("en-UK");
 
-            if (Convert.ToDateTime(model.DropOffDate) < DateTime.Today)
+            try
             {
-                ModelState.AddModelError("DropOffDate", "The date supplied can be in an earlier date");
-            }
 
-            if (ModelState.IsValid)
-            {
-                return this.RedirectToAction("results", new RouteValueDictionary(model));
+                if (DateHelper.ConvertToUKDateTime(model.DropOffDate) > DateHelper.ConvertToUKDateTime(model.ReturnDate))
+                {
+                    ModelState.AddModelError("DropOffDate", "The date supplied is older than the Return Date");
+                }
+
+                if (DateHelper.ConvertToUKDateTime(model.DropOffDate) < DateHelper.ConvertToUKDateTime(DateTime.Today))
+                {
+                    ModelState.AddModelError("DropOffDate", "The date supplied can be in an earlier date");
+                }
+
+                if (ModelState.IsValid)
+                {
+                    return this.RedirectToAction("results", new RouteValueDictionary(model));
+                }
+                else
+                {
+                    //## IT Gets all the airports
+                    var airports = await _airportservice.GetAll();
+                    ViewBag.airports = airports != null ? airports.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList() : null;
+                    return View(model);
+                }
+
             }
-            else
-            {
-                //## IT Gets all the airports
-                var airports = await _airportservice.GetAll();
-                ViewBag.airports = airports != null ? airports.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList() : null;
-                return View(model);
+            catch (Exception ex){
+                throw new System.ArgumentException(ex.ToString(), model.DropOffDate);
             }
-                
         }
 
         [HttpPost]

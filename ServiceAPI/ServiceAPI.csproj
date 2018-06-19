@@ -22,6 +22,7 @@
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -372,8 +373,12 @@
     <Content Include="fonts\fontawesome-webfont.woff2">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="fonts\1YwB1sO8YE1Lyjf12WNiUA.woff2" />
-    <Content Include="fonts\UyBMtLsHKBKXelqf4x7VRQ.woff2" />
+    <Content Include="fonts\1YwB1sO8YE1Lyjf12WNiUA.woff2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fonts\UyBMtLsHKBKXelqf4x7VRQ.woff2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\PublishProfiles\fss-api - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\NationalParkingServices.pubxml" />
     <None Include="Properties\PublishProfiles\thecarparksupermarket.pubxml" />
@@ -444,15 +449,24 @@
     <Content Include="Views\UserAdmin\Create.cshtml" />
     <Content Include="Views\UserAdmin\Details.cshtml" />
     <Content Include="Views\UserAdmin\Delete.cshtml" />
+    <Content Include="Views\BookingAdmin\Paid.cshtml" />
+    <Content Include="Views\BookingAdmin\_WorldpayPaymentForm.cshtml" />
+    <Content Include="Views\AirportAdmin\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Administration\" />
     <Folder Include="Attributes\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.eot">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>

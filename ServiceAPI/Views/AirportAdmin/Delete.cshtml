@@ -1,0 +1,137 @@
+﻿@using ServiceAPI.Helpers
+@model ACP.Business.Models.RootBookingEntityModel
+
+@{
+
+    Layout = "~/Views/Shared/_ActionLayout.cshtml";
+
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="section">
+        <div class="container">
+            @Html.AreaHeader(Areas.Airports, Operation.Delete)
+
+            <div class="well">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
+
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CreatedBy)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CreatedBy)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ModifiedBy)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ModifiedBy)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Created)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Created)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Modified)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Modified)
+                    </dd>
+
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Code)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Code)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Status.StatusType)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Status.StatusType)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Website)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Website)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Telephone)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Telephone)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayFor(model => model.Address.Address1)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Address.Address1)
+                    </dd>
+
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Address.Address2)
+                    </dt>
+                    <dd>
+                        @Html.DisplayNameFor(model => model.Address.Address2)
+                    </dd>
+
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Address.City)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Address.City)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Address.County)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Address.County)
+                    </dd>
+
+                </dl>
+
+            </div>
+            @Html.AreaSubmit(Areas.Airports, Operation.Delete)
+        </div>
+
+    </div>
+}
+

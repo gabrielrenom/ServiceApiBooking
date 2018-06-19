@@ -2,6 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
+using System.Globalization;
+
 namespace ACP.Business.Test
 {
 
@@ -59,6 +61,23 @@ namespace ACP.Business.Test
             var result4 = slots.Where(x => x.StartDate >= startDate4 && x.StartDate <= endDate4).ToList();
             Assert.IsTrue(result4.Count == 0);          
 
+        }
+
+        [TestMethod]
+        public void TestConversion()
+        {
+            string myDate = "30-12-1899 07:50:00:AM";
+            DateTime dt1 = DateTime.ParseExact(myDate, "dd-MM-yyyy HH:mm:ss:tt",
+                                                       CultureInfo.InvariantCulture);
+
+
+            string date = "18-06-2018 18:06:59";
+
+
+            CultureInfo culture = new CultureInfo("en-UK");
+
+            DateTime dt2 = DateTime.ParseExact(date, "dd-MM-yyyy HH:mm:ss", culture);
+            
         }
     }
 }
