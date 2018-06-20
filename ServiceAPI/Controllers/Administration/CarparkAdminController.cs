@@ -143,7 +143,18 @@ namespace ServiceAPI.Controllers
                 {
                     _carparkcontroller.Request = Substitute.For<HttpRequestMessage>();  // using nSubstitute
                     _carparkcontroller.Configuration = Substitute.For<System.Web.Http.HttpConfiguration>();
+
                     model.RootBookEntityId = Convert.ToInt32(collection["airportlist"]);
+
+                    //airportcarpark.Properties = new Collection<PropertyModel>();
+
+                    //airportcarpark.Properties.Add(new PropertyModel { Key = "Direcctions", Value = carpark.Details, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System", });
+                    //airportcarpark.Properties.Add(new PropertyModel { Key = "Provider", Value = "APH", Type = PropertyType.String });
+                    //airportcarpark.Properties.Add(new PropertyModel { Key = "ProductCode", Value = carpark.ProductCode, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System", });
+                    //airportcarpark.Properties.Add(new PropertyModel { Key = "ProductName", Value = carpark.ProductName, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System", });
+                    //airportcarpark.Properties.Add(new PropertyModel { Key = "Terminals", Value = carpark.Terminals, Type = PropertyType.String, Created = DateTime.Now, Modified = DateTime.Now, CreatedBy = "System", ModifiedBy = "System", });
+
+
                     var result = await _carparkcontroller.Add(model);
 
                     result.TryGetContentValue(out hasBeenCreated);
